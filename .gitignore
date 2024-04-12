@@ -57,3 +57,4 @@ rsconnect/
 .Rproj.user
 .httr-oauth
 .quarto
+_site/
