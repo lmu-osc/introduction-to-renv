@@ -29,6 +29,9 @@ title: "outline"
     - developed by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues
     - likely the most popular option already. learning this is a transferable skill between academia and industry.
     - integration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions *because* Posit has developed extensions that make this easier.
+    - it works at a project level (i.e. it should be paired with the use of an R Project/`.RProj` file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment
+    - Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.
+    
 
 
 
