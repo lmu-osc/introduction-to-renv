@@ -1,11 +1,9 @@
 ---
-title: "temp"
+title: "Tutorial Overview"
 ---
 
-This is a Quarto website.
+This is the home page.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This page will provide a brief outline of what this website is for.
 
-```{r}
-1 + 1
-```
+There should be a forward link to the tutorial at the bottom of the page.

@@ -1,13 +1,32 @@
 project:
   type: website
+  
 
 website:
-  title: "temp"
+  title: "Introduction to {renv}"
+  search: 
+    location: navbar
+    type: overlay
+    collapse-after: 3
+    copy-button: true
+    
+
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      
+  sidebar:
+    style: floating
+    search: true
+    contents:
+      - index.qmd
+      - intro_dependencies.qmd
+      - dependencies_in_r.qmd
+      - renv_getting_started.qmd
+      - restoring_a_project.qmd
+      - advanced_topics.qmd
 
 format:
   html:
