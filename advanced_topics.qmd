@@ -1,5 +1,5 @@
 ---
-title: "5. Advanced Topics"
+title: "Advanced Topics"
 ---
 
 Optional: discuss any advanced topics?
