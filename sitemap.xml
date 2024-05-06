@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/LICENSE.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/index.html</loc>
-    <lastmod>2024-04-23T15:47:24.352Z</lastmod>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/about.html</loc>
-    <lastmod>2024-04-23T15:47:24.352Z</lastmod>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/restoring_a_project.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/intro_dependencies.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/renv_getting_started.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/advanced_topics.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/dependencies_in_r.html</loc>
+    <lastmod>2024-05-06T10:09:07.877Z</lastmod>
   </url>
 </urlset>
