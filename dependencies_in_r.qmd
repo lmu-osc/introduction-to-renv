@@ -1,0 +1,9 @@
+---
+title: "2. Dependencies in R"
+---
+
+This page will talk about specifics of dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduce the {renv} package.
+
+Talk about libraries on computer and repos like CRAN, BioC, and RSPM.
+
+Will talk in more detail about why specifically we are using and recommend the {renv} for this tutorial.

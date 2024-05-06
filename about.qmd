@@ -2,8 +2,10 @@
 title: "About"
 ---
 
-About this site
+# Contributors
 
-```{r}
-1 + 1
-```
+This site was created by Pat Callahan with contributions and feedback from Florian Pargent.
+
+# License
+
+Published under a [Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0 Deed)](https://creativecommons.org/licenses/by-sa/4.0/deed.en).
