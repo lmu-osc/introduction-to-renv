@@ -10,8 +10,16 @@ The tutorial is split into a Learning component where you will read about softwa
 
 ## Prerequisites
 
-This is a standalone tutorial, and we only assume some familiarity with R (and that you are using RStudio or another IDE). The following software should be installed:
+This is largely a standalone tutorial, and we only assume familiarity with R to be able to read and understand the Background and {renv} sections. 
 
-* [R, recommend v4.3.X or more recent](https://www.r-project.org/)
-* {renv}, installed with `install.packages("renv")`
-* [RStudio, optional](https://posit.co/download/rstudio-desktop/)
+::: {.callout-important}
+Although optional, completing the Exercises will require some **knowledge of git and GitHub** especially if you would like to receive feedback or troubleshoot issues remotely.
+:::
+
+::: {.callout-tip}
+The following software should be installed:
+
+-   [R, recommend v4.3.X or more recent](https://www.r-project.org/)
+-   {renv}, installed with `install.packages("renv")` from within R
+-   [RStudio, optional](https://posit.co/download/rstudio-desktop/)
+:::

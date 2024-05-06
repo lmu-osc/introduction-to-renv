@@ -1,0 +1,36 @@
+---
+title: "Reproducibility"
+fig-cap-location: bottom
+---
+
+# What is Reproducibility?
+
+provide an overview of the concept of reproducibility here, discuss how it's different from replicability just to be clear, and emphasize that reproducibility is largely (although not entirely) a matter of computing and software practices
+
+# The Machines 
+
+## Your Machine
+
+![...and we are very proud of you for that.](assets/img/works_on_my_machine.jpg){width=90%}
+
+## Everybody Else's Machine
+
+What about all of the other machines where someone might want to use or contribute to your project? It is unlikely they will have all of the same software installed as you used on your computer including but not limited to:
+
+* Operating systems (e.g. Mac vs. Windows vs. Linux)
+* Versions of an operating system (e.g. Windows 10 vs. 11)
+* Programming languages (e.g. R, Python, MATLAB, Julia, JavaScript)
+* Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^1]
+* Add-on packages/libraries for a programming language
+* Versions of packages/libraries
+
+**Do you see some themes here?**
+
+::: {.callout-important}
+* Don't expect others to have the software you rely on
+* Even if others have the software, don't expect them to have the same version
+:::
+
+
+[^1]: Not so fun-fact: some "newer" versions of MacOS come with Python v2 installed because it has some dependencies on this version despite v3 being released in 2008 and not being entirely backwards compatible with v2.
+

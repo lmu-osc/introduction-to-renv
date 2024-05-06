@@ -1,5 +1,5 @@
 ---
-title: "4. Restoring Another Project"
+title: "Restoring Another Project"
 ---
 
 Description about how to restore a {renv} library from an existing project

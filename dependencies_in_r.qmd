@@ -1,5 +1,5 @@
 ---
-title: "2. Dependencies in R"
+title: "Dependencies in R"
 ---
 
 This page will talk about specifics of dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduce the {renv} package.
