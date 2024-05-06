@@ -1,22 +1,17 @@
 ---
-title: "Tutorial Overview"
+title: "Welcome to the {renv} Tutorial!"
 ---
 
-# Section 1
+# Tutorial Structure
 
-## Sub-section 
-This is the home page.
+This **self-paced tutorial** is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components. It is meant to be comprehensible for novice R users, but (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.
 
-This page will provide a brief outline of what this website is for.
+The tutorial is split into a Learning component where you will read about software dependencies, understand some of the nuances of dependencies in R, and be introduced to the [{renv}](https://rstudio.github.io/renv/articles/renv.html) package.
 
-There should be a forward link to the tutorial at the bottom of the page.
+## Prerequisites
 
-# Section 1
+This is a standalone tutorial, and we only assume some familiarity with R (and that you are using RStudio or another IDE). The following software should be installed:
 
-some text here
-
-## Sub-section
-
-more text
-
-### Level 3 sub section
+* [R, recommend v4.3.X or more recent](https://www.r-project.org/)
+* {renv}, installed with `install.packages("renv")`
+* [RStudio, optional](https://posit.co/download/rstudio-desktop/)
