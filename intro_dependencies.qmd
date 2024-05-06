@@ -1,0 +1,5 @@
+---
+title: "1. What Are Dependencies?"
+---
+
+This page will talk about what software dependencies are, why users should care about them in general, and practical scenarios where one will want to manage them.
