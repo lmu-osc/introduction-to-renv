@@ -1,5 +1,5 @@
 ---
-title: "3. {renv}: Getting Started"
+title: "{renv}: Getting Started"
 ---
 
 This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependcies()` function works to identify the packages in use in the project.

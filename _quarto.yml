@@ -37,13 +37,21 @@ website:
     contents:
       - text: "Overview"
         href: index.qmd
-      - section: "Learn"
+      - section: "Background"
         contents:
+          - href: comp_reproducible.qmd
+            text: "1. Reproducibility"
           - href: intro_dependencies.qmd
+            text: "2. Software Dependencies"
           - href: dependencies_in_r.qmd
+            text: "3. Dependencies in R"
+      - section: "{renv}"
+        contents:
           - href: renv_getting_started.qmd
+            text: "1. Getting Started"
           - href: restoring_a_project.qmd
-      - section: "Exercise"
+            text: "2. Restoring Another Project"
+      - section: "Exercises"
         contents:
       - section: "Optional Content"
         contents: 
