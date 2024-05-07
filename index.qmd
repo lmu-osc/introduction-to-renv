@@ -19,7 +19,7 @@ Although optional, completing the Exercises will require some **knowledge of git
 ::: {.callout-tip}
 The following software should be installed:
 
--   [R, recommend v4.3.X or more recent](https://www.r-project.org/)
+-   [R, recommend v4.3.X or more recent](https://www.r-project.org/){target="_blank"}
 -   {renv}, installed with `install.packages("renv")` from within R
--   [RStudio, optional](https://posit.co/download/rstudio-desktop/)
+-   [RStudio, optional](https://posit.co/download/rstudio-desktop/){target="_blank"}
 :::

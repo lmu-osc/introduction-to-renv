@@ -1,36 +1,79 @@
 ---
 title: "Reproducibility"
 fig-cap-location: bottom
+bibliography: references.bib
 ---
+
 
 # What is Reproducibility?
 
-provide an overview of the concept of reproducibility here, discuss how it's different from replicability just to be clear, and emphasize that reproducibility is largely (although not entirely) a matter of computing and software practices
+## A Brief Definition
 
-# The Machines 
+> I propose to consider the question "What is reproducibility?" As reproducibility is such a central concept in science, one would think that it would be clearly defined. However, this is not the case. Reproducibility is an elusive concept. It has no single commonly agreed upon definition. Rather, it has many different, and each of these captures central, but different properties of it...
+>
+> -- <cite>Odd Erik Gundersen</cite> [-@erikgundersen2021]
+
+
+Gundersen goes on to explore many of the different definitions put forward for "reproducibility", and ultimately provides a summary of reproducibility as "the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators" [@erikgundersen2021]. 
+
+What constitutes "documentation", and a sufficient amount of documentation for that matter, can vary widely. In principle, one would assume that academic publications provide all of the information required to reproduce a publication from the requisite background, to data cleaning choices, and to the exact statistical methods employed to arrive at a conclusion.[^2] In practice, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and simply impossible at worst. With this thought in mind, Gundersen further specifies four types or levels of reproducibility:
+
+> **R1 Description:** Only a textual descriptions of the experiment is used as reference for the reproducibility experiment. The text could describe the experimental procedure, the target system and its behaviour, the implementation of the target system for example in form of pseudo code, the data collection procedure, the data, the outcome and the analysis and so on. 
+>
+> **R2 Code:** Code and the textual description of the experiment are used as reference when conducting the reproducibility experiment. The code could cover the target system, the workflow, data pre-processing, experiment configurations, visualization and analyses. 
+>
+> **R3 Data:** Data and the textual description of the experiment are used as reference for conducting the experiment. The data could include training, validation and test sets as well as the outcome produced in the experiment. 
+>
+> **R4 Experiment:** The complete documentation of the experiment including data and code in addition to the textual description as shared by the original investigators are used as reference for the reproducibility experiment.
+
+## Reproducible Code
+
+
+* it is one thing to publish or share all of the code for our projects, but we also need to make sure the code works and functions in an intelligible manner for those who may want to reproduce our analyses
+* overlooked aspect of reproducible code is ensuring that the software we used matches what others will use, and, in short, we can create metadata files defining precisely this kind of information.
+* let's look at this in more detail
+
+
+# The \~Machines\~
 
 ## Your Machine
 
-![...and we are very proud of you for that.](assets/img/works_on_my_machine.jpg){width=90%}
+If you are here, you have more than likely created some analysis or software project, and you have presumably  done all of the development **by yourself on one specific computer**. If the project works, congratulations!
+
+
+```{r, fig.cap="...and we are very proud of you for that. Traditionally, this has been sufficient for generating all of the analyses and figures needed to author manuscripts.", out.width="85%", echo=FALSE}
+knitr::include_graphics("assets/img/works_on_my_machine.jpg")
+```
+
+
+
 
 ## Everybody Else's Machine
 
-What about all of the other machines where someone might want to use or contribute to your project? It is unlikely they will have all of the same software installed as you used on your computer including but not limited to:
+What about all of the other machines where someone might want to use or contribute to your project though? It is unlikely other users will already have all of the requisite software installed that you used while developing on your computer. A non-exhaustive list of examples where there might be software discrepancies include:
 
-* Operating systems (e.g. Mac vs. Windows vs. Linux)
-* Versions of an operating system (e.g. Windows 10 vs. 11)
-* Programming languages (e.g. R, Python, MATLAB, Julia, JavaScript)
-* Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^1]
-* Add-on packages/libraries for a programming language
-* Versions of packages/libraries
+-   Operating systems (e.g. Mac vs. Windows vs. Linux)
+-   Versions of an operating system (e.g. Windows 10 vs. 11)
+-   Programming languages (e.g. R, Python, MATLAB, Julia, JavaScript)
+-   Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^1]
+-   Add-on packages/libraries for a programming language
+-   Versions of packages/libraries
+
 
 **Do you see some themes here?**
 
-::: {.callout-important}
-* Don't expect others to have the software you rely on
-* Even if others have the software, don't expect them to have the same version
+::: callout-important
+-   Don't expect others to already have the software you rely on
+-   Even if others have the software, don't expect them to have the **same version**
 :::
 
 
-[^1]: Not so fun-fact: some "newer" versions of MacOS come with Python v2 installed because it has some dependencies on this version despite v3 being released in 2008 and not being entirely backwards compatible with v2.
+## Every Machine
 
+So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
+
+<!-- footnotes -->
+
+[^1]: Not so fun-fact: some "newer" versions of MacOS come with Python v2 installed because it has some dependencies on this version despite v3 being released in 2008 and not being entirely backwards compatible with v2.
+[^2]: Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.
+[^3]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.

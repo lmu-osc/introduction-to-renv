@@ -3,3 +3,15 @@ title: "Software Dependencies"
 ---
 
 This page will talk about what software dependencies are, why users should care about them in general, and practical scenarios where one will want to manage them.
+
+
+-   what is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.
+-   these can be managed informally with e.g. a written list of softwares used and versions if needed.
+    -   pros: there's little technical knowledge needed here. anyone can type these out.
+    -   cons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.
+        -   what does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.
+        -   However, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)
+-   Given the complexity in all of this, automated solutions for dependency tracking are recommended.
+-   Python: `requirements.txt`, `Pipfile`, and `pyproject.toml` for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.
+    -   this tutorial focuses on R and {renv} so no further comparison of these will be provided here
+-   R: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem
