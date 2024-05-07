@@ -1,5 +1,6 @@
 ---
 title: "{renv}: Getting Started"
+engine: knitr
 ---
 
 This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependcies()` function works to identify the packages in use in the project.
@@ -7,3 +8,67 @@ This page will talk about installation of the renv package, and how to snapshot 
 Talk about how/when to update the library
 
 Troubleshooting?
+
+::: callout-note
+It is recommended to install the latest version of {renv}. A default installation from CRAN will be the latest version of {renv}. At minimum, v1.0.0 or above should be installed.
+
+The repository for this Quarto site was built using {renv} version `r renv::lockfile_read()$Packages$renv$Version`.
+:::
+
+General steps to starting a project with renv:
+
+-   initiate project with `renv::init()`
+    -   creates a lockfile
+    -   creates a renv folder
+    -   adds the line `source("renv/activate.R")` to your .Rprofile which is automatically run anytime a session with this project is started, i.e. you should aim to open projects that use {renv} with the associated `*.Rproj` file if it exists
+    -   updates the .Rbuildignore (only relevant if you're building an R package, but good to understand this because renv files cannot be included in an R package. There are other mechanisms for managing package dependencies, namely the `DESCRIPTION` file.)
+-   lockfile details
+    -   if you init from a new, empty project then generally the lock.file will only populate with the version of R you're currently using and your default repository
+
+
+
+``` r
+renv::init()
+#> The following package(s) will be updated in the lockfile:
+#> 
+#> # CRAN -----------------------------------------------------------------------
+#> - renv          [* -> 1.0.7]
+#> 
+#> The version of R recorded in the lockfile will be updated:
+#> - R             [* -> 4.4.0]
+#> 
+#> - Lockfile written to "~/Desktop/temporary".
+```
+
+* Can check the status of your project
+
+``` r
+renv::status()
+#> No issues found -- the project is in a consistent state.
+```
+
+* what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.
+
+* {renv} can easily read information from the lock.file (it's in a JSON format) so it readily knows what *should* be in the project
+* however, how does {renv} know what is being used in the project? for that, the `renv:dependencies()` function was developed.
+  - you will likely never need to use this function directly, but being aware of it can be massively beneficial in troubleshooting issues in the future. This function also underlies the `renv:status()` and to-be-discussed `renv::snapshot()` functions which **are** essential.
+  - as the name suggests, `renv::dependencies()` detects the packages you are using in your project. it does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency
+  - the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.
+  
+```{r, results='hold', message=FALSE}
+pak::pkg_deps_tree("dplyr", dependencies = NA)
+# Note: the dependencies = NA argument is equivalent 
+# to dependencies = c("Depends", "Imports", "LinkingTo")
+# See below for explanation
+```
+
+* Dependencies
+  - hard: "Depends", "Imports", and "LinkingTo"
+  - soft: "Suggests" and "Enhances
+
+* With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()`
+
+``` r
+renv::snapshot()
+#> - The lockfile is already up to date.
+```
