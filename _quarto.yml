@@ -63,6 +63,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    fontsize: 13pt
+
 
 editor: visual
 
