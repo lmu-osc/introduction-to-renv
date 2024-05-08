@@ -34,6 +34,7 @@ website:
         
   sidebar:
     style: "docked"
+    # background: "#cfc7c6"
     contents:
       - text: "Overview"
         href: index.qmd
@@ -53,9 +54,17 @@ website:
             text: "2. Restoring Another Project"
       - section: "Exercises"
         contents:
+          - href: ex_init_snapshot.qmd
+            text: "Init and Snapshot"
+          - href: ex_2.qmd
+            text: "Exercise 2"
+          - href: ex_3.qmd
+            text: "Exercise 3"
       - section: "Optional Content"
         contents: 
           - href: advanced_topics.qmd
+          - href: embed_and_use.qmd
+            text: "`embed()` and `use()`"
 
 
 format:
@@ -64,6 +73,9 @@ format:
     css: styles.css
     toc: true
     fontsize: 13pt
+    code-overflow: wrap
+    grid:
+      sidebar-width: 300px
 
 
 editor: visual

@@ -1,0 +1,5 @@
+---
+title: "Alternative Workflow: `embed()` and `use()`"
+---
+
+<https://rstudio.github.io/renv/reference/embed.html>
