@@ -9,23 +9,7 @@ Talk about how/when to update the library
 
 Troubleshooting?
 
-Talk about the package cache at the end of this chapter
-- a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however.
-- the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the lock.file if you don't already have it somewhere in the renv cache
-- can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible
-
-``` r
-renv::paths$cache()
-#> [1] "/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20"
-list.files("/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/ggplot2")
-#> [1] "3.4.3" "3.4.4" "3.5.0"
-```
-
-<sup>Created on 2024-05-07 with [reprex v2.1.0](https://reprex.tidyverse.org)</sup>
-
-
-
-
+Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the lock.file if you don't already have it somewhere in the renv cache - can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible
 
 ::: callout-note
 It is recommended to install the latest version of {renv}. A default installation from CRAN will be the latest version of {renv}. At minimum, v1.0.0 or above should be installed.
@@ -33,7 +17,65 @@ It is recommended to install the latest version of {renv}. A default installatio
 The repository for this Quarto site was built using {renv} version `r renv::lockfile_read()$Packages$renv$Version`.
 :::
 
-General steps to starting a project with renv:
+
+
+# Easy Start
+
+This section provides the bare-minimum steps needed to set-up {renv} with one of your projects
+
+## Initiating {renv}
+
+Either approach should yield the following results in the directory you're working within:
+
+* Creation of a `renv.lock` file and a `renv` folder
+* Creation of or additions to the `.Rbuildignore` and `.Rprofile` files
+
+For most purposes, one will only need to have a passing understanding of the `renv.lock` file which 
+
+### With a New RStudio Project
+
+When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to "Use renv with [your] project."
+
+```
+File -> 
+New Project -> 
+New Directory -> 
+New Project -> 
+[x] Use renv with this project
+```
+
+### From an Existing Project or Folder
+
+```r
+library(renv)
+init()
+```
+
+
+## Check Status of Project
+
+```r
+status()
+snapshot()
+```
+
+
+## Updating the lock.file
+
+As you write additional `.R`, `.Rmd`, and/or `.qmd` files for your project, you will presumably employ more functions from various packages that should be captured in the lockfile. This can be done simply by snapshotting the project directory which will initiate a search for calls to `library()` and namespacing `package::function()`
+
+```r
+snapshot()
+```
+
+
+This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others. This is discussed next in [2. Restoring Another Project](restoring_a_project.html), but **we strongly recommend reading the details below if you have time.**
+
+
+# Details
+
+## Initiation Details
+
 
 -   initiate project with `renv::init()`
     -   creates a lockfile
@@ -42,8 +84,7 @@ General steps to starting a project with renv:
     -   updates the .Rbuildignore (only relevant if you're building an R package, but good to understand this because renv files cannot be included in an R package. There are other mechanisms for managing package dependencies, namely the `DESCRIPTION` file.)
 -   lockfile details
     -   if you init from a new, empty project then generally the lock.file will only populate with the version of R you're currently using and your default repository
-
-
+    
 
 ``` r
 renv::init()
@@ -57,49 +98,56 @@ renv::init()
 #> 
 #> - Lockfile written to "~/Desktop/temporary".
 ```
+    
+    
+## Package Detection
 
-* Can check the status of your project
+
+
+
+-   Can check the status of your project
 
 ``` r
 renv::status()
 #> No issues found -- the project is in a consistent state.
 ```
 
-* what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.
+-   what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.
 
-* {renv} can easily read information from the lock.file (it's in a JSON format) so it readily knows what *should* be in the project
-* however, how does {renv} know what is being used in the project? for that, the `renv:dependencies()` function was developed.
-  - you will likely never need to use this function directly, but being aware of it can be massively beneficial in troubleshooting issues in the future. This function also underlies the `renv:status()` and to-be-discussed `renv::snapshot()` functions which **are** essential.
-  - as the name suggests, `renv::dependencies()` detects the packages you are using in your project. it does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency
-  - the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.
-  
-```{r, results='hold', message=FALSE}
+-   {renv} can easily read information from the lock.file (it's in a JSON format) so it readily knows what *should* be in the project
+
+-   however, how does {renv} know what is being used in the project? for that, the `renv:dependencies()` function was developed.
+
+    -   you will likely never need to use this function directly, but being aware of it can be massively beneficial in troubleshooting issues in the future. This function also underlies the `renv:status()` and to-be-discussed `renv::snapshot()` functions which **are** essential.
+    -   as the name suggests, `renv::dependencies()` detects the packages you are using in your project. it does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency
+    -   the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.
+
+```{r, results='hold', message=FALSE, collapse=TRUE}
 pak::pkg_deps_tree("dplyr", dependencies = NA)
 # Note: the dependencies = NA argument is equivalent 
 # to dependencies = c("Depends", "Imports", "LinkingTo")
 # See below for explanation
 ```
 
-* Dependencies
-  - hard: "Depends", "Imports", and "LinkingTo"
-  - soft: "Suggests" and "Enhances
-
-* With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN)
+-   Dependencies
+    -   hard: "Depends", "Imports", and "LinkingTo"
+    -   soft: "Suggests" and "Enhances
+-   With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN)
 
 ``` r
 renv::snapshot()
 #> - The lockfile is already up to date.
 ```
 
-* As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model.
+-   As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model.
 
-```{r, results='hold', message=FALSE}
+```{r, results='hold', message=FALSE, results='hide'}
 # install.packages("lme4")
 library(lme4)
-lme4::lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = iris) 
+lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = iris) 
 ```
 
-* Make sure to save the file, and then run `renv::snapshot()` again from the Console
+-   Make sure to save the file, and then run `renv::snapshot()` again from the Console
 
 ``` r
 > renv::snapshot()
@@ -155,3 +203,11 @@ Do you want to proceed? [Y/n]: Y
 - Lockfile written to "~/Desktop/temporary/renv.lock".
 ```
 
+
+
+``` r
+renv::paths$cache()
+#> [1] "/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20"
+list.files("/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/ggplot2")
+#> [1] "3.4.3" "3.4.4" "3.5.0"
+```
