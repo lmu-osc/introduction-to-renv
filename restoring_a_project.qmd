@@ -3,3 +3,29 @@ title: "Restoring Another Project"
 ---
 
 Description about how to restore a {renv} library from an existing project
+
+Three most likely scenarios
+
+# From a GitHub Repo
+
+* clone
+* run restore()
+* should not be anything else to do
+
+
+# From a lockfile
+
+* place the lockfile in the directory you are working on your R project from. ideally you are already using an R Project `.Rproj` file.
+* run restore()
+  - Note the project argument for restore()
+
+> **project** 
+>
+>   The project directory. If NULL, then the active project will be used. If no project is    currently active, then the current working directory is used instead.
+
+# After Upgrading R
+
+* Topic covered in more detail in the Caching page
+* In short, you will need to restore() projects when upgrading by minor versions of R
+    - semantic versioning: `major.minor.patch` so an upgrade from R4.3 to R4.4 will cause you to need to restore() your projects
+
