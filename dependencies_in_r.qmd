@@ -11,7 +11,8 @@ library(magrittr)
 
 This page will talk about specifics of dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduce the {renv} package.
 
-# Background: Packages, Libraries, and Repositories
+# Some Technical Definitions
+
 
 ## Packages
 
@@ -24,7 +25,8 @@ installed.packages(priority = c("base", "recommended")) %>%
   DT::datatable()
 ```
 
--   of course, you can also download additional packages from various online sources and you can even create your own packages. However, where are all of these downloaded packages stored? In [libraries](#libraries)
+- in general, packages can live in one of two places: in a [Library](#libraries) or in a [Repository](#repositories)
+-   of course, you can also download additional packages from various online sources and you can even create your own packages. However, where are all of these downloaded packages stored? In 
 
 ## Libraries {#libraries}
 
@@ -32,7 +34,12 @@ installed.packages(priority = c("base", "recommended")) %>%
 
 [@xieyihui2014]
 
-# Some History and Comparisons
+## Repositories {#repositories}
+
+
+[See also the Posit article on packages, libraries, and repositories.](https://solutions.posit.co/envs-pkgs/repos_and_libs/)
+
+# Package Managers in R
 
 ## {packrat}
 
