@@ -1,3 +1,7 @@
 ---
 title: "exercise 2"
 ---
+
+
+* restoring a project
+* **Go to the Exercise 2 Folder**
