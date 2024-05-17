@@ -2,6 +2,6 @@
 title: "exercise 3"
 ---
 
-
-* explicit snapshot of {rmarkdown}?
-* **Go to the Exercise 3 Folder**
+-   explicit snapshot of {rmarkdown}?
+-   **Go to the Exercise 3 Folder**
+-   should use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes

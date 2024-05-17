@@ -4,22 +4,23 @@ title: "Initialize and Snapshot"
 
 # Getting Started
 
-* fork the intro-to-renv-examples repo
-* **Go to the Exercise 1 folder**
-* init renv
-* commit repo changes
-
+-   fork the intro-to-renv-examples repo
+-   **Go to the Exercise 1 folder**
+-   init renv
+-   commit repo changes
 
 # Snapshotting
 
-* We want to observe the process in action
-* Run `dependencies()`
-* Create a new .R file
-* Paste this analysis code in the file
-```r
+-   We want to observe the process in action
+-   Run `dependencies()`
+-   Create a new .R file
+-   Paste this analysis code in the file
+
+``` r
 stats::lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 ```
-* Run `dependencies()` again
-* What do you notice?
-* Run `snapshot()`
-* Commit and push changes
+
+-   Run `dependencies()` again
+-   What do you notice?
+-   Run `snapshot()`
+-   Commit and push changes

@@ -1,7 +1,6 @@
 ---
-title: "exercise 2"
+title: "Using `restore()`"
 ---
 
-
-* restoring a project
-* **Go to the Exercise 2 Folder**
+-   restoring a project
+-   **Go to the Exercise 2 Folder**
