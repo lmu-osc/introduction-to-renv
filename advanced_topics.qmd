@@ -3,3 +3,16 @@ title: "Advanced Topics"
 ---
 
 Optional: discuss any advanced topics?
+
+# Caching
+
+* show that `paths$cache()` will return the path to the cache being used by your project
+* show that some packages will have multiple stored versions in the cache which makes sense because different projects will have different 
+
+``` r
+renv::paths$cache()
+#> [1] "/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20"
+list.files("/Users/<user_here>/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/ggplot2")
+#> [1] "3.4.3" "3.4.4" "3.5.0"
+```
+
