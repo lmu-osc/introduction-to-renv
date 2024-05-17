@@ -4,22 +4,24 @@ title: "Welcome to the {renv} Tutorial!"
 
 # Tutorial Structure
 
-This **self-paced tutorial** is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components. It is meant to be comprehensible for novice R users, but (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.
-
-The tutorial is split into a Learning component where you will read about software dependencies, understand some of the nuances of dependencies in R, and be introduced to the [{renv}](https://rstudio.github.io/renv/articles/renv.html) package.
-
-## Prerequisites
-
-This is largely a standalone tutorial, and we only assume familiarity with R to be able to read and understand the Background and {renv} sections. 
-
-::: {.callout-important}
-Although optional, completing the Exercises will require some **knowledge of git and GitHub** especially if you would like to receive feedback or troubleshoot issues remotely.
-:::
-
-::: {.callout-tip}
+::: callout-tip
 The following software should be installed:
 
 -   [R, recommend v4.3.X or more recent](https://www.r-project.org/){target="_blank"}
 -   {renv}, installed with `install.packages("renv")` from within R
--   [RStudio, optional](https://posit.co/download/rstudio-desktop/){target="_blank"}
+-   [RStudio](https://posit.co/download/rstudio-desktop/){target="_blank"}
 :::
+
+This **self-paced tutorial** is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components of dependency management and R. Content has been written with novice R users in mind, but this tutorial (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.
+
+The tutorial is split into the following sections:
+
+1. **Background** introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.
+2. **{renv}** discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful.
+3. **Exercises** contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.
+4. **Optional Content** dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.
+
+::: callout-important
+Although optional for the rest of the tutorial, **knowledge of git and GitHub** will be necessary for the Exercises especially if you would like to receive feedback or troubleshoot issues remotely.
+:::
+
