@@ -13,20 +13,32 @@ This page will talk about specifics of dependency management in R including lega
 
 # Some Technical Definitions
 
-
 ## Packages
 
--   these are the bundles of software you use for data cleaning, analysis, scripting/programming, etc. When R is installed, the "base" packages are automatically included and you will likely recognize some of the "recommended" packages such as Matrix or survival because they are so ubiquitous in the R ecosystem. That is, either you yourself use some of these packages or packages you use have dependencies on these.
+Packages can be thought of as the the bundles of software you use for data cleaning, analysis, scripting/programming, and various other activities. What these all have in common is that they build upon the core, basic functionalities of the R language itself. For example, the code below demonstrates how one can filter a data set using *only* R's built-in capabilities and by using {dplyr}.
+
+```r
+iris[iris$Species == "setosa" & iris$Sepal.Length > 4.5, ]
+dplyr::filter(iris, Species == "setosa", Sepal.Length > 4.5)
+```
+
+
+The basic R approach is relatively verbose in requiring users to write "iris" twice, requires understanding of `[` as an operator, and requires one to remember that indexing in R works `[row, column]`. Someone programming with R **should** still know these things, but, in my opinion, the code from {dplyr} is simply easier to write and is more readable to other users. This trivial example is simply meant to highlight some of the main reasons for packages: convenience, and building better tools on top of the language.
+
+### Pre-Installed Packages
+
+Upon installing R, the "base" packages are automatically included and you will likely recognize some of the "recommended" packages such as Matrix or survival because they are so ubiquitous in the R ecosystem. That is, either you yourself use some of these packages or packages you use have dependencies on these.
+
 
 ```{r}
 installed.packages(priority = c("base", "recommended")) %>%
   as_tibble() %>%
   select(Package, Version, Priority, Depends, Imports) %>%
-  DT::datatable()
+  DT::datatable(options = list(paging=TRUE, scrollY = '300px'))
 ```
 
-- in general, packages can live in one of two places: in a [Library](#libraries) or in a [Repository](#repositories)
--   of course, you can also download additional packages from various online sources and you can even create your own packages. However, where are all of these downloaded packages stored? In 
+-   in general, packages can live in one of two places: in a [Library](#libraries) or in a [Repository](#repositories)
+-   of course, you can also download additional packages from various online sources and you can even create your own packages. However, where are all of these downloaded packages stored? In
 
 ## Libraries {#libraries}
 
@@ -35,7 +47,6 @@ installed.packages(priority = c("base", "recommended")) %>%
 [@xieyihui2014]
 
 ## Repositories {#repositories}
-
 
 [See also the Posit article on packages, libraries, and repositories.](https://solutions.posit.co/envs-pkgs/repos_and_libs/)
 
