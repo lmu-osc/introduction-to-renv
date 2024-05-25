@@ -57,9 +57,9 @@ website:
           - href: ex_init_snapshot.qmd
             text: "Init and Snapshot"
           - href: ex_2.qmd
-            text: "Exercise 2"
+            text: "Restore"
           - href: ex_3.qmd
-            text: "Exercise 3"
+            text: "Explicitly Record"
       - section: "Optional Content"
         contents: 
           - href: advanced_topics.qmd
