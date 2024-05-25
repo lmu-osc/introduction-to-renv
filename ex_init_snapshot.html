@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to {renv} - Restoring Another Project</title>
+<title>Introduction to {renv} - Initialize and Snapshot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ex_init_snapshot.html" rel="next">
-<link href="./starting_details.html" rel="prev">
+<link href="./ex_2.html" rel="next">
+<link href="./restoring_a_project.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -125,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring A Project</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Init and Snapshot</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -203,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link active">
+  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Restoring A Project</span></a>
   </div>
 </li>
@@ -220,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_init_snapshot.html" class="sidebar-item-text sidebar-link">
+  <a href="./ex_init_snapshot.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Init and Snapshot</span></a>
   </div>
 </li>
@@ -271,18 +305,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-a-github-repo" id="toc-from-a-github-repo" class="nav-link active" data-scroll-target="#from-a-github-repo">From a GitHub Repo</a></li>
-  <li><a href="#from-a-lockfile" id="toc-from-a-lockfile" class="nav-link" data-scroll-target="#from-a-lockfile">From a lockfile</a></li>
-  <li><a href="#after-upgrading-r" id="toc-after-upgrading-r" class="nav-link" data-scroll-target="#after-upgrading-r">After Upgrading R</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#snapshotting" id="toc-snapshotting" class="nav-link" data-scroll-target="#snapshotting">Snapshotting</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_init_snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring A Project</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Init and Snapshot</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Restoring Another Project</h1>
+<h1 class="title">Initialize and Snapshot</h1>
 </div>
 
 
@@ -299,38 +332,29 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Description about how to restore a {renv} library from an existing project</p>
-<p>Three most likely scenarios</p>
-<section id="from-a-github-repo" class="level1">
-<h1>From a GitHub Repo</h1>
+<section id="getting-started" class="level1">
+<h1>Getting Started</h1>
 <ul>
-<li>clone</li>
-<li>run restore()</li>
-<li>should not be anything else to do</li>
+<li>fork the intro-to-renv-examples repo</li>
+<li><strong>Go to the Exercise 1 folder</strong></li>
+<li>init renv</li>
+<li>commit repo changes</li>
 </ul>
 </section>
-<section id="from-a-lockfile" class="level1">
-<h1>From a lockfile</h1>
+<section id="snapshotting" class="level1">
+<h1>Snapshotting</h1>
 <ul>
-<li>place the lockfile in the directory you are working on your R project from. ideally you are already using an R Project <code>.Rproj</code> file.</li>
-<li>run restore()
-<ul>
-<li>Note the project argument for restore()</li>
-</ul></li>
+<li>We want to observe the process in action</li>
+<li>Run <code>dependencies()</code></li>
+<li>Create a new .R file</li>
+<li>Paste this analysis code in the file</li>
 </ul>
-<blockquote class="blockquote">
-<p><strong>project</strong></p>
-<p>The project directory. If NULL, then the active project will be used. If no project is currently active, then the current working directory is used instead.</p>
-</blockquote>
-</section>
-<section id="after-upgrading-r" class="level1">
-<h1>After Upgrading R</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Topic covered in more detail in the Caching page</li>
-<li>In short, you will need to restore() projects when upgrading by minor versions of R
-<ul>
-<li>semantic versioning: <code>major.minor.patch</code> so an upgrade from R4.3 to R4.4 will cause you to need to restore() your projects</li>
-</ul></li>
+<li>Run <code>dependencies()</code> again</li>
+<li>What do you notice?</li>
+<li>Run <code>snapshot()</code></li>
+<li>Commit and push changes</li>
 </ul>
 
 
@@ -748,13 +772,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./starting_details.html" class="pagination-link" aria-label="2. Understanding {renv}">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Understanding {renv}</span>
+      <a href="./restoring_a_project.html" class="pagination-link" aria-label="3. Restoring A Project">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Restoring A Project</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ex_init_snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
-        <span class="nav-page-text">Init and Snapshot</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ex_2.html" class="pagination-link" aria-label="Restore">
+        <span class="nav-page-text">Restore</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -766,7 +790,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_init_snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

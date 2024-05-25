@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to {renv} - 2. Dependencies in R</title>
+<title>Introduction to {renv} - Dependencies in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -67,6 +121,16 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -125,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_dependencies.html">Learn</a></li><li class="breadcrumb-item"><a href="./dependencies_in_r.html">2. Dependencies in R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./comp_reproducible.html">Background</a></li><li class="breadcrumb-item"><a href="./dependencies_in_r.html">3. Dependencies in R</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -154,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Learn</span></a>
+ <span class="menu-text">Background</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -162,38 +226,57 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./comp_reproducible.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./intro_dependencies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. What Are Dependencies?</span></a>
+ <span class="menu-text">2. Software Dependencies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2. Dependencies in R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./renv_getting_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. {renv}: Getting Started</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Restoring Another Project</span></a>
+ <span class="menu-text">3. Dependencies in R</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Exercise</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">{renv}</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./renv_getting_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./starting_details.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Understanding {renv}</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Restoring A Project</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Optional Content</span></a>
+ <span class="menu-text">Exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -201,8 +284,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ex_init_snapshot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Init and Snapshot</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Restore</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explicitly Record</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Optional Content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./advanced_topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Topics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
 </li>
       </ul>
@@ -213,14 +331,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#some-technical-definitions" id="toc-some-technical-definitions" class="nav-link active" data-scroll-target="#some-technical-definitions">Some Technical Definitions</a>
+  <ul class="collapse">
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a>
+  <ul class="collapse">
+  <li><a href="#pre-installed-packages" id="toc-pre-installed-packages" class="nav-link" data-scroll-target="#pre-installed-packages">Pre-Installed Packages</a></li>
+  </ul></li>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries">Libraries</a></li>
+  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories">Repositories</a></li>
+  </ul></li>
+  <li><a href="#package-managers-in-r" id="toc-package-managers-in-r" class="nav-link" data-scroll-target="#package-managers-in-r">Package Managers in R</a>
+  <ul class="collapse">
+  <li><a href="#packrat" id="toc-packrat" class="nav-link" data-scroll-target="#packrat">{packrat}</a></li>
+  <li><a href="#groundhogr" id="toc-groundhogr" class="nav-link" data-scroll-target="#groundhogr">{groundhogr}</a></li>
+  <li><a href="#renv" id="toc-renv" class="nav-link" data-scroll-target="#renv">{renv}</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/dependencies_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_dependencies.html">Learn</a></li><li class="breadcrumb-item"><a href="./dependencies_in_r.html">2. Dependencies in R</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./comp_reproducible.html">Background</a></li><li class="breadcrumb-item"><a href="./dependencies_in_r.html">3. Dependencies in R</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">2. Dependencies in R</h1>
+<h1 class="title">Dependencies in R</h1>
 </div>
 
 
@@ -238,12 +376,85 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This page will talk about specifics of dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduce the {renv} package.</p>
-<p>Talk about libraries on computer and repos like CRAN, BioC, and RSPM.</p>
-<p>Will talk in more detail about why specifically we are using and recommend the {renv} for this tutorial.</p>
+<section id="some-technical-definitions" class="level1">
+<h1>Some Technical Definitions</h1>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<p>Packages can be thought of as the the bundles of software you use for data cleaning, analysis, scripting/programming, and various other activities. What these all have in common is that they build upon the core, basic functionalities of the R language itself. For example, the code below demonstrates how one can filter a data set using <em>only</em> R’s built-in capabilities and by using {dplyr}.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iris[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">&amp;</span> iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="fl">4.5</span>, ]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(iris, Species <span class="sc">==</span> <span class="st">"setosa"</span>, Sepal.Length <span class="sc">&gt;</span> <span class="fl">4.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The basic R approach is relatively verbose in requiring users to write “iris” twice, requires understanding of <code>[</code> as an operator, and requires one to remember that indexing in R works <code>[row, column]</code>. Someone programming with R <strong>should</strong> still know these things, but, in my opinion, the code from {dplyr} is simply easier to write and is more readable to other users. This trivial example is simply meant to highlight some of the main reasons for packages: convenience, and building better tools on top of the language.</p>
+<section id="pre-installed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="pre-installed-packages">Pre-Installed Packages</h3>
+<p>Upon installing R, the “base” packages are automatically included and you will likely recognize some of the “recommended” packages such as Matrix or survival because they are so ubiquitous in the R ecosystem. That is, either you yourself use some of these packages or packages you use have dependencies on these.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">installed.packages</span>(<span class="at">priority =</span> <span class="fu">c</span>(<span class="st">"base"</span>, <span class="st">"recommended"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Package, Version, Priority, Depends, Imports) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(<span class="at">options =</span> <span class="fu">list</span>(<span class="at">paging=</span><span class="cn">TRUE</span>, <span class="at">scrollY =</span> <span class="st">'300px'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d14f0481de384087822c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d14f0481de384087822c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29"],["base","boot","class","cluster","codetools","compiler","datasets","foreign","graphics","grDevices","grid","KernSmooth","lattice","MASS","Matrix","methods","mgcv","nlme","nnet","parallel","rpart","spatial","splines","stats","stats4","survival","tcltk","tools","utils"],["4.4.0","1.3-30","7.3-22","2.1.6","0.2-20","4.4.0","4.4.0","0.8-86","4.4.0","4.4.0","4.4.0","2.23-22","0.22-6","7.3-60.2","1.7-0","4.4.0","1.9-1","3.1-164","7.3-19","4.4.0","4.1.23","7.3-17","4.4.0","4.4.0","4.4.0","3.5-8","4.4.0","4.4.0","4.4.0"],["base","recommended","recommended","recommended","recommended","base","base","recommended","base","base","base","recommended","recommended","recommended","recommended","base","recommended","recommended","recommended","base","recommended","recommended","base","base","base","recommended","base","base","base"],[null,"R (&gt;= 3.0.0), graphics, stats","R (&gt;= 3.0.0), stats, utils","R (&gt;= 3.5.0)","R (&gt;= 2.1)",null,null,"R (&gt;= 4.0.0)",null,null,null,"R (&gt;= 2.5.0), stats","R (&gt;= 4.0.0)","R (&gt;= 4.4.0), grDevices, graphics, stats, utils","R (&gt;= 4.4.0), methods",null,"R (&gt;= 3.6.0), nlme (&gt;= 3.1-64)","R (&gt;= 3.5.0)","R (&gt;= 3.0.0), stats, utils",null,"R (&gt;= 2.15.0), graphics, stats, grDevices","R (&gt;= 3.0.0), graphics, stats, utils",null,null,null,"R (&gt;= 3.5.0)",null,null,null],[null,null,"MASS","graphics, grDevices, stats, utils",null,null,null,"methods, utils, stats","grDevices",null,"grDevices, utils",null,"grid, grDevices, graphics, stats, utils","methods","grDevices, graphics, grid, lattice, stats, utils","utils, stats","methods, stats, graphics, Matrix, splines, utils","graphics, stats, utils, lattice",null,"tools, compiler",null,null,"graphics, stats","utils, grDevices, graphics","graphics, methods, stats","graphics, Matrix, methods, splines, stats, utils","utils",null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Package<\/th>\n      <th>Version<\/th>\n      <th>Priority<\/th>\n      <th>Depends<\/th>\n      <th>Imports<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"paging":true,"scrollY":"300px","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Package","targets":1},{"name":"Version","targets":2},{"name":"Priority","targets":3},{"name":"Depends","targets":4},{"name":"Imports","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<ul>
+<li>in general, packages can live in one of two places: in a <a href="#libraries">Library</a> or in a <a href="#repositories">Repository</a></li>
+<li>of course, you can also download additional packages from various online sources and you can even create your own packages. However, where are all of these downloaded packages stored? In</li>
+</ul>
+</section>
+</section>
+<section id="libraries" class="level2">
+<h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
+<ul>
+<li>Simply put, these are the locations where R packages are stored. The use of the <code>library()</code> function to attach a package to your session, e.g.&nbsp;<code>library("dplyr")</code>, can thus be a bit confusing. In everyday situations, making this distinction is not so important, but for the purposes of this tutorial it is essential to have a more precise definition of a library.</li>
+</ul>
+<p><span class="citation" data-cites="xieyihui2014">(<a href="#ref-xieyihui2014" role="doc-biblioref">Xie, Yihui 2014</a>)</span></p>
+</section>
+<section id="repositories" class="level2">
+<h2 class="anchored" data-anchor-id="repositories">Repositories</h2>
+<p><a href="https://solutions.posit.co/envs-pkgs/repos_and_libs/">See also the Posit article on packages, libraries, and repositories.</a></p>
+</section>
+</section>
+<section id="package-managers-in-r" class="level1">
+<h1>Package Managers in R</h1>
+<section id="packrat" class="level2">
+<h2 class="anchored" data-anchor-id="packrat">{packrat}</h2>
+<ul>
+<li>{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least <a href="https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c">April 2020</a>. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.</li>
+</ul>
+</section>
+<section id="groundhogr" class="level2">
+<h2 class="anchored" data-anchor-id="groundhogr">{groundhogr}</h2>
+<ul>
+<li><a href="https://groundhogr.com/">{groundhogr}</a>: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address <a href="https://groundhogr.com/p3m/">some shortcomings</a> of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.</li>
+</ul>
+</section>
+<section id="renv" class="level2">
+<h2 class="anchored" data-anchor-id="renv">{renv}</h2>
+<ul>
+<li>{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g.&nbsp;1.X+1.X or a major release to e.g.&nbsp;2.X.X)
+<ul>
+<li>pros:
+<ul>
+<li>developed by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues</li>
+<li>likely the most popular option already. learning this is a transferable skill between academia and industry.</li>
+<li>integration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions <em>because</em> Posit has developed extensions that make this easier.</li>
+<li>it works at a project level (i.e.&nbsp;it should be paired with the use of an R Project/<code>.RProj</code> file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment</li>
+<li>Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.</li>
+</ul></li>
+</ul></li>
+</ul>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-xieyihui2014" class="csl-entry" role="listitem">
+Xie, Yihui. 2014. <span>“Library() Vs Require() in r - Yihui Xie | 谢益辉.”</span> <a href="https://yihui.org/en/2014/07/library-vs-require/">https://yihui.org/en/2014/07/library-vs-require/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -655,13 +866,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro_dependencies.html" class="pagination-link" aria-label="1. What Are Dependencies?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. What Are Dependencies?</span>
+      <a href="./intro_dependencies.html" class="pagination-link" aria-label="2. Software Dependencies">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Software Dependencies</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./renv_getting_started.html" class="pagination-link" aria-label="3. {renv}: Getting Started">
-        <span class="nav-page-text">3. {renv}: Getting Started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./renv_getting_started.html" class="pagination-link" aria-label="1. Getting Started">
+        <span class="nav-page-text">1. Getting Started</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -673,7 +884,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/dependencies_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/dependencies_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

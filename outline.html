@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to {renv} - Restoring Another Project</title>
+<title>Introduction to {renv} - outline</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ex_init_snapshot.html" rel="next">
-<link href="./starting_details.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -125,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring A Project</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">outline</li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -203,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link active">
+  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Restoring A Project</span></a>
   </div>
 </li>
@@ -267,22 +265,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#from-a-github-repo" id="toc-from-a-github-repo" class="nav-link active" data-scroll-target="#from-a-github-repo">From a GitHub Repo</a></li>
-  <li><a href="#from-a-lockfile" id="toc-from-a-lockfile" class="nav-link" data-scroll-target="#from-a-lockfile">From a lockfile</a></li>
-  <li><a href="#after-upgrading-r" id="toc-after-upgrading-r" class="nav-link" data-scroll-target="#after-upgrading-r">After Upgrading R</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring A Project</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Restoring Another Project</h1>
+<h1 class="title">outline</h1>
 </div>
 
 
@@ -299,42 +289,59 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Description about how to restore a {renv} library from an existing project</p>
-<p>Three most likely scenarios</p>
-<section id="from-a-github-repo" class="level1">
-<h1>From a GitHub Repo</h1>
+<ol type="1">
+<li>Software reproducibility</li>
+</ol>
 <ul>
-<li>clone</li>
-<li>run restore()</li>
-<li>should not be anything else to do</li>
-</ul>
-</section>
-<section id="from-a-lockfile" class="level1">
-<h1>From a lockfile</h1>
+<li>what is it?</li>
+<li>what are the goals?</li>
+<li>what needs to be tracked?
 <ul>
-<li>place the lockfile in the directory you are working on your R project from. ideally you are already using an R Project <code>.Rproj</code> file.</li>
-<li>run restore()
-<ul>
-<li>Note the project argument for restore()</li>
+<li>varies based on project needs. a completely reproducible system would have the same versions of software on the same versions of the operating system on the same hardware models. The hardware aspect is difficult enough as is, but softwares also have a variety of different versions, sometimes with minor changes that won’t affect output in any noticeable way, and sometimes those changes are breaking such that code simply no longer runs, or worse, the code still runs but provides different results than expected</li>
 </ul></li>
+<li>what are the challenges?</li>
 </ul>
-<blockquote class="blockquote">
-<p><strong>project</strong></p>
-<p>The project directory. If NULL, then the active project will be used. If no project is currently active, then the current working directory is used instead.</p>
-</blockquote>
-</section>
-<section id="after-upgrading-r" class="level1">
-<h1>After Upgrading R</h1>
+<ol start="2" type="1">
+<li>Dependency Mangement</li>
+</ol>
 <ul>
-<li>Topic covered in more detail in the Caching page</li>
-<li>In short, you will need to restore() projects when upgrading by minor versions of R
+<li>what is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.</li>
+<li>these can be managed informally with e.g.&nbsp;a written list of softwares used and versions if needed.
 <ul>
-<li>semantic versioning: <code>major.minor.patch</code> so an upgrade from R4.3 to R4.4 will cause you to need to restore() your projects</li>
+<li>pros: there’s little technical knowledge needed here. anyone can type these out.</li>
+<li>cons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.
+<ul>
+<li>what does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.</li>
+<li>However, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)</li>
+</ul></li>
+</ul></li>
+<li>Given the complexity in all of this, automated solutions for dependency tracking are recommended.</li>
+<li>Python: <code>requirements.txt</code>, <code>Pipfile</code>, and <code>pyproject.toml</code> for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.
+<ul>
+<li>this tutorial focuses on R and {renv} so no further comparison of these will be provided here</li>
+</ul></li>
+<li>R: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem</li>
+</ul>
+<ol start="3" type="1">
+<li>Why {renv}?</li>
+</ol>
+<ul>
+<li>{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least <a href="https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c">April 2020</a>. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.</li>
+<li><a href="https://groundhogr.com/">{groundhogr}</a>: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address <a href="https://groundhogr.com/p3m/">some shortcomings</a> of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.</li>
+<li>{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g.&nbsp;1.X+1.X or a major release to e.g.&nbsp;2.X.X)
+<ul>
+<li>pros:
+<ul>
+<li>developed by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues</li>
+<li>likely the most popular option already. learning this is a transferable skill between academia and industry.</li>
+<li>integration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions <em>because</em> Posit has developed extensions that make this easier.</li>
+<li>it works at a project level (i.e.&nbsp;it should be paired with the use of an R Project/<code>.RProj</code> file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment</li>
+<li>Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.</li>
+</ul></li>
 </ul></li>
 </ul>
 
 
-</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -746,18 +753,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./starting_details.html" class="pagination-link" aria-label="2. Understanding {renv}">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Understanding {renv}</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./ex_init_snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
-        <span class="nav-page-text">Init and Snapshot</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -766,7 +761,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/outline.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
