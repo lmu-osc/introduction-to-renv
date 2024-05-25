@@ -50,8 +50,10 @@ website:
         contents:
           - href: renv_getting_started.qmd
             text: "1. Getting Started"
+          - href: starting_details.qmd
+            text: "2. Understanding {renv}"
           - href: restoring_a_project.qmd
-            text: "2. Restoring A Project"
+            text: "3. Restoring A Project"
       - section: "Exercises"
         contents:
           - href: ex_init_snapshot.qmd
