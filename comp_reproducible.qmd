@@ -12,16 +12,17 @@ bibliography: references.bib
 >
 > -- <cite>Odd Erik Gundersen</cite> [-@erikgundersen2021]
 
-Gundersen explores many definitions put forward for "reproducibility", and ultimately summarizes reproducibility as "the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators" [@erikgundersen2021]. What constitutes "documentation", and a sufficient amount of documentation for that matter, can vary widely, however. 
+Gundersen explores many definitions put forward for "reproducibility", but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as "the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators" [@erikgundersen2021]. In principle, this sounds simple enough, but in practice, it can be quite challenging to achieve as there is no single, universally agreed-upon definition of what constitutes "documentation" or how much documentation is necessary to achieve reproducibility. 
 
-In principle, one would assume that academic publications provide all of the information required to reproduce a publication; the requisite background, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.[^1] In practice, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor. 
-
-To address these shortcomings, **researchers must also strive to publish their code, data, and ideally both of these together such that the *complete* documentation of the project is available to others.**
+One might assume that academic publications provide all of the information required for an independent researcher to reproduce a publication; the requisite background on the topic, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.[^1] In practice, a written publication generally cannot capture all of the nuances of data cleaning, exploration, and analysis employed by the original researchers. As a result, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor.
 
 [^1]: Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.
 
+To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.**
 
 ## Reproducible Code
+
+
 
 -   it is one thing to publish or share all of the code for our projects, but we also need to make sure the code works and functions in an intelligible manner for those who may want to reproduce our analyses
 -   overlooked aspect of reproducible code is ensuring that the software we used matches what others will use, and, in short, we can create metadata files defining precisely this kind of information.
@@ -31,28 +32,35 @@ To address these shortcomings, **researchers must also strive to publish their c
 
 ## Your Computer
 
-
 ```{r, fig.cap="...and we are very proud of you for that. Traditionally, this has been sufficient for generating all of the analyses and figures needed to author manuscripts.", out.width="85%", echo=FALSE}
 knitr::include_graphics("assets/img/works_on_my_machine.jpg")
 ```
 
-
 If you are here, you have more than likely created some analysis or software project, and you have presumably done all of the development **by yourself on one specific computer**. If the project works, congratulations!
 
-What about all of the other machines where someone might want to use or contribute to your project though? 
+What about all of the other machines where someone might want to use or contribute to your project though?
 
 ## Someone Else's Computer
 
 It is unlikely other users will already have all of the requisite software installed that you used while developing on your computer. A non-exhaustive list of examples where there might be software discrepancies include:
 
-::: {.callout-tip}
-## Examples of Machine/Software Differences
+### Examples of Machine/Software Differences
+::: {.panel-tabset}
 
--   Operating systems (e.g. Mac vs. Windows vs. Linux)
--   Versions of an operating system (e.g. Windows 10 vs. 11)
--   Programming languages (e.g. R, Python, MATLAB, Julia, JavaScript)
--   Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^2]
--   Add-on packages/libraries for a programming language
+
+## Operating systems 
+
+- (e.g. Mac vs. Windows vs. Linux)
+- Versions of an operating system (e.g. Windows 10 vs. 11)
+
+## Programming languages 
+
+- (e.g. R, Python, MATLAB, Julia, JavaScript)
+- Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^2]
+
+## Software Add-ons
+
+- Add-on packages/libraries for a programming language
 -   Versions of packages/libraries
 :::
 
