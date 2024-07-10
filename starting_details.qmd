@@ -9,6 +9,7 @@ overflow-y: scroll;
 }
 ```
 
+
 # Details {#details}
 
 ## Initiation
@@ -77,14 +78,57 @@ You will likely never need to use `renv::dependencies()` directly, but being awa
 
 -   the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.
 
-```{r, results='hold', message=FALSE, collapse=TRUE}
-#| cache: true
-#| class: output
+:::{.output-overflow}
+
+``` r
 pak::pkg_deps_tree("dplyr", dependencies = NA)
-# Note: the dependencies = NA argument is equivalent 
-# to dependencies = c("Depends", "Imports", "LinkingTo")
-# See below for explanation
+#> ℹ Loading metadata database
+#> ✔ Loading metadata database ... done
+#> 
+#> dplyr 1.1.4 ✨🔧 ⬇ (1.60 MB)
+#> ├─cli 3.6.3 ✨🔧 ⬇ (1.39 MB)
+#> ├─generics 0.1.3 ✨ ⬇ (81.91 kB)
+#> ├─glue 1.7.0 ✨🔧 ⬇ (159.50 kB)
+#> ├─lifecycle 1.0.4 ✨ ⬇ (124.78 kB)
+#> │ ├─cli
+#> │ ├─glue
+#> │ └─rlang 1.1.4 ✨🔧 ⬇ (1.89 MB)
+#> ├─magrittr 2.0.3 ✨🔧 ⬇ (233.52 kB)
+#> ├─pillar 1.9.0 ✨ ⬇ (652.06 kB)
+#> │ ├─cli
+#> │ ├─fansi 1.0.6 ✨🔧 ⬇ (383.06 kB)
+#> │ ├─glue
+#> │ ├─lifecycle
+#> │ ├─rlang
+#> │ ├─utf8 1.2.4 ✨🔧 ⬇ (206.91 kB)
+#> │ └─vctrs 0.6.5 ✨🔧 ⬇ (1.89 MB)
+#> │   ├─cli
+#> │   ├─glue
+#> │   ├─lifecycle
+#> │   └─rlang
+#> ├─R6 2.5.1 ✨ ⬇ (83.20 kB)
+#> ├─rlang
+#> ├─tibble 3.2.1 ✨🔧 ⬇ (688.89 kB)
+#> │ ├─fansi
+#> │ ├─lifecycle
+#> │ ├─magrittr
+#> │ ├─pillar
+#> │ ├─pkgconfig 2.0.3 ✨ ⬇ (18.45 kB)
+#> │ ├─rlang
+#> │ └─vctrs
+#> ├─tidyselect 1.2.1 ✨🔧 ⬇ (224.68 kB)
+#> │ ├─cli
+#> │ ├─glue
+#> │ ├─lifecycle
+#> │ ├─rlang
+#> │ ├─vctrs
+#> │ └─withr 3.0.0 ✨ ⬇ (242.00 kB)
+#> └─vctrs
+#> 
+#> Key:  ✨ new |  ⬇ download | 🔧 compile
 ```
+
+:::
 
 -   Dependencies
     -   hard: "Depends", "Imports", and "LinkingTo"
@@ -120,15 +164,16 @@ renv::snapshot()
 
 -   As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model.
 
-```{r, results='hold', message=FALSE, results='hide'}
+```{r, results='hold', message=FALSE, results='hide', eval=FALSE}
 # install.packages("lme4")
 library(lme4)
-lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = iris) 
+lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::iris) 
 ```
 
 -   Make sure to save the file, and then run `renv::snapshot()` again from the Console
 
-:::{.output}
+:::{.output-overflow}
+
 
 ``` r
 > renv::snapshot()
