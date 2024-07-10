@@ -2,18 +2,24 @@
 title: "Getting Started Details"
 ---
 
-
 # Details {#details}
 
 ## Initiation
 
--   initiate project with `renv::init()`
-    -   creates a lockfile
-    -   creates a renv folder
-    -   adds the line `source("renv/activate.R")` to your .Rprofile which is automatically run anytime a session with this project is started, i.e. you should aim to open projects that use {renv} with the associated `*.Rproj` file if it exists
-    -   updates the .Rbuildignore (only relevant if you're building an R package, but good to understand this because renv files cannot be included in an R package. There are other mechanisms for managing package dependencies, namely the `DESCRIPTION` file.)
--   lockfile details
-    -   if you init from a new, empty project then generally the `renv.lock` will only populate with the version of R you're currently using and your default repository
+When initiating a project with {renv}, the following steps are taken automatically:
+
+1. Creation of a lockfile, `renv.lock` which records the version of R in use, the default download repository, and the packages used in the project.
+1. Creation of a `renv` folder which contains the project `library`[^library_symlinks], a settings file, and a staging area for package installation
+1.  Addition of the line `source("renv/activate.R")` to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library
+1. Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
+
+
+[^library_symlinks]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.
+
+
+### Initiation Example
+
+Initiating {renv} in a project should print the following to the console:
 
 ``` r
 renv::init()
@@ -28,25 +34,37 @@ renv::init()
 #> - Lockfile written to "~/Desktop/temporary".
 ```
 
+And the directory structure in a new project called `temp` would look like this:
+
+``` r
+fs::dir_tree(recurse = 2)
+#> .
+#> ├── renv
+#> │   ├── activate.R
+#> │   ├── library
+#> │   │   └── macos
+#> │   ├── settings.json
+#> │   └── staging
+#> ├── renv.lock
+#> └── temp.Rproj
+```
+
+
 ## Package Detection
+
+{renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.
+
+<!-- It does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency. -->
 
 ### Dependencies
 
--   Can check the status of your project
+At the first degree, *you* depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to `library()`, `require()`, or namespaced calls e.g. `package::function()`. It is quite obvious that these packages are dependencies of your project, and should be included in the `renv.lock` file. 
 
-``` r
-renv::status()
-#> No issues found -- the project is in a consistent state.
-```
+However, how does {renv} detect what packages are being used in the project? The `renv:dependencies()` function! This function works by searching all R-related files (e.g. `.R`, `.Rmd`, `.qmd`) for calls to packages. It is important to note that this function only detects packages that are actually **used** and properly **declared** in the project. Packages that are not used and packages that you use interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency.
 
--   what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.
+You will likely never need to use `renv::dependencies()` directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function also underlies the `renv:status()` and  `renv::snapshot()` functions which **are** essential for using {renv}.
 
--   {renv} can easily read information from the `renv.lock` (it's in a JSON format) so it readily knows what *should* be in the project
 
--   however, how does {renv} know what is being used in the project? for that, the `renv:dependencies()` function was developed.
-
-    -   you will likely never need to use this function directly, but being aware of it can be massively beneficial in troubleshooting issues in the future. This function also underlies the `renv:status()` and to-be-discussed `renv::snapshot()` functions which **are** essential.
-    -   as the name suggests, `renv::dependencies()` detects the packages you are using in your project. it does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency
 
 ### Dependencies of Dependencies
 
@@ -65,10 +83,30 @@ pak::pkg_deps_tree("dplyr", dependencies = NA)
     -   soft: "Suggests" and "Enhances
 -   With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN)
 
+
+
+## Status, Snapshot, Status
+
+
+-   Can check the status of your project
+
+``` r
+renv::status()
+#> No issues found -- the project is in a consistent state.
+```
+
+-   what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.
+
+-   {renv} can easily read information from the `renv.lock` (it's in a JSON format) so it readily knows what *should* be in the project
+
+
 ``` r
 renv::snapshot()
 #> - The lockfile is already up to date.
 ```
+
+
+
 
 ### A Simple Example
 
