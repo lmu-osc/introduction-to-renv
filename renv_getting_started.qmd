@@ -44,6 +44,9 @@ When initiating a new project from within RStudio such as a typical .Rproj, a Qu
 File -> New Project -> New Directory -> New Project -> [x] Use renv with this project
 ```
 
+{{< video assets/img/renv_init_new_project.mp4 >}}
+
+
 ### From an Existing Project or Folder
 
 In essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.
@@ -54,6 +57,10 @@ install.packages("renv")
 library(renv)
 init()
 ```
+
+{{< video assets/img/renv_init_existing_project.mp4 >}}
+
+
 
 ## Check Status of Project
 
