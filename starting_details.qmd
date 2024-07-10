@@ -2,6 +2,12 @@
 title: "Getting Started Details"
 ---
 
+```{css, echo = FALSE}
+.output {
+max-height: 400px;
+overflow-y: scroll;
+}
+```
 
 
 # Details {#details}
@@ -167,6 +173,7 @@ lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::
 -   Make sure to save the file, and then run `renv::snapshot()` again from the Console
 
 :::{.output-overflow}
+
 
 ``` r
 > renv::snapshot()
