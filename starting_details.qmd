@@ -158,7 +158,7 @@ renv::snapshot()
 
 -   As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model.
 
-```{r, results='hold', message=FALSE, results='hide'}
+```{r, results='hold', message=FALSE, results='hide', eval=FALSE}
 # install.packages("lme4")
 library(lme4)
 lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::iris) 
