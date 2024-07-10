@@ -12,7 +12,7 @@ bibliography: references.bib
 >
 > -- <cite>Odd Erik Gundersen</cite> [-@erikgundersen2021]
 
-Gundersen explores many definitions put forward for "reproducibility", but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as "the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators" [@erikgundersen2021]. 
+Gundersen explores many definitions put forward for "reproducibility", but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as "the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators" [@erikgundersen2021].
 
 In principle, this sounds simple enough--provide others with enough information, and they should be able to reproduce your work! Achieving this in practice is, of course, a vastly complex endeavor that requires careful planning and execution. Above all, opinions on what constitutes sufficient "documentation" or how much documentation is necessary to achieve reproducibility can vary widely.
 
@@ -20,82 +20,83 @@ One might assume that academic publications provide all of the information requi
 
 [^1]: Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.
 
-To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.** 
+To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.**
 
 ## Reproducible Code
 
-Why should we concern ourselves with making reproducible code specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one's own work, to make debugging and troubleshooting easier, and to collaborate with others.
+Why should we concern ourselves with making reproducible *code* specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one's own work, to make debugging and troubleshooting easier, and to collaborate with others.
 
 In the context of this tutorial, we will focus on the practical aspects of making code reproducible. This mainly means taking steps to ensure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is **portable** and **future-proof** by ensuring the software originally used in creating our code is the same software used by others. Let's look at this in more detail.
-
 
 # The \~Machines\~
 
 ## Your Computer
 
-Getting code to work on your own machine is *usually* not too difficult. You can install the software you need, set up your environment, and run your code. 
+Getting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)
 
-What about all of the other machines where someone might want to use or contribute to your project though?
+However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software *you* need, perhaps have set up specific paths, and configured various settings to your preferences. 
 
-
-```{r, fig.cap="Traditionally, this has been sufficient for generating all of the analyses and figures needed to author manuscripts.", out.width="85%", echo=FALSE}
+```{r, out.width="85%", echo=FALSE}
 knitr::include_graphics("assets/img/works_on_my_machine.jpg")
 ```
 
-
-
 ## Someone Else's Computer
 
-When you share your code with others, however, you are asking them to run *your* code on *their* machine, and it is unlikely that their machine is set up exactly like yours. They might not have the same software installed, or they might have different versions of the software you used. A non-exhaustive list of examples where there might be software discrepancies are detailed below.
+When you share your code with others, you are asking them to run *your* code on *their* machine, and it is unlikely that their machine is set up exactly like yours. There are a nearly infinite degrees of freedom in how your system might differ from someone else's system, but the main differences They might not have the same software installed, or they might have different versions of the software you used. A non-exhaustive list of examples where there might be software discrepancies are detailed below.
 
+### Major Machine & Software Differences
 
-### Examples of Machine & Software Differences
+<br>
 
 ::: panel-tabset
 ## Operating systems
-
-![](assets/img/mac_linux_windows.jpg)
 
 It's already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.
 
 However, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.
 
+![](assets/img/mac_linux_windows.jpg)
+
 
 ## Programming languages
 
+Another obvious difference is the programming language used in a project. For example, a project written in R will not run (correctly) in a Python, MATLAB, or Julia environment.
+
+Less obvious, however, and more common, are the differences in versions of programming languages. For example, a project written in Python 3.8 might not run in Python 3.9 due to changes in the language, and most R packages are only compatible back to the 5 most recent minor releases of R (e.g. 4.4, 4.3, 4.2, 4.1, 4.0).
+
+Fortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.
+
 ![](assets/img/r_python_julia.jpg)
 
--   (e.g. R, Python, MATLAB, Julia, JavaScript)
--   Versions of programming languages (e.g. Python 2 and 3, R 3.5.3 and 4.3.3)[^2]
 
 ## Software Add-ons
 
+The most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.
+
+Keeping tracking of which packages are used and the specific versions of those packages is a major challenge in reproducibility.
+
+In the context of the R programming language, most packages are likewise compatible across operating systems.
+
+
 ![](assets/img/r_packages.png)
 
--   Add-on packages/libraries for a programming language
--   Versions of packages/libraries
 :::
 
+<br>
 
-The point of this is to demonstrate how many degrees of freedom can exist in the software environment of a project. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons.
-
-Moreover, it's not possible to manage all of these differences manually. For example, you can't just tell someone to install Python v3.8.2, R v4.0.3, and a specific version of a package. This is not only impractical but also not a good use of time.
-
-
-[^2]: Not so fun-fact: some "newer" versions of MacOS come with Python v2 installed because the OS has some dependencies on this version despite v3 being released in 2008; Python v3 is not entirely backwards compatible with v2.
-
-**Do you see some themes here?**
 
 ::: callout-important
 ## Expect No One to Already Have the Required Software
 
--   Don't expect others to already have the software you rely on
--   Even if others have the software, don't expect them to have the **same version**
+In short: don't expect others to have the software you rely on. Even if others have the software, don't expect them to have the **same version**. 
+
 :::
 
 ## All of the Machines
 
-So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
+* The point of this is to demonstrate how many degrees of freedom can exist in the software environment of a project. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons.
+* Moreover, it's not possible to manage all of these differences manually. For example, you can't just tell someone to install Python v3.8.2, R v4.0.3, and a specific version of a package. This is not only impractical but also not a good use of time.
+* So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
 
 [^3]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
