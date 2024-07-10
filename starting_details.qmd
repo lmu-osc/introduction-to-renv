@@ -161,7 +161,7 @@ renv::snapshot()
 ```{r, results='hold', message=FALSE, results='hide'}
 # install.packages("lme4")
 library(lme4)
-lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = iris) 
+lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::iris) 
 ```
 
 -   Make sure to save the file, and then run `renv::snapshot()` again from the Console
