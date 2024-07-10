@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to {renv} - Getting Started Details</title>
+<title>Getting Started Details – Introduction to {renv}</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">Introduction to {renv}</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -134,9 +134,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
     <div class="dropdown">
-      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/introduction-to-renv">
@@ -156,13 +156,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./starting_details.html">2. Understanding {renv}</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -187,9 +187,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Background</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -216,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">{renv}</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -245,9 +245,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Exercises</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -274,9 +274,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Optional Content</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -307,11 +307,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#details" id="toc-details" class="nav-link active" data-scroll-target="#details">Details</a>
   <ul class="collapse">
-  <li><a href="#initiation" id="toc-initiation" class="nav-link" data-scroll-target="#initiation">Initiation</a></li>
+  <li><a href="#initiation" id="toc-initiation" class="nav-link" data-scroll-target="#initiation">Initiation</a>
+  <ul class="collapse">
+  <li><a href="#initiation-example" id="toc-initiation-example" class="nav-link" data-scroll-target="#initiation-example">Initiation Example</a></li>
+  </ul></li>
   <li><a href="#package-detection" id="toc-package-detection" class="nav-link" data-scroll-target="#package-detection">Package Detection</a>
   <ul class="collapse">
   <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
   <li><a href="#dependencies-of-dependencies" id="toc-dependencies-of-dependencies" class="nav-link" data-scroll-target="#dependencies-of-dependencies">Dependencies of Dependencies</a></li>
+  </ul></li>
+  <li><a href="#status-snapshot-status" id="toc-status-snapshot-status" class="nav-link" data-scroll-target="#status-snapshot-status">Status, Snapshot, Status</a>
+  <ul class="collapse">
   <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example">A Simple Example</a></li>
   </ul></li>
   <li><a href="#a-note-on-caching" id="toc-a-note-on-caching" class="nav-link" data-scroll-target="#a-note-on-caching">A Note on Caching</a></li>
@@ -345,19 +351,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Details</h1>
 <section id="initiation" class="level2">
 <h2 class="anchored" data-anchor-id="initiation">Initiation</h2>
-<ul>
-<li>initiate project with <code>renv::init()</code>
-<ul>
-<li>creates a lockfile</li>
-<li>creates a renv folder</li>
-<li>adds the line <code>source("renv/activate.R")</code> to your .Rprofile which is automatically run anytime a session with this project is started, i.e.&nbsp;you should aim to open projects that use {renv} with the associated <code>*.Rproj</code> file if it exists</li>
-<li>updates the .Rbuildignore (only relevant if you’re building an R package, but good to understand this because renv files cannot be included in an R package. There are other mechanisms for managing package dependencies, namely the <code>DESCRIPTION</code> file.)</li>
-</ul></li>
-<li>lockfile details
-<ul>
-<li>if you init from a new, empty project then generally the <code>renv.lock</code> will only populate with the version of R you’re currently using and your default repository</li>
-</ul></li>
-</ul>
+<p>When initiating a project with {renv}, the following steps are taken automatically:</p>
+<ol type="1">
+<li>Creation of a lockfile, <code>renv.lock</code> which records the version of R in use, the default download repository, and the packages used in the project.</li>
+<li>Creation of a <code>renv</code> folder which contains the project <code>library</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a settings file, and a staging area for package installation</li>
+<li>Addition of the line <code>source("renv/activate.R")</code> to your .Rprofile. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library</li>
+<li>Updates the <code>.Rbuildignore</code> to include the <code>renv</code> folder and the <code>renv.lock</code> file. This is only relevant if you’re building an R package.</li>
+</ol>
+<section id="initiation-example" class="level3">
+<h3 class="anchored" data-anchor-id="initiation-example">Initiation Example</h3>
+<p>Initiating {renv} in a project should print the following to the console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following package(s) will be updated in the lockfile:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -368,77 +371,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - R             [* -&gt; 4.4.0]</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - Lockfile written to "~/Desktop/temporary".</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And the directory structure in a new project called <code>temp</code> would look like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── activate.R</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── library</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── macos</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── settings.json</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── staging</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv.lock</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── temp.Rproj</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="package-detection" class="level2">
 <h2 class="anchored" data-anchor-id="package-detection">Package Detection</h2>
+<p>{renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.</p>
+<!-- It does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency. -->
 <section id="dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="dependencies">Dependencies</h3>
-<ul>
-<li>Can check the status of your project</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No issues found -- the project is in a consistent state.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><p>what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.</p></li>
-<li><p>{renv} can easily read information from the <code>renv.lock</code> (it’s in a JSON format) so it readily knows what <em>should</em> be in the project</p></li>
-<li><p>however, how does {renv} know what is being used in the project? for that, the <code>renv:dependencies()</code> function was developed.</p>
-<ul>
-<li>you will likely never need to use this function directly, but being aware of it can be massively beneficial in troubleshooting issues in the future. This function also underlies the <code>renv:status()</code> and to-be-discussed <code>renv::snapshot()</code> functions which <strong>are</strong> essential.</li>
-<li>as the name suggests, <code>renv::dependencies()</code> detects the packages you are using in your project. it does this by searching for calls to <code>library()</code>, <code>require()</code>, or namespace calls to functions e.g.&nbsp;<code>package::function()</code>. Warning: packages that you have only used interactively (i.e.&nbsp;you never wrote a <code>library(&lt;package&gt;)</code> call in a .R/.Rmd script) <strong>will not</strong> be detected as a dependency</li>
-</ul></li>
-</ul>
+<p>At the first degree, <em>you</em> depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to <code>library()</code>, <code>require()</code>, or namespaced calls e.g.&nbsp;<code>package::function()</code>. It is quite obvious that these packages are dependencies of your project, and should be included in the <code>renv.lock</code> file.</p>
+<p>However, how does {renv} detect what packages are being used in the project? The <code>renv:dependencies()</code> function! This function works by searching all R-related files (e.g.&nbsp;<code>.R</code>, <code>.Rmd</code>, <code>.qmd</code>) for calls to packages. It is important to note that this function only detects packages that are actually <strong>used</strong> and properly <strong>declared</strong> in the project. Packages that are not used and packages that you use interactively (i.e.&nbsp;you never wrote a <code>library(&lt;package&gt;)</code> call in a .R/.Rmd script) <strong>will not</strong> be detected as a dependency.</p>
+<p>You will likely never need to use <code>renv::dependencies()</code> directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function also underlies the <code>renv:status()</code> and <code>renv::snapshot()</code> functions which <strong>are</strong> essential for using {renv}.</p>
 </section>
 <section id="dependencies-of-dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="dependencies-of-dependencies">Dependencies of Dependencies</h3>
 <ul>
 <li>the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="cn">NA</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: the dependencies = NA argument is equivalent </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to dependencies = c("Depends", "Imports", "LinkingTo")</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See below for explanation</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## dplyr 1.1.4 [new][dl] (unknown size)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─cli 3.6.2 [new][dl] (unknown size)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─generics 0.1.3 [new][dl] (unknown size)</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─glue 1.7.0 [new][dl] (unknown size)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─lifecycle 1.0.4 [new][dl] (unknown size)</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─cli</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─glue</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## │ └─rlang 1.1.3 [new][dl] (unknown size)</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─magrittr 2.0.3 [new][dl] (unknown size)</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─pillar 1.9.0 [new][dl] (unknown size)</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─cli</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─fansi 1.0.6 [new][dl] (unknown size)</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─glue</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─lifecycle</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─rlang</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─utf8 1.2.4 [new][dl] (unknown size)</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## │ └─vctrs 0.6.5 [new][dl] (unknown size)</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## │   ├─cli</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## │   ├─glue</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## │   ├─lifecycle</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## │   └─rlang</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─R6 2.5.1 [new][dl] (unknown size)</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─rlang</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─tibble 3.2.1 [new][dl] (unknown size)</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─fansi</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─lifecycle</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─magrittr</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─pillar</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─pkgconfig 2.0.3 [new][dl] (unknown size)</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─rlang</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="do">## │ └─vctrs</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="do">## ├─tidyselect 1.2.1 [new][dl] (unknown size)</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─cli</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─glue</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─lifecycle</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─rlang</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="do">## │ ├─vctrs</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="do">## │ └─withr 3.0.0 [new][dl] (unknown size)</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="do">## └─vctrs</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="do">## Key:  [new] new | [dl] download</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="output-overflow">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="cn">NA</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading metadata database</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✔ Loading metadata database ... done</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dplyr 1.1.4 ✨🔧 ⬇ (1.60 MB)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cli 3.6.3 ✨🔧 ⬇ (1.39 MB)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─generics 0.1.3 ✨ ⬇ (81.91 kB)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─glue 1.7.0 ✨🔧 ⬇ (159.50 kB)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─lifecycle 1.0.4 ✨ ⬇ (124.78 kB)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─cli</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─glue</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ └─rlang 1.1.4 ✨🔧 ⬇ (1.89 MB)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─magrittr 2.0.3 ✨🔧 ⬇ (233.52 kB)</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─pillar 1.9.0 ✨ ⬇ (652.06 kB)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─cli</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─fansi 1.0.6 ✨🔧 ⬇ (383.06 kB)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─glue</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─lifecycle</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─rlang</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─utf8 1.2.4 ✨🔧 ⬇ (206.91 kB)</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ └─vctrs 0.6.5 ✨🔧 ⬇ (1.89 MB)</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├─cli</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├─glue</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├─lifecycle</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └─rlang</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─R6 2.5.1 ✨ ⬇ (83.20 kB)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rlang</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tibble 3.2.1 ✨🔧 ⬇ (688.89 kB)</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─fansi</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─lifecycle</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─magrittr</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─pillar</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─pkgconfig 2.0.3 ✨ ⬇ (18.45 kB)</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─rlang</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ └─vctrs</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tidyselect 1.2.1 ✨🔧 ⬇ (224.68 kB)</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─cli</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─glue</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─lifecycle</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─rlang</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ ├─vctrs</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │ └─withr 3.0.0 ✨ ⬇ (242.00 kB)</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─vctrs</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Dependencies
@@ -448,73 +454,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>With that overview of <code>dependencies()</code> and <code>status()</code>, we come to the last major player, <code>snapshot()</code> which will check your project again for new calls to packages, for updated dependencies, and for changes in the <strong>installed</strong> package versions (but it will not check to see if there are recent packages available on e.g.&nbsp;CRAN)</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - The lockfile is already up to date.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+</section>
+<section id="status-snapshot-status" class="level2">
+<h2 class="anchored" data-anchor-id="status-snapshot-status">Status, Snapshot, Status</h2>
+<ul>
+<li>Can check the status of your project</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No issues found -- the project is in a consistent state.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p>what does this mean? essentially, it means that renv has not detected any discrepancies between either A) the packages declared in the lockfile and the packages actually used in the project or B) there are no discrepancies in the versions of packages declared in the lockfile and discovered installed + used from the project library.</p></li>
+<li><p>{renv} can easily read information from the <code>renv.lock</code> (it’s in a JSON format) so it readily knows what <em>should</em> be in the project</p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - The lockfile is already up to date.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="a-simple-example" class="level3">
 <h3 class="anchored" data-anchor-id="a-simple-example">A Simple Example</h3>
 <ul>
 <li>As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called <code>my_analysis.R</code>, call <code>library(lme4)</code>, and create a simple mixed model.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lme4")</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> iris) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lme4")</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Petal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> datasets<span class="sc">::</span>iris) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Make sure to save the file, and then run <code>renv::snapshot()</code> again from the Console</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> renv<span class="sc">::</span><span class="fu">snapshot</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>The following <span class="fu">package</span>(s) will be updated <span class="cf">in</span> the lockfile<span class="sc">:</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># CRAN -----------------------------------------------------------------------</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> boot        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.3</span><span class="dv">-30</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> brio        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">1.5</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> callr       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">7.6</span>]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> cli         [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">6.2</span>]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> crayon      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">5.2</span>]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> desc        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">4.3</span>]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> digest      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">6.35</span>]</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> evaluate    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">0.23</span>]</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> fansi       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.6</span>]</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> fs          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">6.4</span>]</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> glue        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">7.0</span>]</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> jsonlite    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">8.8</span>]</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lattice     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">0.22</span><span class="dv">-6</span>]</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lifecycle   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.4</span>]</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lme4        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.1-35.3</span>]</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> magrittr    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> MASS        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">7.3-60.2</span>]</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Matrix      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.7</span><span class="dv">-0</span>]</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> minqa       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">2.6</span>]</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> nlme        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">3.1</span><span class="dv">-164</span>]</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> nloptr      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pillar      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">9.0</span>]</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgconfig   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> processx    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">8.4</span>]</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> ps          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">7.6</span>]</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> R6          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">5.1</span>]</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> RcppEigen   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="dv">3</span>.<span class="dv">4</span>.<span class="fl">0.0</span>]</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rematch2    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">1.2</span>]</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rlang       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">1.3</span>]</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rprojroot   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.4</span>]</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> tibble      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">2.1</span>]</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> utf8        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">2.4</span>]</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> vctrs       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">6.5</span>]</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> withr       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">0.0</span>]</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># RSPM -----------------------------------------------------------------------</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> diffobj     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">3.5</span>]</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgbuild    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">4.4</span>]</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgload     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">3.4</span>]</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> praise      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.0</span>]</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Rcpp        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.12</span>]</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> testthat    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="dv">2</span>.<span class="fl">1.1</span>]</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> waldo       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">5.2</span>]</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>Do you want to proceed? [Y<span class="sc">/</span>n]<span class="sc">:</span> Y</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Lockfile written to <span class="st">"~/Desktop/temporary/renv.lock"</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="output-overflow">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> renv<span class="sc">::</span><span class="fu">snapshot</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>The following <span class="fu">package</span>(s) will be updated <span class="cf">in</span> the lockfile<span class="sc">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># CRAN -----------------------------------------------------------------------</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> boot        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.3</span><span class="dv">-30</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> brio        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">1.5</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> callr       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">7.6</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> cli         [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">6.2</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> crayon      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">5.2</span>]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> desc        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">4.3</span>]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> digest      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">6.35</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> evaluate    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">0.23</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> fansi       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.6</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> fs          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">6.4</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> glue        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">7.0</span>]</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> jsonlite    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">8.8</span>]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lattice     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">0.22</span><span class="dv">-6</span>]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lifecycle   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.4</span>]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> lme4        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.1-35.3</span>]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> magrittr    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> MASS        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">7.3-60.2</span>]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Matrix      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">1.7</span><span class="dv">-0</span>]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> minqa       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">2.6</span>]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> nlme        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="fl">3.1</span><span class="dv">-164</span>]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> nloptr      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pillar      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">9.0</span>]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgconfig   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.3</span>]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> processx    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">8.4</span>]</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> ps          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">7.6</span>]</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> R6          [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">5.1</span>]</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> RcppEigen   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="dv">3</span>.<span class="dv">4</span>.<span class="fl">0.0</span>]</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rematch2    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">1.2</span>]</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rlang       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">1.3</span>]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> rprojroot   [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">2</span>.<span class="fl">0.4</span>]</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> tibble      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">2.1</span>]</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> utf8        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">2.4</span>]</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> vctrs       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">6.5</span>]</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> withr       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="fl">0.0</span>]</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># RSPM -----------------------------------------------------------------------</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> diffobj     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">3.5</span>]</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgbuild    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">4.4</span>]</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> pkgload     [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">3.4</span>]</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> praise      [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.0</span>]</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Rcpp        [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">1</span>.<span class="fl">0.12</span>]</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> testthat    [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">3</span>.<span class="dv">2</span>.<span class="fl">1.1</span>]</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> waldo       [<span class="sc">*</span> <span class="ot">-&gt;</span> <span class="dv">0</span>.<span class="fl">5.2</span>]</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>Do you want to proceed? [Y<span class="sc">/</span>n]<span class="sc">:</span> Y</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Lockfile written to <span class="st">"~/Desktop/temporary/renv.lock"</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="a-note-on-caching" class="level2">
@@ -528,7 +548,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Strictly speaking, the directory <code>renv/library</code> contains <a href="https://www.google.com/search?q=symlink">symlinks or symbolic links</a> to packages in the renv library, which is a cache of the packages used in the project. This “cached” library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -564,18 +590,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -607,7 +622,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/introduction-to-renv\/");
@@ -615,7 +652,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
