@@ -2,6 +2,13 @@
 title: "Getting Started Details"
 ---
 
+```{css, echo = FALSE}
+.output {
+max-height: 400px;
+overflow-y: scroll;
+}
+```
+
 # Details {#details}
 
 ## Initiation
@@ -72,6 +79,7 @@ You will likely never need to use `renv::dependencies()` directly, but being awa
 
 ```{r, results='hold', message=FALSE, collapse=TRUE}
 #| cache: true
+#| class: output
 pak::pkg_deps_tree("dplyr", dependencies = NA)
 # Note: the dependencies = NA argument is equivalent 
 # to dependencies = c("Depends", "Imports", "LinkingTo")
@@ -119,6 +127,8 @@ lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = iris)
 ```
 
 -   Make sure to save the file, and then run `renv::snapshot()` again from the Console
+
+:::{.output}
 
 ``` r
 > renv::snapshot()
@@ -173,6 +183,8 @@ Do you want to proceed? [Y/n]: Y
 
 - Lockfile written to "~/Desktop/temporary/renv.lock".
 ```
+
+:::
 
 ## A Note on Caching
 
