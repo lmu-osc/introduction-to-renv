@@ -10,24 +10,20 @@ overflow-y: scroll;
 ```
 
 
-# Details {#details}
-
-## Initiation
+# Initiation
 
 When initiating a project with {renv}, the following steps are taken automatically:
 
-1. Creation of a lockfile, `renv.lock` which records the version of R in use, the default download repository, and the packages used in the project.
-1. Creation of a `renv` folder which contains the project `library`[^library_symlinks], a settings file, and a staging area for package installation
-1.  Addition of the line `source("renv/activate.R")` to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library
-1. Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
+1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
+2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, and a staging area for package installation
+3.  Addition of the line `source("renv/activate.R")` to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library
+4.  Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
 
+[^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.
 
-[^library_symlinks]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.
+## Initiation Example
 
-
-### Initiation Example
-
-Initiating {renv} in a project should print the following to the console:
+Initiating {renv} in a project should print the following to the console: 
 
 ``` r
 renv::init()
@@ -42,7 +38,9 @@ renv::init()
 #> - Lockfile written to "~/Desktop/temporary".
 ```
 
-And the directory structure in a new project called `temp` would look like this:
+Notably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.
+
+And as noted, the directory structure should look similar to the one below, particularly the presence of the `renv` directory and the `renv.lock` file.
 
 ``` r
 fs::dir_tree(recurse = 2)
@@ -58,30 +56,27 @@ fs::dir_tree(recurse = 2)
 ```
 
 
-## Package Detection
+# Package Detection
 
 {renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.
 
 <!-- It does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency. -->
 
-### Dependencies
+## Dependencies
 
-At the first degree, *you* depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to `library()`, `require()`, or namespaced calls e.g. `package::function()`. It is quite obvious that these packages are dependencies of your project, and should be included in the `renv.lock` file. 
+At the first degree, *you* depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to `library()`, `require()`, or namespaced calls e.g. `package::function()`. It is quite obvious that these packages are dependencies of your project, and should be included in the `renv.lock` file.
 
 However, how does {renv} detect what packages are being used in the project? The `renv:dependencies()` function! This function works by searching all R-related files (e.g. `.R`, `.Rmd`, `.qmd`) for calls to packages. It is important to note that this function only detects packages that are actually **used** and properly **declared** in the project. Packages that are not used and packages that you use interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency.
 
-You will likely never need to use `renv::dependencies()` directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function also underlies the `renv:status()` and  `renv::snapshot()` functions which **are** essential for using {renv}.
+You will likely never need to use `renv::dependencies()` directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function also underlies the `renv:status()` and `renv::snapshot()` functions which **are** essential for using {renv}.
 
+## Dependencies of Dependencies
 
+As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. One can view the complete, recursive dependency tree for a package using the function `pak::pkg_deps_tree()`
 
-### Dependencies of Dependencies
-
--   the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.
-
-:::{.output-overflow}
-
+::: output-overflow
 ``` r
-pak::pkg_deps_tree("dplyr", dependencies = NA)
+pak::pkg_deps_tree("dplyr", dependencies = "hard")
 #> ℹ Loading metadata database
 #> ✔ Loading metadata database ... done
 #> 
@@ -127,18 +122,30 @@ pak::pkg_deps_tree("dplyr", dependencies = NA)
 #> 
 #> Key:  ✨ new |  ⬇ download | 🔧 compile
 ```
-
 :::
 
--   Dependencies
-    -   hard: "Depends", "Imports", and "LinkingTo"
-    -   soft: "Suggests" and "Enhances
--   With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN)
+<br>
+
+You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
+
+## Dependency Levels
+
+Generally-speaking, there are two levels of dependencies: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:
+
+- Hard Dependencies
+  - Imports
+  - Depends
+  - LinkingTo
+- Soft Dependencies
+  - Suggests
+  - Enhances
+
+These details may seem obscure or trivial, but they are important to be aware of when managing dependencies in a project. This is especially true when using automated package managers as they usually just install the Hard Dependencies, but you might encounter scenarios where Soft Dependencies need to be installed too.
 
 
+<!-- -   With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN) -->
 
-## Status, Snapshot, Status
-
+# Status, Snapshot, Status
 
 -   Can check the status of your project
 
@@ -151,16 +158,12 @@ renv::status()
 
 -   {renv} can easily read information from the `renv.lock` (it's in a JSON format) so it readily knows what *should* be in the project
 
-
 ``` r
 renv::snapshot()
 #> - The lockfile is already up to date.
 ```
 
-
-
-
-### A Simple Example
+## A Simple Example
 
 -   As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model.
 
@@ -172,9 +175,7 @@ lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::
 
 -   Make sure to save the file, and then run `renv::snapshot()` again from the Console
 
-:::{.output-overflow}
-
-
+::: output-overflow
 ``` r
 > renv::snapshot()
 The following package(s) will be updated in the lockfile:
@@ -228,10 +229,9 @@ Do you want to proceed? [Y/n]: Y
 
 - Lockfile written to "~/Desktop/temporary/renv.lock".
 ```
-
 :::
 
-## A Note on Caching
+# A Note on Caching
 
 -   briefly describe caching and the fact that there are shared libraries
 -   link out to the advanced topic on caching
