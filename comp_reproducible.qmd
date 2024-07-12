@@ -36,10 +36,11 @@ Getting code to work on your own machine is, in principle, not too difficult. Yo
 
 However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software *you* need, perhaps have set up specific paths, and configured various settings to your preferences. 
 
+::: {.center}
 ```{r, out.width="85%", echo=FALSE}
 knitr::include_graphics("assets/img/works_on_my_machine.jpg")
 ```
-
+:::
 ## Someone Else's Computer
 
 When you share your code with others, you are asking them to run *your* code on *their* machine, and it is unlikely that their machine is set up exactly like yours. There are a nearly infinite degrees of freedom in how your system might differ from someone else's system, but the main differences They might not have the same software installed, or they might have different versions of the software you used. A non-exhaustive list of examples where there might be software discrepancies are detailed below.
@@ -55,8 +56,9 @@ It's already well-known that different operating systems can have different soft
 
 However, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.
 
+::: {.center}
 ![](assets/img/mac_linux_windows.jpg)
-
+:::
 
 ## Programming languages
 
@@ -66,8 +68,9 @@ Less obvious, however, and more common, are the differences in versions of progr
 
 Fortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
+::: {.center}
 ![](assets/img/r_python_julia.jpg)
-
+:::
 
 ## Software Add-ons
 
@@ -77,8 +80,9 @@ Keeping tracking of which packages are used and the specific versions of those p
 
 In the context of the R programming language, most packages are likewise compatible across operating systems.
 
-
+::: {.center}
 ![](assets/img/r_packages.png)
+:::
 
 :::
 
