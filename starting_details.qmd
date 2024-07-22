@@ -2,13 +2,6 @@
 title: "Getting Started Details"
 ---
 
-```{css, echo = FALSE}
-.output {
-max-height: 400px;
-overflow-y: scroll;
-}
-```
-
 
 # Initiation
 
@@ -232,6 +225,8 @@ Do you want to proceed? [Y/n]: Y
 :::
 
 # A Note on Caching
+
+(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)
 
 -   briefly describe caching and the fact that there are shared libraries
 -   link out to the advanced topic on caching
