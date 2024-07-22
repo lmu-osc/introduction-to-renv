@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -194,8 +194,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Technical Definitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Dependencies in R</span></a>
+ <span class="menu-text">4. Dep. Management in R</span></a>
   </div>
 </li>
       </ul>
@@ -301,7 +307,7 @@ div.csl-indent {
   <li><a href="#your-computer" id="toc-your-computer" class="nav-link" data-scroll-target="#your-computer">Your Computer</a></li>
   <li><a href="#someone-elses-computer" id="toc-someone-elses-computer" class="nav-link" data-scroll-target="#someone-elses-computer">Someone Else’s Computer</a>
   <ul class="collapse">
-  <li><a href="#examples-of-machine-software-differences" id="toc-examples-of-machine-software-differences" class="nav-link" data-scroll-target="#examples-of-machine-software-differences">Examples of Machine &amp; Software Differences</a></li>
+  <li><a href="#major-machine-software-differences" id="toc-major-machine-software-differences" class="nav-link" data-scroll-target="#major-machine-software-differences">Major Machine &amp; Software Differences</a></li>
   </ul></li>
   <li><a href="#all-of-the-machines" id="toc-all-of-the-machines" class="nav-link" data-scroll-target="#all-of-the-machines">All of the Machines</a></li>
   </ul></li>
@@ -345,7 +351,7 @@ div.csl-indent {
 </section>
 <section id="reproducible-code" class="level2">
 <h2 class="anchored" data-anchor-id="reproducible-code">Reproducible Code</h2>
-<p>Why should we concern ourselves with making reproducible code specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one’s own work, to make debugging and troubleshooting easier, and to collaborate with others.</p>
+<p>Why should we concern ourselves with making reproducible <em>code</em> specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one’s own work, to make debugging and troubleshooting easier, and to collaborate with others.</p>
 <p>In the context of this tutorial, we will focus on the practical aspects of making code reproducible. This mainly means taking steps to ensure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is <strong>portable</strong> and <strong>future-proof</strong> by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.</p>
 </section>
 </section>
@@ -353,51 +359,59 @@ div.csl-indent {
 <h1>The ~Machines~</h1>
 <section id="your-computer" class="level2">
 <h2 class="anchored" data-anchor-id="your-computer">Your Computer</h2>
-<p>Getting code to work on your own machine is <em>usually</em> not too difficult. You can install the software you need, set up your environment, and run your code.</p>
-<p>What about all of the other machines where someone might want to use or contribute to your project though?</p>
+<p>Getting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)</p>
+<p>However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software <em>you</em> need, perhaps have set up specific paths, and configured various settings to your preferences.</p>
+<div class="center">
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure class="figure">
 <p><img src="assets/img/works_on_my_machine.jpg" class="img-fluid figure-img" style="width:85.0%"></p>
-<figcaption>Traditionally, this has been sufficient for generating all of the analyses and figures needed to author manuscripts.</figcaption>
 </figure>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="someone-elses-computer" class="level2">
 <h2 class="anchored" data-anchor-id="someone-elses-computer">Someone Else’s Computer</h2>
-<p>When you share your code with others, however, you are asking them to run <em>your</em> code on <em>their</em> machine, and it is unlikely that their machine is set up exactly like yours. They might not have the same software installed, or they might have different versions of the software you used. A non-exhaustive list of examples where there might be software discrepancies are detailed below.</p>
-<section id="examples-of-machine-software-differences" class="level3">
-<h3 class="anchored" data-anchor-id="examples-of-machine-software-differences">Examples of Machine &amp; Software Differences</h3>
+<p>When you share your code with others, you are effectively asking them to run <em>your</em> code on <em>their</em> machine, and it is unlikely that their computer is set up exactly like yours given how many degrees of freedom there are in operating systems, programming languages, software, and the different versions of these. A non-exhaustive list of examples where there might be software discrepancies are detailed below.</p>
+<section id="major-machine-software-differences" class="level3">
+<h3 class="anchored" data-anchor-id="major-machine-software-differences">Major Machine &amp; Software Differences</h3>
+<p><br></p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Operating systems</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Programming languages</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Software Add-ons</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Operating systems</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Programming languages</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Packages/Libraries (Add-Ons)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><img src="assets/img/mac_linux_windows.jpg" class="img-fluid"></p>
 <p>It’s already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.</p>
 <p>However, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.</p>
+<div class="center">
+<p><img src="assets/img/mac_linux_windows.jpg" class="img-fluid"></p>
+</div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Another obvious difference is the programming language used in a project. For example, a project written in R will not run (correctly) in a Python, MATLAB, or Julia environment.</p>
+<p>Less obvious, however, and more common as a pain-point, are the differences in versions of programming languages. For example, a project written in Python 3.8 might not run in Python 3.9 due to changes in the language, and most R packages are only tested for compatibility back to the 5 most recent minor releases of R (e.g.&nbsp;4.4, 4.3, 4.2, 4.1, 4.0).</p>
+<p>Fortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.</p>
+<div class="center">
 <p><img src="assets/img/r_python_julia.jpg" class="img-fluid"></p>
-<ul>
-<li>(e.g.&nbsp;R, Python, MATLAB, Julia, JavaScript)</li>
-<li>Versions of programming languages (e.g.&nbsp;Python 2 and 3, R 3.5.3 and 4.3.3)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
-</ul>
+</div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>The most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.</p>
+<p>Keeping tracking of which packages are used and the specific versions of those packages is a major challenge in reproducibility.</p>
+<p>In the context of the R programming language, most packages are likewise compatible across operating systems.</p>
+<div class="center">
 <p><img src="assets/img/r_packages.png" class="img-fluid"></p>
-<ul>
-<li>Add-on packages/libraries for a programming language</li>
-<li>Versions of packages/libraries</li>
-</ul>
 </div>
 </div>
 </div>
-<p>The point of this is to demonstrate how many degrees of freedom can exist in the software environment of a project. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons.</p>
-<p>Moreover, it’s not possible to manage all of these differences manually. For example, you can’t just tell someone to install Python v3.8.2, R v4.0.3, and a specific version of a package. This is not only impractical but also not a good use of time.</p>
-<p><strong>Do you see some themes here?</strong></p>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="all-of-the-machines" class="level2">
+<h2 class="anchored" data-anchor-id="all-of-the-machines">All of the Machines</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -408,17 +422,13 @@ Expect No One to Already Have the Required Software
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li>Don’t expect others to already have the software you rely on</li>
-<li>Even if others have the software, don’t expect them to have the <strong>same version</strong></li>
-</ul>
+<ol type="1">
+<li>Don’t expect others to have the software you rely on.</li>
+<li>Even if others have the software, don’t expect them to have the <strong>same version</strong>.</li>
+</ol>
 </div>
 </div>
-</section>
-</section>
-<section id="all-of-the-machines" class="level2">
-<h2 class="anchored" data-anchor-id="all-of-the-machines">All of the Machines</h2>
-<p>So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
+<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
 <!-- footnotes -->
 
 
@@ -435,8 +445,7 @@ Erik Gundersen, Odd. 2021. <span>“The fundamental principles of reproducibilit
 
 <ol>
 <li id="fn1"><p>Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Not so fun-fact: some “newer” versions of MacOS come with Python v2 installed because the OS has some dependencies on this version despite v3 being released in 2008; Python v3 is not entirely backwards compatible with v2.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

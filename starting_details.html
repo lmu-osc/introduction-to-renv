@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -208,8 +208,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Technical Definitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Dependencies in R</span></a>
+ <span class="menu-text">4. Dep. Management in R</span></a>
   </div>
 </li>
       </ul>
@@ -305,9 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#details" id="toc-details" class="nav-link active" data-scroll-target="#details">Details</a>
-  <ul class="collapse">
-  <li><a href="#initiation" id="toc-initiation" class="nav-link" data-scroll-target="#initiation">Initiation</a>
+  <li><a href="#initiation" id="toc-initiation" class="nav-link active" data-scroll-target="#initiation">Initiation</a>
   <ul class="collapse">
   <li><a href="#initiation-example" id="toc-initiation-example" class="nav-link" data-scroll-target="#initiation-example">Initiation Example</a></li>
   </ul></li>
@@ -315,13 +319,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
   <li><a href="#dependencies-of-dependencies" id="toc-dependencies-of-dependencies" class="nav-link" data-scroll-target="#dependencies-of-dependencies">Dependencies of Dependencies</a></li>
+  <li><a href="#dependency-levels" id="toc-dependency-levels" class="nav-link" data-scroll-target="#dependency-levels">Dependency Levels</a></li>
   </ul></li>
   <li><a href="#status-snapshot-status" id="toc-status-snapshot-status" class="nav-link" data-scroll-target="#status-snapshot-status">Status, Snapshot, Status</a>
   <ul class="collapse">
   <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example">A Simple Example</a></li>
   </ul></li>
   <li><a href="#a-note-on-caching" id="toc-a-note-on-caching" class="nav-link" data-scroll-target="#a-note-on-caching">A Note on Caching</a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/starting_details.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -347,27 +351,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<style type="text/css">
-.output {
-max-height: 400px;
-overflow-y: scroll;
-}
-</style>
-</div>
-<section id="details" class="level1">
-<h1>Details</h1>
-<section id="initiation" class="level2">
-<h2 class="anchored" data-anchor-id="initiation">Initiation</h2>
+<section id="initiation" class="level1">
+<h1>Initiation</h1>
 <p>When initiating a project with {renv}, the following steps are taken automatically:</p>
 <ol type="1">
-<li>Creation of a lockfile, <code>renv.lock</code> which records the version of R in use, the default download repository, and the packages used in the project.</li>
+<li>Creation of a lockfile, <code>renv.lock</code>, which records the version of R in use, the default download repository, and the packages used in the project.</li>
 <li>Creation of a <code>renv</code> folder which contains the project <code>library</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a settings file, and a staging area for package installation</li>
 <li>Addition of the line <code>source("renv/activate.R")</code> to your .Rprofile. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library</li>
 <li>Updates the <code>.Rbuildignore</code> to include the <code>renv</code> folder and the <code>renv.lock</code> file. This is only relevant if you’re building an R package.</li>
 </ol>
-<section id="initiation-example" class="level3">
-<h3 class="anchored" data-anchor-id="initiation-example">Initiation Example</h3>
+<section id="initiation-example" class="level2">
+<h2 class="anchored" data-anchor-id="initiation-example">Initiation Example</h2>
 <p>Initiating {renv} in a project should print the following to the console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following package(s) will be updated in the lockfile:</span></span>
@@ -379,7 +373,8 @@ overflow-y: scroll;
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - R             [* -&gt; 4.4.0]</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - Lockfile written to "~/Desktop/temporary".</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And the directory structure in a new project called <code>temp</code> would look like this:</p>
+<p>Notably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.</p>
+<p>And as noted, the directory structure should look similar to the one below, particularly the presence of the <code>renv</code> directory and the <code>renv.lock</code> file.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv</span></span>
@@ -392,23 +387,21 @@ overflow-y: scroll;
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── temp.Rproj</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="package-detection" class="level2">
-<h2 class="anchored" data-anchor-id="package-detection">Package Detection</h2>
+<section id="package-detection" class="level1">
+<h1>Package Detection</h1>
 <p>{renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.</p>
 <!-- It does this by searching for calls to `library()`, `require()`, or namespace calls to functions e.g. `package::function()`. Warning: packages that you have only used interactively (i.e. you never wrote a `library(<package>)` call in a .R/.Rmd script) **will not** be detected as a dependency. -->
-<section id="dependencies" class="level3">
-<h3 class="anchored" data-anchor-id="dependencies">Dependencies</h3>
+<section id="dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
 <p>At the first degree, <em>you</em> depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to <code>library()</code>, <code>require()</code>, or namespaced calls e.g.&nbsp;<code>package::function()</code>. It is quite obvious that these packages are dependencies of your project, and should be included in the <code>renv.lock</code> file.</p>
 <p>However, how does {renv} detect what packages are being used in the project? The <code>renv:dependencies()</code> function! This function works by searching all R-related files (e.g.&nbsp;<code>.R</code>, <code>.Rmd</code>, <code>.qmd</code>) for calls to packages. It is important to note that this function only detects packages that are actually <strong>used</strong> and properly <strong>declared</strong> in the project. Packages that are not used and packages that you use interactively (i.e.&nbsp;you never wrote a <code>library(&lt;package&gt;)</code> call in a .R/.Rmd script) <strong>will not</strong> be detected as a dependency.</p>
 <p>You will likely never need to use <code>renv::dependencies()</code> directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function also underlies the <code>renv:status()</code> and <code>renv::snapshot()</code> functions which <strong>are</strong> essential for using {renv}.</p>
 </section>
-<section id="dependencies-of-dependencies" class="level3">
-<h3 class="anchored" data-anchor-id="dependencies-of-dependencies">Dependencies of Dependencies</h3>
-<ul>
-<li>the packages you use in your project also require packages. for example, you might have noticed that when installing 1 new package, R asks you if you want to install 1, 5, 20, etc. additional packages. Simply put, this is because the package you want to install has a tree of dependencies. The dependency tree below demonstrates all of the packages that {dplyr} imports, and the packages that those imports need to import, etc.</li>
-</ul>
+<section id="dependencies-of-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies-of-dependencies">Dependencies of Dependencies</h2>
+<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. One can view the complete, recursive dependency tree for a package using the function <code>pak::pkg_deps_tree()</code></p>
 <div class="output-overflow">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="cn">NA</span>)</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="st">"hard"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading metadata database</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✔ Loading metadata database ... done</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -454,18 +447,31 @@ overflow-y: scroll;
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
+<p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
+</section>
+<section id="dependency-levels" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-levels">Dependency Levels</h2>
+<p>Generally-speaking, there are two levels of dependencies: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:</p>
 <ul>
-<li>Dependencies
+<li>Hard Dependencies
 <ul>
-<li>hard: “Depends”, “Imports”, and “LinkingTo”</li>
-<li>soft: “Suggests” and “Enhances</li>
+<li>Imports</li>
+<li>Depends</li>
+<li>LinkingTo</li>
 </ul></li>
-<li>With that overview of <code>dependencies()</code> and <code>status()</code>, we come to the last major player, <code>snapshot()</code> which will check your project again for new calls to packages, for updated dependencies, and for changes in the <strong>installed</strong> package versions (but it will not check to see if there are recent packages available on e.g.&nbsp;CRAN)</li>
+<li>Soft Dependencies
+<ul>
+<li>Suggests</li>
+<li>Enhances</li>
+</ul></li>
 </ul>
+<p>These details may seem obscure or trivial, but they are important to be aware of when managing dependencies in a project. This is especially true when using automated package managers as they usually just install the Hard Dependencies, but you might encounter scenarios where Soft Dependencies need to be installed too.</p>
+<!-- -   With that overview of `dependencies()` and `status()`, we come to the last major player, `snapshot()` which will check your project again for new calls to packages, for updated dependencies, and for changes in the **installed** package versions (but it will not check to see if there are recent packages available on e.g. CRAN) -->
 </section>
 </section>
-<section id="status-snapshot-status" class="level2">
-<h2 class="anchored" data-anchor-id="status-snapshot-status">Status, Snapshot, Status</h2>
+<section id="status-snapshot-status" class="level1">
+<h1>Status, Snapshot, Status</h1>
 <ul>
 <li>Can check the status of your project</li>
 </ul>
@@ -477,8 +483,8 @@ overflow-y: scroll;
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - The lockfile is already up to date.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="a-simple-example" class="level3">
-<h3 class="anchored" data-anchor-id="a-simple-example">A Simple Example</h3>
+<section id="a-simple-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-example">A Simple Example</h2>
 <ul>
 <li>As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called <code>my_analysis.R</code>, call <code>library(lme4)</code>, and create a simple mixed model.</li>
 </ul>
@@ -545,15 +551,15 @@ overflow-y: scroll;
 </div>
 </section>
 </section>
-<section id="a-note-on-caching" class="level2">
-<h2 class="anchored" data-anchor-id="a-note-on-caching">A Note on Caching</h2>
+<section id="a-note-on-caching" class="level1">
+<h1>A Note on Caching</h1>
+<p>(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)</p>
 <ul>
 <li>briefly describe caching and the fact that there are shared libraries</li>
 <li>link out to the advanced topic on caching</li>
 </ul>
 
 
-</section>
 </section>
 
 

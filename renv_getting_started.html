@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>{renv}: Getting Started – Introduction to {renv}</title>
+<title>{renv}: Easy Start – Introduction to {renv}</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -210,8 +210,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Technical Definitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Dependencies in R</span></a>
+ <span class="menu-text">4. Dep. Management in R</span></a>
   </div>
 </li>
       </ul>
@@ -307,16 +313,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#easy-start" id="toc-easy-start" class="nav-link active" data-scroll-target="#easy-start">Easy Start</a>
-  <ul class="collapse">
-  <li><a href="#initiating-renv" id="toc-initiating-renv" class="nav-link" data-scroll-target="#initiating-renv">Initiating {renv}</a>
+  <li><a href="#initiating-renv" id="toc-initiating-renv" class="nav-link active" data-scroll-target="#initiating-renv">Initiating {renv}</a>
   <ul class="collapse">
   <li><a href="#with-a-new-rstudio-project" id="toc-with-a-new-rstudio-project" class="nav-link" data-scroll-target="#with-a-new-rstudio-project">With a New RStudio Project</a></li>
   <li><a href="#from-an-existing-project-or-folder" id="toc-from-an-existing-project-or-folder" class="nav-link" data-scroll-target="#from-an-existing-project-or-folder">From an Existing Project or Folder</a></li>
   </ul></li>
   <li><a href="#check-status-of-project" id="toc-check-status-of-project" class="nav-link" data-scroll-target="#check-status-of-project">Check Status of Project</a></li>
   <li><a href="#updating-renv.lock" id="toc-updating-renv.lock" class="nav-link" data-scroll-target="#updating-renv.lock">Updating <code>renv.lock</code></a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/renv_getting_started.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -325,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./renv_getting_started.html">1. Getting Started</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">{renv}: Getting Started</h1>
+<h1 class="title">{renv}: Easy Start</h1>
 </div>
 
 
@@ -342,27 +345,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying <code>dependencies()</code> function works to identify the packages in use in the project.</p>
-<p>Talk about how/when to update the library</p>
-<p>Troubleshooting?</p>
-<p>Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g.&nbsp;if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g.&nbsp;R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the <code>renv.lock</code> if you don’t already have it somewhere in the renv cache - can access path with <code>renv::paths$cache()</code> which I think helps make everything a bit more tangible</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It is recommended to install the latest version of {renv}. A default installation from CRAN will be the latest version of {renv}. At minimum, v1.0.0 or above should be installed.</p>
-<p>The repository for this Quarto site was built using {renv} version 1.0.7.</p>
-</div>
-</div>
-<section id="easy-start" class="level1">
-<h1>Easy Start</h1>
-<p>This “Easy Start” section provides the bare-minimum steps needed to set-up {renv} with one of your projects, and should take less than 15 minutes to complete. However, we recommended reading through reading this section <strong>and</strong> reading the <a href="#details">detailed explanation</a> in order to understand what is happening in the background.</p>
+<p>This page will provide a brief overview of how to get started with the {renv} package. The goal is to provide a quick and easy way to get started with the package, and to provide a brief overview of the package’s functionality. This page will be followed by a more detailed explanation of the package’s functionality in the <a href="starting_details.html">Understanding {renv}</a> page.</p>
+<!-- This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependencies()` function works to identify the packages in use in the project. -->
+<!-- Talk about how/when to update the library -->
+<!-- Troubleshooting? -->
+<!-- Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache - can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible -->
+<!-- This "Easy Start" section provides the bare-minimum steps needed to set-up {renv} with one of your projects, and should take less than 15 minutes to complete. However, we recommended reading through reading this section **and** reading the [detailed explanation](#details) in order to understand what is happening in the background. -->
 <section id="initiating-renv" class="level2">
 <h2 class="anchored" data-anchor-id="initiating-renv">Initiating {renv}</h2>
 <p>When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.</p>
@@ -409,7 +397,6 @@ Note
 <p>This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others using <code>renv::restore()</code>. This is discussed next in <a href="restoring_a_project.html">Restoring A Project</a>, but <strong>we strongly recommend reading the details of <a href="starting_details.html">Understanding {renv}</a> first.</strong></p>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -835,8 +822,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./dependencies_in_r.html" class="pagination-link" aria-label="3. Dependencies in R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Dependencies in R</span>
+      <a href="./dependencies_in_r.html" class="pagination-link" aria-label="4. Dep. Management in R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. Dep. Management in R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

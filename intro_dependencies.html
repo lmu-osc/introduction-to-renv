@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./dependencies_in_r.html" rel="next">
+<link href="./technical_definitions.html" rel="next">
 <link href="./comp_reproducible.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -174,8 +174,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Technical Definitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Dependencies in R</span></a>
+ <span class="menu-text">4. Dep. Management in R</span></a>
   </div>
 </li>
       </ul>
@@ -302,60 +308,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div id="fig-dependencies" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-dependencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://imgs.xkcd.com/comics/dependency.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dependencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Dependencies on dependencies on dependencies
-</figcaption>
-</figure>
-</div>
-<p>This page will talk about what software dependencies are, why users should care about them in general, and practical scenarios where one will want to manage them.</p>
 <section id="dependencies-overview" class="level2">
 <h2 class="anchored" data-anchor-id="dependencies-overview">Dependencies Overview</h2>
+<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing <em>depends</em> on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the <code>dplyr</code> package, <code>dplyr</code> is a library dependency that must be downloaded too.</p>
+<p>There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that <code>dplyr</code> itself has dependencies, such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>, which must also be downloaded. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>If you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:</p>
 <ul>
-<li><p>what is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.</p></li>
-<li><p>image above provides a pretty good overview of what dependencies can look like in a project. The comic is a bit of an exaggeration, but it’s not far off from the truth in some cases.</p></li>
-<li><p>dependencies are simply the software that your software relies on to function.</p></li>
-<li><p>dependencies can be broken down into two main categories: <strong>system dependencies</strong> and <strong>library dependencies</strong>.</p>
+<li>Reading the <code>DESCRIPTION</code> file of an R package, which can be accessed in a variety of ways
 <ul>
-<li>system dependencies are the software that is required to run the software that you are developing. For example, if you are developing a R package, you will need R installed on your machine. (straightforward!)</li>
-<li>library dependencies are the software that your software relies on to function. For example, if you are developing a R package that uses the <code>dplyr</code> package, <code>dplyr</code> is a library dependency. Or, as your might encounter more commonly, installing a new package in R will often require other packages to be installed as well. These are the dependencies of the package you are installing.</li>
+<li><code>utils::packageDescription()</code> to print the complete <code>DESCRIPTION</code> file of a package to the console</li>
+<li><code>tools::package_dependencies()</code> for just a list of dependencies from the <code>DESCRIPTION</code> file</li>
+<li>Looking at the <code>DESCRIPTION</code> file online on the package’s CRAN or GitHub page</li>
 </ul></li>
+<li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies</li>
 </ul>
 </section>
 <section id="intro-to-management-practices" class="level2">
 <h2 class="anchored" data-anchor-id="intro-to-management-practices">Intro to Management Practices</h2>
-<p>Given the complexity of software and dependencies already outlined in the previous section, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time. (also mention that dependency management exists on a spectrum; it is not always practical or necessary to manage every dependency in a project)</p>
-<p>(dependencies of package are not explicitly declared) - what does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too. - However, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)</p>
+<p>Given the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.</p>
+<p>You might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.</p>
 <section id="manual-management" class="level3">
 <h3 class="anchored" data-anchor-id="manual-management">Manual management</h3>
-<ul>
-<li>these can be managed manually with e.g.&nbsp;a written list of softwares used and versions if needed.
-<ul>
-<li>pros: there’s little technical knowledge needed to create simple Word or text document with this information. anyone can type these out.</li>
-<li>cons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.</li>
-</ul></li>
-<li>Given the complexity in all of this, automated solutions for dependency tracking are recommended.</li>
-</ul>
+<p>As noted, the dependencies for your project can be managed manually with e.g.&nbsp;a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.</p>
 </section>
 <section id="automated-management" class="level3">
 <h3 class="anchored" data-anchor-id="automated-management">Automated Management</h3>
-<ul>
-<li>Python: <code>requirements.txt</code>, <code>Pipfile</code>, and <code>pyproject.toml</code> for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.
-<ul>
-<li>this tutorial focuses on R and {renv} so no further comparison of these will be provided here</li>
-</ul></li>
-<li>R: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem</li>
-</ul>
+<p>Automated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.</p>
+<p>There are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>The major current and historical options for managing R dependencies are:</p>
+<ol type="1">
+<li>{renv} is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation</li>
+<li>{groundhogr} is a package that is similar to {renv}, and developed by independent, open-source contributors</li>
+<li>{packrat} is a deprecated package that is no longer recommended for new projects</li>
+</ol>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective <code>requirements.txt</code>, <code>Pipfile</code>, and <code>pyproject.toml</code> files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.</p>
+</div>
+</div>
+</div>
+<p>The next chapter delves into some necessary technical definitions in the R ecosystem. The chapters mentions some of the benefits of package managers, but the following chapter will really dive in to the details of package management in R while providing a discussion of the 3 major package managers for R.</p>
 
 
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>If you have enough time, read about how the <a href="https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code">left-pad incident</a> broke the internet as an example of how dependencies can go wrong.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -783,8 +791,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./dependencies_in_r.html" class="pagination-link" aria-label="3. Dependencies in R">
-        <span class="nav-page-text">3. Dependencies in R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./technical_definitions.html" class="pagination-link" aria-label="3. Technical Definitions">
+        <span class="nav-page-text">3. Technical Definitions</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
