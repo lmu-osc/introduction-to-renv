@@ -153,6 +153,7 @@ renv::status()
 However, if there are issues with the project, the output will indicate what the issues are. For example, if a package is used in the project but not declared in the lockfile, the output will look like this:
 
 
+::: output-overflow
 ``` r
 renv::status()
 #> The following package(s) are in an inconsistent state:
@@ -187,6 +188,7 @@ renv::status()
 #> 
 #> See ?renv::status() for advice on resolving these issues.
 ```
+:::
 
 The key to interpreting this output is to note the `installed`, `recorded`, and `used` columns. The `installed` column indicates whether the package is installed in the project library, the `recorded` column indicates whether the package is declared in the lockfile, and the `used` column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running `renv::snapshot()`.
 
@@ -202,6 +204,8 @@ renv::snapshot()
 
 If the lockfile is not up to date, the function will return a message indicating the packages that will be updated in the lockfile. For example, if you have added a new package to the project, the output will look like this:
 
+
+::: output-overflow
 ``` r
 renv::snapshot()
 #> The following package(s) will be updated in the lockfile:
@@ -236,79 +240,19 @@ renv::snapshot()
 #> 
 #> - Lockfile written to "~/Desktop/temp/renv.lock".
 ```
+:::
 
 Packages not already installed in the package can be recognized by the `[* -> version]` notation. The `[*]` indicates that the package is not installed in the project library, and the `version` indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.
 
 
-<!-- ## A Simple Example -->
-
-<!-- -   As expected, there are no changes; we have not changed anything with the repository. As a simple example, create a new file called `my_analysis.R`, call `library(lme4)`, and create a simple mixed model. -->
-
-<!-- ```{r, results='hold', message=FALSE, results='hide', eval=FALSE} -->
-<!-- # install.packages("lme4") -->
-<!-- library(lme4) -->
-<!-- lmer(Sepal.Length ~ Sepal.Width + Petal.Width + (1 | Species), data = datasets::iris)  -->
-<!-- ``` -->
-
-<!-- -   Make sure to save the file, and then run `renv::snapshot()` again from the Console -->
-
-<!-- ::: output-overflow -->
-<!-- ``` r -->
-<!-- > renv::snapshot() -->
-<!-- The following package(s) will be updated in the lockfile: -->
-
-<!--   # CRAN ----------------------------------------------------------------------- -->
-<!-- - boot        [* -> 1.3-30] -->
-<!-- - brio        [* -> 1.1.5] -->
-<!-- - callr       [* -> 3.7.6] -->
-<!-- - cli         [* -> 3.6.2] -->
-<!-- - crayon      [* -> 1.5.2] -->
-<!-- - desc        [* -> 1.4.3] -->
-<!-- - digest      [* -> 0.6.35] -->
-<!-- - evaluate    [* -> 0.23] -->
-<!-- - fansi       [* -> 1.0.6] -->
-<!-- - fs          [* -> 1.6.4] -->
-<!-- - glue        [* -> 1.7.0] -->
-<!-- - jsonlite    [* -> 1.8.8] -->
-<!-- - lattice     [* -> 0.22-6] -->
-<!-- - lifecycle   [* -> 1.0.4] -->
-<!-- - lme4        [* -> 1.1-35.3] -->
-<!-- - magrittr    [* -> 2.0.3] -->
-<!-- - MASS        [* -> 7.3-60.2] -->
-<!-- - Matrix      [* -> 1.7-0] -->
-<!-- - minqa       [* -> 1.2.6] -->
-<!-- - nlme        [* -> 3.1-164] -->
-<!-- - nloptr      [* -> 2.0.3] -->
-<!-- - pillar      [* -> 1.9.0] -->
-<!-- - pkgconfig   [* -> 2.0.3] -->
-<!-- - processx    [* -> 3.8.4] -->
-<!-- - ps          [* -> 1.7.6] -->
-<!-- - R6          [* -> 2.5.1] -->
-<!-- - RcppEigen   [* -> 0.3.4.0.0] -->
-<!-- - rematch2    [* -> 2.1.2] -->
-<!-- - rlang       [* -> 1.1.3] -->
-<!-- - rprojroot   [* -> 2.0.4] -->
-<!-- - tibble      [* -> 3.2.1] -->
-<!-- - utf8        [* -> 1.2.4] -->
-<!-- - vctrs       [* -> 0.6.5] -->
-<!-- - withr       [* -> 3.0.0] -->
-
-<!-- # RSPM ----------------------------------------------------------------------- -->
-<!-- - diffobj     [* -> 0.3.5] -->
-<!-- - pkgbuild    [* -> 1.4.4] -->
-<!-- - pkgload     [* -> 1.3.4] -->
-<!-- - praise      [* -> 1.0.0] -->
-<!-- - Rcpp        [* -> 1.0.12] -->
-<!-- - testthat    [* -> 3.2.1.1] -->
-<!-- - waldo       [* -> 0.5.2] -->
-
-<!-- Do you want to proceed? [Y/n]: Y -->
-
-<!-- - Lockfile written to "~/Desktop/temporary/renv.lock". -->
-<!-- ``` -->
-<!-- ::: -->
 
 # A Note on Caching
+
+The last thing to briefly mention in this section is the package cache. You may be wondering what a *cache* even is, and why it is important. In short, a cache is a temporary storage area that stores frequently accessed data for quick retrieval. In the context of {renv}, the package cache is a shared library that contains the packages used in your projects. 
+
+This shared library is a huge space saver, especially if you have many projects using the same package. 
+
+The package cache is a shared library that contains the packages used in your projects. This shared library is a huge space saver, especially if you have many projects using the same package. The cache is built per the minor version of R you use. For example, if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g. R 4.3.2 to R 4.3.3 will not cause this, however. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache. You can access the path to the cache with `renv::paths$cache()`, which I think helps make everything a bit more tangible.
 
 (I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)
 

@@ -2,30 +2,38 @@
 title: "Restoring Another Project"
 ---
 
-Description about how to restore a {renv} library from an existing project
+The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the `renv.lock` file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.
 
-Three most likely scenarios
+We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.
 
 # From a GitHub Repo
 
-* clone
-* run restore()
-* should not be anything else to do
+Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:
 
+-   Clone the repository to your local machine with `git clone`
+-   Open the `*.Rproj` file
+-   Run `renv::restore()`
+
+There should not be anything else to do! The `renv.lock` file will be used to install the correct versions of the packages you need for the project.
 
 # From a lockfile
 
-* place the lockfile in the directory you are working on your R project from. ideally you are already using an R Project `.Rproj` file.
-* run restore()
-  - Note the project argument for restore()
+If a researcher has shared a renv.lock file and other R scripts **outside of an R project** , restoring is still possible but requires an extra step or two:
 
-> **project** 
->
->   The project directory. If NULL, then the active project will be used. If no project is    currently active, then the current working directory is used instead.
+-   Place the lockfile in the directory you are working on your project from. This is the same directory that you would run `renv::init()` from, and should be an `*.Rproj` project.
+-   Run `renv::status()`. The results should look like this:
+``` r
+renv::status()
+#> This project does not appear to be using renv.
+#> Use `renv::restore()` to install the packages defined in lockfile.
+```
+-   Run `renv::restore()`. If prompted, choose the option "Activate the project and use the project library." This will create all other necessary files and directories for a {renv} project.
+
+
 
 # After Upgrading R
 
-* Topic covered in more detail in the Caching page
-* In short, you will need to restore() projects when upgrading by minor versions of R
-    - semantic versioning: `major.minor.patch` so an upgrade from R4.3 to R4.4 will cause you to need to restore() your projects
+Something that may come as a surprise is the need to restore a project after upgrading R. This is because the `renv` package is tied to the version of R you are using. The `renv.lock` file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.
+
+Note that this only occurs when upgrading by major or minor versions of R. If you're not familiar with "semantic versioning," it is a way of versioning software that uses three numbers separated by periods: `major.minor.patch`. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.
 
