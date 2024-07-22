@@ -366,7 +366,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="with-a-new-rstudio-project">With a New RStudio Project</h3>
 <p>When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to “Use renv with [your] project.”</p>
 <pre><code>File -&gt; New Project -&gt; New Directory -&gt; New Project -&gt; [x] Use renv with this project</code></pre>
+<div class="center-larger">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="assets/img/renv_init_new_project.mp4"></video></div>
+</div>
 </section>
 <section id="from-an-existing-project-or-folder" class="level3">
 <h3 class="anchored" data-anchor-id="from-an-existing-project-or-folder">From an Existing Project or Folder</h3>
@@ -375,7 +377,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(renv)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="center-larger">
 <div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="assets/img/renv_init_existing_project.mp4"></video></div>
+</div>
 </section>
 </section>
 <section id="check-status-of-project" class="level2">
@@ -394,6 +398,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>As you write additional <code>.R</code>, <code>.Rmd</code>, and/or <code>.qmd</code> files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the <code>renv.lock</code> file. This can be done by “snapshotting” the project which will initiate a search for calls to <code>library()</code>, <code>require()</code> and namespaced calls to functions e.g.&nbsp;<code>package::function()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Running the <code>snapshot()</code> function will capture new packages used in your project, <em>and</em> it will update the package versions in the <code>renv.lock</code> file if you have installed new versions to the project you are working in.</p>
+<div class="center-larger">
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="assets/img/renv_status_snapshot.mp4"></video></div>
+</div>
 <p>This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others using <code>renv::restore()</code>. This is discussed next in <a href="restoring_a_project.html">Restoring A Project</a>, but <strong>we strongly recommend reading the details of <a href="starting_details.html">Understanding {renv}</a> first.</strong></p>
 
 
@@ -848,6 +855,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
+<script>videojs(video_shortcode_videojs_video3);</script>
 
 
 

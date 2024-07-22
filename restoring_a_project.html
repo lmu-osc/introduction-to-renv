@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -305,39 +339,36 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Description about how to restore a {renv} library from an existing project</p>
-<p>Three most likely scenarios</p>
+<p>The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the <code>renv.lock</code> file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.</p>
+<p>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</p>
 <section id="from-a-github-repo" class="level1">
 <h1>From a GitHub Repo</h1>
+<p>Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:</p>
 <ul>
-<li>clone</li>
-<li>run restore()</li>
-<li>should not be anything else to do</li>
+<li>Clone the repository to your local machine with <code>git clone</code></li>
+<li>Open the <code>*.Rproj</code> file</li>
+<li>Run <code>renv::restore()</code></li>
 </ul>
+<p>There should not be anything else to do! The <code>renv.lock</code> file will be used to install the correct versions of the packages you need for the project.</p>
 </section>
 <section id="from-a-lockfile" class="level1">
 <h1>From a lockfile</h1>
+<p>If a researcher has shared a renv.lock file and other R scripts <strong>outside of an R project</strong> , restoring is still possible but requires an extra step or two:</p>
 <ul>
-<li>place the lockfile in the directory you are working on your R project from. ideally you are already using an R Project <code>.Rproj</code> file.</li>
-<li>run restore()
-<ul>
-<li>Note the project argument for restore()</li>
-</ul></li>
+<li>Place the lockfile in the directory you are working on your project from. This is the same directory that you would run <code>renv::init()</code> from, and should be an <code>*.Rproj</code> project.</li>
+<li>Run <code>renv::status()</code>. The results should look like this:</li>
 </ul>
-<blockquote class="blockquote">
-<p><strong>project</strong></p>
-<p>The project directory. If NULL, then the active project will be used. If no project is currently active, then the current working directory is used instead.</p>
-</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This project does not appear to be using renv.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Use `renv::restore()` to install the packages defined in lockfile.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Run <code>renv::restore()</code>. If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.</li>
+</ul>
 </section>
 <section id="after-upgrading-r" class="level1">
 <h1>After Upgrading R</h1>
-<ul>
-<li>Topic covered in more detail in the Caching page</li>
-<li>In short, you will need to restore() projects when upgrading by minor versions of R
-<ul>
-<li>semantic versioning: <code>major.minor.patch</code> so an upgrade from R4.3 to R4.4 will cause you to need to restore() your projects</li>
-</ul></li>
-</ul>
+<p>Something that may come as a surprise is the need to restore a project after upgrading R. This is because the <code>renv</code> package is tied to the version of R you are using. The <code>renv.lock</code> file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.</p>
+<p>Note that this only occurs when upgrading by major or minor versions of R. If you’re not familiar with “semantic versioning,” it is a way of versioning software that uses three numbers separated by periods: <code>major.minor.patch</code>. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.</p>
 
 
 </section>
