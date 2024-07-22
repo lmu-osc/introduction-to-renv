@@ -1,26 +1,21 @@
 ---
-title: "{renv}: Getting Started"
+title: "{renv}: Easy Start"
 engine: knitr
 ---
 
-This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependencies()` function works to identify the packages in use in the project.
+This page will provide a brief overview of how to get started with the {renv} package. The goal is to provide a quick and easy way to get started with the package, and to provide a brief overview of the package's functionality. This page will be followed by a more detailed explanation of the package's functionality in the [Understanding {renv}](starting_details.html) page.
 
-Talk about how/when to update the library
+<!-- This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependencies()` function works to identify the packages in use in the project. -->
 
-Troubleshooting?
+<!-- Talk about how/when to update the library -->
 
-Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache - can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible
+<!-- Troubleshooting? -->
 
-::: callout-note
-It is recommended to install the latest version of {renv}. A default installation from CRAN will be the latest version of {renv}. At minimum, v1.0.0 or above should be installed.
+<!-- Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache - can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible -->
 
-The repository for this Quarto site was built using {renv} version `r renv::lockfile_read()$Packages$renv$Version`.
-:::
 
-# Easy Start
 
-This "Easy Start" section provides the bare-minimum steps needed to set-up {renv} with one of your projects, and should take less than 15 minutes to complete. However, we recommended reading through reading this section **and** reading the [detailed explanation](#details) in order to understand what is happening in the background.
-
+<!-- This "Easy Start" section provides the bare-minimum steps needed to set-up {renv} with one of your projects, and should take less than 15 minutes to complete. However, we recommended reading through reading this section **and** reading the [detailed explanation](#details) in order to understand what is happening in the background. -->
 
 ## Initiating {renv}
 
@@ -34,7 +29,7 @@ Either approach should yield the following results in the directory you're worki
 
 For most purposes, one will only need to have a passing understanding of the `renv.lock` file which records the packages used in the project and their versions. The `renv` folder is where the packages are stored, and the `.Rbuildignore` and `.Rprofile` files are used to ensure that the project is reproducible and that the correct packages are loaded when the project is opened.
 
-** Note that if you are using version control, you should not add the `renv` folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the `renv` folder is not necessary for the project to be reproducible, and the project should be rebuilt from the `renv.lock` file. **
+\*\* Note that if you are using version control, you should not add the `renv` folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the `renv` folder is not necessary for the project to be reproducible, and the project should be rebuilt from the `renv.lock` file. \*\*
 
 ### With a New RStudio Project
 
@@ -45,7 +40,6 @@ File -> New Project -> New Directory -> New Project -> [x] Use renv with this pr
 ```
 
 {{< video assets/img/renv_init_new_project.mp4 >}}
-
 
 ### From an Existing Project or Folder
 
@@ -59,8 +53,6 @@ init()
 ```
 
 {{< video assets/img/renv_init_existing_project.mp4 >}}
-
-
 
 ## Check Status of Project
 

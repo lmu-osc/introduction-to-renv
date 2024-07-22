@@ -13,9 +13,10 @@ There are many layers of dependencies that can exist in a project, and these dep
 
 If you're ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package's documentation:
 
-* `utils::packageDescription()` for the complete `DESCRIPTION` file of a package
-* `tools::package_dependencies()` for just a list of dependencies from the `DESCRIPTION` file
-*  Looking at the `DESCRIPTION` file and other contents of the package's GitHub page
+* Reading the `DESCRIPTION` file of an R package, which can be accessed in a variety of ways
+  - `utils::packageDescription()` to print the complete `DESCRIPTION` file of a package to the console
+  - `tools::package_dependencies()` for just a list of dependencies from the `DESCRIPTION` file
+  - Looking at the `DESCRIPTION` file online on the package's CRAN or GitHub page
 * `pak::pkg_deps_tree()` for a visual representation of the direct dependencies **and** the recursive dependencies
 
 
@@ -33,6 +34,26 @@ As noted, the dependencies for your project can be managed manually with e.g. a 
 
 ### Automated Management
 
--   Python: `requirements.txt`, `Pipfile`, and `pyproject.toml` for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.
-    -   this tutorial focuses on R and {renv} so no further comparison of these will be provided here
--   R: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem
+Automated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong. 
+
+There are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:
+
+::: panel-tabset
+
+## R
+
+The major current and historical options for managing R dependencies are:
+
+1. {renv} is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation
+2. {groundhogr} is a package that is similar to {renv}, and developed by independent, open-source contributors
+2. {packrat} is a deprecated package that is no longer recommended for new projects
+
+## Python
+
+The pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
+
+:::
+
+
+The next chapter delves into some necessary technical definitions in the R ecosystem. The chapters mentions some of the benefits of package managers, but the following chapter will really dive in to the details of package management in R while providing a discussion of the 3 major package managers for R.
+

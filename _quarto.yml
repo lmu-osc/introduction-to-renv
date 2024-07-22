@@ -44,8 +44,10 @@ website:
             text: "1. Reproducibility"
           - href: intro_dependencies.qmd
             text: "2. Software Dependencies"
+          - href: technical_definitions.qmd
+            text: "3. Technical Definitions"
           - href: dependencies_in_r.qmd
-            text: "3. Dependencies in R"
+            text: "4. Dep. Management in R"
       - section: "{renv}"
         contents:
           - href: renv_getting_started.qmd

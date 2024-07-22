@@ -1,5 +1,5 @@
 ---
-title: "Dependencies in R"
+title: "Dependency Management in R"
 bibliography: references.bib
 ---
 
@@ -11,74 +11,40 @@ library(magrittr)
 
 This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduces the {renv} package.
 
-# Some Technical Definitions
 
-Prior to discussing the various package managers in R, it is important to understand some R terminology relevant to dependency management, namely the **concepts of and differences between packages, libraries, and repositories**.
+# Package Managers in R
 
-## Packages
+The goal of package managers in R then is to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhogr}, and {renv}.
 
-Packages are collections of functions, data, and documentation that are bundled together in a single unit. They are the primary way that R users can extend the functionality of the base R language. For example, the {dplyr} package is a popular package for data manipulation that extends the base R language with functions like `filter()` and `mutate()`. The code below demonstrates how one can filter a data set using *only* R's built-in capabilities and by using the popular data-cleaning package {dplyr}.
+## {packrat}
 
+The {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a "snapshot" of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.
 
-``` r
-iris[iris$Species == "setosa" & iris$Sepal.Length > 4.5, ]
-dplyr::filter(iris, Species == "setosa", Sepal.Length > 4.5)
-```
+It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least [April 2020](https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c). You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.
 
-But why would someone want to accomplish this task in two different ways? Base R already has a large number of built-in functions and data structures that make it possible to work with data!
+## {groundhogr}
 
-However, base R can be difficult to use for complex data manipulation tasks, and the syntax can be verbose and overall subjectively difficult to work with. Packages like {dplyr} provide a more user-friendly interface for working with data, and they can make complex data manipulation tasks much easier to accomplish for beginners and advanced R users alike.
-
-This example is not meant to highlight the benefits of {dplyr} specifically, but rather to illustrate the general utility of packages in R. Packages are, above all, a way to extend base R to make life easier for users, they provide alternatives to the base R packages, and user-contributed packages are an essential part of the R ecosystem.
-
-
-### Pre-Installed Packages
-
-Upon installing R, you will have access to a number of pre-installed packages. These packages are part of the "base" R distribution and are considered essential for working with R. A list of such packages can be identified by searching your installed packages for the "base" and "recommended" packages (also summarized as "high" priority packages). The code below generates this list of pre-installed packages in R, along with some information about each package. 
-
-
-```{r}
-installed.packages(priority = c("base", "recommended")) %>%
-  as_tibble() %>%
-  select(Package, Version, Priority, Depends, Imports) %>%
-  DT::datatable(options = list(paging=TRUE, scrollY = '300px', pageLength = 11))
-```
-
-
-You will likely recognize some of these packages, such as the {stats} package, which contains many of the commonly used statistical functions that are built into R like `glm()`. Other packages, like {utils} and {survival}, contain functions for other common activities like reading in files and for performing survival analysis, respectively.
-
-Somewhat confusingly, the base R distribution also includes a package called {base} containing many functions and data structures that are considered essential for working with R. Some references to "base R" are therefore referring to the base package, while others refer to the base distribution of the R language. This distinction is not particularly important for the purposes of this tutorial, but it is worth keeping in mind.
-
-
-### User-Installed Packages
-
-In addition to the pre-installed packages, you can also install additional packages from online repositories like CRAN, Bioconductor, and GitHub. You have likely already done this in the past by using the `install.packages()` function to download from CRAN and/or Bioconductor or `devtools::install_github()` to get a package from GitHub. Beyond that, there are principally no differences between the pre-installed packages and user-installed packages; they are both just collections of functions, data, and documentation in a defined format. 
-
-Packages, of course, need to be stored somewhere on your computer, and this is where the concept of libraries comes in.
-
-## Libraries {#libraries}
-
-Libraries are *directories* on your computer[^1] where R packages are stored. When you install a package, it is downloaded from an online repository and stored in a library on your computer. Because a library is, in effect, simply a directory on your computer, you can have multiple libraries on your computer, and you can specify which library you want to use when you install a package. The `.libPaths()` function can be used to see the libraries that are currently available on your system, generally one or two paths will be returned.
-
+[{groundhogr}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:
 
 ``` r
-# Example of running .libPaths() on a Mac. Results will vary across systems
-.libPaths()
-#> [1] "/Users/<USER>/Library/R/arm64/4.4/library"                      
-#> [2] "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"
+install.packages("groundhog")
+library("groundhog")
+pkgs <- c("rio","metafor")
+groundhog.library(pkgs, "2023-09-01")
 ```
 
+This example demonstrates a scenario in which you would like to install the `rio` and `metafor` packages as they were on September 1st, 2023. The `groundhog.library()` function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the `library()` call for `groundhog.library()` is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.
 
-The use of separate libraries is important because it allows you to manage different versions of packages and to avoid conflicts between packages that have the same name but different versions. For example, if you have two packages installed that both contain a function called `foo()`, R needs to know which version of `foo()` to use when you call it. By storing packages in separate libraries, R can keep track of which `foo()` you want to use. While managing these "namespace conflicts" is important, the focus of this tutorial, however, is more on the management of libraries and package versions.
+The other main benefit of using {groundhogr} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhogr}.
 
-Of course, managing multiple libraries can be cumbersome and requires one to be mindful of which library is being used at any given time for installations and for your current R session. This is where package managers come in, as they can help you manage your libraries and package versions effectively and without having to be an expert on navigating the file system of your computer.
+The package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhogr} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit.
+    
+    
+<!-- -   [{groundhogr}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
 
-As a side note: you may hear people refer to R packages as libraries, likely stemming from the fact that packages are attached to your R session using the `library()` function. While this generally will not lead to much confusion, it is important to keep in mind this distinction between packages and libraries for the purposes of this tutorial.
-
-[^1]: Strictly speaking, the libraries do not have to be on your computer, but they do need to be accessible to your R session. For example, you could store your libraries on a network drive or on a cloud storage service like Dropbox, but this is not at all recommended because it can lead to performance issues and other problems. A more likely scenario is that you use RStudio through Posit Cloud (i.e. RStudio on a web interface) in which case the available libraries are stored and managed either by Posit or by an IT group for your institution on a separate server. 
 
 
-## Repositories {#repositories}
+## {renv}
 
 ```{r, echo=FALSE}
 
@@ -93,53 +59,6 @@ cran_package_count <- cran_avail_pkgs %>%
 ```
 
 
-
-A repository is a collection of packages that are available for download from a specific location. The most common repository for R packages is the Comprehensive R Archive Network (CRAN), which hosted `r cran_package_count` freely available packages at the last time this page was generated on `r format(Sys.Date(), "%B %d %Y")`. Another popular repository, Bioconductor, also hosts several thousand packages, but these packages are focused on bioinformatics and computational biology. GitHub is another popular repository for R packages, and many developers use it to host their R packages and make the development process viewable by the public.
-
-
-
-[See also the Posit article on packages, libraries, and repositories.](https://solutions.posit.co/envs-pkgs/repos_and_libs/)
-
-# Package Managers in R
-
-The goal of package managers in R then is to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhogr}, and {renv}.
-
-## {packrat}
-
-The {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a "snapshot" of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.
-
-It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least [April 2020](https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c). You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.
-
-## {groundhogr}
-
-[{groundhogr}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website demonstrates how to install packages and specify a date for when the packages should be updated:
-
-``` r
-install.packages("groundhog")
-library("groundhog")
-pkgs <- c("rio","metafor")
-groundhog.library(pkgs, "2023-09-01")
-```
-
-Regarding the positives of this package and approach:
-
-  -   It is lightweight and easy to use. Swapping the `library()` call for `groundhog.library()` is a simple change to make in your scripts
-  -   The project is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem
-
-
-However, there are also some potential drawbacks to using {groundhogr}: 
-
-  -   The package is still in its early stages of development, so it may not be as stable or reliable as other package managers like {renv}
-  -   The package may not have as many features as other package managers, so it may not be suitable for all use cases
-  -   Learning {renv} instead of {groundhogr} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit. 
-    
-    
-<!-- -   [{groundhogr}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
-
-
-
-## {renv}
-
 ```{r, echo=FALSE}
 renv_cran_version <- cran_avail_pkgs %>%
   as_tibble() %>%
@@ -149,15 +68,24 @@ renv_cran_version <- cran_avail_pkgs %>%
 ```
 
 
-[{renv}](https://rstudio.github.io/renv/) is another one of Posit's inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects will allow you to easily automate a variety of tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run. With regards to reproducibility, {renv} allows you to create a "snapshot" of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. 
+[{renv}](https://rstudio.github.io/renv/) is another one of Posit's inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run. 
+
+More to the focus of this tutorial, however, {renv} allows you to create a "snapshot" of your package dependencies in just a handful of steps, summarized below: 
+
+``` r
+renv::init()
+renv::snapshot()
+```
+
+The results of this code will be discussed in the next chapter, but, in short, the "snapshot" it creates can be shared with collaborators or used to recreate your working environment at a later date.
+
+As mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings[^py_note]. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R. 
 
 Moreover, this package can be considered a relatively stable package as it has moved beyond it's initial development stages into a version 1 release (currently at version `r renv_cran_version`). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.
 
-{renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings[^py_note]. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.
-
-In comparison to {groundhogr}, one of the main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (`.RProj` file) to use {renv} whereas {groundhogr} allows you to simply embed the function `groundhog.library(pkg, date)`  into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the *default workflow* for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the `embed()` and `use()` functions discussed in the supplementary material of this tutorial.
+In comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (`.RProj` file) to use {renv} whereas {groundhogr} allows you to simply embed the function `groundhog.library(pkg, date)`  into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the *default workflow* for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the `embed()` and `use()` functions, discussed in the supplementary material of this tutorial.
 
 
 
 
-[^py_note]: Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.
+[^py_note]: Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.
