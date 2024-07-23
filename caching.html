@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Using restore() – Introduction to {renv}</title>
+<title>Caching – Introduction to {renv}</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ex_3.html" rel="next">
-<link href="./ex_init_snapshot.html" rel="prev">
+<link href="./restoring_a_project.html" rel="next">
+<link href="./starting_details.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -125,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_2.html">Restore</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./caching.html">3. Caching</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -209,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./caching.html" class="sidebar-item-text sidebar-link">
+  <a href="./caching.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">3. Caching</span></a>
   </div>
 </li>
@@ -238,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ex_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Restore</span></a>
   </div>
 </li>
@@ -278,15 +278,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-caching" id="toc-what-is-caching" class="nav-link active" data-scroll-target="#what-is-caching">What is Caching?</a></li>
+  <li><a href="#caching-in-renv" id="toc-caching-in-renv" class="nav-link" data-scroll-target="#caching-in-renv">Caching in {renv}</a>
+  <ul class="collapse">
+  <li><a href="#symlinks" id="toc-symlinks" class="nav-link" data-scroll-target="#symlinks">Symlinks</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/caching.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_2.html">Restore</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./caching.html">3. Caching</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Using <code>restore()</code></h1>
+<h1 class="title">Caching</h1>
 </div>
 
 
@@ -303,12 +313,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="what-is-caching" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-caching">What is Caching?</h2>
+</section>
+<section id="caching-in-renv" class="level2">
+<h2 class="anchored" data-anchor-id="caching-in-renv">Caching in {renv}</h2>
+<section id="symlinks" class="level3">
+<h3 class="anchored" data-anchor-id="symlinks">Symlinks</h3>
+<p>Notes:</p>
 <ul>
-<li>restoring a project</li>
-<li><strong>Go to the Exercise 2 Folder</strong></li>
+<li>The last thing to briefly mention in this section is the package cache. You may be wondering what a <em>cache</em> even is, and why it is important. In short, a cache is a temporary storage area that stores frequently accessed data for quick retrieval. In the context of {renv}, the package cache is a shared library that contains the packages used in your projects.</li>
+<li>This shared library is a huge space saver, especially if you have many projects using the same package.</li>
+<li>The package cache is a shared library that contains the packages used in your projects. This shared library is a huge space saver, especially if you have many projects using the same package. The cache is built per the minor version of R you use. For example, if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g.&nbsp;R 4.3.2 to R 4.3.3 will not cause this, however. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the <code>renv.lock</code> if you don’t already have it somewhere in the renv cache. You can access the path to the cache with <code>renv::paths$cache()</code>, which I think helps make everything a bit more tangible.</li>
+</ul>
+<p>(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)</p>
+<ul>
+<li>briefly describe caching and the fact that there are shared libraries</li>
+<li>link out to the advanced topic on caching</li>
 </ul>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -733,13 +759,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ex_init_snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Init and Snapshot</span>
+      <a href="./starting_details.html" class="pagination-link" aria-label="2. Understanding {renv}">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Understanding {renv}</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ex_3.html" class="pagination-link" aria-label="Explicitly Record">
-        <span class="nav-page-text">Explicitly Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./restoring_a_project.html" class="pagination-link" aria-label="4. Restoring A Project">
+        <span class="nav-page-text">4. Restoring A Project</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -751,7 +777,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/caching.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
