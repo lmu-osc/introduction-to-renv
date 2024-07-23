@@ -53,7 +53,7 @@ fs::dir_tree(recurse = 2)
 
 {renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.
 
-## Dependencies
+## Dependencies Revisited
 
 At the first degree, *you* depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to `library()`, `require()`, or namespaced calls e.g. `package::function()`. It is quite obvious that these packages are dependencies of your project, and thus need to be included in the `renv.lock` file.
 
@@ -61,9 +61,9 @@ However, how does {renv} detect what packages are being used in the project? The
 
 You will likely never need to use `renv::dependencies()` directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function underlies the `renv:status()` and `renv::snapshot()` functions which **are** essential for using {renv}. Before discussing these functions in detail, let's take a look at the dependencies of dependencies.
 
-## Dependencies of Dependencies
+## Dependency Trees
 
-As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as *dependencies of dependencies*. To get a visual representation of this, consider the following example of a recursive dependency tree (using the function `pak::pkg_deps_tree()` from the {pak} package).
+As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as *dependencies of dependencies* and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example of a recursive dependency tree (using the function `pak::pkg_deps_tree()` from the {pak} package).
 
 
 ::: output-overflow
@@ -118,7 +118,7 @@ pak::pkg_deps_tree("dplyr", dependencies = "hard")
 
 <br>
 
-This tree shows the dependencies of the `dplyr` package, and the dependencies of those dependencies. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.
+This tree shows the dependencies of the `dplyr` package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.
 
 You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
 
@@ -151,7 +151,6 @@ renv::status()
 ```
 
 However, if there are issues with the project, the output will indicate what the issues are. For example, if a package is used in the project but not declared in the lockfile, the output will look like this:
-
 
 ::: output-overflow
 ``` r
@@ -189,6 +188,8 @@ renv::status()
 #> See ?renv::status() for advice on resolving these issues.
 ```
 :::
+
+<br>
 
 The key to interpreting this output is to note the `installed`, `recorded`, and `used` columns. The `installed` column indicates whether the package is installed in the project library, the `recorded` column indicates whether the package is declared in the lockfile, and the `used` column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running `renv::snapshot()`.
 
