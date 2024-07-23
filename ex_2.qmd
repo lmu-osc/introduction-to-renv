@@ -4,3 +4,38 @@ title: "Using `restore()`"
 
 -   restoring a project
 -   **Go to the Exercise 2 Folder**
+
+
+``` r
+renv::dependencies()
+#> Finding R package dependencies ... Done!
+#>                                                                                                                      Source
+#> 1  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R
+#> 2  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R
+#> 3 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
+#> 4 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
+#> 5 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
+#> 6        /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock
+#>     Package Require Version   Dev
+#> 1     dplyr                 FALSE
+#> 2     tidyr                 FALSE
+#> 3     dplyr                 FALSE
+#> 4   ggplot2                 FALSE
+#> 5 rmarkdown                 FALSE
+#> 6      renv                 FALSE
+```
+
+
+> Warning message:
+The 'yaml' package is required to parse dependencies within Quarto Markdown files
+Consider installing it with `install.packages("yaml")`. 
+
+```{r, results='asis', echo=FALSE}
+
+# To make changes to the instructions, go to the init-snapshot-exercises-instructions.md file in the intro-to-renv-exercises repository!
+library(httr)
+url="https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/restore-exercises/README.md"
+response=GET(url)
+cat(content(response))
+
+```

@@ -2,14 +2,38 @@
 title: "Initialize and Snapshot"
 ---
 
+```{r}
+library(magrittr)
+```
+
+The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is **recommended** that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.
+
+However, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository. 
+
+
 # Getting Started
+
 
 -   fork the intro-to-renv-examples repo
 -   **Go to the Exercise 1 folder**
 -   init renv
 -   commit repo changes
 
+
+```{r, results='asis', echo=FALSE}
+
+# To make changes to the instructions, go to the init-snapshot-exercises-instructions.md file in the intro-to-renv-exercises repository!
+library(httr)
+url="https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/init-snapshot-exercises/README.md"
+response=GET(url)
+cat(content(response))
+
+```
+
+
+
 # Snapshotting
+
 
 -   We want to observe the process in action
 -   Run `dependencies()`
