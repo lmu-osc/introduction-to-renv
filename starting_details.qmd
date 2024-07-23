@@ -242,19 +242,7 @@ renv::snapshot()
 ```
 :::
 
+<br>
+
 Packages not already installed in the package can be recognized by the `[* -> version]` notation. The `[*]` indicates that the package is not installed in the project library, and the `version` indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.
 
-
-
-# A Note on Caching
-
-The last thing to briefly mention in this section is the package cache. You may be wondering what a *cache* even is, and why it is important. In short, a cache is a temporary storage area that stores frequently accessed data for quick retrieval. In the context of {renv}, the package cache is a shared library that contains the packages used in your projects. 
-
-This shared library is a huge space saver, especially if you have many projects using the same package. 
-
-The package cache is a shared library that contains the packages used in your projects. This shared library is a huge space saver, especially if you have many projects using the same package. The cache is built per the minor version of R you use. For example, if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g. R 4.3.2 to R 4.3.3 will not cause this, however. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache. You can access the path to the cache with `renv::paths$cache()`, which I think helps make everything a bit more tangible.
-
-(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)
-
--   briefly describe caching and the fact that there are shared libraries
--   link out to the advanced topic on caching
