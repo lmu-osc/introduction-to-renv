@@ -51,13 +51,13 @@ website:
       - section: "{renv}"
         contents:
           - href: renv_getting_started.qmd
-            text: "1. Getting Started"
+            text: "1. Quick Start"
           - href: starting_details.qmd
-            text: "2. Understanding {renv}"
+            text: "2. Starting Details"
           - href: caching.qmd
             text: "3. Caching"
           - href: restoring_a_project.qmd
-            text: "4. Restoring A Project"
+            text: "4. Restoring Projects"
       - section: "Exercises"
         contents:
           - href: ex_init_snapshot.qmd
