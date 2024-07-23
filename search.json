@@ -1,62 +1,14 @@
 [
   {
-    "objectID": "dependencies_in_r.html",
-    "href": "dependencies_in_r.html",
-    "title": "Dependency Management in R",
+    "objectID": "embed_and_use.html",
+    "href": "embed_and_use.html",
+    "title": "Alternative Workflow: embed() and use()",
     "section": "",
-    "text": "This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduces the {renv} package.",
+    "text": "https://rstudio.github.io/renv/reference/embed.html\n\n\n\n Back to top",
     "crumbs": [
       "Home",
-      "Background",
-      "4. Dep. Management in R"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#packrat",
-    "href": "dependencies_in_r.html#packrat",
-    "title": "Dependency Management in R",
-    "section": "{packrat}",
-    "text": "{packrat}\nThe {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.\nIt was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. Dep. Management in R"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#groundhogr",
-    "href": "dependencies_in_r.html#groundhogr",
-    "title": "Dependency Management in R",
-    "section": "{groundhogr}",
-    "text": "{groundhogr}\n{groundhogr} is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:\ninstall.packages(\"groundhog\")\nlibrary(\"groundhog\")\npkgs &lt;- c(\"rio\",\"metafor\")\ngroundhog.library(pkgs, \"2023-09-01\")\nThis example demonstrates a scenario in which you would like to install the rio and metafor packages as they were on September 1st, 2023. The groundhog.library() function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the library() call for groundhog.library() is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.\nThe other main benefit of using {groundhogr} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhogr}.\nThe package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhogr} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. Dep. Management in R"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#renv",
-    "href": "dependencies_in_r.html#renv",
-    "title": "Dependency Management in R",
-    "section": "{renv}",
-    "text": "{renv}\n{renv} is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.\nMore to the focus of this tutorial, however, {renv} allows you to create a “snapshot” of your package dependencies in just a handful of steps, summarized below:\nrenv::init()\nrenv::snapshot()\nThe results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date.\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.0.7). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhogr} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. Dep. Management in R"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#footnotes",
-    "href": "dependencies_in_r.html#footnotes",
-    "title": "Dependency Management in R",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.↩︎",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. Dep. Management in R"
+      "Optional Content",
+      "`embed()` and `use()`"
     ]
   },
   {
@@ -117,315 +69,6 @@
       "Home",
       "Background",
       "3. Technical Definitions"
-    ]
-  },
-  {
-    "objectID": "ex_3.html",
-    "href": "ex_3.html",
-    "title": "exercise 3",
-    "section": "",
-    "text": "explicit snapshot of {rmarkdown}?\nGo to the Exercise 3 Folder\nshould use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Explicitly Record"
-    ]
-  },
-  {
-    "objectID": "intro_dependencies.html",
-    "href": "intro_dependencies.html",
-    "title": "Software Dependencies",
-    "section": "",
-    "text": "The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing depends on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the dplyr package, dplyr is a library dependency that must be downloaded too.\nThere are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that dplyr itself has dependencies, such as tibble, rlang, and vctrs, which must also be downloaded. And tibble, rlang, and vctrs have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”1\nIf you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:\n\nReading the DESCRIPTION file of an R package, which can be accessed in a variety of ways\n\nutils::packageDescription() to print the complete DESCRIPTION file of a package to the console\ntools::package_dependencies() for just a list of dependencies from the DESCRIPTION file\nLooking at the DESCRIPTION file online on the package’s CRAN or GitHub page\n\npak::pkg_deps_tree() for a visual representation of the direct dependencies and the recursive dependencies",
-    "crumbs": [
-      "Home",
-      "Background",
-      "2. Software Dependencies"
-    ]
-  },
-  {
-    "objectID": "intro_dependencies.html#dependencies-overview",
-    "href": "intro_dependencies.html#dependencies-overview",
-    "title": "Software Dependencies",
-    "section": "",
-    "text": "The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing depends on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the dplyr package, dplyr is a library dependency that must be downloaded too.\nThere are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that dplyr itself has dependencies, such as tibble, rlang, and vctrs, which must also be downloaded. And tibble, rlang, and vctrs have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”1\nIf you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:\n\nReading the DESCRIPTION file of an R package, which can be accessed in a variety of ways\n\nutils::packageDescription() to print the complete DESCRIPTION file of a package to the console\ntools::package_dependencies() for just a list of dependencies from the DESCRIPTION file\nLooking at the DESCRIPTION file online on the package’s CRAN or GitHub page\n\npak::pkg_deps_tree() for a visual representation of the direct dependencies and the recursive dependencies",
-    "crumbs": [
-      "Home",
-      "Background",
-      "2. Software Dependencies"
-    ]
-  },
-  {
-    "objectID": "intro_dependencies.html#intro-to-management-practices",
-    "href": "intro_dependencies.html#intro-to-management-practices",
-    "title": "Software Dependencies",
-    "section": "Intro to Management Practices",
-    "text": "Intro to Management Practices\nGiven the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.\nYou might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.\n\nManual management\nAs noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.\n\n\nAutomated Management\nAutomated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.\nThere are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:\n\nRPython\n\n\nThe major current and historical options for managing R dependencies are:\n\n{renv} is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation\n{groundhogr} is a package that is similar to {renv}, and developed by independent, open-source contributors\n{packrat} is a deprecated package that is no longer recommended for new projects\n\n\n\nThe pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective requirements.txt, Pipfile, and pyproject.toml files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.\n\n\n\nThe next chapter delves into some necessary technical definitions in the R ecosystem. The chapters mentions some of the benefits of package managers, but the following chapter will really dive in to the details of package management in R while providing a discussion of the 3 major package managers for R.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "2. Software Dependencies"
-    ]
-  },
-  {
-    "objectID": "intro_dependencies.html#footnotes",
-    "href": "intro_dependencies.html#footnotes",
-    "title": "Software Dependencies",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIf you have enough time, read about how the left-pad incident broke the internet as an example of how dependencies can go wrong.↩︎",
-    "crumbs": [
-      "Home",
-      "Background",
-      "2. Software Dependencies"
-    ]
-  },
-  {
-    "objectID": "renv_getting_started.html",
-    "href": "renv_getting_started.html",
-    "title": "{renv}: Easy Start",
-    "section": "",
-    "text": "This page will provide a brief overview of how to get started with the {renv} package. The goal is to provide a quick and easy way to get started with the package, and to provide a brief overview of the package’s functionality. This page will be followed by a more detailed explanation of the package’s functionality in the Understanding {renv} page.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "1. Quick Start"
-    ]
-  },
-  {
-    "objectID": "renv_getting_started.html#initiating-renv",
-    "href": "renv_getting_started.html#initiating-renv",
-    "title": "{renv}: Easy Start",
-    "section": "Initiating {renv}",
-    "text": "Initiating {renv}\nWhen using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.\nEither approach should yield the following results in the directory you’re working within:\n\nCreation of a renv.lock file and a renv folder\nCreation of or additions to the .Rbuildignore and .Rprofile files\nA renv folder will be created in the project directory (for {renv} version 1.0.0 and above)\n\nFor most purposes, one will only need to have a passing understanding of the renv.lock file which records the packages used in the project and their versions. The renv folder is where the packages are stored, and the .Rbuildignore and .Rprofile files are used to ensure that the project is reproducible and that the correct packages are loaded when the project is opened.\n** Note that if you are using version control, you should not add the renv folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the renv folder is not necessary for the project to be reproducible, and the project should be rebuilt from the renv.lock file. **\n\nWith a New RStudio Project\nWhen initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to “Use renv with [your] project.”\nFile -&gt; New Project -&gt; New Directory -&gt; New Project -&gt; [x] Use renv with this project\n\n\n\n\n\nFrom an Existing Project or Folder\nIn essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.\ninstall.packages(\"renv\")\n\nlibrary(renv)\ninit()",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "1. Quick Start"
-    ]
-  },
-  {
-    "objectID": "renv_getting_started.html#check-status-of-project",
-    "href": "renv_getting_started.html#check-status-of-project",
-    "title": "{renv}: Easy Start",
-    "section": "Check Status of Project",
-    "text": "Check Status of Project\nThe project should be in a consistent state after initiating {renv}, and this can be checked by running the renv::status() function.\nstatus()\nIn short, this function checks that your project is in a “consistent state” by checking for the following:\n\nThat all packages detected in the project are listed in the renv.lock file\nThat all packages in the renv.lock file are actually installed\nThat all installed packages are the correct version",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "1. Quick Start"
-    ]
-  },
-  {
-    "objectID": "renv_getting_started.html#updating-renv.lock",
-    "href": "renv_getting_started.html#updating-renv.lock",
-    "title": "{renv}: Easy Start",
-    "section": "Updating renv.lock",
-    "text": "Updating renv.lock\nAs you write additional .R, .Rmd, and/or .qmd files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the renv.lock file. This can be done by “snapshotting” the project which will initiate a search for calls to library(), require() and namespaced calls to functions e.g. package::function().\nsnapshot()\nRunning the snapshot() function will capture new packages used in your project, and it will update the package versions in the renv.lock file if you have installed new versions to the project you are working in.\n\n\n\nThis is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others using renv::restore(). This is discussed next in Restoring A Project, but we strongly recommend reading the details of Understanding {renv} first.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "1. Quick Start"
-    ]
-  },
-  {
-    "objectID": "outline.html",
-    "href": "outline.html",
-    "title": "outline",
-    "section": "",
-    "text": "Software reproducibility\n\n\nwhat is it?\nwhat are the goals?\nwhat needs to be tracked?\n\nvaries based on project needs. a completely reproducible system would have the same versions of software on the same versions of the operating system on the same hardware models. The hardware aspect is difficult enough as is, but softwares also have a variety of different versions, sometimes with minor changes that won’t affect output in any noticeable way, and sometimes those changes are breaking such that code simply no longer runs, or worse, the code still runs but provides different results than expected\n\nwhat are the challenges?\n\n\nDependency Mangement\n\n\nwhat is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.\nthese can be managed informally with e.g. a written list of softwares used and versions if needed.\n\npros: there’s little technical knowledge needed here. anyone can type these out.\ncons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.\n\nwhat does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.\nHowever, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)\n\n\nGiven the complexity in all of this, automated solutions for dependency tracking are recommended.\nPython: requirements.txt, Pipfile, and pyproject.toml for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.\n\nthis tutorial focuses on R and {renv} so no further comparison of these will be provided here\n\nR: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem\n\n\nWhy {renv}?\n\n\n{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.\n{groundhogr}: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address some shortcomings of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.\n{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g. 1.X+1.X or a major release to e.g. 2.X.X)\n\npros:\n\ndeveloped by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues\nlikely the most popular option already. learning this is a transferable skill between academia and industry.\nintegration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions because Posit has developed extensions that make this easier.\nit works at a project level (i.e. it should be paired with the use of an R Project/.RProj file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "restoring_a_project.html",
-    "href": "restoring_a_project.html",
-    "title": "Restoring Another Project",
-    "section": "",
-    "text": "The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the renv.lock file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.\nWe will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.\n\nFrom a GitHub Repo\nRestoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.\n\n\nFrom a lockfile\nIf a researcher has shared a renv.lock file and other R scripts outside of an R project , restoring is still possible but requires an extra step or two:\n\nPlace the lockfile in the directory you are working on your project from. This is the same directory that you would run renv::init() from, and should be an *.Rproj project.\nRun renv::status(). The results should look like this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nRun renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\n\n\n\nAfter Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This is because the renv package is tied to the version of R you are using. The renv.lock file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.\nNote that this only occurs when upgrading by major or minor versions of R. If you’re not familiar with “semantic versioning,” it is a way of versioning software that uses three numbers separated by periods: major.minor.patch. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "4. Restoring Projects"
-    ]
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "Introduction to {renv}",
-    "section": "",
-    "text": "Attribution-ShareAlike 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nAdditional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org.\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "ex_2.html",
-    "href": "ex_2.html",
-    "title": "Using restore()",
-    "section": "",
-    "text": "restoring a project\nGo to the Exercise 2 Folder\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Restore"
-    ]
-  },
-  {
-    "objectID": "ex_init_snapshot.html",
-    "href": "ex_init_snapshot.html",
-    "title": "Initialize and Snapshot",
-    "section": "",
-    "text": "Getting Started\n\nfork the intro-to-renv-examples repo\nGo to the Exercise 1 folder\ninit renv\ncommit repo changes\n\n\n\nSnapshotting\n\nWe want to observe the process in action\nRun dependencies()\nCreate a new .R file\nPaste this analysis code in the file\n\nstats::lm(Sepal.Length ~ Sepal.Width + Species, data = iris)\n\nRun dependencies() again\nWhat do you notice?\nRun snapshot()\nCommit and push changes\n\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Init and Snapshot"
-    ]
-  },
-  {
-    "objectID": "embed_and_use.html",
-    "href": "embed_and_use.html",
-    "title": "Alternative Workflow: embed() and use()",
-    "section": "",
-    "text": "https://rstudio.github.io/renv/reference/embed.html\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "Optional Content",
-      "`embed()` and `use()`"
-    ]
-  },
-  {
-    "objectID": "starting_details.html",
-    "href": "starting_details.html",
-    "title": "Getting Started Details",
-    "section": "",
-    "text": "As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:\n\nCreation of a lockfile, renv.lock, which records the version of R in use, the default download repository, and the packages used in the project.\nCreation of a renv folder which contains the project library1, a settings file, a .gitignore file and a staging area for package installation\nAddition of the line source(\"renv/activate.R\") to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the *.Rproj file. This line ensures that the project library is used in the session, not the global library.\nUpdates the .Rbuildignore to include the renv folder and the renv.lock file. This is only relevant if you’re building an R package.\n\nYou should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as snapshot().\n\n\nInitiating {renv} in a project should print the following to the console:\nrenv::init()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - renv          [* -&gt; 1.0.7]\n#&gt; \n#&gt; The version of R recorded in the lockfile will be updated:\n#&gt; - R             [* -&gt; 4.4.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temporary\".\nNotably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.\nAnd as noted, the directory structure should look similar to the one below, particularly the presence of the renv directory and the renv.lock file. For reference: the function used in the following example, dir_tree(), is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.\nfs::dir_tree(recurse = 2)\n#&gt; .\n#&gt; ├── renv\n#&gt; │   ├── activate.R\n#&gt; │   ├── library\n#&gt; │   │   └── macos\n#&gt; │   ├── settings.json\n#&gt; │   └── staging\n#&gt; ├── renv.lock\n#&gt; └── temp.Rproj",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#initiation-example",
-    "href": "starting_details.html#initiation-example",
-    "title": "Getting Started Details",
-    "section": "",
-    "text": "Initiating {renv} in a project should print the following to the console:\nrenv::init()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - renv          [* -&gt; 1.0.7]\n#&gt; \n#&gt; The version of R recorded in the lockfile will be updated:\n#&gt; - R             [* -&gt; 4.4.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temporary\".\nNotably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.\nAnd as noted, the directory structure should look similar to the one below, particularly the presence of the renv directory and the renv.lock file. For reference: the function used in the following example, dir_tree(), is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.\nfs::dir_tree(recurse = 2)\n#&gt; .\n#&gt; ├── renv\n#&gt; │   ├── activate.R\n#&gt; │   ├── library\n#&gt; │   │   └── macos\n#&gt; │   ├── settings.json\n#&gt; │   └── staging\n#&gt; ├── renv.lock\n#&gt; └── temp.Rproj",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#dependencies",
-    "href": "starting_details.html#dependencies",
-    "title": "Getting Started Details",
-    "section": "Dependencies",
-    "text": "Dependencies\nAt the first degree, you depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to library(), require(), or namespaced calls e.g. package::function(). It is quite obvious that these packages are dependencies of your project, and thus need to be included in the renv.lock file.\nHowever, how does {renv} detect what packages are being used in the project? The renv:dependencies() function! This function works by searching all R-related files (e.g. .R, .Rmd, .qmd) for calls to packages. It is important to note that this function only detects packages that are actually used and properly declared in the project. Packages that have only been used interactively will not be detected as dependencies because they are not saved or used in any of the project files.\nYou will likely never need to use renv::dependencies() directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function underlies the renv:status() and renv::snapshot() functions which are essential for using {renv}. Before discussing these functions in detail, let’s take a look at the dependencies of dependencies.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#dependencies-of-dependencies",
-    "href": "starting_details.html#dependencies-of-dependencies",
-    "title": "Getting Started Details",
-    "section": "Dependencies of Dependencies",
-    "text": "Dependencies of Dependencies\nAs mentioned in the Dependencies Overview, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as dependencies of dependencies. To get a visual representation of this, consider the following example of a recursive dependency tree (using the function pak::pkg_deps_tree() from the {pak} package).\n\npak::pkg_deps_tree(\"dplyr\", dependencies = \"hard\")\n#&gt; ℹ Loading metadata database\n#&gt; ✔ Loading metadata database ... done\n#&gt; \n#&gt; dplyr 1.1.4 ✨🔧 ⬇ (1.60 MB)\n#&gt; ├─cli 3.6.3 ✨🔧 ⬇ (1.39 MB)\n#&gt; ├─generics 0.1.3 ✨ ⬇ (81.91 kB)\n#&gt; ├─glue 1.7.0 ✨🔧 ⬇ (159.50 kB)\n#&gt; ├─lifecycle 1.0.4 ✨ ⬇ (124.78 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─glue\n#&gt; │ └─rlang 1.1.4 ✨🔧 ⬇ (1.89 MB)\n#&gt; ├─magrittr 2.0.3 ✨🔧 ⬇ (233.52 kB)\n#&gt; ├─pillar 1.9.0 ✨ ⬇ (652.06 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─fansi 1.0.6 ✨🔧 ⬇ (383.06 kB)\n#&gt; │ ├─glue\n#&gt; │ ├─lifecycle\n#&gt; │ ├─rlang\n#&gt; │ ├─utf8 1.2.4 ✨🔧 ⬇ (206.91 kB)\n#&gt; │ └─vctrs 0.6.5 ✨🔧 ⬇ (1.89 MB)\n#&gt; │   ├─cli\n#&gt; │   ├─glue\n#&gt; │   ├─lifecycle\n#&gt; │   └─rlang\n#&gt; ├─R6 2.5.1 ✨ ⬇ (83.20 kB)\n#&gt; ├─rlang\n#&gt; ├─tibble 3.2.1 ✨🔧 ⬇ (688.89 kB)\n#&gt; │ ├─fansi\n#&gt; │ ├─lifecycle\n#&gt; │ ├─magrittr\n#&gt; │ ├─pillar\n#&gt; │ ├─pkgconfig 2.0.3 ✨ ⬇ (18.45 kB)\n#&gt; │ ├─rlang\n#&gt; │ └─vctrs\n#&gt; ├─tidyselect 1.2.1 ✨🔧 ⬇ (224.68 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─glue\n#&gt; │ ├─lifecycle\n#&gt; │ ├─rlang\n#&gt; │ ├─vctrs\n#&gt; │ └─withr 3.0.0 ✨ ⬇ (242.00 kB)\n#&gt; └─vctrs\n#&gt; \n#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile\n\n\nThis tree shows the dependencies of the dplyr package, and the dependencies of those dependencies. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.\nYou might have noticed the argument dependencies = \"hard\" in the function call. The dependencies argument is used to specify the kinds of dependencies to install. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#dependency-levels",
-    "href": "starting_details.html#dependency-levels",
-    "title": "Getting Started Details",
-    "section": "Dependency Levels",
-    "text": "Dependency Levels\nGenerally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:\n\nHard Dependencies\n\nImports\nDepends\nLinkingTo\n\nSoft Dependencies\n\nSuggests\nEnhances\n\n\nThese details may seem obscure or trivial, and, in most cases they are; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly expect the Soft dependencies to be installed too.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#status",
-    "href": "starting_details.html#status",
-    "title": "Getting Started Details",
-    "section": "Status",
-    "text": "Status\nThe renv::status() function checks the “status” of the project, and will return a message indicating whether the project is in a consistent state. A consistent state means that the packages declared in the lockfile match the packages actually used in the project, and that the versions of the packages declared in the lockfile match the versions of the packages discovered in the project library. For example, if you have a package declared in the lockfile but it is not actually used in the project, the project is not in a consistent state. A project that is consistent should produce the following output when renv::status() is run:\nrenv::status()\n#&gt; No issues found -- the project is in a consistent state.\nHowever, if there are issues with the project, the output will indicate what the issues are. For example, if a package is used in the project but not declared in the lockfile, the output will look like this:\n\nrenv::status()\n#&gt; The following package(s) are in an inconsistent state:\n#&gt; \n#&gt;  package    installed recorded used\n#&gt;  boot       y         n        y   \n#&gt;  cli        y         n        y   \n#&gt;  dplyr      y         n        y   \n#&gt;  fansi      y         n        y   \n#&gt;  generics   y         n        y   \n#&gt;  glue       y         n        y   \n#&gt;  lattice    y         n        y   \n#&gt;  lifecycle  y         n        y   \n#&gt;  lme4       y         n        y   \n#&gt;  magrittr   y         n        y   \n#&gt;  MASS       y         n        y   \n#&gt;  Matrix     y         n        y   \n#&gt;  minqa      y         n        y   \n#&gt;  nlme       y         n        y   \n#&gt;  nloptr     y         n        y   \n#&gt;  pillar     y         n        y   \n#&gt;  pkgconfig  y         n        y   \n#&gt;  R6         y         n        y   \n#&gt;  Rcpp       y         n        y   \n#&gt;  RcppEigen  y         n        y   \n#&gt;  rlang      y         n        y   \n#&gt;  tibble     y         n        y   \n#&gt;  tidyselect y         n        y   \n#&gt;  utf8       y         n        y   \n#&gt;  vctrs      y         n        y   \n#&gt;  withr      y         n        y   \n#&gt; \n#&gt; See ?renv::status() for advice on resolving these issues.\n\nThe key to interpreting this output is to note the installed, recorded, and used columns. The installed column indicates whether the package is installed in the project library, the recorded column indicates whether the package is declared in the lockfile, and the used column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running renv::snapshot().",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#snapshot",
-    "href": "starting_details.html#snapshot",
-    "title": "Getting Started Details",
-    "section": "Snapshot",
-    "text": "Snapshot\nThe renv::snapshot() function is used to update the lockfile with the packages used in the project. As previously discussed, this function will search all R-related files in the project for calls to library(), require(), and namespaced calls e.g. package::function(), and will update the lockfile with the packages used in the project. If the lockfile is already up to date, the function will return the following message:\nrenv::snapshot()\n#&gt; - The lockfile is already up to date.\nIf the lockfile is not up to date, the function will return a message indicating the packages that will be updated in the lockfile. For example, if you have added a new package to the project, the output will look like this:\n\nrenv::snapshot()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - boot         [* -&gt; 1.3-30]\n#&gt; - cli          [* -&gt; 3.6.3]\n#&gt; - dplyr        [* -&gt; 1.1.4]\n#&gt; - fansi        [* -&gt; 1.0.6]\n#&gt; - generics     [* -&gt; 0.1.3]\n#&gt; - glue         [* -&gt; 1.7.0]\n#&gt; - lattice      [* -&gt; 0.22-6]\n#&gt; - lifecycle    [* -&gt; 1.0.4]\n#&gt; - lme4         [* -&gt; 1.1-35.5]\n#&gt; - magrittr     [* -&gt; 2.0.3]\n#&gt; - MASS         [* -&gt; 7.3-60.2]\n#&gt; - Matrix       [* -&gt; 1.7-0]\n#&gt; - minqa        [* -&gt; 1.2.7]\n#&gt; - nlme         [* -&gt; 3.1-164]\n#&gt; - nloptr       [* -&gt; 2.1.1]\n#&gt; - pillar       [* -&gt; 1.9.0]\n#&gt; - pkgconfig    [* -&gt; 2.0.3]\n#&gt; - R6           [* -&gt; 2.5.1]\n#&gt; - Rcpp         [* -&gt; 1.0.13]\n#&gt; - RcppEigen    [* -&gt; 0.3.4.0.0]\n#&gt; - rlang        [* -&gt; 1.1.4]\n#&gt; - tibble       [* -&gt; 3.2.1]\n#&gt; - tidyselect   [* -&gt; 1.2.1]\n#&gt; - utf8         [* -&gt; 1.2.4]\n#&gt; - vctrs        [* -&gt; 0.6.5]\n#&gt; - withr        [* -&gt; 3.0.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temp/renv.lock\".\n\n\nPackages not already installed in the package can be recognized by the [* -&gt; version] notation. The [*] indicates that the package is not installed in the project library, and the version indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "starting_details.html#footnotes",
-    "href": "starting_details.html#footnotes",
-    "title": "Getting Started Details",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nStrictly speaking, the directory renv/library contains symlinks or symbolic links to packages in the renv library, which is a cache of the packages used in the project. This “cached” library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.↩︎",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "2. Starting Details"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Contributors\nThis site was created by Pat Callahan with contributions and feedback from Florian Pargent.\n\n\nLicense\nPublished under a Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0 Deed).\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "caching.html",
-    "href": "caching.html",
-    "title": "Caching",
-    "section": "",
-    "text": "Page goals:\n(Posit 2024)",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "3. Caching"
-    ]
-  },
-  {
-    "objectID": "caching.html#what-is-caching",
-    "href": "caching.html#what-is-caching",
-    "title": "Caching",
-    "section": "What is Caching?",
-    "text": "What is Caching?",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "3. Caching"
-    ]
-  },
-  {
-    "objectID": "caching.html#caching-in-renv",
-    "href": "caching.html#caching-in-renv",
-    "title": "Caching",
-    "section": "Caching in {renv}",
-    "text": "Caching in {renv}\n\nSymlinks\nNotes:\n\nThe last thing to briefly mention in this section is the package cache. You may be wondering what a cache even is, and why it is important. In short, a cache is a temporary storage area that stores frequently accessed data for quick retrieval. In the context of {renv}, the package cache is a shared library that contains the packages used in your projects.\nThis shared library is a huge space saver, especially if you have many projects using the same package.\nThe package cache is a shared library that contains the packages used in your projects. This shared library is a huge space saver, especially if you have many projects using the same package. The cache is built per the minor version of R you use. For example, if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g. R 4.3.2 to R 4.3.3 will not cause this, however. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the renv.lock if you don’t already have it somewhere in the renv cache. You can access the path to the cache with renv::paths$cache(), which I think helps make everything a bit more tangible.\n\n(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)\n\nbriefly describe caching and the fact that there are shared libraries\nlink out to the advanced topic on caching",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "3. Caching"
     ]
   },
   {
@@ -513,6 +156,241 @@
     ]
   },
   {
+    "objectID": "restoring_a_project.html",
+    "href": "restoring_a_project.html",
+    "title": "Restoring Another Project",
+    "section": "",
+    "text": "The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the renv.lock file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.\nWe will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.\n\nFrom a GitHub Repo\nRestoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.\n\n\nFrom a lockfile\nIf a researcher has shared a renv.lock file and other R scripts outside of an R project , restoring is still possible but requires an extra step or two:\n\nPlace the lockfile in the directory you are working on your project from. This is the same directory that you would run renv::init() from, and should be an *.Rproj project.\nRun renv::status(). The results should look like this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nRun renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\n\n\n\nAfter Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This is because the renv package is tied to the version of R you are using. The renv.lock file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.\nNote that this only occurs when upgrading by major or minor versions of R. If you’re not familiar with “semantic versioning,” it is a way of versioning software that uses three numbers separated by periods: major.minor.patch. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "4. Restoring Projects"
+    ]
+  },
+  {
+    "objectID": "starting_details.html",
+    "href": "starting_details.html",
+    "title": "Getting Started Details",
+    "section": "",
+    "text": "As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:\n\nCreation of a lockfile, renv.lock, which records the version of R in use, the default download repository, and the packages used in the project.\nCreation of a renv folder which contains the project library1, a settings file, a .gitignore file and a staging area for package installation\nAddition of the line source(\"renv/activate.R\") to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the *.Rproj file. This line ensures that the project library is used in the session, not the global library.\nUpdates the .Rbuildignore to include the renv folder and the renv.lock file. This is only relevant if you’re building an R package.\n\nYou should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as snapshot().\n\n\nInitiating {renv} in a project should print the following to the console:\nrenv::init()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - renv          [* -&gt; 1.0.7]\n#&gt; \n#&gt; The version of R recorded in the lockfile will be updated:\n#&gt; - R             [* -&gt; 4.4.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temporary\".\nNotably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.\nAnd as noted, the directory structure should look similar to the one below, particularly the presence of the renv directory and the renv.lock file. For reference: the function used in the following example, dir_tree(), is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.\nfs::dir_tree(recurse = 2)\n#&gt; .\n#&gt; ├── renv\n#&gt; │   ├── activate.R\n#&gt; │   ├── library\n#&gt; │   │   └── macos\n#&gt; │   ├── settings.json\n#&gt; │   └── staging\n#&gt; ├── renv.lock\n#&gt; └── temp.Rproj",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#initiation-example",
+    "href": "starting_details.html#initiation-example",
+    "title": "Getting Started Details",
+    "section": "",
+    "text": "Initiating {renv} in a project should print the following to the console:\nrenv::init()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - renv          [* -&gt; 1.0.7]\n#&gt; \n#&gt; The version of R recorded in the lockfile will be updated:\n#&gt; - R             [* -&gt; 4.4.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temporary\".\nNotably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.\nAnd as noted, the directory structure should look similar to the one below, particularly the presence of the renv directory and the renv.lock file. For reference: the function used in the following example, dir_tree(), is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.\nfs::dir_tree(recurse = 2)\n#&gt; .\n#&gt; ├── renv\n#&gt; │   ├── activate.R\n#&gt; │   ├── library\n#&gt; │   │   └── macos\n#&gt; │   ├── settings.json\n#&gt; │   └── staging\n#&gt; ├── renv.lock\n#&gt; └── temp.Rproj",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#dependencies-revisited",
+    "href": "starting_details.html#dependencies-revisited",
+    "title": "Getting Started Details",
+    "section": "Dependencies Revisited",
+    "text": "Dependencies Revisited\nAt the first degree, you depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to library(), require(), or namespaced calls e.g. package::function(). It is quite obvious that these packages are dependencies of your project, and thus need to be included in the renv.lock file.\nHowever, how does {renv} detect what packages are being used in the project? The renv:dependencies() function! This function works by searching all R-related files (e.g. .R, .Rmd, .qmd) for calls to packages. It is important to note that this function only detects packages that are actually used and properly declared in the project. Packages that have only been used interactively will not be detected as dependencies because they are not saved or used in any of the project files.\nYou will likely never need to use renv::dependencies() directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function underlies the renv:status() and renv::snapshot() functions which are essential for using {renv}. Before discussing these functions in detail, let’s take a look at the dependencies of dependencies.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#dependency-trees",
+    "href": "starting_details.html#dependency-trees",
+    "title": "Getting Started Details",
+    "section": "Dependency Trees",
+    "text": "Dependency Trees\nAs mentioned in the Dependencies Overview, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as dependencies of dependencies and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example of a recursive dependency tree (using the function pak::pkg_deps_tree() from the {pak} package).\n\npak::pkg_deps_tree(\"dplyr\", dependencies = \"hard\")\n#&gt; ℹ Loading metadata database\n#&gt; ✔ Loading metadata database ... done\n#&gt; \n#&gt; dplyr 1.1.4 ✨🔧 ⬇ (1.60 MB)\n#&gt; ├─cli 3.6.3 ✨🔧 ⬇ (1.39 MB)\n#&gt; ├─generics 0.1.3 ✨ ⬇ (81.91 kB)\n#&gt; ├─glue 1.7.0 ✨🔧 ⬇ (159.50 kB)\n#&gt; ├─lifecycle 1.0.4 ✨ ⬇ (124.78 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─glue\n#&gt; │ └─rlang 1.1.4 ✨🔧 ⬇ (1.89 MB)\n#&gt; ├─magrittr 2.0.3 ✨🔧 ⬇ (233.52 kB)\n#&gt; ├─pillar 1.9.0 ✨ ⬇ (652.06 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─fansi 1.0.6 ✨🔧 ⬇ (383.06 kB)\n#&gt; │ ├─glue\n#&gt; │ ├─lifecycle\n#&gt; │ ├─rlang\n#&gt; │ ├─utf8 1.2.4 ✨🔧 ⬇ (206.91 kB)\n#&gt; │ └─vctrs 0.6.5 ✨🔧 ⬇ (1.89 MB)\n#&gt; │   ├─cli\n#&gt; │   ├─glue\n#&gt; │   ├─lifecycle\n#&gt; │   └─rlang\n#&gt; ├─R6 2.5.1 ✨ ⬇ (83.20 kB)\n#&gt; ├─rlang\n#&gt; ├─tibble 3.2.1 ✨🔧 ⬇ (688.89 kB)\n#&gt; │ ├─fansi\n#&gt; │ ├─lifecycle\n#&gt; │ ├─magrittr\n#&gt; │ ├─pillar\n#&gt; │ ├─pkgconfig 2.0.3 ✨ ⬇ (18.45 kB)\n#&gt; │ ├─rlang\n#&gt; │ └─vctrs\n#&gt; ├─tidyselect 1.2.1 ✨🔧 ⬇ (224.68 kB)\n#&gt; │ ├─cli\n#&gt; │ ├─glue\n#&gt; │ ├─lifecycle\n#&gt; │ ├─rlang\n#&gt; │ ├─vctrs\n#&gt; │ └─withr 3.0.0 ✨ ⬇ (242.00 kB)\n#&gt; └─vctrs\n#&gt; \n#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile\n\n\nThis tree shows the dependencies of the dplyr package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.\nYou might have noticed the argument dependencies = \"hard\" in the function call. The dependencies argument is used to specify the kinds of dependencies to install. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#dependency-levels",
+    "href": "starting_details.html#dependency-levels",
+    "title": "Getting Started Details",
+    "section": "Dependency Levels",
+    "text": "Dependency Levels\nGenerally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:\n\nHard Dependencies\n\nImports\nDepends\nLinkingTo\n\nSoft Dependencies\n\nSuggests\nEnhances\n\n\nThese details may seem obscure or trivial, and, in most cases they are; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly expect the Soft dependencies to be installed too.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#status",
+    "href": "starting_details.html#status",
+    "title": "Getting Started Details",
+    "section": "Status",
+    "text": "Status\nThe renv::status() function checks the “status” of the project, and will return a message indicating whether the project is in a consistent state. A consistent state means that the packages declared in the lockfile match the packages actually used in the project, and that the versions of the packages declared in the lockfile match the versions of the packages discovered in the project library. For example, if you have a package declared in the lockfile but it is not actually used in the project, the project is not in a consistent state. A project that is consistent should produce the following output when renv::status() is run:\nrenv::status()\n#&gt; No issues found -- the project is in a consistent state.\nHowever, if there are issues with the project, the output will indicate what the issues are. For example, if a package is used in the project but not declared in the lockfile, the output will look like this:\n\nrenv::status()\n#&gt; The following package(s) are in an inconsistent state:\n#&gt; \n#&gt;  package    installed recorded used\n#&gt;  boot       y         n        y   \n#&gt;  cli        y         n        y   \n#&gt;  dplyr      y         n        y   \n#&gt;  fansi      y         n        y   \n#&gt;  generics   y         n        y   \n#&gt;  glue       y         n        y   \n#&gt;  lattice    y         n        y   \n#&gt;  lifecycle  y         n        y   \n#&gt;  lme4       y         n        y   \n#&gt;  magrittr   y         n        y   \n#&gt;  MASS       y         n        y   \n#&gt;  Matrix     y         n        y   \n#&gt;  minqa      y         n        y   \n#&gt;  nlme       y         n        y   \n#&gt;  nloptr     y         n        y   \n#&gt;  pillar     y         n        y   \n#&gt;  pkgconfig  y         n        y   \n#&gt;  R6         y         n        y   \n#&gt;  Rcpp       y         n        y   \n#&gt;  RcppEigen  y         n        y   \n#&gt;  rlang      y         n        y   \n#&gt;  tibble     y         n        y   \n#&gt;  tidyselect y         n        y   \n#&gt;  utf8       y         n        y   \n#&gt;  vctrs      y         n        y   \n#&gt;  withr      y         n        y   \n#&gt; \n#&gt; See ?renv::status() for advice on resolving these issues.\n\n\nThe key to interpreting this output is to note the installed, recorded, and used columns. The installed column indicates whether the package is installed in the project library, the recorded column indicates whether the package is declared in the lockfile, and the used column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running renv::snapshot().",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#snapshot",
+    "href": "starting_details.html#snapshot",
+    "title": "Getting Started Details",
+    "section": "Snapshot",
+    "text": "Snapshot\nThe renv::snapshot() function is used to update the lockfile with the packages used in the project. As previously discussed, this function will search all R-related files in the project for calls to library(), require(), and namespaced calls e.g. package::function(), and will update the lockfile with the packages used in the project. If the lockfile is already up to date, the function will return the following message:\nrenv::snapshot()\n#&gt; - The lockfile is already up to date.\nIf the lockfile is not up to date, the function will return a message indicating the packages that will be updated in the lockfile. For example, if you have added a new package to the project, the output will look like this:\n\nrenv::snapshot()\n#&gt; The following package(s) will be updated in the lockfile:\n#&gt; \n#&gt; # CRAN -----------------------------------------------------------------------\n#&gt; - boot         [* -&gt; 1.3-30]\n#&gt; - cli          [* -&gt; 3.6.3]\n#&gt; - dplyr        [* -&gt; 1.1.4]\n#&gt; - fansi        [* -&gt; 1.0.6]\n#&gt; - generics     [* -&gt; 0.1.3]\n#&gt; - glue         [* -&gt; 1.7.0]\n#&gt; - lattice      [* -&gt; 0.22-6]\n#&gt; - lifecycle    [* -&gt; 1.0.4]\n#&gt; - lme4         [* -&gt; 1.1-35.5]\n#&gt; - magrittr     [* -&gt; 2.0.3]\n#&gt; - MASS         [* -&gt; 7.3-60.2]\n#&gt; - Matrix       [* -&gt; 1.7-0]\n#&gt; - minqa        [* -&gt; 1.2.7]\n#&gt; - nlme         [* -&gt; 3.1-164]\n#&gt; - nloptr       [* -&gt; 2.1.1]\n#&gt; - pillar       [* -&gt; 1.9.0]\n#&gt; - pkgconfig    [* -&gt; 2.0.3]\n#&gt; - R6           [* -&gt; 2.5.1]\n#&gt; - Rcpp         [* -&gt; 1.0.13]\n#&gt; - RcppEigen    [* -&gt; 0.3.4.0.0]\n#&gt; - rlang        [* -&gt; 1.1.4]\n#&gt; - tibble       [* -&gt; 3.2.1]\n#&gt; - tidyselect   [* -&gt; 1.2.1]\n#&gt; - utf8         [* -&gt; 1.2.4]\n#&gt; - vctrs        [* -&gt; 0.6.5]\n#&gt; - withr        [* -&gt; 3.0.0]\n#&gt; \n#&gt; - Lockfile written to \"~/Desktop/temp/renv.lock\".\n\n\nPackages not already installed in the package can be recognized by the [* -&gt; version] notation. The [*] indicates that the package is not installed in the project library, and the version indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "starting_details.html#footnotes",
+    "href": "starting_details.html#footnotes",
+    "title": "Getting Started Details",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nStrictly speaking, the directory renv/library contains symlinks or symbolic links to packages in the renv library, which is a cache of the packages used in the project. This “cached” library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.↩︎",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "2. Starting Details"
+    ]
+  },
+  {
+    "objectID": "ex_3.html",
+    "href": "ex_3.html",
+    "title": "exercise 3",
+    "section": "",
+    "text": "explicit snapshot of {rmarkdown}?\nGo to the Exercise 3 Folder\nshould use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Explicitly Record"
+    ]
+  },
+  {
+    "objectID": "ex_init_snapshot.html",
+    "href": "ex_init_snapshot.html",
+    "title": "Initialize and Snapshot",
+    "section": "",
+    "text": "library(magrittr)\n\nThe following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nHowever, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.\n\nGetting Started\n\nfork the intro-to-renv-examples repo\nGo to the Exercise 1 folder\ninit renv\ncommit repo changes\n\n\n\nInstructions\n\nCreate an .Rproj in this folder, init-snapshot-exercises.\nInstall the {renv} package if needed.\nInitialize a new project with {renv} with renv::init() (if not already done when creating the .Rproj).\nCreate a new R script in this folder, init-snapshot-exercises, called script.R.\nWrite code to read the iris dataset and print the first 6 rows, create a scatter plot of Sepal.Length and Sepal.Width using the ggplot2 package, and perform an analysis of your choice on the iris dataset. (Ideally use another package like {lme4} or {dplyr} to perform data cleaning and analysis.) Example:\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Read the iris dataset\ndata(iris)\n\n# Print the first 6 rows\nhead(iris)\n\n# Create a scatter plot of Sepal.Length and Sepal.Width\nggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +\n  geom_point()\n  \n# Perform some data analysis using dplyr\niris %&gt;%\n  group_by(Species) %&gt;%\n  summarise(mean_sepal_length = mean(Sepal.Length))\n  \n# Create a linear mixed effects model with {lme4}\nlibrary(lme4)\nlmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)\n\nSave the script.\nRun the renv::dependencies() function to see the new dependencies of your project. What packages are listed? Is this what you expected?\nCheck the status of your project with renv::status(). What do you notice about the results printed to the console?\nSave these new dependencies to the renv.lock file with renv::snapshot().\nCommit your changes to your repository, and push them to GitHub.\n\n\n\nSnapshotting\n\nWe want to observe the process in action\nRun dependencies()\nCreate a new .R file\nPaste this analysis code in the file\n\nstats::lm(Sepal.Length ~ Sepal.Width + Species, data = iris)\n\nRun dependencies() again\nWhat do you notice?\nRun snapshot()\nCommit and push changes\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Init and Snapshot"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Contributors\nThis site was created by Pat Callahan with contributions and feedback from Florian Pargent.\n\n\nLicense\nPublished under a Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0 Deed).\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "caching.html",
+    "href": "caching.html",
+    "title": "Caching",
+    "section": "",
+    "text": "Page goals:\n(Posit 2024)",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Caching"
+    ]
+  },
+  {
+    "objectID": "caching.html#what-is-caching",
+    "href": "caching.html#what-is-caching",
+    "title": "Caching",
+    "section": "What is Caching?",
+    "text": "What is Caching?",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Caching"
+    ]
+  },
+  {
+    "objectID": "caching.html#caching-in-renv",
+    "href": "caching.html#caching-in-renv",
+    "title": "Caching",
+    "section": "Caching in {renv}",
+    "text": "Caching in {renv}\n\nSymlinks\nNotes:\n\nThe last thing to briefly mention in this section is the package cache. You may be wondering what a cache even is, and why it is important. In short, a cache is a temporary storage area that stores frequently accessed data for quick retrieval. In the context of {renv}, the package cache is a shared library that contains the packages used in your projects.\nThis shared library is a huge space saver, especially if you have many projects using the same package.\nThe package cache is a shared library that contains the packages used in your projects. This shared library is a huge space saver, especially if you have many projects using the same package. The cache is built per the minor version of R you use. For example, if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g. R 4.3.2 to R 4.3.3 will not cause this, however. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the renv.lock if you don’t already have it somewhere in the renv cache. You can access the path to the cache with renv::paths$cache(), which I think helps make everything a bit more tangible.\n\n(I think maybe this should be an additional page that discusses the shared library concept in more detail, and caching)\n\nbriefly describe caching and the fact that there are shared libraries\nlink out to the advanced topic on caching",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Caching"
+    ]
+  },
+  {
+    "objectID": "renv_getting_started.html",
+    "href": "renv_getting_started.html",
+    "title": "{renv}: Easy Start",
+    "section": "",
+    "text": "This page will provide a brief overview of how to get started with the {renv} package. The goal is to provide a quick and easy way to get started with the package, and to provide a brief overview of the package’s functionality. This page will be followed by a more detailed explanation of the package’s functionality in the Understanding {renv} page.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "1. Quick Start"
+    ]
+  },
+  {
+    "objectID": "renv_getting_started.html#initiating-renv",
+    "href": "renv_getting_started.html#initiating-renv",
+    "title": "{renv}: Easy Start",
+    "section": "Initiating {renv}",
+    "text": "Initiating {renv}\nWhen using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.\nEither approach should yield the following results in the directory you’re working within:\n\nCreation of a renv.lock file and a renv folder\nCreation of or additions to the .Rbuildignore and .Rprofile files\nA renv folder will be created in the project directory (for {renv} version 1.0.0 and above)\n\nFor most purposes, one will only need to have a passing understanding of the renv.lock file which records the packages used in the project and their versions. The renv folder is where the packages are stored, and the .Rbuildignore and .Rprofile files are used to ensure that the project is reproducible and that the correct packages are loaded when the project is opened.\n** Note that if you are using version control, you should not add the renv folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the renv folder is not necessary for the project to be reproducible, and the project should be rebuilt from the renv.lock file. **\n\nWith a New RStudio Project\nWhen initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to “Use renv with [your] project.”\nFile -&gt; New Project -&gt; New Directory -&gt; New Project -&gt; [x] Use renv with this project\n\n\n\n\n\nFrom an Existing Project or Folder\nIn essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.\ninstall.packages(\"renv\")\n\nlibrary(renv)\ninit()",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "1. Quick Start"
+    ]
+  },
+  {
+    "objectID": "renv_getting_started.html#check-status-of-project",
+    "href": "renv_getting_started.html#check-status-of-project",
+    "title": "{renv}: Easy Start",
+    "section": "Check Status of Project",
+    "text": "Check Status of Project\nThe project should be in a consistent state after initiating {renv}, and this can be checked by running the renv::status() function.\nstatus()\nIn short, this function checks that your project is in a “consistent state” by checking for the following:\n\nThat all packages detected in the project are listed in the renv.lock file\nThat all packages in the renv.lock file are actually installed\nThat all installed packages are the correct version",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "1. Quick Start"
+    ]
+  },
+  {
+    "objectID": "renv_getting_started.html#updating-renv.lock",
+    "href": "renv_getting_started.html#updating-renv.lock",
+    "title": "{renv}: Easy Start",
+    "section": "Updating renv.lock",
+    "text": "Updating renv.lock\nAs you write additional .R, .Rmd, and/or .qmd files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the renv.lock file. This can be done by “snapshotting” the project which will initiate a search for calls to library(), require() and namespaced calls to functions e.g. package::function().\nsnapshot()\nRunning the snapshot() function will capture new packages used in your project, and it will update the package versions in the renv.lock file if you have installed new versions to the project you are working in.\n\n\n\nThis is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others using renv::restore(). This is discussed next in Restoring A Project, but we strongly recommend reading the details of Understanding {renv} first.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "1. Quick Start"
+    ]
+  },
+  {
+    "objectID": "ex_2.html",
+    "href": "ex_2.html",
+    "title": "Using restore()",
+    "section": "",
+    "text": "restoring a project\nGo to the Exercise 2 Folder\n\nrenv::dependencies()\n#&gt; Finding R package dependencies ... Done!\n#&gt;                                                                                                                      Source\n#&gt; 1  /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R\n#&gt; 2  /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R\n#&gt; 3 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd\n#&gt; 4 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd\n#&gt; 5 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd\n#&gt; 6        /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock\n#&gt;     Package Require Version   Dev\n#&gt; 1     dplyr                 FALSE\n#&gt; 2     tidyr                 FALSE\n#&gt; 3     dplyr                 FALSE\n#&gt; 4   ggplot2                 FALSE\n#&gt; 5 rmarkdown                 FALSE\n#&gt; 6      renv                 FALSE\n\nWarning message: The ‘yaml’ package is required to parse dependencies within Quarto Markdown files Consider installing it with install.packages(\"yaml\").\n\n\nRestoring a Project with {renv}\n\nOpen the R project i.e. the .Rproj file.\nAt the console, run the command renv::dependencies(). What packages do you see listed as direct dependencies?\n\n\nDid you receive a notice about the {yaml} package?\n\n\nTake a look at the presentation.qmd file. Note that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?\nRun the command renv::restore(). What happens?\nOpen the billboard.Rmd file, and run the code. This should create the top_billboard_rankings.rds file, needed in the next step.\nTry to render the presentation.qmd file. What happens?\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Restore"
+    ]
+  },
+  {
     "objectID": "advanced_topics.html",
     "href": "advanced_topics.html",
     "title": "Advanced Topics",
@@ -537,6 +415,20 @@
     ]
   },
   {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Introduction to {renv}",
+    "section": "",
+    "text": "Attribution-ShareAlike 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nAdditional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org.\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "outline.html",
+    "href": "outline.html",
+    "title": "outline",
+    "section": "",
+    "text": "Software reproducibility\n\n\nwhat is it?\nwhat are the goals?\nwhat needs to be tracked?\n\nvaries based on project needs. a completely reproducible system would have the same versions of software on the same versions of the operating system on the same hardware models. The hardware aspect is difficult enough as is, but softwares also have a variety of different versions, sometimes with minor changes that won’t affect output in any noticeable way, and sometimes those changes are breaking such that code simply no longer runs, or worse, the code still runs but provides different results than expected\n\nwhat are the challenges?\n\n\nDependency Mangement\n\n\nwhat is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.\nthese can be managed informally with e.g. a written list of softwares used and versions if needed.\n\npros: there’s little technical knowledge needed here. anyone can type these out.\ncons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.\n\nwhat does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.\nHowever, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)\n\n\nGiven the complexity in all of this, automated solutions for dependency tracking are recommended.\nPython: requirements.txt, Pipfile, and pyproject.toml for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.\n\nthis tutorial focuses on R and {renv} so no further comparison of these will be provided here\n\nR: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem\n\n\nWhy {renv}?\n\n\n{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.\n{groundhogr}: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address some shortcomings of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.\n{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g. 1.X+1.X or a major release to e.g. 2.X.X)\n\npros:\n\ndeveloped by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues\nlikely the most popular option already. learning this is a transferable skill between academia and industry.\nintegration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions because Posit has developed extensions that make this easier.\nit works at a project level (i.e. it should be paired with the use of an R Project/.RProj file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.\n\n\n\n\n\n\n Back to top"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to the {renv} Tutorial!",
@@ -545,6 +437,114 @@
     "crumbs": [
       "Home",
       "Overview"
+    ]
+  },
+  {
+    "objectID": "intro_dependencies.html",
+    "href": "intro_dependencies.html",
+    "title": "Software Dependencies",
+    "section": "",
+    "text": "The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing depends on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the dplyr package, dplyr is a library dependency that must be downloaded too.\nThere are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that dplyr itself has dependencies, such as tibble, rlang, and vctrs, which must also be downloaded. And tibble, rlang, and vctrs have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”1\nIf you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:\n\nReading the DESCRIPTION file of an R package, which can be accessed in a variety of ways\n\nutils::packageDescription() to print the complete DESCRIPTION file of a package to the console\ntools::package_dependencies() for just a list of dependencies from the DESCRIPTION file\nLooking at the DESCRIPTION file online on the package’s CRAN or GitHub page\n\npak::pkg_deps_tree() for a visual representation of the direct dependencies and the recursive dependencies",
+    "crumbs": [
+      "Home",
+      "Background",
+      "2. Software Dependencies"
+    ]
+  },
+  {
+    "objectID": "intro_dependencies.html#dependencies-overview",
+    "href": "intro_dependencies.html#dependencies-overview",
+    "title": "Software Dependencies",
+    "section": "",
+    "text": "The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing depends on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the dplyr package, dplyr is a library dependency that must be downloaded too.\nThere are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that dplyr itself has dependencies, such as tibble, rlang, and vctrs, which must also be downloaded. And tibble, rlang, and vctrs have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”1\nIf you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:\n\nReading the DESCRIPTION file of an R package, which can be accessed in a variety of ways\n\nutils::packageDescription() to print the complete DESCRIPTION file of a package to the console\ntools::package_dependencies() for just a list of dependencies from the DESCRIPTION file\nLooking at the DESCRIPTION file online on the package’s CRAN or GitHub page\n\npak::pkg_deps_tree() for a visual representation of the direct dependencies and the recursive dependencies",
+    "crumbs": [
+      "Home",
+      "Background",
+      "2. Software Dependencies"
+    ]
+  },
+  {
+    "objectID": "intro_dependencies.html#intro-to-management-practices",
+    "href": "intro_dependencies.html#intro-to-management-practices",
+    "title": "Software Dependencies",
+    "section": "Intro to Management Practices",
+    "text": "Intro to Management Practices\nGiven the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.\nYou might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.\n\nManual management\nAs noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.\n\n\nAutomated Management\nAutomated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.\nThere are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:\n\nRPython\n\n\nThe major current and historical options for managing R dependencies are:\n\n{renv} is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation\n{groundhogr} is a package that is similar to {renv}, and developed by independent, open-source contributors\n{packrat} is a deprecated package that is no longer recommended for new projects\n\n\n\nThe pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective requirements.txt, Pipfile, and pyproject.toml files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.\n\n\n\nThe next chapter delves into some necessary technical definitions in the R ecosystem. The chapters mentions some of the benefits of package managers, but the following chapter will really dive in to the details of package management in R while providing a discussion of the 3 major package managers for R.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "2. Software Dependencies"
+    ]
+  },
+  {
+    "objectID": "intro_dependencies.html#footnotes",
+    "href": "intro_dependencies.html#footnotes",
+    "title": "Software Dependencies",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIf you have enough time, read about how the left-pad incident broke the internet as an example of how dependencies can go wrong.↩︎",
+    "crumbs": [
+      "Home",
+      "Background",
+      "2. Software Dependencies"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html",
+    "href": "dependencies_in_r.html",
+    "title": "Dependency Management in R",
+    "section": "",
+    "text": "This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduces the {renv} package.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. Dep. Management in R"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#packrat",
+    "href": "dependencies_in_r.html#packrat",
+    "title": "Dependency Management in R",
+    "section": "{packrat}",
+    "text": "{packrat}\nThe {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.\nIt was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. Dep. Management in R"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#groundhogr",
+    "href": "dependencies_in_r.html#groundhogr",
+    "title": "Dependency Management in R",
+    "section": "{groundhogr}",
+    "text": "{groundhogr}\n{groundhogr} is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:\ninstall.packages(\"groundhog\")\nlibrary(\"groundhog\")\npkgs &lt;- c(\"rio\",\"metafor\")\ngroundhog.library(pkgs, \"2023-09-01\")\nThis example demonstrates a scenario in which you would like to install the rio and metafor packages as they were on September 1st, 2023. The groundhog.library() function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the library() call for groundhog.library() is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.\nThe other main benefit of using {groundhogr} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhogr}.\nThe package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhogr} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. Dep. Management in R"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#renv",
+    "href": "dependencies_in_r.html#renv",
+    "title": "Dependency Management in R",
+    "section": "{renv}",
+    "text": "{renv}\n{renv} is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.\nMore to the focus of this tutorial, however, {renv} allows you to create a “snapshot” of your package dependencies in just a handful of steps, summarized below:\nrenv::init()\nrenv::snapshot()\nThe results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date.\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.0.7). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhogr} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. Dep. Management in R"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#footnotes",
+    "href": "dependencies_in_r.html#footnotes",
+    "title": "Dependency Management in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.↩︎",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. Dep. Management in R"
     ]
   }
 ]

@@ -323,8 +323,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#package-detection" id="toc-package-detection" class="nav-link" data-scroll-target="#package-detection">Package Detection</a>
   <ul class="collapse">
-  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
-  <li><a href="#dependencies-of-dependencies" id="toc-dependencies-of-dependencies" class="nav-link" data-scroll-target="#dependencies-of-dependencies">Dependencies of Dependencies</a></li>
+  <li><a href="#dependencies-revisited" id="toc-dependencies-revisited" class="nav-link" data-scroll-target="#dependencies-revisited">Dependencies Revisited</a></li>
+  <li><a href="#dependency-trees" id="toc-dependency-trees" class="nav-link" data-scroll-target="#dependency-trees">Dependency Trees</a></li>
   <li><a href="#dependency-levels" id="toc-dependency-levels" class="nav-link" data-scroll-target="#dependency-levels">Dependency Levels</a></li>
   </ul></li>
   <li><a href="#status-and-snapshot" id="toc-status-and-snapshot" class="nav-link" data-scroll-target="#status-and-snapshot">Status and Snapshot</a>
@@ -397,15 +397,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="package-detection" class="level1">
 <h1>Package Detection</h1>
 <p>{renv} is designed to detect the packages you are using in your project. Before discussing the details of how {renv} detects packages, it is important to understand dependencies in some detail.</p>
-<section id="dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
+<section id="dependencies-revisited" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies-revisited">Dependencies Revisited</h2>
 <p>At the first degree, <em>you</em> depend on packages to perform your analysis or for your project, and you likely have included these packages in your project via calls to <code>library()</code>, <code>require()</code>, or namespaced calls e.g.&nbsp;<code>package::function()</code>. It is quite obvious that these packages are dependencies of your project, and thus need to be included in the <code>renv.lock</code> file.</p>
 <p>However, how does {renv} detect what packages are being used in the project? The <code>renv:dependencies()</code> function! This function works by searching all R-related files (e.g.&nbsp;<code>.R</code>, <code>.Rmd</code>, <code>.qmd</code>) for calls to packages. It is important to note that this function only detects packages that are actually <strong>used</strong> and properly <strong>declared</strong> in the project. Packages that have only been used interactively <strong>will not</strong> be detected as dependencies because they are not saved or used in any of the project files.</p>
 <p>You will likely never need to use <code>renv::dependencies()</code> directly, but being aware of what it does can be massively beneficial in troubleshooting issues in the future. More importantly, this function underlies the <code>renv:status()</code> and <code>renv::snapshot()</code> functions which <strong>are</strong> essential for using {renv}. Before discussing these functions in detail, let’s take a look at the dependencies of dependencies.</p>
 </section>
-<section id="dependencies-of-dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="dependencies-of-dependencies">Dependencies of Dependencies</h2>
-<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as <em>dependencies of dependencies</em>. To get a visual representation of this, consider the following example of a recursive dependency tree (using the function <code>pak::pkg_deps_tree()</code> from the {pak} package).</p>
+<section id="dependency-trees" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-trees">Dependency Trees</h2>
+<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as <em>dependencies of dependencies</em> and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example of a recursive dependency tree (using the function <code>pak::pkg_deps_tree()</code> from the {pak} package).</p>
 <div class="output-overflow">
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="st">"hard"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading metadata database</span></span>
@@ -454,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<p>This tree shows the dependencies of the <code>dplyr</code> package, and the dependencies of those dependencies. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.</p>
+<p>This tree shows the dependencies of the <code>dplyr</code> package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.</p>
 <p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
 </section>
 <section id="dependency-levels" class="level2">
@@ -519,6 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; See ?renv::status() for advice on resolving these issues.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
 <p>The key to interpreting this output is to note the <code>installed</code>, <code>recorded</code>, and <code>used</code> columns. The <code>installed</code> column indicates whether the package is installed in the project library, the <code>recorded</code> column indicates whether the package is declared in the lockfile, and the <code>used</code> column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running <code>renv::snapshot()</code>.</p>
 </section>
 <section id="snapshot" class="level2">

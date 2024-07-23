@@ -318,6 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
   <li><a href="#snapshotting" id="toc-snapshotting" class="nav-link" data-scroll-target="#snapshotting">Snapshotting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_init_snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -344,6 +345,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>However, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
 <section id="getting-started" class="level1">
 <h1>Getting Started</h1>
 <ul>
@@ -353,6 +359,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>commit repo changes</li>
 </ul>
 </section>
+<section id="instructions" class="level1">
+<h1>Instructions</h1>
+<ol type="1">
+<li>Create an <code>.Rproj</code> in this folder, <code>init-snapshot-exercises</code>.</li>
+<li>Install the {renv} package if needed.</li>
+<li>Initialize a new project with {renv} with <code>renv::init()</code> (if not already done when creating the <code>.Rproj</code>).</li>
+<li>Create a new R script in this folder, <code>init-snapshot-exercises</code>, called <code>script.R</code>.</li>
+<li>Write code to read the <code>iris</code> dataset and print the first 6 rows, create a scatter plot of <code>Sepal.Length</code> and <code>Sepal.Width</code> using the <code>ggplot2</code> package, and perform an analysis of your choice on the <code>iris</code> dataset. (Ideally use another package like {lme4} or {dplyr} to perform data cleaning and analysis.) Example:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the iris dataset</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 6 rows</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of Sepal.Length and Sepal.Width</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform some data analysis using dplyr</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_sepal_length =</span> <span class="fu">mean</span>(Sepal.Length))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a linear mixed effects model with {lme4}</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li>Save the script.</li>
+<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project. What packages are listed? Is this what you expected?</li>
+<li>Check the status of your project with <code>renv::status()</code>. What do you notice about the results printed to the console?</li>
+<li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
+<li>Commit your changes to your repository, and push them to GitHub.</li>
+</ol>
+</section>
 <section id="snapshotting" class="level1">
 <h1>Snapshotting</h1>
 <ul>
@@ -361,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Create a new .R file</li>
 <li>Paste this analysis code in the file</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Run <code>dependencies()</code> again</li>
 <li>What do you notice?</li>
