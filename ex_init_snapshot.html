@@ -317,8 +317,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  </ul></li>
   <li><a href="#snapshotting" id="toc-snapshotting" class="nav-link" data-scroll-target="#snapshotting">Snapshotting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_init_snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -345,19 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is <strong>recommended</strong> that you fork the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main">intro-to-renv-exercises</a> repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
 <p>However, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
 <section id="getting-started" class="level1">
 <h1>Getting Started</h1>
-<ul>
-<li>fork the intro-to-renv-examples repo</li>
-<li><strong>Go to the Exercise 1 folder</strong></li>
-<li>init renv</li>
-<li>commit repo changes</li>
-</ul>
-</section>
-<section id="instructions" class="level1">
-<h1>Instructions</h1>
+<p>The exercises for initiating and snapshotting a project can be found in the <code>init-snapshot-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main">intro-to-renv-exercises</a> repo.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
 <li>Create an <code>.Rproj</code> in this folder, <code>init-snapshot-exercises</code>.</li>
 <li>Install the {renv} package if needed.</li>
@@ -393,6 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
 <li>Commit your changes to your repository, and push them to GitHub.</li>
 </ol>
+</section>
 </section>
 <section id="snapshotting" class="level1">
 <h1>Snapshotting</h1>

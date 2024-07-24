@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -317,7 +283,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#restoring-a-project-with-renv" id="toc-restoring-a-project-with-renv" class="nav-link active" data-scroll-target="#restoring-a-project-with-renv">Restoring a Project with {renv}</a></li>
+  <li><a href="#restore-a-renv-project" id="toc-restore-a-renv-project" class="nav-link active" data-scroll-target="#restore-a-renv-project">Restore a {renv} Project</a>
+  <ul class="collapse">
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -343,31 +312,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<ul>
-<li>restoring a project</li>
-<li><strong>Go to the Exercise 2 Folder</strong></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">dependencies</span>()</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding R package dependencies ... Done!</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                                                      Source</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        /Users/&lt;USER&gt;/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Package Require Version   Dev</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     dplyr                 FALSE</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     tidyr                 FALSE</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     dplyr                 FALSE</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   ggplot2                 FALSE</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 rmarkdown                 FALSE</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      renv                 FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>Warning message: The ‘yaml’ package is required to parse dependencies within Quarto Markdown files Consider installing it with <code>install.packages("yaml")</code>.</p>
-</blockquote>
-<section id="restoring-a-project-with-renv" class="level1">
-<h1>Restoring a Project with {renv}</h1>
+<p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>If you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
+<!-- ``` r -->
+<!-- renv::dependencies() -->
+<!-- #> Finding R package dependencies ... Done! -->
+<!-- #>                                                                                                                      Source -->
+<!-- #> 1  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R -->
+<!-- #> 2  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R -->
+<!-- #> 3 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 4 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 5 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 6        /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock -->
+<!-- #>     Package Require Version   Dev -->
+<!-- #> 1     dplyr                 FALSE -->
+<!-- #> 2     tidyr                 FALSE -->
+<!-- #> 3     dplyr                 FALSE -->
+<!-- #> 4   ggplot2                 FALSE -->
+<!-- #> 5 rmarkdown                 FALSE -->
+<!-- #> 6      renv                 FALSE -->
+<!-- ``` -->
+<!-- > Warning message: -->
+<!-- The 'yaml' package is required to parse dependencies within Quarto Markdown files -->
+<!-- Consider installing it with `install.packages("yaml")`.  -->
+<section id="restore-a-renv-project" class="level1">
+<h1>Restore a {renv} Project</h1>
+<p>The exercises for initiating and snapshotting a project can be found in the <code>restore-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main">intro-to-renv-exercises</a> repo.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
 <li>Open the R project i.e.&nbsp;the <code>.Rproj</code> file.</li>
 <li>At the console, run the command <code>renv::dependencies()</code>. What packages do you see listed as direct dependencies?</li>
@@ -383,6 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
