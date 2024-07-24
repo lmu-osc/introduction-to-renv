@@ -2,33 +2,39 @@
 title: "Using `restore()`"
 ---
 
--   restoring a project
--   **Go to the Exercise 2 Folder**
+As with the previous exercise, it is **recommended** that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.
+
+If you're not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.
 
 
-``` r
-renv::dependencies()
-#> Finding R package dependencies ... Done!
-#>                                                                                                                      Source
-#> 1  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R
-#> 2  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R
-#> 3 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
-#> 4 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
-#> 5 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd
-#> 6        /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock
-#>     Package Require Version   Dev
-#> 1     dplyr                 FALSE
-#> 2     tidyr                 FALSE
-#> 3     dplyr                 FALSE
-#> 4   ggplot2                 FALSE
-#> 5 rmarkdown                 FALSE
-#> 6      renv                 FALSE
-```
+<!-- ``` r -->
+<!-- renv::dependencies() -->
+<!-- #> Finding R package dependencies ... Done! -->
+<!-- #>                                                                                                                      Source -->
+<!-- #> 1  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R -->
+<!-- #> 2  /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/billboard_100.R -->
+<!-- #> 3 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 4 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 5 /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/presentation.qmd -->
+<!-- #> 6        /Users/<USER>/Documents/Coding/Open Science Center/introduction-to-renv-exercises/restore-exercises/renv.lock -->
+<!-- #>     Package Require Version   Dev -->
+<!-- #> 1     dplyr                 FALSE -->
+<!-- #> 2     tidyr                 FALSE -->
+<!-- #> 3     dplyr                 FALSE -->
+<!-- #> 4   ggplot2                 FALSE -->
+<!-- #> 5 rmarkdown                 FALSE -->
+<!-- #> 6      renv                 FALSE -->
+<!-- ``` -->
+
+<!-- > Warning message: -->
+<!-- The 'yaml' package is required to parse dependencies within Quarto Markdown files -->
+<!-- Consider installing it with `install.packages("yaml")`.  -->
 
 
-> Warning message:
-The 'yaml' package is required to parse dependencies within Quarto Markdown files
-Consider installing it with `install.packages("yaml")`. 
+# Restore a {renv} Project
+
+The exercises for initiating and snapshotting a project can be found in the `restore-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main) repo.
+
 
 ```{r, results='asis', echo=FALSE}
 
