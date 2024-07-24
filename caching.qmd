@@ -3,16 +3,29 @@ title: "Caching"
 bibliography: references.bib
 ---
 
-Page goals:
+This page will discuss the concept of caching and how it is used in {renv}.
 
--   briefly describe caching and the fact that there are shared libraries
--   discuss how {renv} uses caching
-    -   shared {renv} library for packages on local system
-    -   installation of packages, and checks for packages first in the shared library
-    -   "symlinks" to the shared library in `renv/library`
+<!-- -   briefly describe caching and the fact that there are shared libraries -->
+<!-- -   discuss how {renv} uses caching -->
+<!--     -   shared {renv} library for packages on local system -->
+<!--     -   installation of packages, and checks for packages first in the shared library -->
+<!--     -   "symlinks" to the shared library in `renv/library` -->
 
-> You can find the location of the current cache with `renv::paths$cache()`. By default, it will be in one of the following folders:
->
+
+# What is Caching?
+
+In the context of software development, caching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program. When a program needs to access a package, it first checks the cache to see if the package is already stored there. If the package is found in the cache, the program can retrieve it quickly without having to download it again. This can significantly reduce the time it takes to run a program, especially if the package is large or if the program is run frequently.
+
+# Caching in {renv}
+
+In the context of {renv}, the package cache is a shared library that contains the packages used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages. 
+
+A cache is built per each minor version of R you use. For example, if have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This can be unexpected if the caching behavior is not known to you. Upgrading from e.g. R 4.3.2 to R 4.3.3 will not cause this, however. 
+
+## Cache Locations
+
+The {renv} caches for R packages will be in one of the following locations, based on your operating system:
+
 > -   Linux: `~/.cache/R/renv/cache`
 >
 > -   macOS: `~/Library/Caches/org.R-project.R/R/renv/cache`
@@ -21,9 +34,22 @@ Page goals:
 
 [@posit2024]
 
-## What is Caching?
+Within each of these cache folders, you should see subfolders for each version of R that you have used with {renv}. For example, on a macOS system, you might see the following folders:
 
-## Caching in {renv}
+``` r
+list.files("~/Library/Caches/org.R-project.R/R/renv/cache/v5", full.names = T)
+
+#> [1] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/macos"
+#> [2] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.2"
+#> [3] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3"
+#> [4] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4"
+```
+
+You should not need to interact with the cache directly, but it can be useful to know where it is located and particularly that there can me *multiple caches* in case you need to troubleshoot any issues with {renv}.
+
+## Project Library
+
+When you install a package in a project with {renv}, the package is installed in the shared library, and a "symlink" is created in the `renv/library` folder of your project. This symlink points to the package in the shared library, so the package is not duplicated in your project. This helps to save space on your local machine and ensures that the package is only downloaded once, even if it is used in multiple projects.
 
 ### Symlinks
 

@@ -2,7 +2,7 @@
 title: "Initialize and Snapshot"
 ---
 
-```{r}
+```{r, echo=FALSE}
 library(magrittr)
 ```
 

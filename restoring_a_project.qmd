@@ -8,7 +8,9 @@ We will cover restoring a project from a GitHub repository, restoring a project 
 
 # From a GitHub Repo
 
-Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:
+Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. A repo *should* always have all of the required files for restoring a project including the `renv.lock` file, the `renv` folder, the `*.Rproj` file, and the R scripts. Note that repos generally do not (and should not) contain the `renv/library` folder--this is intended behavior. Recall from the caching chapter that the `renv/library` contains "symlinks" to the actual package files on your machine, and these symlinks are not portable across machines. Moreover, the `renv/library` folder can be quite large and is not necessary for restoring a project.
+
+The steps for restoring a project from a GitHub repository are as follows:
 
 -   Clone the repository to your local machine with `git clone`
 -   Open the `*.Rproj` file
@@ -18,22 +20,27 @@ There should not be anything else to do! The `renv.lock` file will be used to in
 
 # From a lockfile
 
-If a researcher has shared a renv.lock file and other R scripts **outside of an R project** , restoring is still possible but requires an extra step or two:
+Another approach to restoring a project is by sharing just the `renv.lock` file and other R scripts. This is useful if you are sharing a project with someone who does not use Git or if you are sharing a project with someone who does not have a GitHub account. The procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:
 
--   Place the lockfile in the directory you are working on your project from. This is the same directory that you would run `renv::init()` from, and should be an `*.Rproj` project.
+-   Place the lockfile in the directory you are working on your project from. This should be a directory with a `*.Rproj` file.
 -   Run `renv::status()`. The results should look like this:
+
 ``` r
 renv::status()
 #> This project does not appear to be using renv.
 #> Use `renv::restore()` to install the packages defined in lockfile.
 ```
+
 -   Run `renv::restore()`. If prompted, choose the option "Activate the project and use the project library." This will create all other necessary files and directories for a {renv} project.
 
 
 
 # After Upgrading R
 
-Something that may come as a surprise is the need to restore a project after upgrading R. This is because the `renv` package is tied to the version of R you are using. The `renv.lock` file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.
+Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. These "major" and "minor" upgrades refer to semantic versioning of software which is a way of providing version numbers to software that uses three numbers separated by periods: `major.minor.patch`. For example, an upgrade from R4.3 to R4.4 will cause you to need to restore your project, but an upgrade from R4.3.1 to R4.3.2 will not.
 
-Note that this only occurs when upgrading by major or minor versions of R. If you're not familiar with "semantic versioning," it is a way of versioning software that uses three numbers separated by periods: `major.minor.patch`. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.
+Therefore, if you upgrade R by a major or minor version, you should also update the version of R in the `renv.lock` file by running `renv::snapshot()` and update any packages in your project with `renv::update()`. This will ensure that the project is using the correct versions of the packages and of R that were used when the project was last worked on.
+
+Note that this is unlikely to be an issue if you are using e.g. a managed versioned of R and RStudio on a server, if you use a containerized environment like Docker, or if you actively manage the R version on your local machine with a solution like [rswitch](https://rud.is/rswitch/) or [rig](https://github.com/r-lib/rig). The latter two solutions are especially useful if you are working on multiple projects that require different versions of R on your local machine.
+
 

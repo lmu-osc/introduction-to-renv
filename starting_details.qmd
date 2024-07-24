@@ -2,18 +2,20 @@
 title: "Getting Started Details"
 ---
 
-# Initiation
+The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions `renv::init()`, `renv::status()`, and `renv::snapshot()`, and will provide a more detailed example of how to use them in a project.
+
+# Initiating {renv}
 
 As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:
 
 1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
 2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, a `.gitignore` file and a staging area for package installation
-3.  Addition of the line `source("renv/activate.R")` to your .Rprofile. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
+3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile`. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
 4.  Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
 
 You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as `snapshot()`.
 
-[^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.
+[^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the [Caching](caching.qmd) chapter.
 
 ## Initiation Example
 
@@ -63,7 +65,7 @@ You will likely never need to use `renv::dependencies()` directly, but being awa
 
 ## Dependency Trees
 
-As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as *dependencies of dependencies* and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example of a recursive dependency tree (using the function `pak::pkg_deps_tree()` from the {pak} package).
+As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example of a recursive dependency tree (using the function `pak::pkg_deps_tree()` from the {pak} package).
 
 
 ::: output-overflow
@@ -118,13 +120,13 @@ pak::pkg_deps_tree("dplyr", dependencies = "hard")
 
 <br>
 
-This tree shows the dependencies of the `dplyr` package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.
+This tree shows the dependencies of the `dplyr` package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project. **Above all, you should note that all of the packages on this dependency tree need to be recorded in the `renv.lock` file to ensure that your project is reproducible.**
 
-You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
+You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
 
 ## Dependency Levels
 
-Generally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:
+Generally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can improve the package or provide some optional functionality. In the context of R, the following are the dependency levels:
 
 -   Hard Dependencies
     -   Imports
@@ -134,7 +136,7 @@ Generally-speaking, there are two levels of dependencies in R: hard and soft. Ha
     -   Suggests
     -   Enhances
 
-These details may seem obscure or trivial, and, in most cases they are; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly *expect* the Soft dependencies to be installed too.
+The exact differences between the sub-levels of dependencies are not important for the purposes of this course, and, in most cases, the details of dependency levels are obscure and irrelevant; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly *expect* the Soft dependencies to be installed too. In such cases, you might need to explicitly `renv::record()` the dependency into the `renv.lock` file. An example of this will be revisited in the exercises.
 
 
 # Status and Snapshot
