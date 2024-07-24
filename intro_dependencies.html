@@ -316,17 +316,17 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="dependencies-overview" class="level2">
 <h2 class="anchored" data-anchor-id="dependencies-overview">Dependencies Overview</h2>
-<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing <em>depends</em> on to function. For example, if you are developing an R package, you will need R installed on your machine, or if you download an R package that uses functions from the <code>dplyr</code> package, <code>dplyr</code> is a library dependency that must be downloaded too.</p>
-<p>There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that <code>dplyr</code> itself has dependencies, such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>, which must also be downloaded. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, bur rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>If you’re ever curious about the dependencies of a package, there are a variety of ways you can find this information via the package’s documentation:</p>
+<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing <em>depends</em> on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the <code>dplyr</code> package, then the <code>dplyr</code> must be downloaded first.</p>
+<p>There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that <code>dplyr</code> itself has dependencies, such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>, which must also be downloaded. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>If you’re ever curious about the dependencies of a package, they should all be declared in the <code>DESCRIPTION</code> file of an R package. There are a variety of ways you can access this information:</p>
 <ul>
-<li>Reading the <code>DESCRIPTION</code> file of an R package, which can be accessed in a variety of ways
+<li>Methods for reading the <code>DESCRIPTION</code> file of an R package:
 <ul>
 <li><code>utils::packageDescription()</code> to print the complete <code>DESCRIPTION</code> file of a package to the console</li>
 <li><code>tools::package_dependencies()</code> for just a list of dependencies from the <code>DESCRIPTION</code> file</li>
 <li>Looking at the <code>DESCRIPTION</code> file online on the package’s CRAN or GitHub page</li>
 </ul></li>
-<li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies</li>
+<li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies. An example of this will be shown in the <a href="./starting_details.html">Starting Details</a> chapter.</li>
 </ul>
 </section>
 <section id="intro-to-management-practices" class="level2">

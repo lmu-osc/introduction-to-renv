@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#initiation" id="toc-initiation" class="nav-link active" data-scroll-target="#initiation">Initiation</a>
+  <li><a href="#initiating-renv" id="toc-initiating-renv" class="nav-link active" data-scroll-target="#initiating-renv">Initiating {renv}</a>
   <ul class="collapse">
   <li><a href="#initiation-example" id="toc-initiation-example" class="nav-link" data-scroll-target="#initiation-example">Initiation Example</a></li>
   </ul></li>
@@ -357,13 +357,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="initiation" class="level1">
-<h1>Initiation</h1>
+<p>The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions <code>renv::init()</code>, <code>renv::status()</code>, and <code>renv::snapshot()</code>, and will provide a more detailed example of how to use them in a project.</p>
+<section id="initiating-renv" class="level1">
+<h1>Initiating {renv}</h1>
 <p>As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:</p>
 <ol type="1">
 <li>Creation of a lockfile, <code>renv.lock</code>, which records the version of R in use, the default download repository, and the packages used in the project.</li>
 <li>Creation of a <code>renv</code> folder which contains the project <code>library</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a settings file, a <code>.gitignore</code> file and a staging area for package installation</li>
-<li>Addition of the line <code>source("renv/activate.R")</code> to your .Rprofile. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library.</li>
+<li>Addition of the line <code>source("renv/activate.R")</code> to your <code>.Rprofile</code>. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library.</li>
 <li>Updates the <code>.Rbuildignore</code> to include the <code>renv</code> folder and the <code>renv.lock</code> file. This is only relevant if you’re building an R package.</li>
 </ol>
 <p>You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as <code>snapshot()</code>.</p>
@@ -405,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dependency-trees" class="level2">
 <h2 class="anchored" data-anchor-id="dependency-trees">Dependency Trees</h2>
-<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and can be referred to as <em>dependencies of dependencies</em> and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example of a recursive dependency tree (using the function <code>pak::pkg_deps_tree()</code> from the {pak} package).</p>
+<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example of a recursive dependency tree (using the function <code>pak::pkg_deps_tree()</code> from the {pak} package).</p>
 <div class="output-overflow">
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="st">"hard"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading metadata database</span></span>
@@ -454,12 +455,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Key:  ✨ new |  ⬇ download | 🔧 compile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<p>This tree shows the dependencies of the <code>dplyr</code> package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project.</p>
-<p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that that all dependencies are equally important and essential, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
+<p>This tree shows the dependencies of the <code>dplyr</code> package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project. <strong>Above all, you should note that all of the packages on this dependency tree need to be recorded in the <code>renv.lock</code> file to ensure that your project is reproducible.</strong></p>
+<p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
 </section>
 <section id="dependency-levels" class="level2">
 <h2 class="anchored" data-anchor-id="dependency-levels">Dependency Levels</h2>
-<p>Generally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can enhance the package. In the context of R, the following are the dependency levels:</p>
+<p>Generally-speaking, there are two levels of dependencies in R: hard and soft. Hard dependencies are those that are absolutely required for the software to function, while soft dependencies are those that are not required but can improve the package or provide some optional functionality. In the context of R, the following are the dependency levels:</p>
 <ul>
 <li>Hard Dependencies
 <ul>
@@ -473,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Enhances</li>
 </ul></li>
 </ul>
-<p>These details may seem obscure or trivial, and, in most cases they are; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly <em>expect</em> the Soft dependencies to be installed too.</p>
+<p>The exact differences between the sub-levels of dependencies are not important for the purposes of this course, and, in most cases, the details of dependency levels are obscure and irrelevant; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly <em>expect</em> the Soft dependencies to be installed too. In such cases, you might need to explicitly <code>renv::record()</code> the dependency into the <code>renv.lock</code> file. An example of this will be revisited in the exercises.</p>
 </section>
 </section>
 <section id="status-and-snapshot" class="level1">
@@ -573,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Strictly speaking, the directory <code>renv/library</code> contains <a href="https://www.google.com/search?q=symlink">symlinks or symbolic links</a> to packages in the renv library, which is a cache of the packages used in the project. This “cached” library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the Advanced Topics section.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Strictly speaking, the directory <code>renv/library</code> contains <a href="https://www.google.com/search?q=symlink">symlinks or symbolic links</a> to packages in the renv library, which is a cache of the packages used in the project. This “cached” library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the <a href="./caching.html">Caching</a> chapter.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

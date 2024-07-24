@@ -349,7 +349,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</p>
 <section id="from-a-github-repo" class="level1">
 <h1>From a GitHub Repo</h1>
-<p>Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. The steps are as follows:</p>
+<p>Restoring a project library from a GitHub repository is ideally the most straightforward way to restore a project. A repo <em>should</em> always have all of the required files for restoring a project including the <code>renv.lock</code> file, the <code>renv</code> folder, the <code>*.Rproj</code> file, and the R scripts. Note that repos generally do not (and should not) contain the <code>renv/library</code> folder–this is intended behavior. Recall from the caching chapter that the <code>renv/library</code> contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines. Moreover, the <code>renv/library</code> folder can be quite large and is not necessary for restoring a project.</p>
+<p>The steps for restoring a project from a GitHub repository are as follows:</p>
 <ul>
 <li>Clone the repository to your local machine with <code>git clone</code></li>
 <li>Open the <code>*.Rproj</code> file</li>
@@ -359,9 +360,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="from-a-lockfile" class="level1">
 <h1>From a lockfile</h1>
-<p>If a researcher has shared a renv.lock file and other R scripts <strong>outside of an R project</strong> , restoring is still possible but requires an extra step or two:</p>
+<p>Another approach to restoring a project is by sharing just the <code>renv.lock</code> file and other R scripts. This is useful if you are sharing a project with someone who does not use Git or if you are sharing a project with someone who does not have a GitHub account. The procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:</p>
 <ul>
-<li>Place the lockfile in the directory you are working on your project from. This is the same directory that you would run <code>renv::init()</code> from, and should be an <code>*.Rproj</code> project.</li>
+<li>Place the lockfile in the directory you are working on your project from. This should be a directory with a <code>*.Rproj</code> file.</li>
 <li>Run <code>renv::status()</code>. The results should look like this:</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
@@ -373,8 +374,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="after-upgrading-r" class="level1">
 <h1>After Upgrading R</h1>
-<p>Something that may come as a surprise is the need to restore a project after upgrading R. This is because the <code>renv</code> package is tied to the version of R you are using. The <code>renv.lock</code> file will have the version of R that the project was last restored with, and if you upgrade R, you will need to restore the project again. This is a good thing! It ensures that the project is using the correct versions of the packages that were used when the project was last worked on.</p>
-<p>Note that this only occurs when upgrading by major or minor versions of R. If you’re not familiar with “semantic versioning,” it is a way of versioning software that uses three numbers separated by periods: <code>major.minor.patch</code>. An upgrade from R4.3 to R4.4 will cause you to need to restore your projects, but an upgrade from R4.3.1 to R4.3.2 will not.</p>
+<p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. These “major” and “minor” upgrades refer to semantic versioning of software which is a way of providing version numbers to software that uses three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3 to R4.4 will cause you to need to restore your project, but an upgrade from R4.3.1 to R4.3.2 will not.</p>
+<p>Therefore, if you upgrade R by a major or minor version, you should also update the version of R in the <code>renv.lock</code> file by running <code>renv::snapshot()</code> and update any packages in your project with <code>renv::update()</code>. This will ensure that the project is using the correct versions of the packages and of R that were used when the project was last worked on.</p>
+<p>Note that this is unlikely to be an issue if you are using e.g.&nbsp;a managed versioned of R and RStudio on a server, if you use a containerized environment like Docker, or if you actively manage the R version on your local machine with a solution like <a href="https://rud.is/rswitch/">rswitch</a> or <a href="https://github.com/r-lib/rig">rig</a>. The latter two solutions are especially useful if you are working on multiple projects that require different versions of R on your local machine.</p>
 
 
 </section>
