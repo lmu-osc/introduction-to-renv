@@ -5,3 +5,19 @@ title: "exercise 3"
 -   explicit snapshot of {rmarkdown}?
 -   **Go to the Exercise 3 Folder**
 -   should use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes
+
+
+> The example of a prominent function in the psych R package: Setting rotate = "promax" requires the GPArotation package which the package lists under "Suggests". When using the renv defaults, the GPArotation package would not be tracked in the project, right?
+> -Florian
+
+``` r
+library(psych)
+fa(Holzinger, nfactors = 2, fm = "ml", rotate = "promax")
+# Loading required namespace: GPArotation
+# Failed with error:  ‘there is no package called ‘GPArotation’’
+# Error in kaiser(loadings, rotate = "Promax", ...) : 
+#   GPArotation is required for the Kaiser normalization
+```
+
+Need to explicitly add the GPArotation package to the project with `renv::record()`.
+
