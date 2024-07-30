@@ -15,13 +15,15 @@ This page covers more specific information regarding dependency management in R 
 
 The goal of package managers in R then is to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhogr}, and {renv}.
 
-# {packrat}
+# Common Managers
+
+## {packrat}
 
 The {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a "snapshot" of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.
 
 It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least [April 2020](https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c). You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.
 
-# {groundhogr}
+## {groundhogr}
 
 [{groundhogr}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:
 
@@ -43,7 +45,7 @@ The package is still in relatively early stages of development so it may not be 
 
 
 
-# {renv}
+## {renv}
 
 ```{r, echo=FALSE}
 
@@ -79,7 +81,7 @@ renv::snapshot()
 The results of this code will be discussed in the next chapter, but, in short, the "snapshot" it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named `renv::restore()` function.
 
 
-## Pros and Cons 
+### Pros and Cons 
 
 As mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings[^py_note]. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R. 
 
@@ -88,6 +90,11 @@ Moreover, this package can be considered a relatively stable package as it has m
 In comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (`.RProj` file) to use {renv} whereas {groundhogr} allows you to simply embed the function `groundhog.library(pkg, date)`  into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the *default workflow* for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the `embed()` and `use()` functions, discussed in the supplementary material of this tutorial.
 
 
-
-
 [^py_note]: Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.
+
+
+# Limitations of Package Managers
+
+The main limitation of package managers is that they only manage the **packages** you use in your project. They do not manage the **software** you use to run your project, such as R itself, or the **operating system** you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.
+
+Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a containerization system like [rig](https://github.com/r-lib/rig) for R projects on your computer, or to use a cloud-based solution like [Binder](https://mybinder.org/) for creating [Docker](https://www.docker.com/) files or [RStudio Cloud](https://rstudio.cloud/). These solutions allow you to create a "container" that contains all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.
