@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Dep. Management in R</span></a>
+ <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
       </ul>
@@ -319,7 +319,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
-  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
+  <ul class="collapse">
+  <li><a href="#example-code" id="toc-example-code" class="nav-link" data-scroll-target="#example-code">Example Code</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#snapshotting" id="toc-snapshotting" class="nav-link" data-scroll-target="#snapshotting">Snapshotting</a></li>
   </ul>
@@ -359,8 +362,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Install the {renv} package if needed.</li>
 <li>Initialize a new project with {renv} with <code>renv::init()</code> (if not already done when creating the <code>.Rproj</code>).</li>
 <li>Create a new R script in this folder, <code>init-snapshot-exercises</code>, called <code>script.R</code>.</li>
-<li>Write code to read the <code>iris</code> dataset and print the first 6 rows, create a scatter plot of <code>Sepal.Length</code> and <code>Sepal.Width</code> using the <code>ggplot2</code> package, and perform an analysis of your choice on the <code>iris</code> dataset. (Ideally use another package like {lme4} or {dplyr} to perform data cleaning and analysis.) Example:</li>
+<li>Write code that uses a variety of different packages. Try experimenting with calls to <code>library()</code> and namespacing functions e.g.&nbsp;<code>package::function()</code>. If you’re short on time, there’s some example code included below.</li>
+<li>Save the script.</li>
+<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project. What packages are listed? Is this what you expected?</li>
+<li>Check the status of your project with <code>renv::status()</code>. What do you notice about the results printed to the console?</li>
+<li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
+<li>Commit your changes to your repository, and push them to GitHub.</li>
 </ol>
+<section id="example-code" class="level3">
+<h3 class="anchored" data-anchor-id="example-code">Example Code</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -380,15 +390,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_sepal_length =</span> <span class="fu">mean</span>(Sepal.Length))</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a linear mixed effects model with {lme4}</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="6" type="1">
-<li>Save the script.</li>
-<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project. What packages are listed? Is this what you expected?</li>
-<li>Check the status of your project with <code>renv::status()</code>. What do you notice about the results printed to the console?</li>
-<li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
-<li>Commit your changes to your repository, and push them to GitHub.</li>
-</ol>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 </section>
 <section id="snapshotting" class="level1">

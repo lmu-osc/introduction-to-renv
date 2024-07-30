@@ -181,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Dep. Management in R</span></a>
+ <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
       </ul>
@@ -314,8 +314,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="dependencies-overview" class="level2">
-<h2 class="anchored" data-anchor-id="dependencies-overview">Dependencies Overview</h2>
+<section id="dependencies-overview" class="level1">
+<h1>Dependencies Overview</h1>
 <p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing <em>depends</em> on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the <code>dplyr</code> package, then the <code>dplyr</code> must be downloaded first.</p>
 <p>There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that <code>dplyr</code> itself has dependencies, such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>, which must also be downloaded. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>If you’re ever curious about the dependencies of a package, they should all be declared in the <code>DESCRIPTION</code> file of an R package. There are a variety of ways you can access this information:</p>
@@ -329,16 +329,16 @@ ul.task-list li input[type="checkbox"] {
 <li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies. An example of this will be shown in the <a href="./starting_details.html">Starting Details</a> chapter.</li>
 </ul>
 </section>
-<section id="intro-to-management-practices" class="level2">
-<h2 class="anchored" data-anchor-id="intro-to-management-practices">Intro to Management Practices</h2>
+<section id="intro-to-management-practices" class="level1">
+<h1>Intro to Management Practices</h1>
 <p>Given the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.</p>
 <p>You might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.</p>
-<section id="manual-management" class="level3">
-<h3 class="anchored" data-anchor-id="manual-management">Manual management</h3>
+<section id="manual-management" class="level2">
+<h2 class="anchored" data-anchor-id="manual-management">Manual management</h2>
 <p>As noted, the dependencies for your project can be managed manually with e.g.&nbsp;a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.</p>
 </section>
-<section id="automated-management" class="level3">
-<h3 class="anchored" data-anchor-id="automated-management">Automated Management</h3>
+<section id="automated-management" class="level2">
+<h2 class="anchored" data-anchor-id="automated-management">Automated Management</h2>
 <p>Automated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.</p>
 <p>There are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -347,17 +347,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>The major current and historical options for managing R dependencies are:</p>
 <ol type="1">
-<li>{renv} is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation</li>
-<li>{groundhogr} is a package that is similar to {renv}, and developed by independent, open-source contributors</li>
-<li>{packrat} is a deprecated package that is no longer recommended for new projects</li>
+<li><strong>{renv}</strong> is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation</li>
+<li><strong>{groundhogr}</strong> is a package that is similar to {renv}, and developed by independent, open-source contributors</li>
+<li><strong>{packrat}</strong> is a deprecated package that is no longer recommended for new projects</li>
 </ol>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>If you’re coming from a background in Python, you might be familiar with the following analogous approaches:</p>
 <p>The pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective <code>requirements.txt</code>, <code>Pipfile</code>, and <code>pyproject.toml</code> files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.</p>
 </div>
 </div>
 </div>
-<p>The next chapter delves into some necessary technical definitions in the R ecosystem. The chapters mentions some of the benefits of package managers, but the following chapter will really dive in to the details of package management in R while providing a discussion of the 3 major package managers for R.</p>
+<p>The next chapter delves into some necessary <a href="./technical_definitions.html">Technical Definitions</a> in the R ecosystem, the following chapter will really dive in to the details of <a href="./dependencies_in_r.html">R Package Managers</a>.</p>
 
 
 </section>

@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Dep. Management in R</span></a>
+ <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
       </ul>
@@ -351,14 +351,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This page will provide a brief overview of how to get started with the {renv} package. The goal is to provide a quick and easy way to get started with the package, and to provide a brief overview of the package’s functionality. This page will be followed by a more detailed explanation of the package’s functionality in the <a href="starting_details.html">Understanding {renv}</a> page.</p>
-<!-- This page will talk about installation of the renv package, and how to snapshot so the lockfile updates. Will then talk about how the underlying `dependencies()` function works to identify the packages in use in the project. -->
-<!-- Talk about how/when to update the library -->
-<!-- Troubleshooting? -->
-<!-- Talk about the package cache at the end of this chapter - a cache is built per the minor version of R you use. e.g. if you upgrade from R 4.3 to 4.4, then you will need to build a new cache. this can be unexpected if the caching behavior is not known to you. upgrading from e.g. R4.3.2 to R4.3.3 will not cause this, however. - the cache will, when needed, contain multiple different versions of same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache - can access path with `renv::paths$cache()` which I think helps make everything a bit more tangible -->
-<!-- This "Easy Start" section provides the bare-minimum steps needed to set-up {renv} with one of your projects, and should take less than 15 minutes to complete. However, we recommended reading through reading this section **and** reading the [detailed explanation](#details) in order to understand what is happening in the background. -->
-<section id="initiating-renv" class="level2">
-<h2 class="anchored" data-anchor-id="initiating-renv">Initiating {renv}</h2>
+<p>This page provides the basic steps to starting a project with the {renv} package, and how to update the <code>renv.lock</code> file as you add new packages to your project. This page will be followed by a more detailed explanation of the package’s functionality in the <a href="starting_details.html">Starting Details</a> page.</p>
+<section id="initiating-renv" class="level1">
+<h1>Initiating {renv}</h1>
 <p>When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.</p>
 <p>Either approach should yield the following results in the directory you’re working within:</p>
 <ul>
@@ -367,17 +362,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A <code>renv</code> folder will be created in the project directory (for {renv} version 1.0.0 and above)</li>
 </ul>
 <p>For most purposes, one will only need to have a passing understanding of the <code>renv.lock</code> file which records the packages used in the project and their versions. The <code>renv</code> folder is where the packages are stored, and the <code>.Rbuildignore</code> and <code>.Rprofile</code> files are used to ensure that the project is reproducible and that the correct packages are loaded when the project is opened.</p>
-<p>** Note that if you are using version control, you should not add the <code>renv</code> folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the <code>renv</code> folder is not necessary for the project to be reproducible, and the project should be rebuilt from the <code>renv.lock</code> file. **</p>
-<section id="with-a-new-rstudio-project" class="level3">
-<h3 class="anchored" data-anchor-id="with-a-new-rstudio-project">With a New RStudio Project</h3>
+<div class="callout callout-style-default callout-warning callout-titled" title="Git and `renv` Notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Git and <code>renv</code> Notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The <code>renv</code> folder comes with a .gitignore file. This file should be respected if you are using git with your project–do not override or force track items in the <code>renv</code> folder.</strong> A more detailed explanation is available in the Advanced Topics section, but TL;DR: the project library should always be rebuilt from the <code>renv.lock</code> file.</p>
+</div>
+</div>
+<section id="with-a-new-rstudio-project" class="level2">
+<h2 class="anchored" data-anchor-id="with-a-new-rstudio-project">With a New RStudio Project</h2>
 <p>When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to “Use renv with [your] project.”</p>
 <pre><code>File -&gt; New Project -&gt; New Directory -&gt; New Project -&gt; [x] Use renv with this project</code></pre>
 <div class="center-larger">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="assets/img/renv_init_new_project.mp4"></video></div>
 </div>
 </section>
-<section id="from-an-existing-project-or-folder" class="level3">
-<h3 class="anchored" data-anchor-id="from-an-existing-project-or-folder">From an Existing Project or Folder</h3>
+<section id="from-an-existing-project-or-folder" class="level2">
+<h2 class="anchored" data-anchor-id="from-an-existing-project-or-folder">From an Existing Project or Folder</h2>
 <p>In essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -388,8 +395,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="check-status-of-project" class="level2">
-<h2 class="anchored" data-anchor-id="check-status-of-project">Check Status of Project</h2>
+<section id="check-status-of-project" class="level1">
+<h1>Check Status of Project</h1>
 <p>The project should be in a consistent state after initiating {renv}, and this can be checked by running the <code>renv::status()</code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In short, this function checks that your project is in a “consistent state” by checking for the following:</p>
@@ -399,8 +406,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>That all installed packages are the correct version</li>
 </ul>
 </section>
-<section id="updating-renv.lock" class="level2">
-<h2 class="anchored" data-anchor-id="updating-renv.lock">Updating <code>renv.lock</code></h2>
+<section id="updating-renv.lock" class="level1">
+<h1>Updating <code>renv.lock</code></h1>
 <p>As you write additional <code>.R</code>, <code>.Rmd</code>, and/or <code>.qmd</code> files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the <code>renv.lock</code> file. This can be done by “snapshotting” the project which will initiate a search for calls to <code>library()</code>, <code>require()</code> and namespaced calls to functions e.g.&nbsp;<code>package::function()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Running the <code>snapshot()</code> function will capture new packages used in your project, <em>and</em> it will update the package versions in the <code>renv.lock</code> file if you have installed new versions to the project you are working in.</p>
@@ -835,8 +842,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./dependencies_in_r.html" class="pagination-link" aria-label="4. Dep. Management in R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. Dep. Management in R</span>
+      <a href="./dependencies_in_r.html" class="pagination-link" aria-label="4. R Package Managers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. R Package Managers</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Dep. Management in R</span></a>
+ <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
       </ul>
@@ -357,7 +357,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions <code>renv::init()</code>, <code>renv::status()</code>, and <code>renv::snapshot()</code>, and will provide a more detailed example of how to use them in a project.</p>
+<div class="center img-border">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/renv_cycle.png" class="img-fluid figure-img"></p>
+<figcaption>Typical project workflow with {renv}</figcaption>
+</figure>
+</div>
+</div>
+<p><br></p>
+<p>The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions <code>renv::init()</code>, <code>renv::status()</code>, and <code>renv::snapshot()</code>, and will provide a more detailed example of how to use them in a project. Later chapters will cover the system library/renv cache and restoring a project from a lockfile.</p>
 <section id="initiating-renv" class="level1">
 <h1>Initiating {renv}</h1>
 <p>As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:</p>
