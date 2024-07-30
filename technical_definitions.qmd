@@ -10,11 +10,10 @@ library(dplyr)
 library(magrittr)
 ```
 
-# Some Technical Definitions
 
 Prior to discussing the various package managers in R, it is important to understand some R terminology relevant to dependency management, namely the **concepts of and differences between packages, libraries, and repositories**.
 
-## Packages
+# Packages
 
 Packages are collections of functions, data, and documentation that are bundled together in a single unit. They are the primary way that R users can extend the functionality of the base R language. For example, the {dplyr} package is a popular package for data manipulation that extends the base R language with functions like `filter()` and `mutate()`. The code below demonstrates how one can filter a data set using *only* R's built-in capabilities and by using the popular data-cleaning package {dplyr}.
 
@@ -24,14 +23,14 @@ iris[iris$Species == "setosa" & iris$Sepal.Length > 4.5, ]
 dplyr::filter(iris, Species == "setosa", Sepal.Length > 4.5)
 ```
 
-But why would someone want to accomplish this task in two different ways? Base R already has a large number of built-in functions and data structures that make it possible to work with data!
+Base R already has a large number of built-in functions and data structures that make it possible to work with data so what is the benefit in creating a whole new package like {dplyr} to accomplish the same tasks? 
 
-However, base R can be difficult to use for complex data manipulation tasks, and the syntax can be verbose and overall subjectively difficult to work with. Packages like {dplyr} provide a more user-friendly interface for working with data, and they can make complex data manipulation tasks much easier to accomplish for beginners and advanced R users alike.
+Subjectively, base R can be difficult to use for complex data manipulation tasks, the syntax is verbose, and it is overall difficult for beginners and intermediate users to gain mastery. Packages like {dplyr}, however, provide a more user-friendly interface for working with data, and they can make complex data manipulation tasks much easier to accomplish for users who are more concerned with accomplishing a task rather than learning a programming language in depth.
 
-This example is not meant to highlight the benefits of {dplyr} specifically, but rather to illustrate the general utility of packages in R. Packages are, above all, a way to extend base R to make life easier for users, they provide alternatives to the base R packages, and user-contributed packages are an essential part of the R ecosystem.
+This example is not meant to highlight the benefits of {dplyr} specifically, but rather to illustrate the general utility of packages in R. Packages are, above all, a way to extend base R to make life easier for users, they provide alternatives to the base R packages, and they provide excellent extnesions to the base R language for specific tasks.
 
 
-### Pre-Installed Packages
+## Pre-Installed Packages
 
 Upon installing R, you will have access to a number of pre-installed packages. These packages are part of the "base" R distribution and are considered essential for working with R. A list of such packages can be identified by searching your installed packages for the "base" and "recommended" packages (also summarized as "high" priority packages). The code below generates this list of pre-installed packages in R, along with some information about each package. 
 
@@ -46,18 +45,22 @@ installed.packages(priority = c("base", "recommended")) %>%
 
 You will likely recognize some of these packages, such as the {stats} package, which contains many of the commonly used statistical functions that are built into R like `glm()`. Other packages, like {utils} and {survival}, contain functions for other common activities like reading in files and for performing survival analysis, respectively.
 
-Somewhat confusingly, the base R distribution also includes a package called {base} containing many functions and data structures that are considered essential for working with R. Some references to "base R" are therefore referring to the base package, while others refer to the base distribution of the R language. This distinction is not particularly important for the purposes of this tutorial, but it is worth keeping in mind.
+Somewhat confusingly, the base R distribution also includes a package called {base} containing many functions and data structures that are considered essential for working with R. Some references to "base R" are therefore referring to the base package, while others refer to the base distribution of the R language. This distinction is not particularly important for the purposes of this tutorial, but it is worth keeping in mind when reading other R documentation.
 
 
-### User-Installed Packages
+## User-Installed Packages
 
 In addition to the pre-installed packages, you can also install additional packages from online repositories like CRAN, Bioconductor, and GitHub. You have likely already done this in the past by using the `install.packages()` function to download from CRAN and/or Bioconductor or `devtools::install_github()` to get a package from GitHub. Beyond that, there are principally no differences between the pre-installed packages and user-installed packages; they are both just collections of functions, data, and documentation in a defined format. 
 
 Packages, of course, need to be stored somewhere on your computer, and this is where the concept of libraries comes in.
 
-## Libraries {#libraries}
+(Side note: you may hear people refer to R packages as libraries, likely stemming from the fact that packages are attached to your R session using the `library()` function. While this generally will not lead to much confusion, it is important to keep in mind the distinction between packages and libraries for the purposes of this tutorial.)
 
-Libraries are the location(s) on your computer[^1] where R packages are stored. When you install a package, it is downloaded from an online repository and stored in a library on your computer which is, in effect, just a directory/folder on your computer. Given that a library is just a folder, it should not be surprising that it is possible to have multiple libraries on your computer. R by default will look for packages in a set of default libraries, typically one in the user's home directory and one in the system directory. These paths vary based on operating system, but the `.libPaths()` function can be used to see the libraries that are currently detected by default on your computer.
+# Libraries {#libraries}
+
+Libraries are the location(s) on your computer[^1] where R packages are stored. When you install a package, the contents are downloaded from a repository and stored in a library on your computer which is simply a directory/folder. Note that we said "a library," not "the library!" This is because it is possible to have multiple libraries on your computer. 
+
+By default, R will look for packages in a set of default libraries, typically one in the user's home directory and one in the system directory. These paths vary based on operating system, but the `.libPaths()` function can be used to see the libraries that are currently detected by default on your computer.
 
 
 ``` r
@@ -67,18 +70,16 @@ Libraries are the location(s) on your computer[^1] where R packages are stored. 
 #> [2] "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"
 ```
 
-The user directory is generally the default location for installing packages. Moreover, R will look for a package in the libraries in the order they are listed in the output of `.libPaths()`, so if you have two libraries with the same package installed, R will use the version of the package in the first library it finds.
+The user directory is generally the default location for installing packages. Moreover, R will look for a package in the libraries in the order they are listed in the output of `.libPaths()`. The use of separate libraries is important because it allows you to manage different versions of packages and to avoid conflicts between packages that have the same name but different versions. 
 
-The use of separate libraries is important because it allows you to manage different versions of packages and to avoid conflicts between packages that have the same name but different versions. For example, if you have two packages installed that both contain a function called `foo()`, R needs to know which version of `foo()` to use when you call it. By storing packages in separate libraries, R can keep track of which `foo()` you want to use. While managing these "namespace conflicts" is important, the focus of this tutorial, however, is more on the management of libraries and package versions.
+For example, different versions of the same package might have important differences between how the function `pkg::foo()` works, but R needs to know which version of `foo()` to use when you call it. By storing packages in separate libraries, R can keep track of which version of `foo()` you want to use. These differences between versions happen more often than you'd expect, and should be logged in the package's `NEWS` file or in the package's documentation. Check out this example of "breaking changes" [from the {ggplot2} 3.5.0 package release](https://ggplot2.tidyverse.org/news/index.html#breaking-changes-3-5-0) to get a sense of how behavior can change over time.
 
-Of course, managing multiple libraries can be cumbersome and requires one to be mindful of which library is being used at any given time for installations and for your current R session. This is where package managers come in, as they can help you manage your libraries and package versions effectively, automatically, and without having to be an expert on navigating the file system of your computer.
-
-As a side note: you may hear people refer to R packages as libraries, likely stemming from the fact that packages are attached to your R session using the `library()` function. While this generally will not lead to much confusion, it is important to keep in mind the distinction between packages and libraries for the purposes of this tutorial.
+Of course, managing multiple libraries would be incredibly cumbersome, and it requires one to actively be aware of which libraries hold the correct versions of packages. Doing this manually would likely be a worse solution than simply dealing with broken code, but this is where package managers come in; they can help you manage your libraries and package versions effectively, automatically, and without having to be an expert on navigating the file system of your computer.
 
 [^1]: Strictly speaking, the libraries do not have to be on your computer, but they do need to be accessible to your R session. For example, you could store your libraries on a network drive or on a cloud storage service like Dropbox, but this is not at all recommended because it can lead to performance issues and other problems. A more likely scenario is that you use RStudio through Posit Cloud (i.e. RStudio on a web interface) in which case the available libraries are stored and managed either by Posit or by an IT group for your institution on a separate server. 
 
 
-## Repositories {#repositories}
+# Repositories {#repositories}
 
 ```{r, echo=FALSE}
 

@@ -47,7 +47,7 @@ website:
           - href: technical_definitions.qmd
             text: "3. Technical Definitions"
           - href: dependencies_in_r.qmd
-            text: "4. Dep. Management in R"
+            text: "4. R Package Managers"
       - section: "{renv}"
         contents:
           - href: renv_getting_started.qmd

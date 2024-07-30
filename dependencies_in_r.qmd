@@ -12,17 +12,16 @@ library(magrittr)
 This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduces the {renv} package.
 
 
-# Package Managers in R
 
 The goal of package managers in R then is to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhogr}, and {renv}.
 
-## {packrat}
+# {packrat}
 
 The {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a "snapshot" of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.
 
 It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least [April 2020](https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c). You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.
 
-## {groundhogr}
+# {groundhogr}
 
 [{groundhogr}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:
 
@@ -44,7 +43,7 @@ The package is still in relatively early stages of development so it may not be 
 
 
 
-## {renv}
+# {renv}
 
 ```{r, echo=FALSE}
 
@@ -70,14 +69,17 @@ renv_cran_version <- cran_avail_pkgs %>%
 
 [{renv}](https://rstudio.github.io/renv/) is another one of Posit's inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run. 
 
-More to the focus of this tutorial, however, {renv} allows you to create a "snapshot" of your package dependencies in just a handful of steps, summarized below: 
+More to the focus of this tutorial, however, {renv} greatly assists in making your project reproducible by creating a "snapshot" of your package dependencies in as few as two commands:
 
 ``` r
 renv::init()
 renv::snapshot()
 ```
 
-The results of this code will be discussed in the next chapter, but, in short, the "snapshot" it creates can be shared with collaborators or used to recreate your working environment at a later date.
+The results of this code will be discussed in the next chapter, but, in short, the "snapshot" it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named `renv::restore()` function.
+
+
+## Pros and Cons 
 
 As mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings[^py_note]. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R. 
 
