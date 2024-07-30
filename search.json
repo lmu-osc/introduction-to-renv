@@ -500,11 +500,35 @@
     ]
   },
   {
-    "objectID": "dependencies_in_r.html#pros-and-cons",
-    "href": "dependencies_in_r.html#pros-and-cons",
+    "objectID": "dependencies_in_r.html#packrat",
+    "href": "dependencies_in_r.html#packrat",
     "title": "Dependency Management in R",
-    "section": "Pros and Cons",
-    "text": "Pros and Cons\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.0.7). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhogr} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
+    "section": "{packrat}",
+    "text": "{packrat}\nThe {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.\nIt was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#groundhogr",
+    "href": "dependencies_in_r.html#groundhogr",
+    "title": "Dependency Management in R",
+    "section": "{groundhogr}",
+    "text": "{groundhogr}\n{groundhogr} is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:\ninstall.packages(\"groundhog\")\nlibrary(\"groundhog\")\npkgs &lt;- c(\"rio\",\"metafor\")\ngroundhog.library(pkgs, \"2023-09-01\")\nThis example demonstrates a scenario in which you would like to install the rio and metafor packages as they were on September 1st, 2023. The groundhog.library() function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the library() call for groundhog.library() is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.\nThe other main benefit of using {groundhogr} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhogr}.\nThe package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhogr} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#renv",
+    "href": "dependencies_in_r.html#renv",
+    "title": "Dependency Management in R",
+    "section": "{renv}",
+    "text": "{renv}\n{renv} is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.\nMore to the focus of this tutorial, however, {renv} greatly assists in making your project reproducible by creating a “snapshot” of your package dependencies in as few as two commands:\nrenv::init()\nrenv::snapshot()\nThe results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named renv::restore() function.\n\nPros and Cons\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.0.7). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhogr} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
     "crumbs": [
       "Home",
       "Background",
