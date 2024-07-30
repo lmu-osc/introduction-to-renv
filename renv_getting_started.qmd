@@ -18,7 +18,9 @@ Either approach should yield the following results in the directory you're worki
 
 For most purposes, one will only need to have a passing understanding of the `renv.lock` file which records the packages used in the project and their versions. The `renv` folder is where the packages are stored, and the `.Rbuildignore` and `.Rprofile` files are used to ensure that the project is reproducible and that the correct packages are loaded when the project is opened.
 
-**Note that if you are using version control, you should not add the `renv` folder to tracking. A more detailed explanation is available in the Advanced Topics section, but the TL;DR is: the `renv` folder is not necessary for the project to be reproducible, and the project library should always be rebuilt from the `renv.lock` file.**
+::: {.callout-warning title="Git and `renv` Notice"}
+**The `renv` folder comes with a .gitignore file. This file should be respected if you are using git with your project--do not override or force track items in the `renv` folder.** A more detailed explanation is available in the Advanced Topics section, but TL;DR: the project library should always be rebuilt from the `renv.lock` file.
+:::
 
 ## With a New RStudio Project
 

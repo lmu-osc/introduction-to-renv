@@ -2,20 +2,27 @@
 title: "Getting Started Details"
 ---
 
-The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions `renv::init()`, `renv::status()`, and `renv::snapshot()`, and will provide a more detailed example of how to use them in a project.
+::: {.center .img-border}
+![Typical project workflow with {renv}](assets/img/renv_cycle.png)
+:::
+
+<br>
+
+The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions `renv::init()`, `renv::status()`, and `renv::snapshot()`, and will provide a more detailed example of how to use them in a project. Later chapters will cover the system library/renv cache and restoring a project from a lockfile.
+
 
 # Initiating {renv}
 
 As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:
 
-1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
+1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project. 
 2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, a `.gitignore` file and a staging area for package installation
 3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile`. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
 4.  Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
 
-You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as `snapshot()`.
-
 [^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the [Caching](caching.qmd) chapter.
+
+You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as `snapshot()`.
 
 ## Initiation Example
 
@@ -36,7 +43,7 @@ renv::init()
 
 Notably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.
 
-And as noted, the directory structure should look similar to the one below, particularly the presence of the `renv` directory and the `renv.lock` file. For reference: the function used in the following example, `dir_tree()`, is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the  directory where you are currently working.
+And as noted, the directory structure should look similar to the one below, particularly the presence of the `renv` directory and the `renv.lock` file. For reference: the function used in the following example, `dir_tree()`, is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.
 
 ``` r
 fs::dir_tree(recurse = 2)
@@ -66,7 +73,6 @@ You will likely never need to use `renv::dependencies()` directly, but being awa
 ## Dependency Trees
 
 As mentioned in the [Dependencies Overview](intro_dependencies.html#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example of a recursive dependency tree (using the function `pak::pkg_deps_tree()` from the {pak} package).
-
 
 ::: output-overflow
 ``` r
@@ -138,7 +144,6 @@ Generally-speaking, there are two levels of dependencies in R: hard and soft. Ha
 
 The exact differences between the sub-levels of dependencies are not important for the purposes of this course, and, in most cases, the details of dependency levels are obscure and irrelevant; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly *expect* the Soft dependencies to be installed too. In such cases, you might need to explicitly `renv::record()` the dependency into the `renv.lock` file. An example of this will be revisited in the exercises.
 
-
 # Status and Snapshot
 
 With a basic understanding of dependencies, we can now discuss the functions `renv::status()` and `renv::snapshot()` in more detail. These functions are the backbone of {renv} and are essential for maintaining the `renv.lock` file.
@@ -195,7 +200,6 @@ renv::status()
 
 The key to interpreting this output is to note the `installed`, `recorded`, and `used` columns. The `installed` column indicates whether the package is installed in the project library, the `recorded` column indicates whether the package is declared in the lockfile, and the `used` column indicates whether the package is actually used in the project. In this example, the packages are installed and used in the project, but are not declared in the lockfile. This is an inconsistent state, and the issues should be resolved by running `renv::snapshot()`.
 
-
 ## Snapshot
 
 The `renv::snapshot()` function is used to update the lockfile with the packages used in the project. As previously discussed, this function will search all R-related files in the project for calls to `library()`, `require()`, and namespaced calls e.g. `package::function()`, and will update the lockfile with the packages used in the project. If the lockfile is already up to date, the function will return the following message:
@@ -206,7 +210,6 @@ renv::snapshot()
 ```
 
 If the lockfile is not up to date, the function will return a message indicating the packages that will be updated in the lockfile. For example, if you have added a new package to the project, the output will look like this:
-
 
 ::: output-overflow
 ``` r
@@ -248,4 +251,3 @@ renv::snapshot()
 <br>
 
 Packages not already installed in the package can be recognized by the `[* -> version]` notation. The `[*]` indicates that the package is not installed in the project library, and the `version` indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.
-
