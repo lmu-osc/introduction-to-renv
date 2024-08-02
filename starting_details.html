@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dependency-trees" class="level2">
 <h2 class="anchored" data-anchor-id="dependency-trees">Dependency Trees</h2>
-<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example of a recursive dependency tree (using the function <code>pak::pkg_deps_tree()</code> from the {pak} package).</p>
+<p>As mentioned in the <a href="intro_dependencies.html#dependencies-overview">Dependencies Overview</a>, project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a “dependency tree.” To get a visual representation of this, consider the following example displaying the recursive dependency tree for the {dplyr} package.</p>
 <div class="output-overflow">
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps_tree</span>(<span class="st">"dplyr"</span>, <span class="at">dependencies =</span> <span class="st">"hard"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading metadata database</span></span>
@@ -483,7 +483,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Enhances</li>
 </ul></li>
 </ul>
-<p>The exact differences between the sub-levels of dependencies are not important for the purposes of this course, and, in most cases, the details of dependency levels are obscure and irrelevant; you will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time. However, they are important to be aware of when when using automated package managers as they usually just install the Hard dependencies, but you might encounter scenarios where you mistakenly <em>expect</em> the Soft dependencies to be installed too. In such cases, you might need to explicitly <code>renv::record()</code> the dependency into the <code>renv.lock</code> file. An example of this will be revisited in the exercises.</p>
+<p>The exact differences between the sub-levels of dependencies are not important for the purposes of this course, and, in most cases, the details of dependency levels are obscure and irrelevant. You will be able to successfully use R and {renv} without knowing the difference between hard and soft dependencies 99% of the time especially because most packages you download will only have Hard dependencies.</p>
+<p>However, it is still worthwhile to be aware that these these differences exist when using automated package managers as they will default to capturing just the Hard dependencies, but you might encounter scenarios where you mistakenly <em>expect</em> the snapshot to include the Soft dependencies. In such cases, you might need to explicitly <code>renv::record()</code> the dependency into the <code>renv.lock</code> file. Examples of this scenario will be revisited in the exercises.</p>
 </section>
 </section>
 <section id="status-and-snapshot" class="level1">
