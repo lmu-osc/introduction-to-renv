@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./advanced_topics.html" rel="prev">
+<link href="./advanced_topics.html" rel="next">
+<link href="./ex_3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./advanced_topics.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./embed_and_use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./embed_and_use.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./embed_and_use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,14 +261,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_topics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Topics</span></a>
+  <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
+  <a href="./advanced_topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced Topics</span></a>
   </div>
 </li>
       </ul>
@@ -283,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./advanced_topics.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./embed_and_use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./embed_and_use.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./embed_and_use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Alternative Workflow: <code>embed()</code> and <code>use()</code></h1>
 </div>
@@ -303,6 +304,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><a href="https://rstudio.github.io/renv/reference/embed.html" class="uri">https://rstudio.github.io/renv/reference/embed.html</a></p>
+<p>This {renv} workshop focused on the main workflow of <code>renv</code> which is to use <code>renv::init()</code> to create a new project with an <code>.Rproj</code> file, and then to use <code>renv::snapshot()</code> to create a lockfile. This lockfile is then used to restore the project on another machine or to share with collaborators.</p>
+<p>However, there are two other functions that are useful for some workflows: <code>renv::embed()</code> and <code>renv::use()</code>. These functions are useful when you simply want to include packages in a project by embedding them in a script in your library. Typically you will see people include <code>install.packages()</code> calls at the top of their scripts to ensure that the necessary packages are installed. This can be improved upon by using <code>renv::embed()</code>.</p>
+<p><code>renv::embed()</code> also detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to <code>renv::use()</code> at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.</p>
+<p>The downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use <code>renv::embed()</code> or <code>renv::use()</code>.</p>
 
 
 
@@ -729,11 +734,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./advanced_topics.html" class="pagination-link" aria-label="Advanced Topics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Advanced Topics</span>
+      <a href="./ex_3.html" class="pagination-link" aria-label="Explicitly Record">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Explicitly Record</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./advanced_topics.html" class="pagination-link" aria-label="Advanced Topics">
+        <span class="nav-page-text">Advanced Topics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
