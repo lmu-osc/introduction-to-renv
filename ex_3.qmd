@@ -1,23 +1,22 @@
 ---
-title: "exercise 3"
+title: "Explcitly Recording Packages"
 ---
 
--   explicit snapshot of {rmarkdown}?
--   **Go to the Exercise 3 Folder**
--   should use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes
+As with the previous exercise, it is **recommended** that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.
+
+If you're not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.
+
+# Adding Packages to the`renv.lock` File
 
 
-> The example of a prominent function in the psych R package: Setting rotate = "promax" requires the GPArotation package which the package lists under "Suggests". When using the renv defaults, the GPArotation package would not be tracked in the project, right?
-> -Florian
+The exercises for initiating and snapshotting a project can be found in the `explicit-record-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main) repo.
 
-``` r
-library(psych)
-fa(Holzinger, nfactors = 2, fm = "ml", rotate = "promax")
-# Loading required namespace: GPArotation
-# Failed with error:  ‘there is no package called ‘GPArotation’’
-# Error in kaiser(loadings, rotate = "Promax", ...) : 
-#   GPArotation is required for the Kaiser normalization
+```{r, results='asis', echo=FALSE}
+
+# To make changes to the instructions, go to the init-snapshot-exercises-instructions.md file in the intro-to-renv-exercises repository!
+library(httr)
+url="https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/explicit-record-exercises/README.md"
+response=GET(url)
+cat(content(response))
+
 ```
-
-Need to explicitly add the GPArotation package to the project with `renv::record()`.
-
