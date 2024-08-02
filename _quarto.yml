@@ -68,9 +68,9 @@ website:
             text: "Explicitly Record"
       - section: "Optional Content"
         contents: 
-          - href: advanced_topics.qmd
           - href: embed_and_use.qmd
             text: "`embed()` and `use()`"
+          - href: advanced_topics.qmd
 
 
 format:
