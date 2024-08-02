@@ -254,9 +254,21 @@
   {
     "objectID": "ex_3.html",
     "href": "ex_3.html",
-    "title": "exercise 3",
+    "title": "Explcitly Recording Packages",
     "section": "",
-    "text": "explicit snapshot of {rmarkdown}?\nGo to the Exercise 3 Folder\nshould use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes\n\n\nThe example of a prominent function in the psych R package: Setting rotate = “promax” requires the GPArotation package which the package lists under “Suggests”. When using the renv defaults, the GPArotation package would not be tracked in the project, right? -Florian\n\nlibrary(psych)\nfa(Holzinger, nfactors = 2, fm = \"ml\", rotate = \"promax\")\n# Loading required namespace: GPArotation\n# Failed with error:  ‘there is no package called ‘GPArotation’’\n# Error in kaiser(loadings, rotate = \"Promax\", ...) : \n#   GPArotation is required for the Kaiser normalization\nNeed to explicitly add the GPArotation package to the project with renv::record().\n\n\n\n Back to top",
+    "text": "As with the previous exercise, it is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nIf you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Explicitly Record"
+    ]
+  },
+  {
+    "objectID": "ex_3.html#instructions",
+    "href": "ex_3.html#instructions",
+    "title": "Explcitly Recording Packages",
+    "section": "Instructions",
+    "text": "Instructions\n\nOpen the R project i.e. the .Rproj file.\nInitiate {renv}} by running renv::init().\nCheck the identified dependencies by running renv::dependencies().\n\nWhat packages are required and why?\n\nCheck the status of the dependencies by running renv::status().\n\nIs the lock file in-sync with the project library? Why not?\n\nInstall the identified dependencies by running renv::restore().\nOpen the analysis_doc.qmd file and knit it to generate the analysis document.\n\nWhy did the knitting fail?\nCheck the documentation for the map_data() function with ?map_data.\n\nExplicitly record the needed package with renv::record(\"package_name\").\nCheck the status of the dependencies again by running renv::status().\n\nWhat has changed?\n\nInstall the identified dependencies by running renv::restore().\nOpen the analysis_doc.qmd file and knit it to generate the analysis document.\n\nWas it successful this time?\nWhy did you need to explicitly record one of the packages? Take a look at the DESCRIPTION file for {ggplot2} to help understand: packageDescription(\"ggplot2\").",
     "crumbs": [
       "Home",
       "Exercises",
@@ -280,7 +292,7 @@
     "href": "ex_init_snapshot.html#instructions",
     "title": "Initialize and Snapshot",
     "section": "Instructions",
-    "text": "Instructions\n\nCreate an .Rproj in this folder, init-snapshot-exercises.\nInstall the {renv} package if needed.\nInitialize a new project with {renv} with renv::init() (if not already done when creating the .Rproj).\nCreate a new R script in this folder, init-snapshot-exercises, called script.R.\nWrite code that uses a variety of different packages. Try experimenting with calls to library() and namespacing functions e.g. package::function(). If you’re short on time, there’s some example code included below.\nSave the script.\nRun the renv::dependencies() function to see the new dependencies of your project. What packages are listed? Is this what you expected?\nCheck the status of your project with renv::status(). What do you notice about the results printed to the console?\nSave these new dependencies to the renv.lock file with renv::snapshot().\nCommit your changes to your repository, and push them to GitHub.\n\n\nExample Code\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Read the iris dataset\ndata(iris)\n\n# Print the first 6 rows\nhead(iris)\n\n# Create a scatter plot of Sepal.Length and Sepal.Width\nggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +\n  geom_point()\n  \n# Perform some data analysis using dplyr\niris %&gt;%\n  group_by(Species) %&gt;%\n  summarise(mean_sepal_length = mean(Sepal.Length))\n  \n# Create a linear mixed effects model with {lme4}\nlme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)",
+    "text": "Instructions\n\nCreate an .Rproj in this folder, init-snapshot-exercises.\nInstall the {renv} package if needed.\nInitialize a new project with {renv} with renv::init() (if not already done when creating the .Rproj).\nCreate a new R script in this folder, init-snapshot-exercises, called script.R.\nWrite code that uses a variety of different packages.\n\nTry experimenting with calls to library() and namespacing functions e.g. package::function(). If you’re short on time, there’s some example code included below.\n\nSave the script.\nRun the renv::dependencies() function to see the new dependencies of your project.\n\nWhat packages are listed? Is this what you expected?\n\nCheck the status of your project with renv::status().\n\nWhat do you notice about the results printed to the console?\n\nSave these new dependencies to the renv.lock file with renv::snapshot().\n(Optional) Commit your changes to your repository, and push them to GitHub.\n\n\nExample Code\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Read the iris dataset\ndata(iris)\n\n# Print the first 6 rows\nhead(iris)\n\n# Create a scatter plot of Sepal.Length and Sepal.Width\nggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +\n  geom_point()\n  \n# Perform some data analysis using dplyr\niris %&gt;%\n  group_by(Species) %&gt;%\n  summarise(mean_sepal_length = mean(Sepal.Length))\n  \n# Create a linear mixed effects model with {lme4}\nlme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)",
     "crumbs": [
       "Home",
       "Exercises",
@@ -383,7 +395,7 @@
     "href": "ex_2.html#instructions",
     "title": "Using restore()",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the R project i.e. the .Rproj file.\nAt the console, run the command renv::dependencies(). What packages do you see listed as direct dependencies?\n\n\nDid you receive a notice about the {yaml} package?\n\n\nTake a look at the presentation.qmd file. Note that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?\nRun the command renv::restore(). What happens?\nOpen the billboard.Rmd file, and run the code. This should create the top_billboard_rankings.rds file, needed in the next step.\nTry to render the presentation.qmd file. What happens?",
+    "text": "Instructions\n\nOpen the R project i.e. the .Rproj file.\nAt the console, run the command renv::dependencies().\n\nWhat packages do you see listed as direct dependencies, and what project files depend on which dependency?\n\nTake a look at the presentation.rmd file.\n\nNote that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?\n\nTry to Render the presentation.rmd file.\n\nWhat happens? Why did the render fail?\n\nRun the command renv::restore().\n\nWhat happens?\n\nOpen the billboard_100.R file, and run the code. This should create the top_billboard_rankings.rds file, needed in the next step.\nTry to render the presentation.rmd file.\n\nWhat happens?",
     "crumbs": [
       "Home",
       "Exercises",

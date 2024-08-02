@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>exercise 3 – Introduction to {renv}</title>
+<title>Explcitly Recording Packages – Introduction to {renv}</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -312,15 +278,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#adding-packages-to-therenv.lock-file" id="toc-adding-packages-to-therenv.lock-file" class="nav-link active" data-scroll-target="#adding-packages-to-therenv.lock-file">Adding Packages to the<code>renv.lock</code> File</a>
+  <ul class="collapse">
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_3.html">Explicitly Record</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">exercise 3</h1>
+<h1 class="title">Explcitly Recording Packages</h1>
 </div>
 
 
@@ -337,23 +312,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>If you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
+<section id="adding-packages-to-therenv.lock-file" class="level1">
+<h1>Adding Packages to the<code>renv.lock</code> File</h1>
+<p>The exercises for initiating and snapshotting a project can be found in the <code>explicit-record-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main">intro-to-renv-exercises</a> repo.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol type="1">
+<li>Open the R project i.e.&nbsp;the <code>.Rproj</code> file.</li>
+<li>Initiate {renv}} by running <code>renv::init()</code>.</li>
+<li>Check the identified dependencies by running <code>renv::dependencies()</code>.
 <ul>
-<li>explicit snapshot of {rmarkdown}?</li>
-<li><strong>Go to the Exercise 3 Folder</strong></li>
-<li>should use an RMarkown file here to demonstrate that it is important to explicitly add the markdown package to the snapshot sometimes</li>
-</ul>
-<blockquote class="blockquote">
-<p>The example of a prominent function in the psych R package: Setting rotate = “promax” requires the GPArotation package which the package lists under “Suggests”. When using the renv defaults, the GPArotation package would not be tracked in the project, right? -Florian</p>
-</blockquote>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fa</span>(Holzinger, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">rotate =</span> <span class="st">"promax"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required namespace: GPArotation</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Failed with error:  ‘there is no package called ‘GPArotation’’</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in kaiser(loadings, rotate = "Promax", ...) : </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   GPArotation is required for the Kaiser normalization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Need to explicitly add the GPArotation package to the project with <code>renv::record()</code>.</p>
+<li>What packages are required and why?</li>
+</ul></li>
+<li>Check the status of the dependencies by running <code>renv::status()</code>.
+<ul>
+<li>Is the lock file in-sync with the project library? Why not?</li>
+</ul></li>
+<li>Install the identified dependencies by running <code>renv::restore()</code>.</li>
+<li>Open the analysis_doc.qmd file and knit it to generate the analysis document.
+<ul>
+<li>Why did the knitting fail?</li>
+<li>Check the documentation for the <code>map_data()</code> function with <code>?map_data</code>.</li>
+</ul></li>
+<li>Explicitly record the needed package with <code>renv::record("package_name")</code>.</li>
+<li>Check the status of the dependencies again by running <code>renv::status()</code>.
+<ul>
+<li>What has changed?</li>
+</ul></li>
+<li>Install the identified dependencies by running <code>renv::restore()</code>.</li>
+<li>Open the analysis_doc.qmd file and knit it to generate the analysis document.
+<ul>
+<li>Was it successful this time?</li>
+<li>Why did you need to explicitly record one of the packages? Take a look at the <code>DESCRIPTION</code> file for {ggplot2} to help understand: <code>packageDescription("ggplot2")</code>.</li>
+</ul></li>
+</ol>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -796,7 +794,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

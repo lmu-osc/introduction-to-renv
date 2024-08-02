@@ -362,12 +362,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Install the {renv} package if needed.</li>
 <li>Initialize a new project with {renv} with <code>renv::init()</code> (if not already done when creating the <code>.Rproj</code>).</li>
 <li>Create a new R script in this folder, <code>init-snapshot-exercises</code>, called <code>script.R</code>.</li>
-<li>Write code that uses a variety of different packages. Try experimenting with calls to <code>library()</code> and namespacing functions e.g.&nbsp;<code>package::function()</code>. If you’re short on time, there’s some example code included below.</li>
+<li>Write code that uses a variety of different packages.
+<ul>
+<li>Try experimenting with calls to <code>library()</code> and namespacing functions e.g.&nbsp;<code>package::function()</code>. If you’re short on time, there’s some example code included below.</li>
+</ul></li>
 <li>Save the script.</li>
-<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project. What packages are listed? Is this what you expected?</li>
-<li>Check the status of your project with <code>renv::status()</code>. What do you notice about the results printed to the console?</li>
+<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project.
+<ul>
+<li>What packages are listed? Is this what you expected?</li>
+</ul></li>
+<li>Check the status of your project with <code>renv::status()</code>.
+<ul>
+<li>What do you notice about the results printed to the console?</li>
+</ul></li>
 <li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
-<li>Commit your changes to your repository, and push them to GitHub.</li>
+<li>(Optional) Commit your changes to your repository, and push them to GitHub.</li>
 </ol>
 <section id="example-code" class="level3">
 <h3 class="anchored" data-anchor-id="example-code">Example Code</h3>

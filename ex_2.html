@@ -342,16 +342,27 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
 <li>Open the R project i.e.&nbsp;the <code>.Rproj</code> file.</li>
-<li>At the console, run the command <code>renv::dependencies()</code>. What packages do you see listed as direct dependencies?</li>
-</ol>
+<li>At the console, run the command <code>renv::dependencies()</code>.
 <ul>
-<li>Did you receive a notice about the {yaml} package?</li>
-</ul>
-<ol start="3" type="1">
-<li>Take a look at the <code>presentation.qmd</code> file. Note that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
-<li>Run the command <code>renv::restore()</code>. What happens?</li>
-<li>Open the <code>billboard.Rmd</code> file, and run the code. This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
-<li>Try to render the <code>presentation.qmd</code> file. What happens?</li>
+<li>What packages do you see listed as direct dependencies, and what project files depend on which dependency?</li>
+</ul></li>
+<li>Take a look at the <code>presentation.rmd</code> file.
+<ul>
+<li>Note that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
+</ul></li>
+<li>Try to Render the <code>presentation.rmd</code> file.
+<ul>
+<li>What happens? Why did the render fail?</li>
+</ul></li>
+<li>Run the command <code>renv::restore()</code>.
+<ul>
+<li>What happens?</li>
+</ul></li>
+<li>Open the <code>billboard_100.R</code> file, and run the code. This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
+<li>Try to render the <code>presentation.rmd</code> file.
+<ul>
+<li>What happens?</li>
+</ul></li>
 </ol>
 
 
