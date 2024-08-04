@@ -391,7 +391,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limitations-of-package-managers" class="level1">
 <h1>Limitations of Package Managers</h1>
 <p>The main limitation of package managers is that they only manage the <strong>packages</strong> you use in your project. They do not manage the <strong>software</strong> you use to run your project, such as R itself, or the <strong>operating system</strong> you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.</p>
-<p>Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a containerization system like <a href="https://github.com/r-lib/rig">rig</a> for R projects on your computer, or to use a cloud-based solution like <a href="https://mybinder.org/">Binder</a> for creating <a href="https://www.docker.com/">Docker</a> files or <a href="https://rstudio.cloud/">RStudio Cloud</a>. These solutions allow you to create a “container” that contains all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.</p>
+<p>Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like <a href="https://github.com/r-lib/rig">rig</a> for R projects on your computer, or to use a containerization solution like <a href="https://mybinder.org/">Binder</a> for creating <a href="https://www.docker.com/">Docker</a> files or managed environments in <a href="https://rstudio.cloud/">RStudio Cloud</a>. These solutions allow you to create a “container” with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but will not directly manage or change your R versions.</strong></p>
+</div>
+</div>
+<p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="">Posit Package Mangaer</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
+<p>For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found <a href="https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0">here</a>.</p>
 
 
 </section>
