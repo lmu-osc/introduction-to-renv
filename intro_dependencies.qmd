@@ -4,7 +4,7 @@ title: "Software Dependencies"
 
 # Dependencies Overview
 
-The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using or developing *depends* on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the `dplyr` package, then the `dplyr` must be downloaded first.
+The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using or developing *depends* on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the `dplyr` package, then `dplyr` must be downloaded first.
 
 There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that `dplyr` itself has dependencies, such as `tibble`, `rlang`, and `vctrs`, which must also be downloaded. And `tibble`, `rlang`, and `vctrs` have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
 
