@@ -6,7 +6,7 @@ title: "Software Dependencies"
 
 The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using or developing *depends* on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the `dplyr` package, then `dplyr` must be downloaded first.
 
-There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that `dplyr` itself has dependencies, such as `tibble`, `rlang`, and `vctrs`, which must also be downloaded. And `tibble`, `rlang`, and `vctrs` have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use, for example, 5-10 libraries can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
+There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that `dplyr` itself has dependencies, such as `tibble`, `rlang`, and `vctrs`, which must also be downloaded. And `tibble`, `rlang`, and `vctrs` have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use, for example, 5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
 
 [^1]: If you have enough time, read about how the [left-pad incident](https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code) broke the internet as an example of how dependencies can go wrong.
 
@@ -26,7 +26,7 @@ You might already have a system in place for managing your dependencies, such as
 
 ## Manual management
 
-As noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.
+As noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.
 
 ## Automated Management
 
@@ -46,7 +46,7 @@ The major current and historical options for managing R dependencies are:
 ## Python
 If you're coming from a background in Python, you might be familiar with the following analogous approaches:
 
-The pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
+The pip, pipenv, and poetry packages can, generally speaking, be used for package management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
 :::
 
 The next chapter delves into some necessary [Technical Definitions](./technical_definitions.html) in the R ecosystem, the following chapter will really dive in to the details of  [R Package Managers](./dependencies_in_r.html).
