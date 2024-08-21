@@ -29,15 +29,13 @@ A cache is built per each minor version of R you use. For example, if have used 
 
 Although you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.
 
-The {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system:
+The {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system [@posit2024]:
 
 > -   Linux: `~/.cache/R/renv/cache`
 >
 > -   macOS: `~/Library/Caches/org.R-project.R/R/renv/cache`
 >
 > -   Windows: `%LOCALAPPDATA%/renv/cache`
-
-[@posit2024]
 
 Within each of these cache folders, you should see sub-folders for each version of R that you have used with {renv}. For example, on a macOS system, you might see the following folders:
 
