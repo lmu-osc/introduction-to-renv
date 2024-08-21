@@ -40,7 +40,7 @@ There are many package managers available for different programming languages, a
 The major current and historical options for managing R dependencies are:
 
 1.  **{renv}** is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation
-2.  **{groundhogr}** is a package that is similar to {renv}, and developed by independent, open-source contributors
+2.  **{groundhog}** is a package that is similar to {renv}, and developed by independent, open-source contributors
 3.  **{packrat}** is a deprecated package that is no longer recommended for new projects
 
 ## Python
