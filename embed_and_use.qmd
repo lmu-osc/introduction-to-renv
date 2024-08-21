@@ -8,7 +8,7 @@ This {renv} workshop focused on the main workflow of `renv` which is to use `ren
 
 However, there are two other functions that are useful for some workflows: `renv::embed()` and `renv::use()`. These functions are useful when you simply want to include packages in a project by embedding them in a script in your library. Typically you will see people include `install.packages()` calls at the top of their scripts to ensure that the necessary packages are installed. This can be improved upon by using `renv::embed()`.
 
-`renv::embed()` also detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to `renv::use()` at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.
+`renv::embed()` detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to `renv::use()` at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.
 
 The downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use `renv::embed()` or `renv::use()`.
 
