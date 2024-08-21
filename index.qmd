@@ -23,6 +23,6 @@ This tutorial assumes you have the following software installed:
 -   [RStudio](https://posit.co/download/rstudio-desktop/){target="_blank"}
 -   {renv}, installed with `install.packages("renv")` from within R
 
-Although optional for the general content in this tutorial, **knowledge of git and GitHub** will be helpful for the Exercises especially if you would like to receive feedback or troubleshoot issues remotely. Check out [our git and GitHub tutorial](https://lmu-osc.github.io/Introduction-RStudio-Git-GitHub/) if needed!
+Although optional for the general content in this tutorial, **knowledge of git and GitHub** will be helpful for the exercises especially if you would like to receive feedback or troubleshoot issues remotely. Check out [our git and GitHub tutorial](https://lmu-osc.github.io/Introduction-RStudio-Git-GitHub/) if needed!
 
 :::
