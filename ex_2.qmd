@@ -33,7 +33,7 @@ If you're not familiar with using git and GitHub, you can skip the forking and c
 
 # Restore a {renv} Project
 
-The exercises for initiating and snapshotting a project can be found in the `restore-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main) repo.
+The exercises for initiating and snapshotting a project can be found in the `restore-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) repo.
 
 
 ```{r, results='asis', echo=FALSE}

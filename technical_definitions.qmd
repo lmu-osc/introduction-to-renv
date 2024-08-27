@@ -95,7 +95,7 @@ cran_package_count <- cran_avail_pkgs %>%
 
 
 ::: {.center-larger}
-![Popular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor](assets/img/cran_and_bioconductor.png)
+![Popular R package repositories: Comprehensive R Archive Network (CRAN) and Bioconductor](assets/img/cran_and_bioconductor.png)
 :::
 
 

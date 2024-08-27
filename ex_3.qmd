@@ -1,5 +1,5 @@
 ---
-title: "Explcitly Recording Packages"
+title: "Explicitly Recording Packages"
 ---
 
 As with the previous exercise, it is **recommended** that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.
