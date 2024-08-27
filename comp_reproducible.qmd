@@ -76,7 +76,7 @@ Fortunately, most modern programming languages are cross-compatible across recen
 
 The most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.
 
-Keeping tracking of which packages are used and the specific versions of those packages is a major challenge in reproducibility.
+Keeping track of which packages are used and the specific versions of those packages is a major challenge in reproducibility.
 
 In the context of the R programming language, most packages are likewise compatible across operating systems.
 
@@ -99,7 +99,7 @@ In the context of the R programming language, most packages are likewise compati
 
 :::
 
-In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
+In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
 
 [^3]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
