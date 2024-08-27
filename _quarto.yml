@@ -53,7 +53,7 @@ website:
           - href: renv_getting_started.qmd
             text: "1. Quick Start"
           - href: starting_details.qmd
-            text: "2. Starting Details"
+            text: "2. Understanding {renv}"
           - href: caching.qmd
             text: "3. Caching"
           - href: restoring_a_project.qmd
