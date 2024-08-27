@@ -392,7 +392,7 @@ div.csl-indent {
 <section id="cache-locations" class="level2">
 <h2 class="anchored" data-anchor-id="cache-locations">Cache Locations</h2>
 <p>Although you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.</p>
-<p>The {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system:</p>
+<p>The {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system <span class="citation" data-cites="posit2024">(<a href="#ref-posit2024" role="doc-biblioref">Posit 2024</a>)</span>:</p>
 <blockquote class="blockquote">
 <ul>
 <li><p>Linux: <code>~/.cache/R/renv/cache</code></p></li>
@@ -400,7 +400,6 @@ div.csl-indent {
 <li><p>Windows: <code>%LOCALAPPDATA%/renv/cache</code></p></li>
 </ul>
 </blockquote>
-<p><span class="citation" data-cites="posit2024">(<a href="#ref-posit2024" role="doc-biblioref">Posit 2024</a>)</span></p>
 <p>Within each of these cache folders, you should see sub-folders for each version of R that you have used with {renv}. For example, on a macOS system, you might see the following folders:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"~/Library/Caches/org.R-project.R/R/renv/cache/v5"</span>, <span class="at">full.names =</span> T)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
