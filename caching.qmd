@@ -48,7 +48,7 @@ list.files("~/Library/Caches/org.R-project.R/R/renv/cache/v5", full.names = T)
 #> [4] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4"
 ```
 
-The {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to **one** specific cache, but not **all** of the caches on your system. You can access the path to the cache with the following code:
+The {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to the **one** cache specific to the version of R used in your project. You can access the path to the cache with the following code:
 
 ``` r
 # Run on a MacOS, and <USER> removed. 
