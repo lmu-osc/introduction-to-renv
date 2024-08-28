@@ -17,7 +17,10 @@ As you might have noted from the videos in the previous sections, initiating a p
 1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
 2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, a `.gitignore` file and a staging area for package installation
 3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile`. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
-4.  Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
+
+:::{.callout-note collapse="true" title="Other Created Files"}
+Adding renv to a project also updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. **This is only relevant if you're building an R package.**
+:::
 
 [^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the [Caching](caching.qmd) chapter.
 
