@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Getting Started Details – Introduction to {renv}</title>
+<title>Understanding {renv} – Introduction to {renv}</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./caching.html" rel="next">
+<link href="./restoring_a_project.html" rel="next">
 <link href="./renv_getting_started.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./starting_details.html">2. Starting Details</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./starting_details.html">2. Understanding {renv}</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -238,19 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./starting_details.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2. Starting Details</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./caching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Caching</span></a>
+ <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Restoring Projects</span></a>
+ <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
       </ul>
@@ -293,6 +287,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./caching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Caching</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
@@ -338,9 +338,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./starting_details.html">2. Starting Details</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./starting_details.html">2. Understanding {renv}</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Getting Started Details</h1>
+<h1 class="title">Understanding {renv}</h1>
 </div>
 
 
@@ -391,17 +391,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - Lockfile written to "~/Desktop/temporary".</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.</p>
-<p>And as noted, the directory structure should look similar to the one below, particularly the presence of the <code>renv</code> directory and the <code>renv.lock</code> file. For reference: the function used in the following example, <code>dir_tree()</code>, is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── activate.R</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── library</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── macos</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── settings.json</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── staging</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv.lock</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── temp.Rproj</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For reference, the directory structure should look similar to the one below, particularly the presence of the <code>renv</code> directory and the <code>renv.lock</code> file.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the function used in the following example, `dir_tree()`, is from the {fs} package and is used </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to display the directory structure of the project. That is, it will list the files and</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># directories in the directory where you are currently working.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(<span class="at">recurse =</span> <span class="dv">2</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; .</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── activate.R</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── library</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── macos</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── settings.json</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── staging</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── renv.lock</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── temp.Rproj</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="package-detection" class="level1">
@@ -465,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><br></p>
 <p>This tree shows the dependencies of the <code>dplyr</code> package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project. <strong>Above all, you should note that all of the packages on this dependency tree need to be recorded in the <code>renv.lock</code> file to ensure that your project is reproducible.</strong></p>
-<p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
+<p>You might have noticed the argument <code>dependencies = "hard"</code> in the function call. The <code>dependencies</code> argument is used to specify the <em>kinds of dependencies to install</em>. However, the discussion about dependencies so far has implied that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.</p>
 </section>
 <section id="dependency-levels" class="level2">
 <h2 class="anchored" data-anchor-id="dependency-levels">Dependency Levels</h2>
@@ -574,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - Lockfile written to "~/Desktop/temp/renv.lock".</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<p>Packages not already installed in the package can be recognized by the <code>[* -&gt; version]</code> notation. The <code>[*]</code> indicates that the package is not installed in the project library, and the <code>version</code> indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.</p>
+<p>Packages not already installed in the project can be recognized by the <code>[* -&gt; version]</code> notation. The <code>[*]</code> indicates that the package is not installed in the project library, and the <code>version</code> indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.</p>
 
 
 </section>
@@ -1014,8 +1018,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./caching.html" class="pagination-link" aria-label="3. Caching">
-        <span class="nav-page-text">3. Caching</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./restoring_a_project.html" class="pagination-link" aria-label="3. Restoring Projects">
+        <span class="nav-page-text">3. Restoring Projects</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

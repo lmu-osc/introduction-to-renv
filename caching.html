@@ -84,8 +84,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./restoring_a_project.html" rel="next">
-<link href="./starting_details.html" rel="prev">
+<link href="./embed_and_use.html" rel="next">
+<link href="./ex_3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -179,7 +179,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./caching.html">3. Caching</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./caching.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./caching.html">Caching</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -258,19 +258,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./starting_details.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Starting Details</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./caching.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">3. Caching</span></a>
+ <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Restoring Projects</span></a>
+ <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
       </ul>
@@ -315,6 +309,12 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./caching.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Caching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
@@ -356,7 +356,7 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./caching.html">3. Caching</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./caching.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./caching.html">Caching</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Caching</h1>
 </div>
@@ -388,7 +388,7 @@ div.csl-indent {
 <section id="caching-in-renv" class="level1">
 <h1>Caching in {renv}</h1>
 <p>In the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the <code>renv.lock</code> if you don’t already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages.</p>
-<p>A cache is built per each minor version of R you use. For example, if have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the <a href="restoring_a_project.html">Restoring Projects</a> section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.</p>
+<p>A cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the <a href="restoring_a_project.html">Restoring Projects</a> section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.</p>
 <section id="cache-locations" class="level2">
 <h2 class="anchored" data-anchor-id="cache-locations">Cache Locations</h2>
 <p>Although you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.</p>
@@ -407,7 +407,7 @@ div.csl-indent {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.2"</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] "~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to <strong>one</strong> specific cache, but not <strong>all</strong> of the caches on your system. You can access the path to the cache with the following code:</p>
+<p>The {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to the <strong>one</strong> cache specific to the version of R used in your project. You can access the path to the cache with the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run on a MacOS, and &lt;USER&gt; removed. </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span>paths<span class="sc">$</span><span class="fu">cache</span>()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/Users/&lt;USER&gt;/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -879,13 +879,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./starting_details.html" class="pagination-link" aria-label="2. Starting Details">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Starting Details</span>
+      <a href="./ex_3.html" class="pagination-link" aria-label="Explicitly Record">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Explicitly Record</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./restoring_a_project.html" class="pagination-link" aria-label="4. Restoring Projects">
-        <span class="nav-page-text">4. Restoring Projects</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./embed_and_use.html" class="pagination-link" aria-label="`embed()` and `use()`">
+        <span class="nav-page-text"><code>embed()</code> and <code>use()</code></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

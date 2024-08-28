@@ -224,19 +224,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./starting_details.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Starting Details</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./caching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Caching</span></a>
+ <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Restoring Projects</span></a>
+ <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
       </ul>
@@ -279,6 +273,12 @@ div.csl-indent {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./caching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Caching</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
@@ -342,6 +342,7 @@ div.csl-indent {
 </header>
 
 
+<p>In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.</p>
 <section id="what-is-reproducibility" class="level1">
 <h1>What is Reproducibility?</h1>
 <section id="a-brief-definition" class="level2">
@@ -405,7 +406,7 @@ div.csl-indent {
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>The most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.</p>
-<p>Keeping tracking of which packages are used and the specific versions of those packages is a major challenge in reproducibility.</p>
+<p>Keeping track of which packages are used and the specific versions of those packages is a major challenge in reproducibility.</p>
 <p>In the context of the R programming language, most packages are likewise compatible across operating systems.</p>
 <div class="center">
 <p><img src="assets/img/r_packages.png" class="img-fluid"></p>
@@ -434,7 +435,7 @@ Expect No One to Already Have the Required Software
 </ol>
 </div>
 </div>
-<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
+<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
 <!-- footnotes -->
 
 
