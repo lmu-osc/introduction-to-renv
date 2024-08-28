@@ -374,9 +374,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Creation of a lockfile, <code>renv.lock</code>, which records the version of R in use, the default download repository, and the packages used in the project.</li>
 <li>Creation of a <code>renv</code> folder which contains the project <code>library</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a settings file, a <code>.gitignore</code> file and a staging area for package installation</li>
 <li>Addition of the line <code>source("renv/activate.R")</code> to your <code>.Rprofile</code>. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library.</li>
-<li>Updates the <code>.Rbuildignore</code> to include the <code>renv</code> folder and the <code>renv.lock</code> file. This is only relevant if you’re building an R package.</li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Other Created Files">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Other Created Files
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Adding renv to a project also updates the <code>.Rbuildignore</code> to include the <code>renv</code> folder and the <code>renv.lock</code> file. <strong>This is only relevant if you’re building an R package.</strong></p>
+</div>
+</div>
+</div>
 <p>You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as <code>snapshot()</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="renv with Git &amp; GitHub">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+renv with Git &amp; GitHub
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<section id="renv-with-git-github" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="renv-with-git-github">{renv} with Git &amp; GitHub</h2>
+<p>Ideally, you will use {renv} in projects that are under version control with Git (or another version control system) because “one of the reasons to use renv is to make it easier to share your code in such a way that everyone gets exactly the same package versions as you.” In order to do this successfully, note the advice on collaborating with {renv} in the <a href="https://rstudio.github.io/renv/articles/collaborating.html">official documentation</a>.</p>
+<blockquote class="blockquote">
+<p>You’ll then need to commit <code>renv.lock</code>, <code>.Rprofile</code>, <code>renv/settings.json</code> and <code>renv/activate.R</code> to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a .gitignore for you, and you can just commit all suggested files.</p>
+</blockquote>
+<p>The above also assumes that you are working within an RProject (<code>*.Rproj</code>) structure.</p>
+</section>
+</div>
+</div>
 <section id="initiation-example" class="level2">
 <h2 class="anchored" data-anchor-id="initiation-example">Initiation Example</h2>
 <p>Initiating {renv} in a project should print the following to the console:</p>

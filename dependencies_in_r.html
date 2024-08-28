@@ -402,10 +402,11 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but will not directly manage or change your R versions.</strong></p>
+<p><strong>R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.</strong></p>
+<p><strong>If you need to change R versions for your projects, we recommend downloading <a href="https://github.com/r-lib/rig">rig</a>.</strong></p>
 </div>
 </div>
-<p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="">Posit Package Manager</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
+<p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="https://packagemanager.posit.co/client/#/">Posit Package Mangaer</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
 <p>For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found <a href="https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0">here</a>.</p>
 
 

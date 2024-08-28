@@ -283,7 +283,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dependencies-overview" id="toc-dependencies-overview" class="nav-link active" data-scroll-target="#dependencies-overview">Dependencies Overview</a></li>
+  <li><a href="#dependencies-overview" id="toc-dependencies-overview" class="nav-link active" data-scroll-target="#dependencies-overview">Dependencies Overview</a>
+  <ul class="collapse">
+  <li><a href="#package-dependencies" id="toc-package-dependencies" class="nav-link" data-scroll-target="#package-dependencies">Package Dependencies</a></li>
+  <li><a href="#system-dependencies" id="toc-system-dependencies" class="nav-link" data-scroll-target="#system-dependencies">System Dependencies</a></li>
+  </ul></li>
   <li><a href="#intro-to-management-practices" id="toc-intro-to-management-practices" class="nav-link" data-scroll-target="#intro-to-management-practices">Intro to Management Practices</a>
   <ul class="collapse">
   <li><a href="#manual-management" id="toc-manual-management" class="nav-link" data-scroll-target="#manual-management">Manual management</a></li>
@@ -316,18 +320,43 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="dependencies-overview" class="level1">
 <h1>Dependencies Overview</h1>
-<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using or developing <em>depends</em> on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the <code>dplyr</code> package, then <code>dplyr</code> must be downloaded first.</p>
-<p>There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that <code>dplyr</code> itself has dependencies, such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>, which must also be downloaded. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use, for example, 5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using <em>depends</em> on to function. If the dependencies are not installed, dependent software will either be missing features, not work as expected, or possibly not work at all.</p>
+<p>We make an arbitrary distinction between “system dependencies” and “package dependencies” for the purposes of this tutorial, but there is principally no difference between the two.The distinction is made to clarify that system dependencies are not R packages, but rather are other software programs that are necessary for the project to run. Package dependencies are R packages that are necessary for the project to run.</p>
+<section id="package-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="package-dependencies">Package Dependencies</h2>
+<p>Package dependencies are R packages that are necessary for the project to run. For example, if you are using the <code>dplyr</code> package in your project, you will need to have the <code>dplyr</code> package installed on your system. However, <code>dplyr</code> itself depends on other R packages such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have their dependencies too.</p>
+<p>This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Finding Dependencies for R Packages">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Finding Dependencies for R Packages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>If you’re ever curious about the dependencies of a package, they should all be declared in the <code>DESCRIPTION</code> file of an R package. There are a variety of ways you can access this information:</p>
 <ul>
 <li>Methods for reading the <code>DESCRIPTION</code> file of an R package:
 <ul>
+<li>Directly on <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN by finding the package</a> by name</li>
 <li><code>utils::packageDescription()</code> to print the complete <code>DESCRIPTION</code> file of a package to the console</li>
 <li><code>tools::package_dependencies()</code> for just a list of dependencies from the <code>DESCRIPTION</code> file</li>
 <li>Looking at the <code>DESCRIPTION</code> file online on the package’s CRAN or GitHub page</li>
 </ul></li>
 <li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies. An example of this will be shown in the <a href="./starting_details.html">Starting Details</a> chapter.</li>
 </ul>
+</div>
+</div>
+</div>
+</section>
+<section id="system-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="system-dependencies">System Dependencies</h2>
+<p>Systems dependencies are not R packages, but rather are other software programs that are necessary for the project to run. For example, if you are using R to run a Python script, you will need to have Python installed on your system. Or if you are using R to run a C++ script, you will need to have a C++ compiler installed on your system. These system dependencies can be more difficult to manage than package dependencies, as they are not always explicitly declared in the project files.</p>
+</section>
 </section>
 <section id="intro-to-management-practices" class="level1">
 <h1>Intro to Management Practices</h1>

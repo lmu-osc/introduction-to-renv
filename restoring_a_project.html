@@ -317,9 +317,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-a-github-repo" id="toc-from-a-github-repo" class="nav-link active" data-scroll-target="#from-a-github-repo">From a GitHub Repo</a></li>
+  <li><a href="#when-to-restore" id="toc-when-to-restore" class="nav-link active" data-scroll-target="#when-to-restore">When to <code>restore()</code></a>
+  <ul class="collapse">
+  <li><a href="#from-a-github-repo" id="toc-from-a-github-repo" class="nav-link" data-scroll-target="#from-a-github-repo">From a GitHub Repo</a></li>
   <li><a href="#from-a-lockfile" id="toc-from-a-lockfile" class="nav-link" data-scroll-target="#from-a-lockfile">From a lockfile</a></li>
   <li><a href="#after-upgrading-r" id="toc-after-upgrading-r" class="nav-link" data-scroll-target="#after-upgrading-r">After Upgrading R</a></li>
+  </ul></li>
+  <li><a href="#when-to-upgrade-and-update" id="toc-when-to-upgrade-and-update" class="nav-link" data-scroll-target="#when-to-upgrade-and-update">When to <code>upgrade()</code> and <code>update()</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -347,8 +351,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the <code>renv.lock</code> file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.</p>
 <p>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</p>
-<section id="from-a-github-repo" class="level1">
-<h1>From a GitHub Repo</h1>
+<section id="when-to-restore" class="level1">
+<h1>When to <code>restore()</code></h1>
+<section id="from-a-github-repo" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-github-repo">From a GitHub Repo</h2>
 <p>Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo <em>should</em> always have all of the required files for restoring a project including the <code>renv.lock</code> file, the <code>renv</code> folder, the <code>*.Rproj</code> file, and the R scripts. Note that repos generally do not (and should not) contain the <code>renv/library</code> folder–this is intended behavior. The <code>renv/library</code> contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Moreover, the <code>renv/library</code> folder can be quite large and is not necessary for restoring a project.</p>
 <p>The steps for restoring a project from a GitHub repository are as follows:</p>
 <ul>
@@ -358,8 +364,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>There should not be anything else to do! The <code>renv.lock</code> file will be used to install the correct versions of the packages you need for the project.</p>
 </section>
-<section id="from-a-lockfile" class="level1">
-<h1>From a lockfile</h1>
+<section id="from-a-lockfile" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-lockfile">From a lockfile</h2>
 <p>You may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the <code>renv.lock</code> file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:</p>
 <ul>
 <li>Obtain the <code>renv.lock</code> file from your collaborators.</li>
@@ -373,14 +379,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Run <code>renv::restore()</code>. If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.</li>
 </ul>
 </section>
-<section id="after-upgrading-r" class="level1">
-<h1>After Upgrading R</h1>
+<section id="after-upgrading-r" class="level2">
+<h2 class="anchored" data-anchor-id="after-upgrading-r">After Upgrading R</h2>
 <p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <a href="caching.html">caching chapter</a>, but a summarized version is also provided here.</p>
 <!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. -->
 <p>To first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.</p>
 <p>If you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:</p>
 <p>The first option is to update your <em>project</em> to use the new version of R. This can be done by running <code>renv::update()</code> to update the packages in your project (particularly the base R packages that came with the new version of R), and then running <code>renv::snapshot()</code> to update the <code>renv.lock</code> file.</p>
 <p>The second option is to switch between R versions using a tool like <a href="https://rud.is/rswitch/">rswitch</a> or <a href="https://github.com/r-lib/rig">rig</a>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.</p>
+</section>
+</section>
+<section id="when-to-upgrade-and-update" class="level1">
+<h1>When to <code>upgrade()</code> and <code>update()</code></h1>
+<p>If you are working on a project and you want to update the packages in your project, you can run <code>renv::update()</code>. This will update the packages in your project to the latest versions that are compatible with the versions of the packages in your <code>renv.lock</code> file. If you want to update a specific package, you can run <code>renv::update("package_name")</code>.</p>
+<p>If you want to update the <code>renv</code> package itself, you can run <code>renv::upgrade()</code>. This will update the <code>renv</code> package to the latest version available on CRAN.</p>
 
 
 </section>
