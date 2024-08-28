@@ -26,6 +26,17 @@ Adding renv to a project also updates the `.Rbuildignore` to include the `renv` 
 
 You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as `snapshot()`.
 
+:::{.callout-note collapse="true" title="renv with Git & GitHub"}
+
+## {renv} with Git & GitHub
+
+Ideally, you will use {renv} in projects that are under version control with Git (or another version control system) because "one of the reasons to use renv is to make it easier to share your code in such a way that everyone gets exactly the same package versions as you." In order to do this successfully, note the advice on collaborating with {renv} in the [official documentation](https://rstudio.github.io/renv/articles/collaborating.html).
+
+> You’ll then need to commit `renv.lock`, `.Rprofile`, `renv/settings.json` and `renv/activate.R` to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a .gitignore for you, and you can just commit all suggested files.
+
+The above also assumes that you are working within an RProject (`*.Rproj`) structure.
+:::
+
 ## Initiation Example
 
 Initiating {renv} in a project should print the following to the console:
@@ -63,6 +74,7 @@ fs::dir_tree(recurse = 2)
 #> ├── renv.lock
 #> └── temp.Rproj
 ```
+
 
 # Package Detection
 
