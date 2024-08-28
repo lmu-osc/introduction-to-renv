@@ -23,6 +23,7 @@ This process works recursively until all unique packages are identified, and a p
 If you're ever curious about the dependencies of a package, they should all be declared in the `DESCRIPTION` file of an R package. There are a variety of ways you can access this information:
 
 -   Methods for reading the `DESCRIPTION` file of an R package:
+    -   Directly on [CRAN by finding the package](https://cran.r-project.org/web/packages/available_packages_by_name.html) by name
     -   `utils::packageDescription()` to print the complete `DESCRIPTION` file of a package to the console
     -   `tools::package_dependencies()` for just a list of dependencies from the `DESCRIPTION` file
     -   Looking at the `DESCRIPTION` file online on the package's CRAN or GitHub page
