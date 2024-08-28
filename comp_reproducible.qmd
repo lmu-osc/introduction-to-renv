@@ -4,6 +4,8 @@ fig-cap-location: bottom
 bibliography: references.bib
 ---
 
+In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.
+
 # What is Reproducibility?
 
 ## A Brief Definition
@@ -34,13 +36,14 @@ In the context of this tutorial, we will focus on the practical aspects of makin
 
 Getting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)
 
-However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software *you* need, perhaps have set up specific paths, and configured various settings to your preferences. 
+However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software *you* need, perhaps have set up specific paths, and configured various settings to your preferences.
 
-::: {.center}
+::: center
 ```{r, out.width="85%", echo=FALSE}
 knitr::include_graphics("assets/img/works_on_my_machine.jpg")
 ```
 :::
+
 ## Someone Else's Computer
 
 When you share your code with others, you are effectively asking them to run *your* code on *their* machine, and it is unlikely that their computer is set up exactly like yours given how many degrees of freedom there are in operating systems, programming languages, software, and the different versions of these. A non-exhaustive list of examples where there might be software discrepancies are detailed below.
@@ -56,7 +59,7 @@ It's already well-known that different operating systems can have different soft
 
 However, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.
 
-::: {.center}
+::: center
 ![](assets/img/mac_linux_windows.jpg)
 :::
 
@@ -68,7 +71,7 @@ Less obvious, however, and more common as a pain-point, are the differences in v
 
 Fortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
-::: {.center}
+::: center
 ![](assets/img/r_python_julia.jpg)
 :::
 
@@ -80,27 +83,24 @@ Keeping track of which packages are used and the specific versions of those pack
 
 In the context of the R programming language, most packages are likewise compatible across operating systems.
 
-::: {.center}
+::: center
 ![](assets/img/r_packages.png)
 :::
-
 :::
 
 <br>
-
 
 ## All of the Machines
 
 ::: callout-important
 ## Expect No One to Already Have the Required Software
 
-1. Don't expect others to have the software you rely on.
-2. Even if others have the software, don't expect them to have the **same version**. 
-
+1.  Don't expect others to have the software you rely on.
+2.  Even if others have the software, don't expect them to have the **same version**.
 :::
 
-In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^3] **By managing our software dependencies**, described in the next chapter.
+In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone install Python v3.8.2, R v4.0.3, and a specific version of a package is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^2] **By managing our software dependencies**, described in the next chapter.
 
-[^3]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.
+[^2]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
 <!-- footnotes -->
