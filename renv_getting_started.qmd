@@ -5,7 +5,6 @@ engine: knitr
 
 This page provides the basic steps to starting a project with the {renv} package, and how to update the `renv.lock` file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the [Starting Details](starting_details.html) page.
 
-
 # Initiating {renv}
 
 When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.
@@ -30,7 +29,7 @@ When initiating a new project from within RStudio such as a typical .Rproj, a Qu
 File -> New Project -> New Directory -> New Project -> [x] Use renv with this project
 ```
 
-::: {.center-larger}
+::: center-larger
 {{< video assets/img/renv_init_new_project.mp4 >}}
 :::
 
@@ -45,23 +44,38 @@ library(renv)
 init()
 ```
 
-::: {.center-larger}
+::: center-larger
 {{< video assets/img/renv_init_existing_project.mp4 >}}
 :::
 
 # Check Status of Project
 
-The project should be in a consistent state after initiating {renv}, and this can be checked by running the `renv::status()` function.
+After initiating {renv} in your project, you should see a message indicating that your project is in a "consistent state." In short, this means that {renv} has detected the following:
+
+-   That all packages detected in the project are listed in the `renv.lock` file
+-   That all packages in the `renv.lock` file are actually installed in the project
+-   That all installed packages are the correct version
+
+As you further develop your project, the packages you use may change or you may not have all required packages downloaded (particularly if you're collaborating with others). You can check the status of your project at any time by running the `renv::status()` function.
 
 ``` r
 status()
 ```
 
-In short, this function checks that your project is in a "consistent state" by checking for the following:
+If your project is in a consistent state, you will see the following message:
 
--   That all packages detected in the project are listed in the `renv.lock` file
--   That all packages in the `renv.lock` file are actually installed
--   That all installed packages are the correct version
+``` r
+The project is already in a consistent state.
+```
+
+If your project is not in a consistent state, you will see a message indicating what is wrong with the project, and a potential remedy for the inconsistent state. For example, if you have a package that is not listed in the `renv.lock` file, you will see a message like the following:
+
+``` r
+The project is out of sync with the lockfile.
+- Packages that are not in the lockfile:
+    - {package_name}
+```
+
 
 # Updating `renv.lock`
 
@@ -73,8 +87,8 @@ snapshot()
 
 Running the `snapshot()` function will capture new packages used in your project, *and* it will update the package versions in the `renv.lock` file if you have installed new versions to the project you are working in.
 
-::: {.center-larger}
+::: center-larger
 {{< video assets/img/renv_status_snapshot.mp4 >}}
 :::
 
-This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be restoring libraries for either your own projects or for projects shared by others using `renv::restore()`. This is discussed next in [Restoring A Project](restoring_a_project.html), but **we strongly recommend reading the details of [Understanding {renv}](starting_details.html) first.**
+This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be "restoring" libraries for either your own projects or for projects shared by others using `renv::restore()`. This is discussed next in [Restoring A Project](restoring_a_project.html), but **we strongly recommend reading the details of [Understanding {renv}](starting_details.html) first.**

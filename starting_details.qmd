@@ -1,5 +1,5 @@
 ---
-title: "Getting Started Details"
+title: "Understanding {renv}"
 ---
 
 ::: {.center .img-border}
@@ -10,12 +10,11 @@ title: "Getting Started Details"
 
 The previous page introduced the main functions needed for using {renv} in a project, and showed short example snippets of how to use them. This page will provide a more detailed explanation of the functions `renv::init()`, `renv::status()`, and `renv::snapshot()`, and will provide a more detailed example of how to use them in a project. Later chapters will cover the system library/renv cache and restoring a project from a lockfile.
 
-
 # Initiating {renv}
 
 As you might have noted from the videos in the previous sections, initiating a project with {renv} will cause the following changes to your project:
 
-1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project. 
+1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
 2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, a `.gitignore` file and a staging area for package installation
 3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile`. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
 4.  Updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. This is only relevant if you're building an R package.
@@ -43,9 +42,13 @@ renv::init()
 
 Notably, one can see that the version of R (4.4.0) and the renv package (1.0.7) are recorded in the lockfile immediately. If you are initiating renv in an already existing project, the lockfile should also identify the other packages and package versions in use.
 
-And as noted, the directory structure should look similar to the one below, particularly the presence of the `renv` directory and the `renv.lock` file. For reference: the function used in the following example, `dir_tree()`, is from the {fs} package and is used to display the directory structure of the project. That is, it will list the files and directories in the directory where you are currently working.
+For reference, the directory structure should look similar to the one below, particularly the presence of the `renv` directory and the `renv.lock` file. 
 
 ``` r
+# the function used in the following example, `dir_tree()`, is from the {fs} package and is used 
+# to display the directory structure of the project. That is, it will list the files and
+# directories in the directory where you are currently working.
+
 fs::dir_tree(recurse = 2)
 #> .
 #> ├── renv
@@ -128,7 +131,7 @@ pak::pkg_deps_tree("dplyr", dependencies = "hard")
 
 This tree shows the dependencies of the `dplyr` package at the top level, and the dependencies of those dependencies nested below each package. The tree is recursive, meaning that it will continue to show dependencies of dependencies until it reaches the end of the dependency chain. This is a simplified example, but it is important to understand that the dependencies of dependencies can be quite complex and can lead to a large number of packages being installed in your project. **Above all, you should note that all of the packages on this dependency tree need to be recorded in the `renv.lock` file to ensure that your project is reproducible.**
 
-You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
+You might have noticed the argument `dependencies = "hard"` in the function call. The `dependencies` argument is used to specify the *kinds of dependencies to install*. However, the discussion about dependencies so far has implied that another package is either a dependency or not, and you might now be asking yourself: are there different kinds of dependencies? Yes, there are! To be more specific, there are different levels of dependencies, discussed below.
 
 ## Dependency Levels
 
@@ -252,4 +255,4 @@ renv::snapshot()
 
 <br>
 
-Packages not already installed in the package can be recognized by the `[* -> version]` notation. The `[*]` indicates that the package is not installed in the project library, and the `version` indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.
+Packages not already installed in the project can be recognized by the `[* -> version]` notation. The `[*]` indicates that the package is not installed in the project library, and the `version` indicates the version of the package that will be installed. The lockfile is then written to the project directory, and the project should now in a consistent state.
