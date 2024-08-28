@@ -53,11 +53,9 @@ website:
           - href: renv_getting_started.qmd
             text: "1. Quick Start"
           - href: starting_details.qmd
-            text: "2. Starting Details"
-          - href: caching.qmd
-            text: "3. Caching"
+            text: "2. Understanding {renv}"
           - href: restoring_a_project.qmd
-            text: "4. Restoring Projects"
+            text: "3. Restoring Projects"
       - section: "Exercises"
         contents:
           - href: ex_init_snapshot.qmd
@@ -68,6 +66,8 @@ website:
             text: "Explicitly Record"
       - section: "Optional Content"
         contents: 
+          - href: caching.qmd
+            text: "Caching"
           - href: embed_and_use.qmd
             text: "`embed()` and `use()`"
           - href: advanced_topics.qmd

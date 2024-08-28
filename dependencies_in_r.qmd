@@ -9,9 +9,9 @@ library(dplyr)
 library(magrittr)
 ```
 
-This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhogr}, and introduces the {renv} package.
+This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.
 
-The goal of package managers in R then is to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhogr}, and {renv}.
+The goal of package managers in R are to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhog}, and {renv}.
 
 # Common Managers
 
@@ -21,9 +21,9 @@ The {packrat} package was one of the first package managers developed for R, and
 
 It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least [April 2020](https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c). You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.
 
-## {groundhogr}
+## {groundhog}
 
-[{groundhogr}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:
+[{groundhog}](https://groundhogr.com/) is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:
 
 ``` r
 install.packages("groundhog")
@@ -34,11 +34,12 @@ groundhog.library(pkgs, "2023-09-01")
 
 This example demonstrates a scenario in which you would like to install the `rio` and `metafor` packages as they were on September 1st, 2023. The `groundhog.library()` function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the `library()` call for `groundhog.library()` is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.
 
-The other main benefit of using {groundhogr} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhogr}.
+The other main benefit of using {groundhog} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhog}.
 
-The package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhogr} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhogr} especially because of the professional support and software development the package receives from Posit.
+The package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhog} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhog} especially because of the professional support and software development the package receives from Posit.
 
-<!-- -   [{groundhogr}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
+<!-- -   [{groundhog}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhog} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhog}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
+
 
 ## {renv}
 
@@ -81,7 +82,7 @@ As mentioned, {renv} is likely the most popular option for package management in
 
 Moreover, this package can be considered a relatively stable package as it has moved beyond it's initial development stages into a version 1 release (currently at version `r renv_cran_version`). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.
 
-In comparison to {groundhogr}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (`.RProj` file) to use {renv} whereas {groundhogr} allows you to simply embed the function `groundhog.library(pkg, date)` into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the *default workflow* for {renv} is not as flexible as {groundhogr} in this regard. However, {renv} also offers a similar workflow to {groundhogr} via the `embed()` and `use()` functions, discussed in the supplementary material of this tutorial.
+In comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (`.RProj` file) to use {renv} whereas {groundhog} allows you to simply embed the function `groundhog.library(pkg, date)` into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the *default workflow* for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the `embed()` and `use()` functions, discussed in the supplementary material of this tutorial.
 
 # Limitations of Package Managers
 
@@ -90,11 +91,12 @@ The main limitation of package managers is that they only manage the **packages*
 Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like [rig](https://github.com/r-lib/rig) for R projects on your computer, or to use a containerization solution like [Binder](https://mybinder.org/) for creating [Docker](https://www.docker.com/) files or managed environments in [RStudio Cloud](https://rstudio.cloud/). These solutions allow you to create a "container" with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.
 
 ::: callout-important
-**R package managers only manage the packages you use in your project.** The package managers might record the version of R you are using, but they will not directly manage or change your R versions.
+**R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.**
 
 **If you need to change R versions for your projects, we recommend downloading [rig](https://github.com/r-lib/rig).**
 :::
 
 A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package's `DESCRIPTION` file or by checking out the [Posit Package Mangaer](https://packagemanager.posit.co/client/#/) page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.
+
 
 For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found [here](https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0).

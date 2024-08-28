@@ -15,6 +15,7 @@ Package dependencies are R packages that are necessary for the project to run. F
 
 This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
 
+
 [^1]: If you have enough time, read about how the [left-pad incident](https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code) broke the internet as an example of how dependencies can go wrong.
 
 
@@ -41,7 +42,7 @@ You might already have a system in place for managing your dependencies, such as
 
 ## Manual management
 
-As noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package/library by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.
+As noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.
 
 ## Automated Management
 
@@ -55,14 +56,14 @@ There are many package managers available for different programming languages, a
 The major current and historical options for managing R dependencies are:
 
 1.  **{renv}** is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation
-2.  **{groundhogr}** is a package that is similar to {renv}, and developed by independent, open-source contributors
+2.  **{groundhog}** is a package that is similar to {renv}, and developed by independent, open-source contributors
 3.  **{packrat}** is a deprecated package that is no longer recommended for new projects
 
 ## Python
 
 If you're coming from a background in Python, you might be familiar with the following analogous approaches:
 
-The pip, pipenv, and poetry libraries can, generally speaking, be used for library management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
+The pip, pipenv, and poetry packages can, generally speaking, be used for package management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
 :::
 
 The next chapter delves into some necessary [Technical Definitions](./technical_definitions.html) in the R ecosystem, the following chapter will really dive in to the details of [R Package Managers](./dependencies_in_r.html).
