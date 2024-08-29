@@ -96,7 +96,13 @@ Matching the installed version of R to the required version, however, will tend 
 **If you need to change R versions for your projects, we recommend downloading [rig](https://github.com/r-lib/rig).**
 :::
 
-A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package's `DESCRIPTION` file or by checking out the [Posit Package Mangaer](https://packagemanager.posit.co/client/#/) page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.
+A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package's `DESCRIPTION` file or by checking out the [Posit Package Manager](https://packagemanager.posit.co/client/#/) page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.
+
+:::{.callout-note collapse="true" title="Advanced Reading: System Dependencies in R Packages"}
+
+For a more advanced understanding of system dependencies in R packages, see this [R-hub blogpost](https://blog.r-hub.io/2023/09/26/system-dependency/) on the topic. Subsequently, you can explore the [rstudio/r-system-requirements repo](https://github.com/rstudio/r-system-requirements) to see how RStudio manages system dependencies for their own packages (and you can too if you need to use e.g. a Docker container for your project).
+
+:::
 
 
 For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found [here](https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0).

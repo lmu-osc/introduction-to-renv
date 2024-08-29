@@ -90,7 +90,7 @@ Each {renv} project has its own library, located in the `renv/library` folder of
 
 A symlink or "symbolic link" is a file that points to another file or directory. It is a reference to the original file or directory, and it can be used to access the original file or directory from a different location. Symlinks are important because they allow you to create shortcuts to files or directories, which can be useful for organizing files, accessing files from different locations, or creating symbolic links to files or directories that are located on different drives or partitions.
 
-In the context of {renv}, the apparent packages in the `renv/library` folder of your project are actually symlinks that point to the packages in the shared library!
+In the context of {renv}, the apparent packages in the `renv/library` folder of your project are actually symlinks that point to the packages in the cache!
 
 # Summary and Key Points
 
@@ -99,4 +99,4 @@ This chapter contained quite a bit of technical detail and may have been a bit o
 1.  Caching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program.
 2.  In the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects.
 3.  The cache is built per each minor version of R you use, and the cache locations are specific to your operating system. **You will almost never need to directly access these cache locations.**
-4.  Each project has its own library, located in the `renv/library` folder of the project, but the packages in this folder are actually symlinks to the packages in the shared library.
+4.  Each project has its own library, located in the `renv/library` folder of the project, but the packages in this folder are actually symlinks to the packages in the cache.
