@@ -23,11 +23,15 @@ For most purposes, one will only need to have a passing understanding of the `re
 
 ## With a New RStudio Project
 
-When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to "Use renv with \[your\] project."
+When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to "Use renv with your project."
 
-```         
-File -> New Project -> New Directory -> New Project -> [x] Use renv with this project
-```
+1. `File`
+2. `New Project`
+3. `New Directory`
+4. `New Project`
+5. `[x] Use renv with this project`
+
+
 
 ::: center-larger
 {{< video assets/img/renv_init_new_project.mp4 >}}
@@ -75,7 +79,6 @@ The project is out of sync with the lockfile.
 - Packages that are not in the lockfile:
     - {package_name}
 ```
-
 
 # Updating `renv.lock`
 
