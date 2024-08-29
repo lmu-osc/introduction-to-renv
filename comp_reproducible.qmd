@@ -22,7 +22,7 @@ One might assume that academic publications provide all of the information requi
 
 [^1]: Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.
 
-To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.**
+To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.** This tutorial specifically covers how to document the R version and R packages used in a project to ensure that the code can be run on other machines.
 
 ## Reproducible Code
 

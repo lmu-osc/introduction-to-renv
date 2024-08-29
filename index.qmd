@@ -9,10 +9,10 @@ This **self-paced tutorial** is intended to take 1-2 hours to complete, dependin
 
 The tutorial is split into the following sections:
 
-1.  **Background** introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.
-2.  **{renv}** discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful.
-3.  **Exercises** contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.
-4.  **Optional Content** dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.
+1.  [**Background**](comp_reproducible.html) introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.
+2.  [**{renv}**](renv_getting_started.html) discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful. **You can jump to this section if you don't have time for the background.**
+3.  [**Exercises**](ex_init_snapshot.html) contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.
+4.  [**Optional Content**](caching.html) dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.
 
 
 ::: {.callout-tip title="Recommended Software"}

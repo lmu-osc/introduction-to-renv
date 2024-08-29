@@ -40,6 +40,7 @@ The package is still in relatively early stages of development so it may not be 
 
 <!-- -   [{groundhog}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhog} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhog}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
 
+
 ## {renv}
 
 ```{r, echo=FALSE}
@@ -90,7 +91,9 @@ The main limitation of package managers is that they only manage the **packages*
 Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like [rig](https://github.com/r-lib/rig) for R projects on your computer, or to use a containerization solution like [Binder](https://mybinder.org/) for creating [Docker](https://www.docker.com/) files or managed environments in [RStudio Cloud](https://rstudio.cloud/). These solutions allow you to create a "container" with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.
 
 ::: callout-important
-**R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but will not directly manage or change your R versions.**
+**R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.**
+
+**If you need to change R versions for your projects, we recommend downloading [rig](https://github.com/r-lib/rig).**
 :::
 
 A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package's `DESCRIPTION` file or by checking out the [Posit Package Manager](https://packagemanager.posit.co/client/#/) page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.
@@ -100,5 +103,6 @@ A less common issue, particularly if you are using Windows or macOS, occurs when
 For a more advanced understanding of system dependencies in R packages, see this [R-hub blogpost](https://blog.r-hub.io/2023/09/26/system-dependency/) on the topic. Subsequently, you can explore the [rstudio/r-system-requirements repo](https://github.com/rstudio/r-system-requirements) to see how RStudio manages system dependencies for their own packages (and you can too if you need to use e.g. a Docker container for your project).
 
 :::
+
 
 For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found [here](https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0).

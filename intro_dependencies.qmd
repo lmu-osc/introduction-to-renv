@@ -4,19 +4,36 @@ title: "Software Dependencies"
 
 # Dependencies Overview
 
-The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using or developing *depends* on to function. For example, if you are developing an R package, you will need R installed on your machine, or if the R code you are using includes functions from the `dplyr` package, then `dplyr` must be downloaded first.
+The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using  *depends* on to function. If the dependencies are not installed, dependent software will either be missing features, not work as expected, or possibly not work at all.
 
-There are many layers of dependencies that can exist in a project, and these dependencies can be difficult to manage. Extending the previous example, one must keep in mind that `dplyr` itself has dependencies, such as `tibble`, `rlang`, and `vctrs`, which must also be downloaded. And `tibble`, `rlang`, and `vctrs` have dependencies too, and so on. This process works recursively until all unique packages are identified, and a project that appears to only use, for example, 5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
+We make an arbitrary distinction between "system dependencies" and "package dependencies" for the purposes of this tutorial, but there is principally no difference between the two.The distinction is made to clarify that system dependencies are not R packages, but rather are other software programs that are necessary for the project to run. Package dependencies are R packages that are necessary for the project to run.
+
+
+## Package Dependencies
+
+Package dependencies are R packages that are necessary for the project to run. For example, if you are using the `dplyr` package in your project, you will need to have the `dplyr` package installed on your system. However, `dplyr` itself depends on other R packages such as `tibble`, `rlang`, and `vctrs`. And `tibble`, `rlang`, and `vctrs` have their dependencies too.
+
+This process works recursively until all unique packages are identified, and a project that appears to only use e.g. 5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as "dependency hell."[^1]
+
 
 [^1]: If you have enough time, read about how the [left-pad incident](https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code) broke the internet as an example of how dependencies can go wrong.
 
+
+:::{.callout-note collapse="true" title="Finding Dependencies for R Packages"}
 If you're ever curious about the dependencies of a package, they should all be declared in the `DESCRIPTION` file of an R package. There are a variety of ways you can access this information:
 
 -   Methods for reading the `DESCRIPTION` file of an R package:
+    -   Directly on [CRAN by finding the package](https://cran.r-project.org/web/packages/available_packages_by_name.html) by name
     -   `utils::packageDescription()` to print the complete `DESCRIPTION` file of a package to the console
     -   `tools::package_dependencies()` for just a list of dependencies from the `DESCRIPTION` file
     -   Looking at the `DESCRIPTION` file online on the package's CRAN or GitHub page
 -   `pak::pkg_deps_tree()` for a visual representation of the direct dependencies **and** the recursive dependencies. An example of this will be shown in the [Starting Details](starting_details.qmd) chapter.
+:::
+
+## System Dependencies
+
+Systems dependencies are not R packages, but rather are other software programs that are necessary for the project to run. For example, if you are using R to run a Python script, you will need to have Python installed on your system. Or if you are using R to run a C++ script, you will need to have a C++ compiler installed on your system. These system dependencies can be more difficult to manage than package dependencies, as they are not always explicitly declared in the project files.
+
 
 # Intro to Management Practices
 
@@ -44,9 +61,10 @@ The major current and historical options for managing R dependencies are:
 3.  **{packrat}** is a deprecated package that is no longer recommended for new projects
 
 ## Python
+
 If you're coming from a background in Python, you might be familiar with the following analogous approaches:
 
 The pip, pipenv, and poetry packages can, generally speaking, be used for package management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
 :::
 
-The next chapter delves into some necessary [Technical Definitions](./technical_definitions.html) in the R ecosystem, the following chapter will really dive in to the details of  [R Package Managers](./dependencies_in_r.html).
+The next chapter delves into some necessary [Technical Definitions](./technical_definitions.html) in the R ecosystem, the following chapter will really dive in to the details of [R Package Managers](./dependencies_in_r.html).
