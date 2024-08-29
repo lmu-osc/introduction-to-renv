@@ -406,7 +406,23 @@ Important
 <p><strong>If you need to change R versions for your projects, we recommend downloading <a href="https://github.com/r-lib/rig">rig</a>.</strong></p>
 </div>
 </div>
-<p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="https://packagemanager.posit.co/client/#/">Posit Package Mangaer</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
+<p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="https://packagemanager.posit.co/client/#/">Posit Package Manager</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Advanced Reading: System Dependencies in R Packages">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advanced Reading: System Dependencies in R Packages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a more advanced understanding of system dependencies in R packages, see this <a href="https://blog.r-hub.io/2023/09/26/system-dependency/">R-hub blogpost</a> on the topic. Subsequently, you can explore the <a href="https://github.com/rstudio/r-system-requirements">rstudio/r-system-requirements repo</a> to see how RStudio manages system dependencies for their own packages (and you can too if you need to use e.g.&nbsp;a Docker container for your project).</p>
+</div>
+</div>
+</div>
 <p>For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found <a href="https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0">here</a>.</p>
 
 
