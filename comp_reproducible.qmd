@@ -99,7 +99,7 @@ In the context of the R programming language, most packages are likewise compati
 2.  Even if others have the software, don't expect them to have the **same version**.
 :::
 
-In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone *manutally* install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^2] **By managing our software dependencies**, described in the next chapter.
+In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else's code and it didn't work, it was likely due to one of these reasons. Moreover, it's not practical to manage most of these differences manually. For example, requesting that someone *manually* install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody's machines?[^2] **By managing our software dependencies**, described in the next chapter.
 
 [^2]: Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
