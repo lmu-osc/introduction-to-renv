@@ -10,7 +10,4 @@ However, there are two other functions that are useful for some workflows: `renv
 
 `renv::embed()` detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to `renv::use()` at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.
 
-The downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use `renv::embed()` or `renv::use()`.
-
-
-
+The downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use `renv::embed()` or a full lockfile.
