@@ -319,6 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#restore-a-renv-project" id="toc-restore-a-renv-project" class="nav-link active" data-scroll-target="#restore-a-renv-project">Restore a {renv} Project</a>
   <ul class="collapse">
+  <li><a href="#exercise-notes" id="toc-exercise-notes" class="nav-link" data-scroll-target="#exercise-notes">Exercise Notes</a></li>
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
   </ul></li>
   </ul>
@@ -351,6 +352,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="restore-a-renv-project" class="level1">
 <h1>Restore a {renv} Project</h1>
 <p>The exercises for initiating and snapshotting a project can be found in the <code>restore-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repo.</p>
+<section id="exercise-notes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-notes">Exercise Notes</h2>
+<p>Restoring a project library from a <code>renv.lock</code> file can generally be accomplished in just two steps:</p>
+<ol type="1">
+<li>Open the RStudio <code>.RProj</code> file.</li>
+<li>Run <code>renv::restore()</code>.</li>
+</ol>
+<p>The following exercise is intended to guide you through a <strong>more complicated restore situation</strong>, particularly the scenario in which a project dependency has not been added to the <code>renv.lock</code> file. This exercise will help you understand how to identify missing dependencies and restore them to a project.</p>
+</section>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <p><strong>IMPORTANT</strong>: This exercise expects you have version 4.4.X of R installed. If you have a different version, please install the correct version before starting the exercise. <strong>Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.</strong></p>
@@ -365,6 +375,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Project <span class="st">'~/Desktop/introduction-to-renv-exercises/restore-exercises'</span> loaded. [renv <span class="dv">1</span>.<span class="fl">0.7</span>]</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> One or more packages recorded <span class="cf">in</span> the lockfile are not installed.</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Use <span class="st">`</span><span class="at">renv::status()</span><span class="st">`</span> <span class="cf">for</span> more details.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+<li>At the console, run the command <code>renv::status()</code>.
+<ul>
+<li>What is out of sync and why?</li>
 </ul></li>
 <li>At the console, run the command <code>renv::dependencies()</code>. For better formatting, you can run <code>View(renv::dependencies())</code>.
 <ul>
