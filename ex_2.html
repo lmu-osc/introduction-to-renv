@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -340,36 +374,65 @@ ul.task-list li input[type="checkbox"] {
 <p>The exercises for initiating and snapshotting a project can be found in the <code>restore-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repo.</p>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p><strong>IMPORTANT</strong>: This exercise expects you have version 4.4.X of R installed. If you have a different version, please install the correct version before starting the exercise. <strong>Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.</strong></p>
 <ol type="1">
-<li>Open the R project i.e.&nbsp;the <code>.Rproj</code> file.</li>
-<li>At the console, run the command <code>renv::dependencies()</code>.
+<li>Open the <code>restore-exercises.Rproj</code> file.
 <ul>
-<li>What packages do you see listed as direct dependencies, and what project files depend on which dependency?</li>
+<li><p>Upon opening, you should be greeted with a message similar to this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrapping renv 1.0.7 ---------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Downloading renv ... OK</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Installing renv  ... OK</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Project <span class="st">'~/Desktop/introduction-to-renv-exercises/restore-exercises'</span> loaded. [renv <span class="dv">1</span>.<span class="fl">0.7</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> One or more packages recorded <span class="cf">in</span> the lockfile are not installed.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Use <span class="st">`</span><span class="at">renv::status()</span><span class="st">`</span> <span class="cf">for</span> more details.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+<li>At the console, run the command <code>renv::dependencies()</code>. For better formatting, you can run <code>View(renv::dependencies())</code>.
+<ul>
+<li><p>What packages do you see listed as direct dependencies?</p></li>
+<li><p>The <code>Source</code> column indicates which files use these packages. Knowing this, can you list the package dependencies by file?</p></li>
+<li><p><em>Note: some versions of Quarto/RStudio may present you with the following warning message:</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The <span class="st">'yaml'</span> package is required to parse dependencies within R Markdown files. Consider installing it with <span class="fu">install.packages</span>(<span class="st">"yaml"</span>).<span class="st">" </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>If this occurs, then install the <code>yaml</code> package, and run <code>renv::dependencies()</code> again.</p></li>
 </ul></li>
 <li>Take a look at the <code>presentation.rmd</code> file.
 <ul>
-<li>Note that {rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
+<li>{rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
+<li><em>Note: RStudio may prompt you to install several packages in a yellow highlighted bar. You can ignore this request. A later step will address this.</em></li>
 </ul></li>
-<li>Try to Render the <code>presentation.rmd</code> file.
+<li>We want to simulate running someone else’s analysis <em>without</em> first installing the same packages as them: try to Render<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> the <code>presentation.rmd</code> file.
 <ul>
-<li>What happens? Why did the render fail?</li>
+<li><strong>You will be prompted to install some packages in a pop-up window. This is to install the {rmarkdown} package and its dependencies. Accept the prompt.</strong></li>
+<li>The {rmarkdown} package and its dependencies should install, but the rendering still fails. Why do you think this is? Take a careful look at the error message, and align it with the content of the <code>presentation.rmd</code> file.</li>
 </ul></li>
-<li>Run the command <code>renv::restore()</code>.
+<li>We will now need to install all R packages required for this exercise. Run the command <code>renv::restore()</code>.
 <ul>
 <li>What happens?</li>
+<li>If prompted with the question “Do you want to proceed? [Y/n]:”, type <code>Y</code> and press <code>Enter</code>.”</li>
 </ul></li>
-<li>Open the <code>billboard_100.R</code> file, and run the code. This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
+<li>Open the <code>billboard_100.R</code> file, and run the code by pressing the <code>Source</code> button near the top right hand corner of the script.
+<ul>
+<li>This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
+</ul></li>
 <li>Try to render the <code>presentation.rmd</code> file.
 <ul>
 <li>What happens?</li>
 </ul></li>
+<li>Close the project <code>restore-exercises.Rproj</code>.</li>
 </ol>
+<p>Congrats! You have restored someone else’s project and successfully rendered their analysis.</p>
 
 
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>“Rendering” an RMarkdown <code>.rmd</code>, Quarto <code>.qmd</code>, or similar file simply means you are generating the output file (e.g., <code>.html</code>, <code>.pdf</code>, etc.) from the source file. In RStudio, you can do this by clicking the “Knit” or “Render” button depending on your file type and version of RStudio.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

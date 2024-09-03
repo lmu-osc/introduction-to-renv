@@ -320,33 +320,36 @@ ul.task-list li input[type="checkbox"] {
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li>Open the R project i.e.&nbsp;the <code>.Rproj</code> file.</li>
-<li>Initiate {renv} by running <code>renv::init()</code>.</li>
+<li>Open the <code>explicit-record-exercises.Rproj</code> project.</li>
 <li>Check the identified dependencies by running <code>renv::dependencies()</code>.
 <ul>
-<li>What packages are required and why?</li>
+<li>What packages are identified as direct dependencies and why?</li>
 </ul></li>
-<li>Check the status of the dependencies by running <code>renv::status()</code>.
+<li>Initiate {renv} by running <code>renv::init()</code>.</li>
+<li>Double-check the status of the dependencies by running <code>renv::status()</code>.
 <ul>
-<li>Is the lock file in-sync with the project library? Why not?</li>
+<li>Is the lock file in-sync with the project library? (Hint: it should be.)</li>
 </ul></li>
-<li>Install the identified dependencies by running <code>renv::restore()</code>.</li>
-<li>Open the analysis_doc.qmd file and knit it to generate the analysis document.
+<li>Open the <code>analysis_doc.qmd</code> file and try to Render the analysis document.
 <ul>
-<li>Why did the knitting fail?</li>
-<li>Check the documentation for the <code>map_data()</code> function with <code>?map_data</code>.</li>
+<li>Why did the rendering fail?</li>
+<li>Check the documentation for the <code>map_data()</code> function using <code>?ggplot2::map_data</code>. What package is still needed?</li>
 </ul></li>
 <li>Explicitly record the needed package with <code>renv::record("package_name")</code>.</li>
 <li>Check the status of the dependencies again by running <code>renv::status()</code>.
 <ul>
 <li>What has changed?</li>
 </ul></li>
-<li>Install the identified dependencies by running <code>renv::restore()</code>.</li>
-<li>Open the analysis_doc.qmd file and knit it to generate the analysis document.
+<li>Install the newly identified dependencies by running <code>renv::restore()</code>.</li>
+<li>Open the <code>analysis_doc.qmd</code> file again, and Render the analysis document.
 <ul>
 <li>Was it successful this time?</li>
-<li>Why did you need to explicitly record one of the packages? Take a look at the <code>DESCRIPTION</code> file for {ggplot2} to help understand: <code>packageDescription("ggplot2")</code>.</li>
 </ul></li>
+<li>Why did you need to explicitly record one of the packages to be able to render the document?
+<ul>
+<li>Take a look at the <code>DESCRIPTION</code> file for {ggplot2} to help understand: <code>packageDescription("ggplot2")</code>.</li>
+</ul></li>
+<li>Close the <code>explicit-record-exercises.Rproj</code> project.</li>
 </ol>
 
 

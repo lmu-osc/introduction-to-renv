@@ -357,9 +357,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li>Create an <code>.Rproj</code> in this folder, <code>init-snapshot-exercises</code>.</li>
+<li>Open the R project, <code>init-snapshot-exercises.Rproj</code>.</li>
 <li>Install the {renv} package if needed.</li>
-<li>Initialize a new project with {renv} with <code>renv::init()</code> (if not already done when creating the <code>.Rproj</code>).</li>
+<li>Initialize a new project with {renv} with <code>renv::init()</code>.</li>
 <li>Create a new R script in this folder, <code>init-snapshot-exercises</code>, called <code>script.R</code>.</li>
 <li>Write code that uses a variety of different packages.
 <ul>
@@ -375,7 +375,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>What do you notice about the results printed to the console?</li>
 </ul></li>
 <li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
-<li>(Optional) Commit your changes to your repository, and push them to GitHub.</li>
+<li>(Optional) Commit your changes to your repository, and push them to GitHub.
+<ul>
+<li>This should include a new <code>.Rprofile</code> file, the <code>renv.lock</code> file, and some components of the <code>renv</code> folder (<code>renv/.gitignore</code>, <code>renv/activate.R</code>, <code>renv/settings.json</code>).</li>
+</ul></li>
+<li>Close the R project.</li>
 </ol>
 <section id="example-code" class="level3">
 <h3 class="anchored" data-anchor-id="example-code">Example Code</h3>
