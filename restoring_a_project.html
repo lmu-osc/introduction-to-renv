@@ -379,7 +379,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This project does not appear to be using renv.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Use `renv::restore()` to install the packages defined in lockfile.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Run <code>renv::restore()</code>. If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.</li>
+<li>Option 1: Run <code>renv::restore()</code>. If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.</li>
+<li><strong>Option 2: Run <code>renv::init()</code>. Choose the option to “Restore the project from the lockfile.” This will do everything that <code>renv::restore()</code> does <em>and</em> install the packages at the same time.</strong></li>
 </ul>
 </section>
 <section id="after-upgrading-r" class="level2">
