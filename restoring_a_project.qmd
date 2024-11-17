@@ -36,7 +36,8 @@ renv::status()
 #> Use `renv::restore()` to install the packages defined in lockfile.
 ```
 
--   Run `renv::restore()`. If prompted, choose the option "Activate the project and use the project library." This will create all other necessary files and directories for a {renv} project.
+-   Option 1: Run `renv::restore()`. If prompted, choose the option "Activate the project and use the project library." This will create all other necessary files and directories for a {renv} project.
+-   **Option 2: Run `renv::init()`. Choose the option to "Restore the project from the lockfile." This will do everything that `renv::restore()` does *and* install the packages at the same time.**
 
 ## After Upgrading R
 
