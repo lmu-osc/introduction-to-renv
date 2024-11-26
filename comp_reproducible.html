@@ -52,6 +52,7 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <link href="./intro_dependencies.html" rel="next">
 <link href="./index.html" rel="prev">
+<link href="./assets/LMU-OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -60,7 +61,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b96bbe71900337c3ec9b0c3a40d54d23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b529df0bff79b15315c99e711227f49f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -298,7 +299,9 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<p><img src="./assets/LMU-OSC_logo.jpg" class="img-fluid" width="175"></p>
+</div></div>
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -415,6 +418,12 @@ div.csl-indent {
 </div>
 </div>
 <p><br></p>
+<p>Some real-world examples:</p>
+<ul>
+<li><strong>Operating systems</strong>: Windows 95 gives different results <span class="citation" data-cites="mccullough2003">(<a href="#ref-mccullough2003" role="doc-biblioref">McCullough and Vinod 2003</a>)</span>, and neuroimaging analysis results can vary based on OS <span class="citation" data-cites="glatard2015">(<a href="#ref-glatard2015" role="doc-biblioref">Glatard et al. 2015</a>)</span></li>
+<li><strong>Programming languages</strong>: R switched its default random number generating process at version 3.6.0 <span class="citation" data-cites="brodeur2024">(<a href="#ref-brodeur2024" role="doc-biblioref">Brodeur et al. 2024</a>)</span>, and R versions from 4.4.0 give different (albeit more consistent) values for the <code>density()</code> function <span class="citation" data-cites="schlicht2022">(<a href="#ref-schlicht2022" role="doc-biblioref">Schlicht 2022</a>)</span></li>
+<li><strong>Packages/libraries</strong>: JASP changed the default Bayesian ANOVA <span class="citation" data-cites="vandenbergh2023">(<a href="#ref-vandenbergh2023" role="doc-biblioref">Bergh, Wagenmakers, and Aust 2023</a>)</span></li>
+</ul>
 </section>
 </section>
 <section id="all-of-the-machines" class="level2">
@@ -435,7 +444,7 @@ Expect No One to Already Have the Required Software
 </ol>
 </div>
 </div>
-<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone <em>manutally</em> install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
+<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone <em>manually</em> install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
 <!-- footnotes -->
 
 
@@ -445,8 +454,23 @@ Expect No One to Already Have the Required Software
 
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-vandenbergh2023" class="csl-entry" role="listitem">
+Bergh, Don van den, Eric-Jan Wagenmakers, and Frederik Aust. 2023. <span>“Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (2): 25152459231168024. <a href="https://doi.org/10.1177/25152459231168024">https://doi.org/10.1177/25152459231168024</a>.
+</div>
+<div id="ref-brodeur2024" class="csl-entry" role="listitem">
+Brodeur, Abel, Derek Mikola, Nikolai Cook, Thomas Brailey, Ryan Briggs, Alexandra de Gendre, Yannick Dupraz, et al. 2024. <span>“Mass Reproducibility and Replicability: A New Hope.”</span> <a href="https://www.econstor.eu/handle/10419/289437">https://www.econstor.eu/handle/10419/289437</a>.
+</div>
 <div id="ref-erikgundersen2021" class="csl-entry" role="listitem">
 Erik Gundersen, Odd. 2021. <span>“The fundamental principles of reproducibility.”</span> <em>Philosophical Transactions. Series A, Mathematical, Physical, and Engineering Sciences</em> 379 (2197): 20200210. <a href="https://doi.org/10.1098/rsta.2020.0210">https://doi.org/10.1098/rsta.2020.0210</a>.
+</div>
+<div id="ref-glatard2015" class="csl-entry" role="listitem">
+Glatard, Tristan, Lindsay B. Lewis, Rafael Ferreira da Silva, Reza Adalat, Natacha Beck, Claude Lepage, Pierre Rioux, et al. 2015. <span>“Reproducibility of Neuroimaging Analyses Across Operating Systems.”</span> <em>Frontiers in Neuroinformatics</em> 9 (April). <a href="https://doi.org/10.3389/fninf.2015.00012">https://doi.org/10.3389/fninf.2015.00012</a>.
+</div>
+<div id="ref-mccullough2003" class="csl-entry" role="listitem">
+McCullough, B. D., and H. D. Vinod. 2003. <span>“Verifying the Solution from a Nonlinear Solver: A Case Study.”</span> <em>The American Economic Review</em> 93 (3): 873–92. <a href="https://www.jstor.org/stable/3132121">https://www.jstor.org/stable/3132121</a>.
+</div>
+<div id="ref-schlicht2022" class="csl-entry" role="listitem">
+Schlicht, Robert. 2022. <em>Bug 18337 - Issue in Stats::density.default Affecting Accuracy</em>. bugs.r-project.org. <a href="https://bugs.r-project.org/show_bug.cgi?id=18337">https://bugs.r-project.org/show_bug.cgi?id=18337</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
