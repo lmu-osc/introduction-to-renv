@@ -36,7 +36,7 @@ Upon installing R, you will have access to a number of pre-installed packages. T
 installed.packages(priority = c("base", "recommended")) %>%
   as_tibble() %>%
   select(Package, Version, Priority, Depends, Imports) %>%
-  DT::datatable(options = list(paging=TRUE, scrollY = '300px', pageLength = 11))
+  DT::datatable(options = list(paging=TRUE, scrollY = '300px', pageLength = 11), style = "bootstrap5")
 ```
 
 You will likely recognize some of these packages, such as the {stats} package, which contains many of the commonly used statistical functions that are built into R like `glm()`. Other packages, like {utils} and {survival}, contain functions for other common activities like reading in files and for performing survival analysis, respectively.
