@@ -36,7 +36,7 @@ Upon installing R, you will have access to a number of pre-installed packages. T
 installed.packages(priority = c("base", "recommended")) %>%
   as_tibble() %>%
   select(Package, Version, Priority, Depends, Imports) %>%
-  DT::datatable(options = list(paging=TRUE, scrollY = '300px', pageLength = 11))
+  DT::datatable(options = list(paging=TRUE, scrollY = '300px', pageLength = 11), style = "bootstrap5")
 ```
 
 You will likely recognize some of these packages, such as the {stats} package, which contains many of the commonly used statistical functions that are built into R like `glm()`. Other packages, like {utils} and {survival}, contain functions for other common activities like reading in files and for performing survival analysis, respectively.
@@ -90,11 +90,36 @@ cran_package_count <- cran_avail_pkgs %>%
 ![Popular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor](assets/img/cran_and_bioconductor.png)
 :::
 
+A repository is a collection of packages that are available for download from a specific location. The most common and general-purpose repository for R packages is the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), which hosted `r cran_package_count` freely available packages at the last time this page was generated on `r format(Sys.Date(), "%B %d %Y")`. Another popular repository, [Bioconductor](https://www.bioconductor.org/), also hosts several thousand packages, but these packages are focused on bioinformatics, genomics, and computational biology. 
 
-A repository is a collection of packages that are available for download from a specific location. The most common and general-purpose repository for R packages is the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), which hosted `r cran_package_count` freely available packages at the last time this page was generated on `r format(Sys.Date(), "%B %d %Y")`. Another popular repository, [Bioconductor](https://www.bioconductor.org/), also hosts several thousand packages, but these packages are focused on bioinformatics, genomics, and computational biology. Although not exactly a unified "repository," GitHub is another popular location for R packages, and many developers use it to host their R packages and to make the development process viewable by the public.
+Although not strictly "repositories," GitHub and GitLab to a lesser extent are popular locations for hosting R packages, and many developers use these services to develop their packages and distribute them to the public. Another repository option of note is [R-universe](https://r-universe.dev/search), which is a growing repository for R packages that is designed to make it easier for R users to share and discover packages. The benefit (but also downside of R-Universe) is that it is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN.
 
-Repositories are important because they provide a centralized location for R users to find and download packages. When you use the `install.packages()` function in R, you are downloading a package from a specific repository. By default, R will download packages from CRAN, but you can specify a different repository if you want to download a package from a different location. This is useful if you want to download a package from [Bioconductor](https://www.bioconductor.org/), a single GitHub repository, or the growing [R-universe](https://r-universe.dev/search) repo  for example.
+## Commonly Used Repositories 
 
-Repositories are particularly relevant for package managers, as they provide a way for the package manager to know where to look for packages. When you use a package manager to install a package, the package manager will download the package from a specific repository and install it in a specific library on your computer. By specifying the repository and library, the package manager can ensure that the correct package is downloaded and installed in the correct location. Like with managing libraries, managing download repositories manually would be a tedious task at best, and package managers also largely automate this procedure.
+### CRAN and Bioconductor
+
+As mentioned, CRAN is the most popular repository for R packages, and it is the default repository that R will use when you use the `install.packages()` function. CRAN has a strict set of guidelines for package submission, and packages are reviewed by a team of volunteers before they are accepted into the repository. This ensures that packages on CRAN are of high quality and are well-documented, which is why CRAN is often considered the gold standard for R package repositories.
+
+Bioconductor, on the other hand, is a repository specifically for packages related to bioinformatics, genomics, and computational biology. Bioconductor has its own set of guidelines for package submission, and packages are reviewed by a team of experts in the field before they are accepted into the repository. This ensures that packages on Bioconductor are also of high quality and are well-suited for use in bioinformatics and genomics research.
+
+### GitHub and GitLab
+
+GitHub and GitLab are popular version control platforms that are used by many R package developers to host their packages. These platforms are not strictly "repositories" in the same sense as CRAN and Bioconductor which are purpose-dedicated to hosting R packages, but they are often used as repositories for R packages. GitHub, in particular, is a popular platform for hosting R packages, and many R packages are available on GitHub for download and installation using the `devtools::install_github()` function.
+
+### R-universe
+
+R-universe is a newer repository for R packages that is designed to make it easier for R users to share and discover packages. R-universe is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN. However, R-universe can be a great place to find packages that are not available on CRAN or Bioconductor, and it is a good place to discover new and interesting packages that are being developed by the R community.
+
+It is, however, worth noting that almost any package available on R-Universe will also be available on CRAN, Bioconductor, or GitHub/GitLab so it is not necessary to use R-Universe to find packages that are not available on CRAN or Bioconductor.
+
+
+## Repositories and Package Managers
+
+Repositories are an essential part of the R package ecosystem, as they are the locations from which R packages are downloaded and installed. Package managers like {renv}, {packrat}, and {checkpoint} use repositories to manage package versions and dependencies, and they can help you ensure that your projects are reproducible and that the correct versions of packages are used.
+
+When you install a package using a package manager, the package manager will download the package from a repository and store it in a library on your computer. The package manager will also keep track of the version of the package that was installed and any dependencies that the package has. This makes it easy to reproduce your projects and ensure that the correct versions of packages are used.
+
+In the next section, we will discuss the various package managers that are available in R and how they can help you manage your packages and dependencies.
+
 
 [See also the Posit article on packages, libraries, and repositories.](https://solutions.posit.co/envs-pkgs/repos_and_libs/)
