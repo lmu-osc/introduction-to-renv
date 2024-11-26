@@ -52,7 +52,7 @@ When you share your code with others, you are effectively asking them to run *yo
 
 <br>
 
-::: panel-tabset
+:::::: panel-tabset
 ## Operating systems
 
 It's already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.
@@ -86,9 +86,15 @@ In the context of the R programming language, most packages are likewise compati
 ::: center
 ![](assets/img/r_packages.png)
 :::
-:::
+::::::
 
 <br>
+
+Some real-world examples:
+
+-   **Operating systems**: Windows 95 gives different results [@mccullough2003], and neuroimaging analysis results can vary based on OS [@glatard2015]
+-   **Programming languages**: R switched its default random number generating process at version 3.6.0 [@brodeur2024], and R versions from 4.4.0 give different (albeit more consistent) values for the `density()` function [@schlicht2022]
+-   **Packages/libraries**: JASP changed the default Bayesian ANOVA [@vandenbergh2023]
 
 ## All of the Machines
 
