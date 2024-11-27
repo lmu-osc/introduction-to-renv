@@ -11,7 +11,7 @@ authors:
     affiliation: "LMU Open Science Center"
     orcid: "https://orcid.org/0000-0003-0374-5625"
 title: "lmu-osc/introduction-to-renv: Initial release"
-version: v0.1.0
+version: v0.1.1
 date-released: 2024-11-27
 doi: 10.5281/zenodo.14230879
 url: "https://lmu-osc.github.io/introduction-to-renv/"
