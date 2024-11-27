@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/781914870.svg)](https://doi.org/10.5281/zenodo.14230879)
+
 # Introduction to {renv}
 
 This is a brief introduction to the {renv} package, which is a package manager for R. It is designed to make your R projects more reproducible by ensuring that the packages you use are the same across different environments.

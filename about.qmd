@@ -6,7 +6,7 @@ citation:
   title: "Introduction to {renv}"
   container-title: "LMU Open Science Center"
   url: https://lmu-osc.github.io/introduction-to-renv
-  doi: ""
+  doi: "10.5281/zenodo.14230879"
 author:
   - name: Pat Callahan
     affiliation: "LMU Open Science Center"
