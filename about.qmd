@@ -1,12 +1,23 @@
 ---
 title: "About"
+date: 2024-11-27
+citation:
+  type: "webpage"
+  title: "Introduction to {renv}"
+  container-title: "LMU Open Science Center"
+  url: https://lmu-osc.github.io/introduction-to-renv
+  doi: ""
 author:
   - name: Pat Callahan
+    affiliation: "LMU Open Science Center"
     orcid: 0000-0003-1769-7580
   - name: Florian Pargent
+    affiliation: "LMU Open Science Center"
     orcid: 0000-0002-2388-553X
   - name: Florian Kohrt
+    affiliation: "LMU Open Science Center"
     orcid: 0000-0003-0374-5625
+# google-scholar: true
 ---
 
 # Contributors
