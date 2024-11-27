@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.38">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -57,10 +58,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b663525e4b92bb903b2199e2d401bf36.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b529df0bff79b15315c99e711227f49f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6027f6a4c34b33f2ed434a3d13552814.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -351,11 +352,11 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="a-brief-definition">A Brief Definition</h2>
 <blockquote class="blockquote">
 <p>I propose to consider the question “What is reproducibility?” As reproducibility is such a central concept in science, one would think that it would be clearly defined. However, this is not the case. Reproducibility is an elusive concept. It has no single commonly agreed upon definition. Rather, it has many different, and each of these captures central, but different properties of it…</p>
-<p>– <cite>Odd Erik Gundersen</cite> <span class="citation" data-cites="erikgundersen2021">(<a href="#ref-erikgundersen2021" role="doc-biblioref">1</a>)</span></p>
+<p>– <cite>Odd Erik Gundersen</cite><span class="citation" data-cites="erikgundersen2021"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span></p>
 </blockquote>
-<p>Gundersen explores many definitions put forward for “reproducibility”, but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as “the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators” <span class="citation" data-cites="erikgundersen2021">(<a href="#ref-erikgundersen2021" role="doc-biblioref">1</a>)</span>.</p>
+<p>Gundersen explores many definitions put forward for “reproducibility”, but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as “the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators.”<span class="citation" data-cites="erikgundersen2021"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span></p>
 <p>In principle, this sounds simple enough–provide others with enough information, and they should be able to reproduce your work! Achieving this in practice is, of course, a vastly complex endeavor that requires careful planning and execution. Above all, opinions on what constitutes sufficient “documentation” or how much documentation is necessary to achieve reproducibility can vary widely.</p>
-<p>One might assume that academic publications provide all of the information required for an independent researcher to reproduce a publication; the requisite background on the topic, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In practice, a written publication generally cannot capture all of the nuances of data cleaning, exploration, and analysis employed by the original researchers. As a result, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor.</p>
+<p>One might assume that academic publications provide all of the information required for an independent researcher to reproduce a publication; the requisite background on the topic, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In practice, a written publication generally cannot capture all of the nuances of data cleaning, exploration, and analysis employed by the original researchers. As a result, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor.</p>
 <p>To address the shortcomings of written descriptions, <strong>researchers must also strive to publish their code, data, and ideally both code and data together such that the <em>complete</em> documentation of the project is available to others.</strong> This tutorial specifically covers how to document the R version and R packages used in a project to ensure that the code can be run on other machines.</p>
 </section>
 <section id="reproducible-code" class="level2">
@@ -419,9 +420,9 @@ div.csl-indent {
 <p><br></p>
 <p>Some real-world examples:</p>
 <ul>
-<li><strong>Operating systems</strong>: Windows 95 gives different results <span class="citation" data-cites="mccullough2003">(<a href="#ref-mccullough2003" role="doc-biblioref">2</a>)</span>, and neuroimaging analysis results can vary based on OS <span class="citation" data-cites="glatard2015">(<a href="#ref-glatard2015" role="doc-biblioref">3</a>)</span></li>
-<li><strong>Programming languages</strong>: R switched its default random number generating process at version 3.6.0 <span class="citation" data-cites="brodeur2024">(<a href="#ref-brodeur2024" role="doc-biblioref">4</a>)</span>, and R versions from 4.4.0 give different (albeit more consistent) values for the <code>density()</code> function <span class="citation" data-cites="schlicht2022">(<a href="#ref-schlicht2022" role="doc-biblioref">5</a>)</span></li>
-<li><strong>Packages/libraries</strong>: JASP changed the default Bayesian ANOVA <span class="citation" data-cites="vandenbergh2023">(<a href="#ref-vandenbergh2023" role="doc-biblioref">6</a>)</span></li>
+<li><strong>Operating systems</strong>: Windows 95 gives different results,<span class="citation" data-cites="mccullough2003"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span> and neuroimaging analysis results can vary based on OS<span class="citation" data-cites="glatard2015"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span></li>
+<li><strong>Programming languages</strong>: R switched its default random number generating process at version 3.6.0,<span class="citation" data-cites="brodeur2024"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span> and R versions from 4.4.0 give different (albeit more consistent) values for the <code>density()</code> function<span class="citation" data-cites="schlicht2022"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span></li>
+<li><strong>Packages/libraries</strong>: JASP changed the default Bayesian ANOVA<span class="citation" data-cites="vandenbergh2023"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span></li>
 </ul>
 </section>
 </section>
@@ -443,7 +444,7 @@ Expect No One to Already Have the Required Software
 </ol>
 </div>
 </div>
-<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone <em>manually</em> install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
+<p>In summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone <em>manually</em> install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> <strong>By managing our software dependencies</strong>, described in the next chapter.</p>
 <!-- footnotes -->
 
 
@@ -452,30 +453,37 @@ Expect No One to Already Have the Required Software
 </section>
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
-<div id="ref-erikgundersen2021" class="csl-entry" role="listitem">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Erik Gundersen O. <a href="https://doi.org/10.1098/rsta.2020.0210">The fundamental principles of reproducibility</a>. Philosophical Transactions Series A, Mathematical, Physical, and Engineering Sciences. 2021 May 17;379(2197):20200210. </div>
-</div>
-<div id="ref-mccullough2003" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">McCullough BD, Vinod HD. Verifying the solution from a nonlinear solver: A case study. The American Economic Review [Internet]. 2003;93(3):873–92. Available from: <a href="https://www.jstor.org/stable/3132121">https://www.jstor.org/stable/3132121</a></div>
-</div>
-<div id="ref-glatard2015" class="csl-entry" role="listitem">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Glatard T, Lewis LB, Ferreira da Silva R, Adalat R, Beck N, Lepage C, et al. Reproducibility of neuroimaging analyses across operating systems. Frontiers in Neuroinformatics [Internet]. 2015 Apr 24;9. Available from: <a href="https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2015.00012/full">https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2015.00012/full</a></div>
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-vandenbergh2023" class="csl-entry" role="listitem">
+Bergh, Don van den, Eric-Jan Wagenmakers, and Frederik Aust. <span>“Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6, no. 2 (April 1, 2023): 25152459231168024. <a href="https://doi.org/10.1177/25152459231168024">https://doi.org/10.1177/25152459231168024</a>.
 </div>
 <div id="ref-brodeur2024" class="csl-entry" role="listitem">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Brodeur A, Mikola D, Cook N, Brailey T, Briggs R, Gendre A de, et al. Mass Reproducibility and Replicability: A New Hope [Internet]. 2024. Available from: <a href="https://www.econstor.eu/handle/10419/289437">https://www.econstor.eu/handle/10419/289437</a></div>
+Brodeur, Abel, Derek Mikola, Nikolai Cook, Thomas Brailey, Ryan Briggs, Alexandra de Gendre, Yannick Dupraz, et al. <span>“Mass Reproducibility and Replicability: A New Hope,”</span> 2024. <a href="https://www.econstor.eu/handle/10419/289437">https://www.econstor.eu/handle/10419/289437</a>.
+</div>
+<div id="ref-erikgundersen2021" class="csl-entry" role="listitem">
+Erik Gundersen, Odd. <span>“The fundamental principles of reproducibility.”</span> <em>Philosophical Transactions. Series A, Mathematical, Physical, and Engineering Sciences</em> 379, no. 2197 (May 17, 2021): 20200210. <a href="https://doi.org/10.1098/rsta.2020.0210">https://doi.org/10.1098/rsta.2020.0210</a>.
+</div>
+<div id="ref-glatard2015" class="csl-entry" role="listitem">
+Glatard, Tristan, Lindsay B. Lewis, Rafael Ferreira da Silva, Reza Adalat, Natacha Beck, Claude Lepage, Pierre Rioux, et al. <span>“Reproducibility of Neuroimaging Analyses Across Operating Systems.”</span> <em>Frontiers in Neuroinformatics</em> 9 (April 24, 2015). <a href="https://doi.org/10.3389/fninf.2015.00012">https://doi.org/10.3389/fninf.2015.00012</a>.
+</div>
+<div id="ref-mccullough2003" class="csl-entry" role="listitem">
+McCullough, B. D., and H. D. Vinod. <span>“Verifying the Solution from a Nonlinear Solver: A Case Study.”</span> <em>The American Economic Review</em> 93, no. 3 (2003): 873–92. <a href="https://www.jstor.org/stable/3132121">https://www.jstor.org/stable/3132121</a>.
 </div>
 <div id="ref-schlicht2022" class="csl-entry" role="listitem">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Schlicht R. Bug 18337 - issue in stats::density.default affecting accuracy [Internet]. bugs.r-project.org; 2022. Available from: <a href="https://bugs.r-project.org/show_bug.cgi?id=18337">https://bugs.r-project.org/show_bug.cgi?id=18337</a></div>
-</div>
-<div id="ref-vandenbergh2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Bergh D van den, Wagenmakers EJ, Aust F. Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP. Advances in Methods and Practices in Psychological Science [Internet]. 2023 Apr 1;6(2):25152459231168024. Available from: <a href="https://doi.org/10.1177/25152459231168024">https://doi.org/10.1177/25152459231168024</a></div>
+Schlicht, Robert. <em>Bug 18337 - Issue in Stats::density.default Affecting Accuracy</em>. bugs.r-project.org, 2022. <a href="https://bugs.r-project.org/show_bug.cgi?id=18337">https://bugs.r-project.org/show_bug.cgi?id=18337</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><a href="#ref-erikgundersen2021" role="doc-biblioref"><span>“The fundamental principles of reproducibility,”</span> <em>Philosophical Transactions. Series A, Mathematical, Physical, and Engineering Sciences</em> 379, no. 2197 (May 17, 2021): 20200210, <span>https://doi.org/10.1098/rsta.2020.0210</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="#ref-erikgundersen2021" role="doc-biblioref">Erik Gundersen</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Assuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="#ref-mccullough2003" role="doc-biblioref">B. D. McCullough and H. D. Vinod, <span>“Verifying the Solution from a Nonlinear Solver: A Case Study,”</span> <em>The American Economic Review</em> 93, no. 3 (2003): 873–92, <span>https://www.jstor.org/stable/3132121</span></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="#ref-glatard2015" role="doc-biblioref">Tristan Glatard et al., <span>“Reproducibility of Neuroimaging Analyses Across Operating Systems,”</span> <em>Frontiers in Neuroinformatics</em> 9 (April 24, 2015), <span>https://doi.org/10.3389/fninf.2015.00012</span></a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="#ref-brodeur2024" role="doc-biblioref">Abel Brodeur et al., <span>“Mass Reproducibility and Replicability: A New Hope,”</span> 2024, <span>https://www.econstor.eu/handle/10419/289437</span></a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="#ref-schlicht2022" role="doc-biblioref">Robert Schlicht, <em>Bug 18337 - Issue in Stats::density.default Affecting Accuracy</em> (bugs.r-project.org, 2022), <span>https://bugs.r-project.org/show_bug.cgi?id=18337</span></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="#ref-vandenbergh2023" role="doc-biblioref">Don van den Bergh, Eric-Jan Wagenmakers, and Frederik Aust, <span>“Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP,”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6, no. 2 (April 1, 2023): 25152459231168024, <span>https://doi.org/10.1177/25152459231168024</span></a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Within reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
