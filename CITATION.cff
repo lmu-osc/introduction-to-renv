@@ -1,17 +1,20 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
 authors:
-  - name: Pat Callahan
+  - family-names: Pat
+    given-names: Callahan
     affiliation: "LMU Open Science Center"
     orcid: "https://orcid.org/0000-0003-1769-7580"
-  - name: Florian Pargent
+  - family-names: Florian
+    given-names: Pargent
     affiliation: "LMU Open Science Center"
     orcid: "https://orcid.org/0000-0002-2388-553X"
-  - name: Florian Kohrt
+  - family-names: Florian
+    given-names: Kohrt
     affiliation: "LMU Open Science Center"
     orcid: "https://orcid.org/0000-0003-0374-5625"
 title: "lmu-osc/introduction-to-renv: Initial release"
-version: v0.1.1
+version: v0.1.2
 date-released: 2024-11-27
 doi: 10.5281/zenodo.14230879
 url: "https://lmu-osc.github.io/introduction-to-renv/"
