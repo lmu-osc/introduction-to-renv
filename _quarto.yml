@@ -87,6 +87,8 @@ format:
     code-overflow: wrap
     grid:
       sidebar-width: 300px
+    include-in-header:
+      - file: matomo-analytics.html
 
 
 editor: source
