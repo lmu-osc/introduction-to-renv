@@ -1,86 +1,26 @@
 [
   {
-    "objectID": "comp_reproducible.html",
-    "href": "comp_reproducible.html",
-    "title": "Reproducibility",
+    "objectID": "ex_3.html",
+    "href": "ex_3.html",
+    "title": "Explicitly Recording Packages",
     "section": "",
-    "text": "In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.",
+    "text": "As with the previous exercise, it is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nIf you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.",
     "crumbs": [
       "Home",
-      "Background",
-      "1. Reproducibility"
+      "Exercises",
+      "Explicitly Record"
     ]
   },
   {
-    "objectID": "comp_reproducible.html#a-brief-definition",
-    "href": "comp_reproducible.html#a-brief-definition",
-    "title": "Reproducibility",
-    "section": "A Brief Definition",
-    "text": "A Brief Definition\n\nI propose to consider the question “What is reproducibility?” As reproducibility is such a central concept in science, one would think that it would be clearly defined. However, this is not the case. Reproducibility is an elusive concept. It has no single commonly agreed upon definition. Rather, it has many different, and each of these captures central, but different properties of it…\n– Odd Erik Gundersen1\n\nGundersen explores many definitions put forward for “reproducibility”, but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as “the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators.”2\nIn principle, this sounds simple enough–provide others with enough information, and they should be able to reproduce your work! Achieving this in practice is, of course, a vastly complex endeavor that requires careful planning and execution. Above all, opinions on what constitutes sufficient “documentation” or how much documentation is necessary to achieve reproducibility can vary widely.\nOne might assume that academic publications provide all of the information required for an independent researcher to reproduce a publication; the requisite background on the topic, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.3 In practice, a written publication generally cannot capture all of the nuances of data cleaning, exploration, and analysis employed by the original researchers. As a result, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor.\nTo address the shortcomings of written descriptions, researchers must also strive to publish their code, data, and ideally both code and data together such that the complete documentation of the project is available to others. This tutorial specifically covers how to document the R version and R packages used in a project to ensure that the code can be run on other machines.",
+    "objectID": "ex_3.html#instructions",
+    "href": "ex_3.html#instructions",
+    "title": "Explicitly Recording Packages",
+    "section": "Instructions",
+    "text": "Instructions\n\nOpen the explicit-record-exercises.Rproj project.\nCheck the identified dependencies by running renv::dependencies().\n\nWhat packages are identified as direct dependencies and why?\n\nInitiate {renv} by running renv::init().\nDouble-check the status of the dependencies by running renv::status().\n\nIs the lock file in-sync with the project library? (Hint: it should be.)\n\nOpen the analysis_doc.qmd file and try to Render the analysis document.\n\nWhy did the rendering fail?\nCheck the documentation for the map_data() function using ?ggplot2::map_data. What package is still needed?\n\nExplicitly record the needed package with renv::record(\"package_name\").\nCheck the status of the dependencies again by running renv::status().\n\nWhat has changed?\n\nInstall the newly identified dependencies by running renv::restore().\nOpen the analysis_doc.qmd file again, and Render the analysis document.\n\nWas it successful this time?\n\nWhy did you need to explicitly record one of the packages to be able to render the document?\n\nTake a look at the DESCRIPTION file for {ggplot2} to help understand: packageDescription(\"ggplot2\").\n\nClose the explicit-record-exercises.Rproj project.",
     "crumbs": [
       "Home",
-      "Background",
-      "1. Reproducibility"
-    ]
-  },
-  {
-    "objectID": "comp_reproducible.html#reproducible-code",
-    "href": "comp_reproducible.html#reproducible-code",
-    "title": "Reproducibility",
-    "section": "Reproducible Code",
-    "text": "Reproducible Code\nWhy should we concern ourselves with making reproducible code specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one’s own work, to make debugging and troubleshooting easier, and to collaborate with others.\nIn the context of this tutorial, we will focus on the practical aspects of making code reproducible. This mainly means taking steps to ensure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "1. Reproducibility"
-    ]
-  },
-  {
-    "objectID": "comp_reproducible.html#your-computer",
-    "href": "comp_reproducible.html#your-computer",
-    "title": "Reproducibility",
-    "section": "Your Computer",
-    "text": "Your Computer\nGetting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)\nHowever, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software you need, perhaps have set up specific paths, and configured various settings to your preferences.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "1. Reproducibility"
-    ]
-  },
-  {
-    "objectID": "comp_reproducible.html#someone-elses-computer",
-    "href": "comp_reproducible.html#someone-elses-computer",
-    "title": "Reproducibility",
-    "section": "Someone Else’s Computer",
-    "text": "Someone Else’s Computer\nWhen you share your code with others, you are effectively asking them to run your code on their machine, and it is unlikely that their computer is set up exactly like yours given how many degrees of freedom there are in operating systems, programming languages, software, and the different versions of these. A non-exhaustive list of examples where there might be software discrepancies are detailed below.\n\nMajor Machine & Software Differences\n\n\nOperating systemsProgramming languagesPackages/Libraries (Add-Ons)\n\n\nIt’s already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.\nHowever, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.\n\n\n\n\n\nAnother obvious difference is the programming language used in a project. For example, a project written in R will not run (correctly) in a Python, MATLAB, or Julia environment.\nLess obvious, however, and more common as a pain-point, are the differences in versions of programming languages. For example, a project written in Python 3.8 might not run in Python 3.9 due to changes in the language, and most R packages are only tested for compatibility back to the 5 most recent minor releases of R (e.g. 4.4, 4.3, 4.2, 4.1, 4.0).\nFortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.\n\n\n\n\n\nThe most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.\nKeeping track of which packages are used and the specific versions of those packages is a major challenge in reproducibility.\nIn the context of the R programming language, most packages are likewise compatible across operating systems.\n\n\n\n\n\n\n\nSome real-world examples:\n\nOperating systems: Windows 95 gives different results,4 and neuroimaging analysis results can vary based on OS5\nProgramming languages: R switched its default random number generating process at version 3.6.0,6 and R versions from 4.4.0 give different (albeit more consistent) values for the density() function7\nPackages/libraries: JASP changed the default Bayesian ANOVA8",
-    "crumbs": [
-      "Home",
-      "Background",
-      "1. Reproducibility"
-    ]
-  },
-  {
-    "objectID": "comp_reproducible.html#all-of-the-machines",
-    "href": "comp_reproducible.html#all-of-the-machines",
-    "title": "Reproducibility",
-    "section": "All of the Machines",
-    "text": "All of the Machines\n\n\n\n\n\n\nExpect No One to Already Have the Required Software\n\n\n\n\nDon’t expect others to have the software you rely on.\nEven if others have the software, don’t expect them to have the same version.\n\n\n\nIn summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone manually install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?9 By managing our software dependencies, described in the next chapter.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "1. Reproducibility"
-    ]
-  },
-  {
-    "objectID": "comp_reproducible.html#footnotes",
-    "href": "comp_reproducible.html#footnotes",
-    "title": "Reproducibility",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\n“The fundamental principles of reproducibility,” Philosophical Transactions. Series A, Mathematical, Physical, and Engineering Sciences 379, no. 2197 (May 17, 2021): 20200210, https://doi.org/10.1098/rsta.2020.0210.↩︎\nErik Gundersen.↩︎\nAssuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.↩︎\nB. D. McCullough and H. D. Vinod, “Verifying the Solution from a Nonlinear Solver: A Case Study,” The American Economic Review 93, no. 3 (2003): 873–92, https://www.jstor.org/stable/3132121.↩︎\nTristan Glatard et al., “Reproducibility of Neuroimaging Analyses Across Operating Systems,” Frontiers in Neuroinformatics 9 (April 24, 2015), https://doi.org/10.3389/fninf.2015.00012.↩︎\nAbel Brodeur et al., “Mass Reproducibility and Replicability: A New Hope,” 2024, https://www.econstor.eu/handle/10419/289437.↩︎\nRobert Schlicht, Bug 18337 - Issue in Stats::density.default Affecting Accuracy (bugs.r-project.org, 2022), https://bugs.r-project.org/show_bug.cgi?id=18337.↩︎\nDon van den Bergh, Eric-Jan Wagenmakers, and Frederik Aust, “Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP,” Advances in Methods and Practices in Psychological Science 6, no. 2 (April 1, 2023): 25152459231168024, https://doi.org/10.1177/25152459231168024.↩︎\nWithin reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.↩︎",
-    "crumbs": [
-      "Home",
-      "Background",
-      "1. Reproducibility"
+      "Exercises",
+      "Explicitly Record"
     ]
   },
   {
@@ -130,37 +70,6 @@
       "Optional Content",
       "Caching"
     ]
-  },
-  {
-    "objectID": "ex_3.html",
-    "href": "ex_3.html",
-    "title": "Explicitly Recording Packages",
-    "section": "",
-    "text": "As with the previous exercise, it is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nIf you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Explicitly Record"
-    ]
-  },
-  {
-    "objectID": "ex_3.html#instructions",
-    "href": "ex_3.html#instructions",
-    "title": "Explicitly Recording Packages",
-    "section": "Instructions",
-    "text": "Instructions\n\nOpen the explicit-record-exercises.Rproj project.\nCheck the identified dependencies by running renv::dependencies().\n\nWhat packages are identified as direct dependencies and why?\n\nInitiate {renv} by running renv::init().\nDouble-check the status of the dependencies by running renv::status().\n\nIs the lock file in-sync with the project library? (Hint: it should be.)\n\nOpen the analysis_doc.qmd file and try to Render the analysis document.\n\nWhy did the rendering fail?\nCheck the documentation for the map_data() function using ?ggplot2::map_data. What package is still needed?\n\nExplicitly record the needed package with renv::record(\"package_name\").\nCheck the status of the dependencies again by running renv::status().\n\nWhat has changed?\n\nInstall the newly identified dependencies by running renv::restore().\nOpen the analysis_doc.qmd file again, and Render the analysis document.\n\nWas it successful this time?\n\nWhy did you need to explicitly record one of the packages to be able to render the document?\n\nTake a look at the DESCRIPTION file for {ggplot2} to help understand: packageDescription(\"ggplot2\").\n\nClose the explicit-record-exercises.Rproj project.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Explicitly Record"
-    ]
-  },
-  {
-    "objectID": "LICENSE-CODE.html",
-    "href": "LICENSE-CODE.html",
-    "title": "Creative Commons Zero v1.0 Universal",
-    "section": "",
-    "text": "Creative Commons Zero v1.0 Universal\nCREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS INFORMATION ON AN “AS-IS” BASIS. CREATIVE COMMONS MAKES NO WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.\n\nStatement of Purpose\nThe laws of most jurisdictions throughout the world automatically confer exclusive Copyright and Related Rights (defined below) upon the creator and subsequent owner(s) (each and all, an “owner”) of an original work of authorship and/or a database (each, a “Work”).\nCertain owners wish to permanently relinquish those rights to a Work for the purpose of contributing to a commons of creative, cultural and scientific works (“Commons”) that the public can reliably and without fear of later claims of infringement build upon, modify, incorporate in other works, reuse and redistribute as freely as possible in any form whatsoever and for any purposes, including without limitation commercial purposes. These owners may contribute to the Commons to promote the ideal of a free culture and the further production of creative, cultural and scientific works, or to gain reputation or greater distribution for their Work in part through the use and efforts of others.\nFor these and/or other purposes and motivations, and without any expectation of additional consideration or compensation, the person associating CC0 with a Work (the “Affirmer”), to the extent that he or she is an owner of Copyright and Related Rights in the Work, voluntarily elects to apply CC0 to the Work and publicly distribute the Work under its terms, with knowledge of his or her Copyright and Related Rights in the Work and the meaning and intended legal effect of CC0 on those rights.\n\nCopyright and Related Rights. A Work made available under CC0 may be protected by copyright and related or neighboring rights (“Copyright and Related Rights”). Copyright and Related Rights include, but are not limited to, the following:\n\nthe right to reproduce, adapt, distribute, perform, display, communicate, and translate a Work;\nmoral rights retained by the original author(s) and/or performer(s);\npublicity and privacy rights pertaining to a person’s image or likeness depicted in a Work;\nrights protecting against unfair competition in regards to a Work, subject to the limitations in paragraph 4(a), below;\nrights protecting the extraction, dissemination, use and reuse of data in a Work;\ndatabase rights (such as those arising under Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, and under any national implementation thereof, including any amended or successor version of such directive); and\nother similar, equivalent or corresponding rights throughout the world based on applicable law or treaty, and any national implementations thereof.\n\nWaiver. To the greatest extent permitted by, but not in contravention of, applicable law, Affirmer hereby overtly, fully, permanently, irrevocably and unconditionally waives, abandons, and surrenders all of Affirmer’s Copyright and Related Rights and associated claims and causes of action, whether now known or unknown (including existing as well as future claims and causes of action), in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “Waiver”). Affirmer makes the Waiver for the benefit of each member of the public at large and to the detriment of Affirmer’s heirs and successors, fully intending that such Waiver shall not be subject to revocation, rescission, cancellation, termination, or any other legal or equitable action to disrupt the quiet enjoyment of the Work by the public as contemplated by Affirmer’s express Statement of Purpose.\nPublic License Fallback. Should any part of the Waiver for any reason be judged legally invalid or ineffective under applicable law, then the Waiver shall be preserved to the maximum extent permitted taking into account Affirmer’s express Statement of Purpose. In addition, to the extent the Waiver is so judged Affirmer hereby grants to each affected person a royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and unconditional license to exercise Affirmer’s Copyright and Related Rights in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “License”). The License shall be deemed effective as of the date CC0 was applied by Affirmer to the Work. Should any part of the License for any reason be judged legally invalid or ineffective under applicable law, such partial invalidity or ineffectiveness shall not invalidate the remainder of the License, and in such case Affirmer hereby affirms that he or she will not (i) exercise any of his or her remaining Copyright and Related Rights in the Work or (ii) assert any associated claims and causes of action with respect to the Work, in either case contrary to Affirmer’s express Statement of Purpose.\nLimitations and Disclaimers.\n\nNo trademark or patent rights held by Affirmer are waived, abandoned, surrendered, licensed or otherwise affected by this document.\nAffirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.\nAffirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person’s Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.\nAffirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "technical_definitions.html",
@@ -307,6 +216,54 @@
     ]
   },
   {
+    "objectID": "ex_2.html",
+    "href": "ex_2.html",
+    "title": "Using restore()",
+    "section": "",
+    "text": "As with the previous exercise, it is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nIf you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Restore"
+    ]
+  },
+  {
+    "objectID": "ex_2.html#exercise-notes",
+    "href": "ex_2.html#exercise-notes",
+    "title": "Using restore()",
+    "section": "Exercise Notes",
+    "text": "Exercise Notes\nRestoring a project library from a renv.lock file can generally be accomplished in just two steps:\n\nOpen the RStudio .RProj file.\nRun renv::restore().\n\nYou could technically complete just these two steps for this exercise, and you would essentially be finished. However, the exercise is designed to help you understand the process of restoring a project library, and to help you see what happens when your project library does not match the required packages laid out in renv.lock file.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Restore"
+    ]
+  },
+  {
+    "objectID": "ex_2.html#instructions",
+    "href": "ex_2.html#instructions",
+    "title": "Using restore()",
+    "section": "Instructions",
+    "text": "Instructions\nIMPORTANT: This exercise expects you have version 4.4.X of R installed. If you have a different version, please install the correct version before starting the exercise. Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.\n\nOpen the restore-exercises.Rproj file.\n\nUpon opening, you should be greeted with a message similar to this:\n# Bootstrapping renv 1.0.7 ---------------------------------------------------\n- Downloading renv ... OK\n- Installing renv  ... OK\n\n- Project '~/Desktop/introduction-to-renv-exercises/restore-exercises' loaded. [renv 1.0.7]\n- One or more packages recorded in the lockfile are not installed.\n- Use `renv::status()` for more details.\n\nAt the console, run the command renv::status().\n\nWhat is out of sync and why?\n\nAt the console, run the command renv::dependencies(). For better formatting, you can run View(renv::dependencies()).\n\nWhat packages do you see listed as direct dependencies?\nThe Source column indicates which files use these packages. Knowing this, can you list the package dependencies by file?\nNote: some versions of Quarto/RStudio may present you with the warning message below. If this occurs, then install the package, and run renv::dependencies() again.\nThe 'yaml' package is required to parse dependencies within R Markdown files. Consider installing it with install.packages(\"yaml\").\" \n\nOpen the presentation.rmd file.\n\nNote: RStudio may prompt you to install several packages in a yellow highlighted bar. You can ignore this request. A later step will address this.\n{rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?\n\nWe want to simulate running someone else’s analysis without first installing the same packages as them: try to Render1 the presentation.rmd file.\n\nYou will be prompted to install some packages in a pop-up window. This is to install the {rmarkdown} package and its dependencies. Accept the prompt.\nThe {rmarkdown} package and its dependencies should install, but the rendering still fails. Why do you think this is? Take a careful look at the error message, and align it with the content of the presentation.rmd file.\n\nWe will now need to install all R packages required for this exercise. Run the command renv::restore().\n\nWhat happens?\nIf prompted with the question “Do you want to proceed? [Y/n]:”, type Y and press Enter.”\n\nOpen the billboard_100.R file, and run the code by pressing the Source button near the top right hand corner of the script.\n\nThis should create the top_billboard_rankings.rds file, needed in the next step.\n\nTry to render the presentation.rmd file.\n\nWhat happens?\n\nClose the project restore-exercises.Rproj.\n\nCongrats! You have restored someone else’s project and successfully rendered their analysis.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Restore"
+    ]
+  },
+  {
+    "objectID": "ex_2.html#footnotes",
+    "href": "ex_2.html#footnotes",
+    "title": "Using restore()",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n“Rendering” an RMarkdown .rmd, Quarto .qmd, or similar file simply means you are generating the output file (e.g., .html, .pdf, etc.) from the source file. In RStudio, you can do this by clicking the “Knit” or “Render” button depending on your file type and version of RStudio.↩︎",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Restore"
+    ]
+  },
+  {
     "objectID": "LICENSE.html",
     "href": "LICENSE.html",
     "title": "Creative Commons Attribution-ShareAlike 4.0 International",
@@ -357,6 +314,194 @@
     ]
   },
   {
+    "objectID": "dependencies_in_r.html",
+    "href": "dependencies_in_r.html",
+    "title": "Dependency Management in R",
+    "section": "",
+    "text": "This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.\nThe goal of package managers in R are to ensure that the packages you need are downloaded from a defined repository and installed in the libraries you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhog}, and {renv}.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#packrat",
+    "href": "dependencies_in_r.html#packrat",
+    "title": "Dependency Management in R",
+    "section": "{packrat}",
+    "text": "{packrat}\nThe {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.\nIt was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#groundhog",
+    "href": "dependencies_in_r.html#groundhog",
+    "title": "Dependency Management in R",
+    "section": "{groundhog}",
+    "text": "{groundhog}\n{groundhog} is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:\ninstall.packages(\"groundhog\")\nlibrary(\"groundhog\")\npkgs &lt;- c(\"rio\",\"metafor\")\ngroundhog.library(pkgs, \"2023-09-01\")\nThis example demonstrates a scenario in which you would like to install the rio and metafor packages as they were on September 1st, 2023. The groundhog.library() function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the library() call for groundhog.library() is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.\nThe other main benefit of using {groundhog} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhog}.\nThe package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhog} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhog} especially because of the professional support and software development the package receives from Posit.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#renv",
+    "href": "dependencies_in_r.html#renv",
+    "title": "Dependency Management in R",
+    "section": "{renv}",
+    "text": "{renv}\n{renv} is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.\nMore to the focus of this tutorial, however, {renv} greatly assists in making your project reproducible by creating a “snapshot” of your package dependencies in as few as two commands:\nrenv::init()\nrenv::snapshot()\nThe results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named renv::restore() function.\n\nPros and Cons\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.1.1). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhog} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "dependencies_in_r.html#footnotes",
+    "href": "dependencies_in_r.html#footnotes",
+    "title": "Dependency Management in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.↩︎",
+    "crumbs": [
+      "Home",
+      "Background",
+      "4. R Package Managers"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the {renv} Tutorial!",
+    "section": "",
+    "text": "Tutorial Overview\nThis self-paced tutorial is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components of dependency management and R. Content has been written with novice R users in mind, but this tutorial (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.\nThe tutorial is split into the following sections:\n\nBackground introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.\n{renv} discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful. You can jump to this section if you don’t have time for the background.\nExercises contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.\nOptional Content dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.\n\n\n\n\n\n\n\nRecommended Software\n\n\n\nThis tutorial assumes you have the following software installed:\n\nR, recommend v4.4.X or more recent\nRStudio\n{renv}, installed with install.packages(\"renv\") from within R\n\nAlthough optional for the general content in this tutorial, knowledge of git and GitHub will be helpful for the exercises especially if you would like to receive feedback or troubleshoot issues remotely. Check out our git and GitHub tutorial if needed!\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "LICENSE-CODE.html",
+    "href": "LICENSE-CODE.html",
+    "title": "Creative Commons Zero v1.0 Universal",
+    "section": "",
+    "text": "Creative Commons Zero v1.0 Universal\nCREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS INFORMATION ON AN “AS-IS” BASIS. CREATIVE COMMONS MAKES NO WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.\n\nStatement of Purpose\nThe laws of most jurisdictions throughout the world automatically confer exclusive Copyright and Related Rights (defined below) upon the creator and subsequent owner(s) (each and all, an “owner”) of an original work of authorship and/or a database (each, a “Work”).\nCertain owners wish to permanently relinquish those rights to a Work for the purpose of contributing to a commons of creative, cultural and scientific works (“Commons”) that the public can reliably and without fear of later claims of infringement build upon, modify, incorporate in other works, reuse and redistribute as freely as possible in any form whatsoever and for any purposes, including without limitation commercial purposes. These owners may contribute to the Commons to promote the ideal of a free culture and the further production of creative, cultural and scientific works, or to gain reputation or greater distribution for their Work in part through the use and efforts of others.\nFor these and/or other purposes and motivations, and without any expectation of additional consideration or compensation, the person associating CC0 with a Work (the “Affirmer”), to the extent that he or she is an owner of Copyright and Related Rights in the Work, voluntarily elects to apply CC0 to the Work and publicly distribute the Work under its terms, with knowledge of his or her Copyright and Related Rights in the Work and the meaning and intended legal effect of CC0 on those rights.\n\nCopyright and Related Rights. A Work made available under CC0 may be protected by copyright and related or neighboring rights (“Copyright and Related Rights”). Copyright and Related Rights include, but are not limited to, the following:\n\nthe right to reproduce, adapt, distribute, perform, display, communicate, and translate a Work;\nmoral rights retained by the original author(s) and/or performer(s);\npublicity and privacy rights pertaining to a person’s image or likeness depicted in a Work;\nrights protecting against unfair competition in regards to a Work, subject to the limitations in paragraph 4(a), below;\nrights protecting the extraction, dissemination, use and reuse of data in a Work;\ndatabase rights (such as those arising under Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, and under any national implementation thereof, including any amended or successor version of such directive); and\nother similar, equivalent or corresponding rights throughout the world based on applicable law or treaty, and any national implementations thereof.\n\nWaiver. To the greatest extent permitted by, but not in contravention of, applicable law, Affirmer hereby overtly, fully, permanently, irrevocably and unconditionally waives, abandons, and surrenders all of Affirmer’s Copyright and Related Rights and associated claims and causes of action, whether now known or unknown (including existing as well as future claims and causes of action), in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “Waiver”). Affirmer makes the Waiver for the benefit of each member of the public at large and to the detriment of Affirmer’s heirs and successors, fully intending that such Waiver shall not be subject to revocation, rescission, cancellation, termination, or any other legal or equitable action to disrupt the quiet enjoyment of the Work by the public as contemplated by Affirmer’s express Statement of Purpose.\nPublic License Fallback. Should any part of the Waiver for any reason be judged legally invalid or ineffective under applicable law, then the Waiver shall be preserved to the maximum extent permitted taking into account Affirmer’s express Statement of Purpose. In addition, to the extent the Waiver is so judged Affirmer hereby grants to each affected person a royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and unconditional license to exercise Affirmer’s Copyright and Related Rights in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “License”). The License shall be deemed effective as of the date CC0 was applied by Affirmer to the Work. Should any part of the License for any reason be judged legally invalid or ineffective under applicable law, such partial invalidity or ineffectiveness shall not invalidate the remainder of the License, and in such case Affirmer hereby affirms that he or she will not (i) exercise any of his or her remaining Copyright and Related Rights in the Work or (ii) assert any associated claims and causes of action with respect to the Work, in either case contrary to Affirmer’s express Statement of Purpose.\nLimitations and Disclaimers.\n\nNo trademark or patent rights held by Affirmer are waived, abandoned, surrendered, licensed or otherwise affected by this document.\nAffirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.\nAffirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person’s Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.\nAffirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "outline.html",
+    "href": "outline.html",
+    "title": "outline",
+    "section": "",
+    "text": "Software reproducibility\n\n\nwhat is it?\nwhat are the goals?\nwhat needs to be tracked?\n\nvaries based on project needs. a completely reproducible system would have the same versions of software on the same versions of the operating system on the same hardware models. The hardware aspect is difficult enough as is, but softwares also have a variety of different versions, sometimes with minor changes that won’t affect output in any noticeable way, and sometimes those changes are breaking such that code simply no longer runs, or worse, the code still runs but provides different results than expected\n\nwhat are the challenges?\n\n\nDependency Mangement\n\n\nwhat is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.\nthese can be managed informally with e.g. a written list of softwares used and versions if needed.\n\npros: there’s little technical knowledge needed here. anyone can type these out.\ncons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.\n\nwhat does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.\nHowever, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)\n\n\nGiven the complexity in all of this, automated solutions for dependency tracking are recommended.\nPython: requirements.txt, Pipfile, and pyproject.toml for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.\n\nthis tutorial focuses on R and {renv} so no further comparison of these will be provided here\n\nR: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem\n\n\nWhy {renv}?\n\n\n{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.\n{groundhogr}: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address some shortcomings of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.\n{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g. 1.X+1.X or a major release to e.g. 2.X.X)\n\npros:\n\ndeveloped by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues\nlikely the most popular option already. learning this is a transferable skill between academia and industry.\nintegration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions because Posit has developed extensions that make this easier.\nit works at a project level (i.e. it should be paired with the use of an R Project/.RProj file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "embed_and_use.html",
+    "href": "embed_and_use.html",
+    "title": "Alternative Workflow: embed() and use()",
+    "section": "",
+    "text": "https://rstudio.github.io/renv/reference/embed.html\nThis {renv} workshop focused on the main workflow of renv which is to use renv::init() to create a new project with an .Rproj file, and then to use renv::snapshot() to create a lockfile. This lockfile is then used to restore the project on another machine or to share with collaborators.\nHowever, there are two other functions that are useful for some workflows: renv::embed() and renv::use(). These functions are useful when you simply want to include packages in a project by embedding them in a script in your library. Typically you will see people include install.packages() calls at the top of their scripts to ensure that the necessary packages are installed. This can be improved upon by using renv::embed().\nrenv::embed() detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to renv::use() at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.\nThe downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use renv::embed() or a full lockfile.\n\n\n\n Back to top",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "`embed()` and `use()`"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Contributors\nThis site was authored by Pat Callahan with contributions and feedback from Florian Pargent and Florian Kohrt.\n\n\nLicenses\nThe overall project is licensed under the CC BY-SA 4.0 license found at LICENSE; all code snippets are additionally licensed under the CC0 1.0 Universal license found at LICENSE-CODE.\nWhy two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and configuration files. This is a common practice for websites that include code snippets and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.\n\n\nNotes\nThis tutorial was primarily written in 2024 using {renv} version 1.0.11. Major changes to the {renv} package are unlikely to occur in the near future, but it is always a good idea to check the package’s website for the most up-to-date information, and to confirm that our tutorial is not out-of-date.\n\n\n\n\n Back to topCitationBibTeX citation:@online{callahan2024,\n  author = {Callahan, Pat and Pargent, Florian and Kohrt, Florian},\n  title = {Introduction to \\{Renv\\}},\n  date = {2024-11-27},\n  url = {https://lmu-osc.github.io/introduction-to-renv},\n  doi = {10.5281/zenodo.14230879},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nCallahan, Pat, Florian Pargent, and Florian Kohrt. “Introduction\nto {Renv}.” LMU Open Science Center, November 27, 2024. https://doi.org/10.5281/zenodo.14230879."
+  },
+  {
+    "objectID": "ex_init_snapshot.html",
+    "href": "ex_init_snapshot.html",
+    "title": "Initialize and Snapshot",
+    "section": "",
+    "text": "The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is recommended that you fork the intro-to-renv-exercises repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nHowever, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Init and Snapshot"
+    ]
+  },
+  {
+    "objectID": "ex_init_snapshot.html#instructions",
+    "href": "ex_init_snapshot.html#instructions",
+    "title": "Initialize and Snapshot",
+    "section": "Instructions",
+    "text": "Instructions\n\nOpen the R project, init-snapshot-exercises.Rproj.\nInstall the {renv} package if needed.\nInitialize a new project with {renv} with renv::init().\nCreate a new R script in this folder, init-snapshot-exercises, called script.R.\nWrite code that uses a variety of different packages.\n\nTry experimenting with calls to library() and namespacing functions e.g. package::function(). If you’re short on time, there’s some example code included below.\n\nSave the script.\nRun the renv::dependencies() function to see the new dependencies of your project.\n\nWhat packages are listed? Is this what you expected?\n\nCheck the status of your project with renv::status().\n\nWhat do you notice about the results printed to the console?\n\nSave these new dependencies to the renv.lock file with renv::snapshot().\n(Optional) Commit your changes to your repository, and push them to GitHub.\n\nThis should include a new .Rprofile file, the renv.lock file, and some components of the renv folder (renv/.gitignore, renv/activate.R, renv/settings.json).\n\nClose the R project.\n\n\nExample Code\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Read the iris dataset\ndata(iris)\n\n# Print the first 6 rows\nhead(iris)\n\n# Create a scatter plot of Sepal.Length and Sepal.Width\nggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +\n  geom_point()\n  \n# Perform some data analysis using dplyr\niris %&gt;%\n  group_by(Species) %&gt;%\n  summarise(mean_sepal_length = mean(Sepal.Length))\n  \n# Create a linear mixed effects model with {lme4}\nlme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Init and Snapshot"
+    ]
+  },
+  {
+    "objectID": "restoring_a_project.html",
+    "href": "restoring_a_project.html",
+    "title": "Restoring Another Project",
+    "section": "",
+    "text": "The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the renv.lock file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.\nWe will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Restoring Projects"
+    ]
+  },
+  {
+    "objectID": "restoring_a_project.html#from-a-github-repo",
+    "href": "restoring_a_project.html#from-a-github-repo",
+    "title": "Restoring Another Project",
+    "section": "From a GitHub Repo",
+    "text": "From a GitHub Repo\nRestoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo should always have all of the required files for restoring a project including the renv.lock file, the renv folder, the *.Rproj file, and the R scripts. Note that repos generally do not (and should not) contain the renv/library folder–this is intended behavior. The renv/library contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines1. Moreover, the renv/library folder can be quite large and is not necessary for restoring a project.\nThe steps for restoring a project from a GitHub repository are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Restoring Projects"
+    ]
+  },
+  {
+    "objectID": "restoring_a_project.html#from-a-lockfile",
+    "href": "restoring_a_project.html#from-a-lockfile",
+    "title": "Restoring Another Project",
+    "section": "From a lockfile",
+    "text": "From a lockfile\nYou may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the renv.lock file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:\n\nObtain the renv.lock file from your collaborators.\nPlace the renv.lock in the same directory as your project’s *.Rproj file.\nRun renv::status(). The results will look similar to this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nOption 1: Run renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\nOption 2: Run renv::init(). Choose the option to “Restore the project from the lockfile.” This will do everything that renv::restore() does and install the packages at the same time.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Restoring Projects"
+    ]
+  },
+  {
+    "objectID": "restoring_a_project.html#after-upgrading-r",
+    "href": "restoring_a_project.html#after-upgrading-r",
+    "title": "Restoring Another Project",
+    "section": "After Upgrading R",
+    "text": "After Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the caching chapter, but a summarized version is also provided here.\n\nTo first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: major.minor.patch. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.\nIf you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:\nThe first option is to update your project to use the new version of R. This can be done by running renv::update() to update the packages in your project (particularly the base R packages that came with the new version of R), and then running renv::snapshot() to update the renv.lock file.\nThe second option is to switch between R versions using a tool like rswitch or rig. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Restoring Projects"
+    ]
+  },
+  {
+    "objectID": "restoring_a_project.html#footnotes",
+    "href": "restoring_a_project.html#footnotes",
+    "title": "Restoring Another Project",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nSee the Caching chapter for more information on the renv/library folder.↩︎",
+    "crumbs": [
+      "Home",
+      "{renv}",
+      "3. Restoring Projects"
+    ]
+  },
+  {
     "objectID": "advanced_topics.html",
     "href": "advanced_topics.html",
     "title": "Advanced Topics",
@@ -378,68 +523,6 @@
       "Home",
       "Optional Content",
       "Advanced Topics"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Contributors\nThis site was authored by Pat Callahan with contributions and feedback from Florian Pargent and Florian Kohrt.\n\n\nLicenses\nThe overall project is licensed under the CC BY-SA 4.0 license found at LICENSE; all code snippets are additionally licensed under the CC0 1.0 Universal license found at LICENSE-CODE.\nWhy two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and configuration files. This is a common practice for websites that include code snippets and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.\n\n\nNotes\nThis tutorial was primarily written in 2024 using {renv} version 1.0.11. Major changes to the {renv} package are unlikely to occur in the near future, but it is always a good idea to check the package’s website for the most up-to-date information, and to confirm that our tutorial is not out-of-date.\n\n\n\n\n Back to topCitationBibTeX citation:@online{callahan2024,\n  author = {Callahan, Pat and Pargent, Florian and Kohrt, Florian},\n  title = {Introduction to \\{Renv\\}},\n  date = {2024-11-27},\n  url = {https://lmu-osc.github.io/introduction-to-renv},\n  doi = {10.5281/zenodo.14230879},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nCallahan, Pat, Florian Pargent, and Florian Kohrt. “Introduction\nto {Renv}.” LMU Open Science Center, November 27, 2024. https://doi.org/10.5281/zenodo.14230879."
-  },
-  {
-    "objectID": "outline.html",
-    "href": "outline.html",
-    "title": "outline",
-    "section": "",
-    "text": "Software reproducibility\n\n\nwhat is it?\nwhat are the goals?\nwhat needs to be tracked?\n\nvaries based on project needs. a completely reproducible system would have the same versions of software on the same versions of the operating system on the same hardware models. The hardware aspect is difficult enough as is, but softwares also have a variety of different versions, sometimes with minor changes that won’t affect output in any noticeable way, and sometimes those changes are breaking such that code simply no longer runs, or worse, the code still runs but provides different results than expected\n\nwhat are the challenges?\n\n\nDependency Mangement\n\n\nwhat is it? the process/steps for actually controlling and documenting the softwares and specific versions used in a project.\nthese can be managed informally with e.g. a written list of softwares used and versions if needed.\n\npros: there’s little technical knowledge needed here. anyone can type these out.\ncons: inexact, error prone, still requires another user to manually download each package/library by hand, and (big issue) the dependencies of packages are not explicitly declared.\n\nwhat does that last point mean? many packages or libraries that one will download also depend on other software packages. When downloading a package, the required dependencies are generally declared and they should be downloaded too. However, not all packages/libraries will declare specific versions of their dependencies, and a well-developed project will track these too.\nHowever, when including package dependencies, a project that appears to only use 5-10 libraries can actually be using a few hundred. (Note that this process works recursively.)\n\n\nGiven the complexity in all of this, automated solutions for dependency tracking are recommended.\nPython: requirements.txt, Pipfile, and pyproject.toml for pip, pipenv, and poetry respectively can, generally speaking, be used for library management and for declaring necessary Python versions.\n\nthis tutorial focuses on R and {renv} so no further comparison of these will be provided here\n\nR: {renv}, {packrat}, and {groundhogr} are the major options in the R ecosystem\n\n\nWhy {renv}?\n\n\n{packrat} was for many years the most popular environment/dependency manager package for R. It is maintained by RStudio/Posit, and still receives bug updates. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.\n{groundhogr}: this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address some shortcomings of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhogr} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhogr}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option.\n{renv}: this is another one of Posit’s inventions, and is now in its 1.X.X version iterations meaning it can be considered stable without any breaking changes likely to occur at least for many years. (This would generally be indicated with a minor release to e.g. 1.X+1.X or a major release to e.g. 2.X.X)\n\npros:\n\ndeveloped by professional software engineers at Posit so there is paid support. development, however, is also done open-source so people can independently propose bug fixes or raise issues\nlikely the most popular option already. learning this is a transferable skill between academia and industry.\nintegration with other Posit packages and development pipelines, in particular with CI/CD pipelines on GitHub repos. Another tutorial will discuss CI/CD pipelines, but, in short, using {renv} means you can more easily automate deploying websites through GitHub Pages, checking the development status of R packages you work on, deploy Shiny apps to servers, and run other automated process that require specific package versions because Posit has developed extensions that make this easier.\nit works at a project level (i.e. it should be paired with the use of an R Project/.RProj file). {groundhogr} notes this as a disadvantage so I suppose this requirement is subjective. However, I argue this is a pro because using an R Project structure helps manage your working environment\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multi-language project. This would likely only be encountered in complex, multi-team analysis projects or possibly in industry settings.\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "ex_2.html",
-    "href": "ex_2.html",
-    "title": "Using restore()",
-    "section": "",
-    "text": "As with the previous exercise, it is recommended that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nIf you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Restore"
-    ]
-  },
-  {
-    "objectID": "ex_2.html#exercise-notes",
-    "href": "ex_2.html#exercise-notes",
-    "title": "Using restore()",
-    "section": "Exercise Notes",
-    "text": "Exercise Notes\nRestoring a project library from a renv.lock file can generally be accomplished in just two steps:\n\nOpen the RStudio .RProj file.\nRun renv::restore().\n\nYou could technically complete just these two steps for this exercise, and you would essentially be finished. However, the exercise is designed to help you understand the process of restoring a project library, and to help you see what happens when your project library does not match the required packages laid out in renv.lock file.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Restore"
-    ]
-  },
-  {
-    "objectID": "ex_2.html#instructions",
-    "href": "ex_2.html#instructions",
-    "title": "Using restore()",
-    "section": "Instructions",
-    "text": "Instructions\nIMPORTANT: This exercise expects you have version 4.4.X of R installed. If you have a different version, please install the correct version before starting the exercise. Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.\n\nOpen the restore-exercises.Rproj file.\n\nUpon opening, you should be greeted with a message similar to this:\n# Bootstrapping renv 1.0.7 ---------------------------------------------------\n- Downloading renv ... OK\n- Installing renv  ... OK\n\n- Project '~/Desktop/introduction-to-renv-exercises/restore-exercises' loaded. [renv 1.0.7]\n- One or more packages recorded in the lockfile are not installed.\n- Use `renv::status()` for more details.\n\nAt the console, run the command renv::status().\n\nWhat is out of sync and why?\n\nAt the console, run the command renv::dependencies(). For better formatting, you can run View(renv::dependencies()).\n\nWhat packages do you see listed as direct dependencies?\nThe Source column indicates which files use these packages. Knowing this, can you list the package dependencies by file?\nNote: some versions of Quarto/RStudio may present you with the warning message below. If this occurs, then install the package, and run renv::dependencies() again.\nThe 'yaml' package is required to parse dependencies within R Markdown files. Consider installing it with install.packages(\"yaml\").\" \n\nOpen the presentation.rmd file.\n\nNote: RStudio may prompt you to install several packages in a yellow highlighted bar. You can ignore this request. A later step will address this.\n{rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?\n\nWe want to simulate running someone else’s analysis without first installing the same packages as them: try to Render1 the presentation.rmd file.\n\nYou will be prompted to install some packages in a pop-up window. This is to install the {rmarkdown} package and its dependencies. Accept the prompt.\nThe {rmarkdown} package and its dependencies should install, but the rendering still fails. Why do you think this is? Take a careful look at the error message, and align it with the content of the presentation.rmd file.\n\nWe will now need to install all R packages required for this exercise. Run the command renv::restore().\n\nWhat happens?\nIf prompted with the question “Do you want to proceed? [Y/n]:”, type Y and press Enter.”\n\nOpen the billboard_100.R file, and run the code by pressing the Source button near the top right hand corner of the script.\n\nThis should create the top_billboard_rankings.rds file, needed in the next step.\n\nTry to render the presentation.rmd file.\n\nWhat happens?\n\nClose the project restore-exercises.Rproj.\n\nCongrats! You have restored someone else’s project and successfully rendered their analysis.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Restore"
-    ]
-  },
-  {
-    "objectID": "ex_2.html#footnotes",
-    "href": "ex_2.html#footnotes",
-    "title": "Using restore()",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\n“Rendering” an RMarkdown .rmd, Quarto .qmd, or similar file simply means you are generating the output file (e.g., .html, .pdf, etc.) from the source file. In RStudio, you can do this by clicking the “Knit” or “Render” button depending on your file type and version of RStudio.↩︎",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Restore"
     ]
   },
   {
@@ -551,170 +634,87 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the {renv} Tutorial!",
+    "objectID": "comp_reproducible.html",
+    "href": "comp_reproducible.html",
+    "title": "Reproducibility",
     "section": "",
-    "text": "Tutorial Overview\nThis self-paced tutorial is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components of dependency management and R. Content has been written with novice R users in mind, but this tutorial (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.\nThe tutorial is split into the following sections:\n\nBackground introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.\n{renv} discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful. You can jump to this section if you don’t have time for the background.\nExercises contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.\nOptional Content dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.\n\n\n\n\n\n\n\nRecommended Software\n\n\n\nThis tutorial assumes you have the following software installed:\n\nR, recommend v4.4.X or more recent\nRStudio\n{renv}, installed with install.packages(\"renv\") from within R\n\nAlthough optional for the general content in this tutorial, knowledge of git and GitHub will be helpful for the exercises especially if you would like to receive feedback or troubleshoot issues remotely. Check out our git and GitHub tutorial if needed!\n\n\n\n\n\n\n Back to top",
+    "text": "In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.",
     "crumbs": [
       "Home",
-      "Overview"
+      "Background",
+      "1. Reproducibility"
     ]
   },
   {
-    "objectID": "restoring_a_project.html",
-    "href": "restoring_a_project.html",
-    "title": "Restoring Another Project",
-    "section": "",
-    "text": "The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the renv.lock file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.\nWe will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.",
+    "objectID": "comp_reproducible.html#a-brief-definition",
+    "href": "comp_reproducible.html#a-brief-definition",
+    "title": "Reproducibility",
+    "section": "A Brief Definition",
+    "text": "A Brief Definition\n\nI propose to consider the question “What is reproducibility?” As reproducibility is such a central concept in science, one would think that it would be clearly defined. However, this is not the case. Reproducibility is an elusive concept. It has no single commonly agreed upon definition. Rather, it has many different, and each of these captures central, but different properties of it…\n– Odd Erik Gundersen1\n\nGundersen explores many definitions put forward for “reproducibility”, but, for the purposes of this tutorial, his exploration of reproducibility is best summarized as “the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators.”2\nIn principle, this sounds simple enough–provide others with enough information, and they should be able to reproduce your work! Achieving this in practice is, of course, a vastly complex endeavor that requires careful planning and execution. Above all, opinions on what constitutes sufficient “documentation” or how much documentation is necessary to achieve reproducibility can vary widely.\nOne might assume that academic publications provide all of the information required for an independent researcher to reproduce a publication; the requisite background on the topic, the data cleaning choices, and the exact statistical methods employed to arrive at a conclusion are theoretically included in a paper.3 In practice, a written publication generally cannot capture all of the nuances of data cleaning, exploration, and analysis employed by the original researchers. As a result, reproducing an analysis result only from a written description is, at best, incredibly time-consuming, and, at worst, an impossible endeavor.\nTo address the shortcomings of written descriptions, researchers must also strive to publish their code, data, and ideally both code and data together such that the complete documentation of the project is available to others. This tutorial specifically covers how to document the R version and R packages used in a project to ensure that the code can be run on other machines.",
     "crumbs": [
       "Home",
-      "{renv}",
-      "3. Restoring Projects"
+      "Background",
+      "1. Reproducibility"
     ]
   },
   {
-    "objectID": "restoring_a_project.html#from-a-github-repo",
-    "href": "restoring_a_project.html#from-a-github-repo",
-    "title": "Restoring Another Project",
-    "section": "From a GitHub Repo",
-    "text": "From a GitHub Repo\nRestoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo should always have all of the required files for restoring a project including the renv.lock file, the renv folder, the *.Rproj file, and the R scripts. Note that repos generally do not (and should not) contain the renv/library folder–this is intended behavior. The renv/library contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines1. Moreover, the renv/library folder can be quite large and is not necessary for restoring a project.\nThe steps for restoring a project from a GitHub repository are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.",
+    "objectID": "comp_reproducible.html#reproducible-code",
+    "href": "comp_reproducible.html#reproducible-code",
+    "title": "Reproducibility",
+    "section": "Reproducible Code",
+    "text": "Reproducible Code\nWhy should we concern ourselves with making reproducible code specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one’s own work, to make debugging and troubleshooting easier, and to collaborate with others.\nIn the context of this tutorial, we will focus on the practical aspects of making code reproducible. This mainly means taking steps to ensure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.",
     "crumbs": [
       "Home",
-      "{renv}",
-      "3. Restoring Projects"
+      "Background",
+      "1. Reproducibility"
     ]
   },
   {
-    "objectID": "restoring_a_project.html#from-a-lockfile",
-    "href": "restoring_a_project.html#from-a-lockfile",
-    "title": "Restoring Another Project",
-    "section": "From a lockfile",
-    "text": "From a lockfile\nYou may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the renv.lock file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:\n\nObtain the renv.lock file from your collaborators.\nPlace the renv.lock in the same directory as your project’s *.Rproj file.\nRun renv::status(). The results will look similar to this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nOption 1: Run renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\nOption 2: Run renv::init(). Choose the option to “Restore the project from the lockfile.” This will do everything that renv::restore() does and install the packages at the same time.",
+    "objectID": "comp_reproducible.html#your-computer",
+    "href": "comp_reproducible.html#your-computer",
+    "title": "Reproducibility",
+    "section": "Your Computer",
+    "text": "Your Computer\nGetting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)\nHowever, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software you need, perhaps have set up specific paths, and configured various settings to your preferences.",
     "crumbs": [
       "Home",
-      "{renv}",
-      "3. Restoring Projects"
+      "Background",
+      "1. Reproducibility"
     ]
   },
   {
-    "objectID": "restoring_a_project.html#after-upgrading-r",
-    "href": "restoring_a_project.html#after-upgrading-r",
-    "title": "Restoring Another Project",
-    "section": "After Upgrading R",
-    "text": "After Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the caching chapter, but a summarized version is also provided here.\n\nTo first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: major.minor.patch. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.\nIf you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:\nThe first option is to update your project to use the new version of R. This can be done by running renv::update() to update the packages in your project (particularly the base R packages that came with the new version of R), and then running renv::snapshot() to update the renv.lock file.\nThe second option is to switch between R versions using a tool like rswitch or rig. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.",
+    "objectID": "comp_reproducible.html#someone-elses-computer",
+    "href": "comp_reproducible.html#someone-elses-computer",
+    "title": "Reproducibility",
+    "section": "Someone Else’s Computer",
+    "text": "Someone Else’s Computer\nWhen you share your code with others, you are effectively asking them to run your code on their machine, and it is unlikely that their computer is set up exactly like yours given how many degrees of freedom there are in operating systems, programming languages, software, and the different versions of these. A non-exhaustive list of examples where there might be software discrepancies are detailed below.\n\nMajor Machine & Software Differences\n\n\nOperating systemsProgramming languagesPackages/Libraries (Add-Ons)\n\n\nIt’s already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.\nHowever, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.\n\n\n\n\n\nAnother obvious difference is the programming language used in a project. For example, a project written in R will not run (correctly) in a Python, MATLAB, or Julia environment.\nLess obvious, however, and more common as a pain-point, are the differences in versions of programming languages. For example, a project written in Python 3.8 might not run in Python 3.9 due to changes in the language, and most R packages are only tested for compatibility back to the 5 most recent minor releases of R (e.g. 4.4, 4.3, 4.2, 4.1, 4.0).\nFortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.\n\n\n\n\n\nThe most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.\nKeeping track of which packages are used and the specific versions of those packages is a major challenge in reproducibility.\nIn the context of the R programming language, most packages are likewise compatible across operating systems.\n\n\n\n\n\n\n\nSome real-world examples:\n\nOperating systems: Windows 95 gives different results,4 and neuroimaging analysis results can vary based on OS5\nProgramming languages: R switched its default random number generating process at version 3.6.0,6 and R versions from 4.4.0 give different (albeit more consistent) values for the density() function7\nPackages/libraries: JASP changed the default Bayesian ANOVA8",
     "crumbs": [
       "Home",
-      "{renv}",
-      "3. Restoring Projects"
+      "Background",
+      "1. Reproducibility"
     ]
   },
   {
-    "objectID": "restoring_a_project.html#footnotes",
-    "href": "restoring_a_project.html#footnotes",
-    "title": "Restoring Another Project",
+    "objectID": "comp_reproducible.html#all-of-the-machines",
+    "href": "comp_reproducible.html#all-of-the-machines",
+    "title": "Reproducibility",
+    "section": "All of the Machines",
+    "text": "All of the Machines\n\n\n\n\n\n\nExpect No One to Already Have the Required Software\n\n\n\n\nDon’t expect others to have the software you rely on.\nEven if others have the software, don’t expect them to have the same version.\n\n\n\nIn summary, the software environment of a project can be incredibly complex, with many degrees of freedom. If you have ever tried to run someone else’s code and it didn’t work, it was likely due to one of these reasons. Moreover, it’s not practical to manage most of these differences manually. For example, requesting that someone manually install Python v3.8.2, R v4.0.3, and specific versions of dozens of packages is technically possible, but exceptionally tedious and a poor use of time. So this brings us to our core question: how do we set up a project to work on everybody’s machines?9 By managing our software dependencies, described in the next chapter.",
+    "crumbs": [
+      "Home",
+      "Background",
+      "1. Reproducibility"
+    ]
+  },
+  {
+    "objectID": "comp_reproducible.html#footnotes",
+    "href": "comp_reproducible.html#footnotes",
+    "title": "Reproducibility",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nSee the Caching chapter for more information on the renv/library folder.↩︎",
-    "crumbs": [
-      "Home",
-      "{renv}",
-      "3. Restoring Projects"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html",
-    "href": "dependencies_in_r.html",
-    "title": "Dependency Management in R",
-    "section": "",
-    "text": "This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.\nThe goal of package managers in R are to ensure that the packages you need are downloaded from a defined repository and installed in the libraries you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhog}, and {renv}.",
+    "text": "Footnotes\n\n\n“The fundamental principles of reproducibility,” Philosophical Transactions. Series A, Mathematical, Physical, and Engineering Sciences 379, no. 2197 (May 17, 2021): 20200210, https://doi.org/10.1098/rsta.2020.0210.↩︎\nErik Gundersen.↩︎\nAssuming, of course, that the data for the analysis can also be accessed either because it is publicly available or by way of contacting the original researcher.↩︎\nB. D. McCullough and H. D. Vinod, “Verifying the Solution from a Nonlinear Solver: A Case Study,” The American Economic Review 93, no. 3 (2003): 873–92, https://www.jstor.org/stable/3132121.↩︎\nTristan Glatard et al., “Reproducibility of Neuroimaging Analyses Across Operating Systems,” Frontiers in Neuroinformatics 9 (April 24, 2015), https://doi.org/10.3389/fninf.2015.00012.↩︎\nAbel Brodeur et al., “Mass Reproducibility and Replicability: A New Hope,” 2024, https://www.econstor.eu/handle/10419/289437.↩︎\nRobert Schlicht, Bug 18337 - Issue in Stats::density.default Affecting Accuracy (bugs.r-project.org, 2022), https://bugs.r-project.org/show_bug.cgi?id=18337.↩︎\nDon van den Bergh, Eric-Jan Wagenmakers, and Frederik Aust, “Bayesian Repeated-Measures Analysis of Variance: An Updated Methodology Implemented in JASP,” Advances in Methods and Practices in Psychological Science 6, no. 2 (April 1, 2023): 25152459231168024, https://doi.org/10.1177/25152459231168024.↩︎\nWithin reason; many software and hardware configurations just simply were not meant to be, but most modern programming languages are cross-compatible across recent, major operating systems without issue.↩︎",
     "crumbs": [
       "Home",
       "Background",
-      "4. R Package Managers"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#packrat",
-    "href": "dependencies_in_r.html#packrat",
-    "title": "Dependency Management in R",
-    "section": "{packrat}",
-    "text": "{packrat}\nThe {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.\nIt was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least April 2020. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. R Package Managers"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#groundhog",
-    "href": "dependencies_in_r.html#groundhog",
-    "title": "Dependency Management in R",
-    "section": "{groundhog}",
-    "text": "{groundhog}\n{groundhog} is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:\ninstall.packages(\"groundhog\")\nlibrary(\"groundhog\")\npkgs &lt;- c(\"rio\",\"metafor\")\ngroundhog.library(pkgs, \"2023-09-01\")\nThis example demonstrates a scenario in which you would like to install the rio and metafor packages as they were on September 1st, 2023. The groundhog.library() function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the library() call for groundhog.library() is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.\nThe other main benefit of using {groundhog} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhog}.\nThe package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhog} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhog} especially because of the professional support and software development the package receives from Posit.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. R Package Managers"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#renv",
-    "href": "dependencies_in_r.html#renv",
-    "title": "Dependency Management in R",
-    "section": "{renv}",
-    "text": "{renv}\n{renv} is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.\nMore to the focus of this tutorial, however, {renv} greatly assists in making your project reproducible by creating a “snapshot” of your package dependencies in as few as two commands:\nrenv::init()\nrenv::snapshot()\nThe results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named renv::restore() function.\n\nPros and Cons\nAs mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings1. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.\nMoreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.1.1). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.\nIn comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (.RProj file) to use {renv} whereas {groundhog} allows you to simply embed the function groundhog.library(pkg, date) into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the default workflow for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the embed() and use() functions, discussed in the supplementary material of this tutorial.",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. R Package Managers"
-    ]
-  },
-  {
-    "objectID": "dependencies_in_r.html#footnotes",
-    "href": "dependencies_in_r.html#footnotes",
-    "title": "Dependency Management in R",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nNiche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.↩︎",
-    "crumbs": [
-      "Home",
-      "Background",
-      "4. R Package Managers"
-    ]
-  },
-  {
-    "objectID": "ex_init_snapshot.html",
-    "href": "ex_init_snapshot.html",
-    "title": "Initialize and Snapshot",
-    "section": "",
-    "text": "The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is recommended that you fork the intro-to-renv-exercises repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.\nHowever, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Init and Snapshot"
-    ]
-  },
-  {
-    "objectID": "ex_init_snapshot.html#instructions",
-    "href": "ex_init_snapshot.html#instructions",
-    "title": "Initialize and Snapshot",
-    "section": "Instructions",
-    "text": "Instructions\n\nOpen the R project, init-snapshot-exercises.Rproj.\nInstall the {renv} package if needed.\nInitialize a new project with {renv} with renv::init().\nCreate a new R script in this folder, init-snapshot-exercises, called script.R.\nWrite code that uses a variety of different packages.\n\nTry experimenting with calls to library() and namespacing functions e.g. package::function(). If you’re short on time, there’s some example code included below.\n\nSave the script.\nRun the renv::dependencies() function to see the new dependencies of your project.\n\nWhat packages are listed? Is this what you expected?\n\nCheck the status of your project with renv::status().\n\nWhat do you notice about the results printed to the console?\n\nSave these new dependencies to the renv.lock file with renv::snapshot().\n(Optional) Commit your changes to your repository, and push them to GitHub.\n\nThis should include a new .Rprofile file, the renv.lock file, and some components of the renv folder (renv/.gitignore, renv/activate.R, renv/settings.json).\n\nClose the R project.\n\n\nExample Code\nlibrary(ggplot2)\nlibrary(dplyr)\n\n# Read the iris dataset\ndata(iris)\n\n# Print the first 6 rows\nhead(iris)\n\n# Create a scatter plot of Sepal.Length and Sepal.Width\nggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +\n  geom_point()\n  \n# Perform some data analysis using dplyr\niris %&gt;%\n  group_by(Species) %&gt;%\n  summarise(mean_sepal_length = mean(Sepal.Length))\n  \n# Create a linear mixed effects model with {lme4}\nlme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)",
-    "crumbs": [
-      "Home",
-      "Exercises",
-      "Init and Snapshot"
-    ]
-  },
-  {
-    "objectID": "embed_and_use.html",
-    "href": "embed_and_use.html",
-    "title": "Alternative Workflow: embed() and use()",
-    "section": "",
-    "text": "https://rstudio.github.io/renv/reference/embed.html\nThis {renv} workshop focused on the main workflow of renv which is to use renv::init() to create a new project with an .Rproj file, and then to use renv::snapshot() to create a lockfile. This lockfile is then used to restore the project on another machine or to share with collaborators.\nHowever, there are two other functions that are useful for some workflows: renv::embed() and renv::use(). These functions are useful when you simply want to include packages in a project by embedding them in a script in your library. Typically you will see people include install.packages() calls at the top of their scripts to ensure that the necessary packages are installed. This can be improved upon by using renv::embed().\nrenv::embed() detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to renv::use() at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.\nThe downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use renv::embed() or a full lockfile.\n\n\n\n Back to top",
-    "crumbs": [
-      "Home",
-      "Optional Content",
-      "`embed()` and `use()`"
+      "1. Reproducibility"
     ]
   }
 ]
