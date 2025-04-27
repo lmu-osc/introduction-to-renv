@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_3.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/outline.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/caching.html</loc>
-    <lastmod>2025-04-20T23:10:33.396Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/technical_definitions.html</loc>
-    <lastmod>2025-04-20T23:10:33.398Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/intro_dependencies.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_2.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/LICENSE.html</loc>
-    <lastmod>2025-04-20T23:10:33.362Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/renv_getting_started.html</loc>
-    <lastmod>2025-04-20T23:10:33.398Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/dependencies_in_r.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/index.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/LICENSE-CODE.html</loc>
-    <lastmod>2025-04-20T23:10:33.362Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/outline.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
+    <lastmod>2025-04-27T23:11:04.931Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/embed_and_use.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/index.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/about.html</loc>
-    <lastmod>2025-04-20T23:10:33.362Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_init_snapshot.html</loc>
-    <lastmod>2025-04-20T23:10:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/restoring_a_project.html</loc>
-    <lastmod>2025-04-20T23:10:33.398Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/introduction-to-renv/advanced_topics.html</loc>
-    <lastmod>2025-04-20T23:10:33.362Z</lastmod>
+    <lastmod>2025-04-27T23:11:04.898Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/starting_details.html</loc>
-    <lastmod>2025-04-20T23:10:33.398Z</lastmod>
+    <lastmod>2025-04-27T23:11:04.933Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/dependencies_in_r.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/technical_definitions.html</loc>
+    <lastmod>2025-04-27T23:11:04.934Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/LICENSE.html</loc>
+    <lastmod>2025-04-27T23:11:04.898Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/introduction-to-renv/comp_reproducible.html</loc>
-    <lastmod>2025-04-20T23:10:33.396Z</lastmod>
+    <lastmod>2025-04-27T23:11:04.931Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/restoring_a_project.html</loc>
+    <lastmod>2025-04-27T23:11:04.933Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/renv_getting_started.html</loc>
+    <lastmod>2025-04-27T23:11:04.933Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_init_snapshot.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_3.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/ex_2.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/LICENSE-CODE.html</loc>
+    <lastmod>2025-04-27T23:11:04.897Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/advanced_topics.html</loc>
+    <lastmod>2025-04-27T23:11:04.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/introduction-to-renv/intro_dependencies.html</loc>
+    <lastmod>2025-04-27T23:11:04.932Z</lastmod>
   </url>
 </urlset>
