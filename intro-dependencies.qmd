@@ -27,7 +27,7 @@ If you're ever curious about the dependencies of a package, they should all be d
     -   `utils::packageDescription()` to print the complete `DESCRIPTION` file of a package to the console
     -   `tools::package_dependencies()` for just a list of dependencies from the `DESCRIPTION` file
     -   Looking at the `DESCRIPTION` file online on the package's CRAN or GitHub page
--   `pak::pkg_deps_tree()` for a visual representation of the direct dependencies **and** the recursive dependencies. An example of this will be shown in the [Starting Details](starting_details.qmd) chapter.
+-   `pak::pkg_deps_tree()` for a visual representation of the direct dependencies **and** the recursive dependencies. An example of this will be shown in the [Starting Details](starting-details.qmd) chapter.
 :::
 
 ## System Dependencies
