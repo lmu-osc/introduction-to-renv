@@ -73,7 +73,7 @@ website:
             text: "Caching"
           - href: embed-and-use.qmd
             text: "`embed()` and `use()`"
-          - href: advancedatopics.qmd
+          - href: advanced-topics.qmd
 
 
 format:
