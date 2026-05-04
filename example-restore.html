@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to the {renv} Tutorial! – Introduction to {renv}</title>
+<title>Using restore() – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,7 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./computational-reproducibility.html" rel="next">
+<link href="./example-explicit-record.html" rel="next">
+<link href="./example-init-snapshot.html" rel="prev">
 <link href="./assets/LMU-OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -145,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./example-restore.html">Restore</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -252,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example-restore.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-restore.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Restore</span></a>
   </div>
 </li>
@@ -305,16 +341,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tutorial-overview" id="toc-tutorial-overview" class="nav-link active" data-scroll-target="#tutorial-overview">Tutorial Overview</a></li>
+  <li><a href="#restore-a-renv-project" id="toc-restore-a-renv-project" class="nav-link active" data-scroll-target="#restore-a-renv-project">Restore a {renv} Project</a>
+  <ul class="collapse">
+  <li><a href="#exercise-notes" id="toc-exercise-notes" class="nav-link" data-scroll-target="#exercise-notes">Exercise Notes</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/example-restore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./example-restore.html">Restore</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Welcome to the {renv} Tutorial!</h1>
+<h1 class="title">Using <code>restore()</code></h1>
 </div>
 
 
@@ -331,40 +371,84 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="tutorial-overview" class="level1">
-<h1>Tutorial Overview</h1>
-<p>This <strong>self-paced tutorial</strong> is intended to take 1-2 hours to complete, depending on your previous familiarity with the theoretical and programming components of dependency management and R. Content has been written with novice R users in mind, but this tutorial (hopefully) provides useful information on setting up reproducible computational environments for R users of any skill level.</p>
-<p>The tutorial is split into the following sections:</p>
+<p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>If you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
+<section id="restore-a-renv-project" class="level1">
+<h1>Restore a {renv} Project</h1>
+<p>The exercises for initiating and snapshotting a project can be found in the <code>restore-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repo.</p>
+<section id="exercise-notes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-notes">Exercise Notes</h2>
+<p>Restoring a project library from a <code>renv.lock</code> file can generally be accomplished in just two steps:</p>
 <ol type="1">
-<li><a href="comp_reproducible.html"><strong>Background</strong></a> introduces a simplified definition and reasoning for reproducibility, its relation to managing software dependencies, and some of the nuances of dependencies in R.</li>
-<li><a href="renv_getting_started.html"><strong>{renv}</strong></a> discusses the main functions of the {renv} package, and just enough of the underlying mechanics of the package to be useful. <strong>You can jump to this section if you don’t have time for the background.</strong></li>
-<li><a href="ex_init_snapshot.html"><strong>Exercises</strong></a> contains a handful of practical exercises that walk users through the main components of using {renv}, and highlights some common mistakes or issues users might encounter.</li>
-<li><a href="caching.html"><strong>Optional Content</strong></a> dives into some of the more technical details of {renv}, caching, and related topics. This section is only recommended for users with more advanced use cases or troubleshooting needs.</li>
+<li>Open the RStudio <code>.RProj</code> file.</li>
+<li>Run <code>renv::restore()</code>.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Recommended Software">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Recommended Software
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This tutorial assumes you have the following software installed:</p>
+<p>You could technically complete just these two steps for this exercise, and you would essentially be finished. However, the exercise is designed to help you understand the process of restoring a project library, and to help you see what happens when your project library does not match the required packages laid out in <code>renv.lock</code> file.</p>
+</section>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p><strong>IMPORTANT</strong>: This exercise expects you have version 4.4.X of R installed. If you have a different version, please install the correct version before starting the exercise. <strong>Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.</strong></p>
+<ol type="1">
+<li>Open the <code>restore-exercises.Rproj</code> file.
 <ul>
-<li><a href="https://www.r-project.org/" target="_blank">R, recommend v4.4.X or more recent</a></li>
-<li><a href="https://posit.co/download/rstudio-desktop/" target="_blank">RStudio</a></li>
-<li>{renv}, installed with <code>install.packages("renv")</code> from within R</li>
-</ul>
-<p>Although optional for the general content in this tutorial, <strong>knowledge of git and GitHub</strong> will be helpful for the exercises especially if you would like to receive feedback or troubleshoot issues remotely. Check out <a href="https://lmu-osc.github.io/Introduction-RStudio-Git-GitHub/">our git and GitHub tutorial</a> if needed!</p>
-</div>
-</div>
+<li><p>Upon opening, you should be greeted with a message similar to this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrapping renv 1.0.7 ---------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Downloading renv ... OK</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Installing renv  ... OK</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Project <span class="st">'~/Desktop/introduction-to-renv-exercises/restore-exercises'</span> loaded. [renv <span class="dv">1</span>.<span class="fl">0.7</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> One or more packages recorded <span class="cf">in</span> the lockfile are not installed.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Use <span class="st">`</span><span class="at">renv::status()</span><span class="st">`</span> <span class="cf">for</span> more details.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul></li>
+<li>At the console, run the command <code>renv::status()</code>.
+<ul>
+<li>What is out of sync and why?</li>
+</ul></li>
+<li>At the console, run the command <code>renv::dependencies()</code>. For better formatting, you can run <code>View(renv::dependencies())</code>.
+<ul>
+<li><p>What packages do you see listed as direct dependencies?</p></li>
+<li><p>The <code>Source</code> column indicates which files use these packages. Knowing this, can you list the package dependencies by file?</p></li>
+<li><p><em>Note: some versions of Quarto/RStudio may present you with the warning message below.</em> If this occurs, then install the package, and run <code>renv::dependencies()</code> again.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The <span class="st">'yaml'</span> package is required to parse dependencies within R Markdown files. Consider installing it with <span class="fu">install.packages</span>(<span class="st">"yaml"</span>).<span class="st">" </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul></li>
+<li>Open the <code>presentation.rmd</code> file.
+<ul>
+<li><em>Note: RStudio may prompt you to install several packages in a yellow highlighted bar. You can ignore this request. A later step will address this.</em></li>
+<li>{rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
+</ul></li>
+<li>We want to simulate running someone else’s analysis <em>without</em> first installing the same packages as them: try to Render<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> the <code>presentation.rmd</code> file.
+<ul>
+<li><strong>You will be prompted to install some packages in a pop-up window. This is to install the {rmarkdown} package and its dependencies. Accept the prompt.</strong></li>
+<li>The {rmarkdown} package and its dependencies should install, but the rendering still fails. Why do you think this is? Take a careful look at the error message, and align it with the content of the <code>presentation.rmd</code> file.</li>
+</ul></li>
+<li>We will now need to install all R packages required for this exercise. Run the command <code>renv::restore()</code>.
+<ul>
+<li>What happens?</li>
+<li>If prompted with the question “Do you want to proceed? [Y/n]:”, type <code>Y</code> and press <code>Enter</code>.”</li>
+</ul></li>
+<li>Open the <code>billboard_100.R</code> file, and run the code by pressing the <code>Source</code> button near the top right hand corner of the script.
+<ul>
+<li>This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
+</ul></li>
+<li>Try to render the <code>presentation.rmd</code> file.
+<ul>
+<li>What happens?</li>
+</ul></li>
+<li>Close the project <code>restore-exercises.Rproj</code>.</li>
+</ol>
+<p>Congrats! You have restored someone else’s project and successfully rendered their analysis.</p>
 
 
 </section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>“Rendering” an RMarkdown <code>.rmd</code>, Quarto <code>.qmd</code>, or similar file simply means you are generating the output file (e.g., <code>.html</code>, <code>.pdf</code>, etc.) from the source file. In RStudio, you can do this by clicking the “Knit” or “Render” button depending on your file type and version of RStudio.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -767,10 +851,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./example-init-snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Init and Snapshot</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./computational-reproducibility.html" class="pagination-link" aria-label="1. Reproducibility">
-        <span class="nav-page-text">1. Reproducibility</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./example-explicit-record.html" class="pagination-link" aria-label="Explicitly Record">
+        <span class="nav-page-text">Explicitly Record</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -782,7 +869,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/example-restore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

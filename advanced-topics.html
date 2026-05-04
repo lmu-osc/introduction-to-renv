@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Restoring Another Project – Introduction to {renv}</title>
+<title>Advanced Topics – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,8 +33,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ex_init_snapshot.html" rel="next">
-<link href="./starting_details.html" rel="prev">
+<link href="./embed-and-use.html" rel="prev">
 <link href="./assets/LMU-OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -181,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring Projects</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./caching.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./advanced-topics.html">Advanced Topics</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -218,25 +182,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./comp_reproducible.html" class="sidebar-item-text sidebar-link">
+  <a href="./computational-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Reproducibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_dependencies.html" class="sidebar-item-text sidebar-link">
+  <a href="./intro-dependencies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Software Dependencies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+  <a href="./technical-definitions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Technical Definitions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
+  <a href="./dependencies-in-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
@@ -253,19 +217,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./renv_getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="./renv-getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Quick Start</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting_details.html" class="sidebar-item-text sidebar-link">
+  <a href="./starting-details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link active">
+  <a href="./restoring-a-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
@@ -282,19 +246,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_init_snapshot.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-init-snapshot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Init and Snapshot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_2.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-restore.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Restore</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_3.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-explicit-record.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explicitly Record</span></a>
   </div>
 </li>
@@ -317,13 +281,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
+  <a href="./embed-and-use.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_topics.html" class="sidebar-item-text sidebar-link">
+  <a href="./advanced-topics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Advanced Topics</span></a>
   </div>
 </li>
@@ -341,22 +305,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#when-to-restore" id="toc-when-to-restore" class="nav-link active" data-scroll-target="#when-to-restore">When to <code>restore()</code></a>
+  <li><a href="#settings-and-config" id="toc-settings-and-config" class="nav-link active" data-scroll-target="#settings-and-config">“Settings” and “Config”</a></li>
+  <li><a href="#library-management" id="toc-library-management" class="nav-link" data-scroll-target="#library-management">Library Management</a></li>
+  <li><a href="#docker-and-renv" id="toc-docker-and-renv" class="nav-link" data-scroll-target="#docker-and-renv">Docker and {renv}</a>
   <ul class="collapse">
-  <li><a href="#from-a-github-repo" id="toc-from-a-github-repo" class="nav-link" data-scroll-target="#from-a-github-repo">From a GitHub Repo</a></li>
-  <li><a href="#from-a-lockfile" id="toc-from-a-lockfile" class="nav-link" data-scroll-target="#from-a-lockfile">From a lockfile</a></li>
-  <li><a href="#after-upgrading-r" id="toc-after-upgrading-r" class="nav-link" data-scroll-target="#after-upgrading-r">After Upgrading R</a></li>
+  <li><a href="#binder" id="toc-binder" class="nav-link" data-scroll-target="#binder">Binder</a></li>
   </ul></li>
-  <li><a href="#when-to-upgrade-and-update" id="toc-when-to-upgrade-and-update" class="nav-link" data-scroll-target="#when-to-upgrade-and-update">When to <code>upgrade()</code> and <code>update()</code></a></li>
+  <li><a href="#python-integration" id="toc-python-integration" class="nav-link" data-scroll-target="#python-integration">Python Integration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/advanced-topics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv_getting_started.html">{renv}</a></li><li class="breadcrumb-item"><a href="./restoring_a_project.html">3. Restoring Projects</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./caching.html">Optional Content</a></li><li class="breadcrumb-item"><a href="./advanced-topics.html">Advanced Topics</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Restoring Another Project</h1>
+<h1 class="title">Advanced Topics</h1>
 </div>
 
 
@@ -373,62 +337,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the <code>renv.lock</code> file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.</p>
-<p>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</p>
-<section id="when-to-restore" class="level1">
-<h1>When to <code>restore()</code></h1>
-<section id="from-a-github-repo" class="level2">
-<h2 class="anchored" data-anchor-id="from-a-github-repo">From a GitHub Repo</h2>
-<p>Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo <em>should</em> always have all of the required files for restoring a project including the <code>renv.lock</code> file, the <code>renv</code> folder, the <code>*.Rproj</code> file, and the R scripts. Note that repos generally do not (and should not) contain the <code>renv/library</code> folder–this is intended behavior. The <code>renv/library</code> contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Moreover, the <code>renv/library</code> folder can be quite large and is not necessary for restoring a project.</p>
-<p>The steps for restoring a project from a GitHub repository are as follows:</p>
-<ul>
-<li>Clone the repository to your local machine with <code>git clone</code></li>
-<li>Open the <code>*.Rproj</code> file</li>
-<li>Run <code>renv::restore()</code></li>
-</ul>
-<p>There should not be anything else to do! The <code>renv.lock</code> file will be used to install the correct versions of the packages you need for the project.</p>
+<p>(Section under development)</p>
+<section id="settings-and-config" class="level1">
+<h1>“Settings” and “Config”</h1>
+<p>https://rstudio.github.io/renv/reference/settings.html</p>
+<p>https://rstudio.github.io/renv/reference/config.html</p>
 </section>
-<section id="from-a-lockfile" class="level2">
-<h2 class="anchored" data-anchor-id="from-a-lockfile">From a lockfile</h2>
-<p>You may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the <code>renv.lock</code> file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:</p>
-<ul>
-<li>Obtain the <code>renv.lock</code> file from your collaborators.</li>
-<li>Place the <code>renv.lock</code> in the same directory as your project’s <code>*.Rproj</code> file.</li>
-<li>Run <code>renv::status()</code>. The results will look similar to this:</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This project does not appear to be using renv.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Use `renv::restore()` to install the packages defined in lockfile.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Option 1: Run <code>renv::restore()</code>. If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.</li>
-<li><strong>Option 2: Run <code>renv::init()</code>. Choose the option to “Restore the project from the lockfile.” This will do everything that <code>renv::restore()</code> does <em>and</em> install the packages at the same time.</strong></li>
-</ul>
+<section id="library-management" class="level1">
+<h1>Library Management</h1>
+<p>https://rstudio.github.io/renv/reference/index.html#library-management</p>
+<p>Emphasis on <code>record()</code>, and <code>history()</code>/<code>revert()</code>. Also talk about the <code>lockfile_*()</code> functions as useful documentation for understanding the contents of the lockfile and what everything means.</p>
+<p>Possible discuss <code>checkout()</code>?</p>
 </section>
-<section id="after-upgrading-r" class="level2">
-<h2 class="anchored" data-anchor-id="after-upgrading-r">After Upgrading R</h2>
-<p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <a href="caching.html">caching chapter</a>, but a summarized version is also provided here.</p>
-<!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. -->
-<p>To first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.</p>
-<p>If you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:</p>
-<p>The first option is to update your <em>project</em> to use the new version of R. This can be done by running <code>renv::update()</code> to update the packages in your project (particularly the base R packages that came with the new version of R), and then running <code>renv::snapshot()</code> to update the <code>renv.lock</code> file.</p>
-<p>The second option is to switch between R versions using a tool like <a href="https://rud.is/rswitch/">rswitch</a> or <a href="https://github.com/r-lib/rig">rig</a>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.</p>
+<section id="docker-and-renv" class="level1">
+<h1>Docker and {renv}</h1>
+<p>(mention existence, and link out to Binder which can create [most of] the Docker file from a renv lockfile)</p>
+<p>https://rstudio.github.io/renv/articles/docker.html</p>
+<section id="binder" class="level2">
+<h2 class="anchored" data-anchor-id="binder">Binder</h2>
+<p>(link to the tutorial if we create one. otherwise, just link to Binder page on renv)</p>
 </section>
 </section>
-<section id="when-to-upgrade-and-update" class="level1">
-<h1>When to <code>upgrade()</code> and <code>update()</code></h1>
-<p>If you are working on a project and you want to update the packages in your project, you can run <code>renv::update()</code>. This will update the packages in your project to the latest versions that are compatible with the versions of the packages in your <code>renv.lock</code> file. If you want to update a specific package, you can run <code>renv::update("package_name")</code>.</p>
-<p>If you want to update the <code>renv</code> package itself, you can run <code>renv::upgrade()</code>. This will update the <code>renv</code> package to the latest version available on CRAN.</p>
+<section id="python-integration" class="level1">
+<h1>Python Integration</h1>
+<p>(only mention existence, and link to)</p>
+<p>https://rstudio.github.io/renv/articles/python.html</p>
 
 
 </section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>See the <a href="caching.html">Caching chapter</a> for more information on the <code>renv/library</code> folder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -831,14 +769,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./starting_details.html" class="pagination-link" aria-label="2. Understanding {renv}">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Understanding {renv}</span>
+      <a href="./embed-and-use.html" class="pagination-link" aria-label="`embed()` and `use()`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><code>embed()</code> and <code>use()</code></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ex_init_snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
-        <span class="nav-page-text">Init and Snapshot</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -849,7 +784,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/restoring_a_project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/advanced-topics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

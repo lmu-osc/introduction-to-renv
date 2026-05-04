@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Explicitly Recording Packages – Introduction to {renv}</title>
+<title>Initialize and Snapshot – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,8 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./caching.html" rel="next">
-<link href="./ex_2.html" rel="prev">
+<link href="./example-restore.html" rel="next">
+<link href="./restoring-a-project.html" rel="prev">
 <link href="./assets/LMU-OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -146,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_3.html">Explicitly Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Init and Snapshot</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -183,25 +218,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./comp_reproducible.html" class="sidebar-item-text sidebar-link">
+  <a href="./computational-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Reproducibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_dependencies.html" class="sidebar-item-text sidebar-link">
+  <a href="./intro-dependencies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Software Dependencies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./technical_definitions.html" class="sidebar-item-text sidebar-link">
+  <a href="./technical-definitions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Technical Definitions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies_in_r.html" class="sidebar-item-text sidebar-link">
+  <a href="./dependencies-in-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
@@ -218,19 +253,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./renv_getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="./renv-getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Quick Start</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting_details.html" class="sidebar-item-text sidebar-link">
+  <a href="./starting-details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./restoring_a_project.html" class="sidebar-item-text sidebar-link">
+  <a href="./restoring-a-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
@@ -247,19 +282,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_init_snapshot.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-init-snapshot.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Init and Snapshot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_2.html" class="sidebar-item-text sidebar-link">
+  <a href="./example-restore.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Restore</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex_3.html" class="sidebar-item-text sidebar-link active">
+  <a href="./example-explicit-record.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explicitly Record</span></a>
   </div>
 </li>
@@ -282,13 +317,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./embed_and_use.html" class="sidebar-item-text sidebar-link">
+  <a href="./embed-and-use.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_topics.html" class="sidebar-item-text sidebar-link">
+  <a href="./advanced-topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Topics</span></a>
   </div>
 </li>
@@ -306,19 +341,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#adding-packages-to-therenv.lock-file" id="toc-adding-packages-to-therenv.lock-file" class="nav-link active" data-scroll-target="#adding-packages-to-therenv.lock-file">Adding Packages to the<code>renv.lock</code> File</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a>
   <ul class="collapse">
-  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
+  <ul class="collapse">
+  <li><a href="#example-code" id="toc-example-code" class="nav-link" data-scroll-target="#example-code">Example Code</a></li>
+  </ul></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/example-init-snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex_init_snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./ex_3.html">Explicitly Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Exercises</a></li><li class="breadcrumb-item"><a href="./example-init-snapshot.html">Init and Snapshot</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Explicitly Recording Packages</h1>
+<h1 class="title">Initialize and Snapshot</h1>
 </div>
 
 
@@ -335,47 +373,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
-<p>If you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
-<section id="adding-packages-to-therenv.lock-file" class="level1">
-<h1>Adding Packages to the<code>renv.lock</code> File</h1>
-<p>The exercises for initiating and snapshotting a project can be found in the <code>explicit-record-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main">intro-to-renv-exercises</a> repo.</p>
+<p>The following examples will guide you through the process of initializing a project with {renv} and then snapshotting the project to capture the packages used in the project. It is <strong>recommended</strong> that you fork the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+<p>However, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
+<section id="getting-started" class="level1">
+<h1>Getting Started</h1>
+<p>The exercises for initiating and snapshotting a project can be found in the <code>init-snapshot-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repo.</p>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
-<li>Open the <code>explicit-record-exercises.Rproj</code> project.</li>
-<li>Check the identified dependencies by running <code>renv::dependencies()</code>.
+<li>Open the R project, <code>init-snapshot-exercises.Rproj</code>.</li>
+<li>Install the {renv} package if needed.</li>
+<li>Initialize a new project with {renv} with <code>renv::init()</code>.</li>
+<li>Create a new R script in this folder, <code>init-snapshot-exercises</code>, called <code>script.R</code>.</li>
+<li>Write code that uses a variety of different packages.
 <ul>
-<li>What packages are identified as direct dependencies and why?</li>
+<li>Try experimenting with calls to <code>library()</code> and namespacing functions e.g.&nbsp;<code>package::function()</code>. If you’re short on time, there’s some example code included below.</li>
 </ul></li>
-<li>Initiate {renv} by running <code>renv::init()</code>.</li>
-<li>Double-check the status of the dependencies by running <code>renv::status()</code>.
+<li>Save the script.</li>
+<li>Run the <code>renv::dependencies()</code> function to see the new dependencies of your project.
 <ul>
-<li>Is the lock file in-sync with the project library? (Hint: it should be.)</li>
+<li>What packages are listed? Is this what you expected?</li>
 </ul></li>
-<li>Open the <code>analysis_doc.qmd</code> file and try to Render the analysis document.
+<li>Check the status of your project with <code>renv::status()</code>.
 <ul>
-<li>Why did the rendering fail?</li>
-<li>Check the documentation for the <code>map_data()</code> function using <code>?ggplot2::map_data</code>. What package is still needed?</li>
+<li>What do you notice about the results printed to the console?</li>
 </ul></li>
-<li>Explicitly record the needed package with <code>renv::record("package_name")</code>.</li>
-<li>Check the status of the dependencies again by running <code>renv::status()</code>.
+<li>Save these new dependencies to the <code>renv.lock</code> file with <code>renv::snapshot()</code>.</li>
+<li>(Optional) Commit your changes to your repository, and push them to GitHub.
 <ul>
-<li>What has changed?</li>
+<li>This should include a new <code>.Rprofile</code> file, the <code>renv.lock</code> file, and some components of the <code>renv</code> folder (<code>renv/.gitignore</code>, <code>renv/activate.R</code>, <code>renv/settings.json</code>).</li>
 </ul></li>
-<li>Install the newly identified dependencies by running <code>renv::restore()</code>.</li>
-<li>Open the <code>analysis_doc.qmd</code> file again, and Render the analysis document.
-<ul>
-<li>Was it successful this time?</li>
-</ul></li>
-<li>Why did you need to explicitly record one of the packages to be able to render the document?
-<ul>
-<li>Take a look at the <code>DESCRIPTION</code> file for {ggplot2} to help understand: <code>packageDescription("ggplot2")</code>.</li>
-</ul></li>
-<li>Close the <code>explicit-record-exercises.Rproj</code> project.</li>
+<li>Close the R project.</li>
 </ol>
+<section id="example-code" class="level3">
+<h3 class="anchored" data-anchor-id="example-code">Example Code</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the iris dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 6 rows</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of Sepal.Length and Sepal.Width</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform some data analysis using dplyr</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_sepal_length =</span> <span class="fu">mean</span>(Sepal.Length))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a linear mixed effects model with {lme4}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">lmer</span>(Sepal.Length <span class="sc">~</span> Sepal.Width <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Species), <span class="at">data =</span> iris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 </section>
 
@@ -782,13 +836,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ex_2.html" class="pagination-link" aria-label="Restore">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Restore</span>
+      <a href="./restoring-a-project.html" class="pagination-link" aria-label="3. Restoring Projects">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Restoring Projects</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./caching.html" class="pagination-link" aria-label="Caching">
-        <span class="nav-page-text">Caching</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./example-restore.html" class="pagination-link" aria-label="Restore">
+        <span class="nav-page-text">Restore</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -800,7 +854,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/ex_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/example-init-snapshot.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
