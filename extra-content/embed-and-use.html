@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Software Dependencies – Introduction to {renv}</title>
+<title>Alternative Workflow: embed() and use() – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,26 +26,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./technical-definitions.html" rel="next">
-<link href="./computational-reproducibility.html" rel="prev">
-<link href="./assets/LMU-OSC_favicon.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3099bdc2190a3ec175eb42465dc5a664.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../extra-content/advanced-topics.html" rel="next">
+<link href="../extra-content/caching.html" rel="prev">
+<link href="..//assets/lmu-osc-favicon.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1ad997474d96d7c1d7a82c0aee862a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,7 +92,9 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <!-- End Matomo Code -->
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../assets/bootstrap-grid.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
+<link rel="stylesheet" href="../footer/footer-style.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -102,7 +104,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Introduction to {renv}</span>
     </a>
   </div>
@@ -112,13 +114,13 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -139,7 +141,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
           </li>
       </ul>
     </div>
-    <a href="https://www.osc.uni-muenchen.de/index.html" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+    <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -148,7 +150,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./computational-reproducibility.html">Background</a></li><li class="breadcrumb-item"><a href="./intro-dependencies.html">2. Software Dependencies</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra-content/index.html">Optional Content</a></li><li class="breadcrumb-item"><a href="../extra-content/embed-and-use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -170,13 +172,13 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a href="../background/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Background</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -185,25 +187,25 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./computational-reproducibility.html" class="sidebar-item-text sidebar-link">
+  <a href="../background/computational-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Reproducibility</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-dependencies.html" class="sidebar-item-text sidebar-link active">
+  <a href="../background/intro-dependencies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Software Dependencies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./technical-definitions.html" class="sidebar-item-text sidebar-link">
+  <a href="../background/technical-definitions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Technical Definitions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies-in-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../background/dependencies-in-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4. R Package Managers</span></a>
   </div>
 </li>
@@ -211,7 +213,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a href="../about-renv/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">{renv}</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -220,19 +222,19 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./renv-getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="../about-renv/renv-getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Quick Start</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting-details.html" class="sidebar-item-text sidebar-link">
+  <a href="../about-renv/starting-details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Understanding {renv}</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./restoring-a-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../about-renv/restoring-a-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Restoring Projects</span></a>
   </div>
 </li>
@@ -240,7 +242,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -249,19 +251,19 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example-init-snapshot.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/example-init-snapshot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Init and Snapshot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example-restore.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/example-restore.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Restore</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example-explicit-record.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/example-explicit-record.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explicitly Record</span></a>
   </div>
 </li>
@@ -269,7 +271,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a href="../extra-content/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optional Content</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -278,19 +280,19 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./caching.html" class="sidebar-item-text sidebar-link">
+  <a href="../extra-content/caching.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Caching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./embed-and-use.html" class="sidebar-item-text sidebar-link">
+  <a href="../extra-content/embed-and-use.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><code>embed()</code> and <code>use()</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced-topics.html" class="sidebar-item-text sidebar-link">
+  <a href="../extra-content/advanced-topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Topics</span></a>
   </div>
 </li>
@@ -302,31 +304,16 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="./assets/LMU-OSC_logo.jpg" class="img-fluid" width="175"></p>
+<p><img src="../assets/lmu-osc-logo.svg" class="img-fluid" width="175"></p>
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#dependencies-overview" id="toc-dependencies-overview" class="nav-link active" data-scroll-target="#dependencies-overview">Dependencies Overview</a>
-  <ul class="collapse">
-  <li><a href="#package-dependencies" id="toc-package-dependencies" class="nav-link" data-scroll-target="#package-dependencies">Package Dependencies</a></li>
-  <li><a href="#system-dependencies" id="toc-system-dependencies" class="nav-link" data-scroll-target="#system-dependencies">System Dependencies</a></li>
-  </ul></li>
-  <li><a href="#intro-to-management-practices" id="toc-intro-to-management-practices" class="nav-link" data-scroll-target="#intro-to-management-practices">Intro to Management Practices</a>
-  <ul class="collapse">
-  <li><a href="#manual-management" id="toc-manual-management" class="nav-link" data-scroll-target="#manual-management">Manual management</a></li>
-  <li><a href="#automated-management" id="toc-automated-management" class="nav-link" data-scroll-target="#automated-management">Automated Management</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/intro-dependencies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./computational-reproducibility.html">Background</a></li><li class="breadcrumb-item"><a href="./intro-dependencies.html">2. Software Dependencies</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra-content/index.html">Optional Content</a></li><li class="breadcrumb-item"><a href="../extra-content/embed-and-use.html"><code>embed()</code> and <code>use()</code></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Software Dependencies</h1>
+<h1 class="title">Alternative Workflow: <code>embed()</code> and <code>use()</code></h1>
 </div>
 
 
@@ -343,88 +330,15 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </header>
 
 
-<section id="dependencies-overview" class="level1">
-<h1>Dependencies Overview</h1>
-<p>The general concept of software dependencies is relatively straightforward: “dependencies” are other softwares/programs that the software you’re using <em>depends</em> on to function. If the dependencies are not installed, dependent software will either be missing features, not work as expected, or possibly not work at all.</p>
-<p>We make an arbitrary distinction between “system dependencies” and “package dependencies” for the purposes of this tutorial, but there is principally no difference between the two.The distinction is made to clarify that system dependencies are not R packages, but rather are other software programs that are necessary for the project to run. Package dependencies are R packages that are necessary for the project to run.</p>
-<section id="package-dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="package-dependencies">Package Dependencies</h2>
-<p>Package dependencies are R packages that are necessary for the project to run. For example, if you are using the <code>dplyr</code> package in your project, you will need to have the <code>dplyr</code> package installed on your system. However, <code>dplyr</code> itself depends on other R packages such as <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code>. And <code>tibble</code>, <code>rlang</code>, and <code>vctrs</code> have their dependencies too.</p>
-<p>This process works recursively until all unique packages are identified, and a project that appears to only use e.g.&nbsp;5-10 packages can ultimately require a few dozen or hundred packages. This is not an R-specific problem, but rather a common issue in software development known as “dependency hell.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="callout callout-style-default callout-note callout-titled" title="Finding Dependencies for R Packages">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Finding Dependencies for R Packages
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If you’re ever curious about the dependencies of a package, they should all be declared in the <code>DESCRIPTION</code> file of an R package. There are a variety of ways you can access this information:</p>
-<ul>
-<li>Methods for reading the <code>DESCRIPTION</code> file of an R package:
-<ul>
-<li>Directly on <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN by finding the package</a> by name</li>
-<li><code>utils::packageDescription()</code> to print the complete <code>DESCRIPTION</code> file of a package to the console</li>
-<li><code>tools::package_dependencies()</code> for just a list of dependencies from the <code>DESCRIPTION</code> file</li>
-<li>Looking at the <code>DESCRIPTION</code> file online on the package’s CRAN or GitHub page</li>
-</ul></li>
-<li><code>pak::pkg_deps_tree()</code> for a visual representation of the direct dependencies <strong>and</strong> the recursive dependencies. An example of this will be shown in the <a href="./starting-details.html">Starting Details</a> chapter.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="system-dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="system-dependencies">System Dependencies</h2>
-<p>Systems dependencies are not R packages, but rather are other software programs that are necessary for the project to run. For example, if you are using R to run a Python script, you will need to have Python installed on your system. Or if you are using R to run a C++ script, you will need to have a C++ compiler installed on your system. These system dependencies can be more difficult to manage than package dependencies, as they are not always explicitly declared in the project files.</p>
-</section>
-</section>
-<section id="intro-to-management-practices" class="level1">
-<h1>Intro to Management Practices</h1>
-<p>Given the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.</p>
-<p>You might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.</p>
-<section id="manual-management" class="level2">
-<h2 class="anchored" data-anchor-id="manual-management">Manual management</h2>
-<p>As noted, the dependencies for your project can be managed manually with e.g.&nbsp;a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.</p>
-</section>
-<section id="automated-management" class="level2">
-<h2 class="anchored" data-anchor-id="automated-management">Automated Management</h2>
-<p>Automated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.</p>
-<p>There are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>The major current and historical options for managing R dependencies are:</p>
-<ol type="1">
-<li><strong>{renv}</strong> is arguably the most important package for managing R dependencies, is maintained by Posit, and is our recommendation</li>
-<li><strong>{groundhog}</strong> is a package that is similar to {renv}, and developed by independent, open-source contributors</li>
-<li><strong>{packrat}</strong> is a deprecated package that is no longer recommended for new projects</li>
-</ol>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>If you’re coming from a background in Python, you might be familiar with the following analogous approaches:</p>
-<p>The pip, pipenv, and poetry packages can, generally speaking, be used for package management and for declaring necessary Python versions in the respective <code>requirements.txt</code>, <code>Pipfile</code>, and <code>pyproject.toml</code> files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.</p>
-</div>
-</div>
-</div>
-<p>The next chapter delves into some necessary <a href="./technical_definitions.html">Technical Definitions</a> in the R ecosystem, the following chapter will really dive in to the details of <a href="./dependencies_in_r.html">R Package Managers</a>.</p>
+<p><a href="https://rstudio.github.io/renv/reference/embed.html" class="uri">https://rstudio.github.io/renv/reference/embed.html</a></p>
+<p>This {renv} workshop focused on the main workflow of <code>renv</code> which is to use <code>renv::init()</code> to create a new project with an <code>.Rproj</code> file, and then to use <code>renv::snapshot()</code> to create a lockfile. This lockfile is then used to restore the project on another machine or to share with collaborators.</p>
+<p>However, there are two other functions that are useful for some workflows: <code>renv::embed()</code> and <code>renv::use()</code>. These functions are useful when you simply want to include packages in a project by embedding them in a script in your library. Typically you will see people include <code>install.packages()</code> calls at the top of their scripts to ensure that the necessary packages are installed. This can be improved upon by using <code>renv::embed()</code>.</p>
+<p><code>renv::embed()</code> detects the packages in use in a file, captures the versions currently in use in your project, and then places a call to <code>renv::use()</code> at the top of that same file. This ensures that the necessary packages are installed when the script is run. This is useful for sharing code with collaborators because they do not need to install the packages themselves, and has less overhead than using {renv} in a project with a lockfile.</p>
+<p>The downside to this approach is that caching is not available, and the packages are not tracked in a lockfile. This means that the versions of the packages are not guaranteed to be the same across different machines. This is a trade-off that you will need to consider when deciding whether to use <code>renv::embed()</code> or a full lockfile.</p>
 
 
-</section>
-</section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>If you have enough time, read about how the <a href="https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code">left-pad incident</a> broke the internet as an example of how dependencies can go wrong.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -827,13 +741,13 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./computational-reproducibility.html" class="pagination-link" aria-label="1. Reproducibility">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Reproducibility</span>
+      <a href="../extra-content/caching.html" class="pagination-link" aria-label="Caching">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Caching</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./technical-definitions.html" class="pagination-link" aria-label="3. Technical Definitions">
-        <span class="nav-page-text">3. Technical Definitions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../extra-content/advanced-topics.html" class="pagination-link" aria-label="Advanced Topics">
+        <span class="nav-page-text">Advanced Topics</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -844,11 +758,99 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Copyright, 2024 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/intro-dependencies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<p>© 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/extra-content/embed-and-use.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
+  </div>
+</footer>
+<footer class="osc-footer-card text-white py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3 ">
+        <h4 class="fw-bold fs-5 fs-lg-4 text-white">
+          Ludwig-Maximilians-Universität<br>
+          LMU Open Science Center
+        </h4>
+        <p class="mb-0 mt-1 fw-normal fs-5">
+          Leopoldstr. 13<br>
+          80802 München
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Contact</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Prof. Dr. Felix Schönbrodt (Managing Director)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:malika.ihle@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Dr. Malika Ihle (Coordinator) 
+            </a>
+          </li>
+          <li>
+            <a href="mailto:osc@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              OSC team
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
+              Subscribe to our announcement list
+            </a>
+          </li>
+          <li>
+            <a href="https://www.osc.lmu.de/about/join-us.html" target="_blank" class="text-white text-decoration-underline" aria-label="Become a member (opens in new window)">
+              Become a member
+            </a>
+          </li>
+          <li>
+            <a href="https://matrix.to/#/#lmu-open-science-center:matrix.lmu.de" target="_blank" class="text-white text-decoration-underline" aria-label="Chat with us on Matrix (opens in new window)">
+              Chat with us on Matrix
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
+        <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/lmu-open-science-center/" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on LinkedIn (opens in new window)">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://bsky.app/profile/lmu-osc.bsky.social" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Bluesky (opens in new window)">
+          <i class="bi bi-bluesky"></i>
+        </a>
+        <a href="https://scicomm.xyz/@lmu_osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Mastodon (opens in new window)">
+          <i class="bi bi-mastodon"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-light">
+
+    <div class="d-flex flex-wrap gap-3 small">
+      <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/accessibilty.html" class="text-white text-decoration-underline">Accessibility</a>
+    </div>
+
   </div>
 </footer>
 
