@@ -3,7 +3,7 @@ title: "Understanding {renv}"
 ---
 
 ::: {.center .img-border}
-![Typical project workflow with {renv}](/assets/img/renv_cycle.png)
+![Typical project workflow with {renv}](/assets/img/renv-cycle.png)
 :::
 
 <br>

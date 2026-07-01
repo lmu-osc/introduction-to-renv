@@ -38,7 +38,7 @@ Getting code to work on your own machine is, in principle, not too difficult. Yo
 However, this is only half the battle. When you run your code on your machine, you are running it in an environment that you have set up and configured to your liking. You have installed the software *you* need, perhaps have set up specific paths, and configured various settings to your preferences.
 
 <div style="text-align: center">
-![](/assets/img/works_on_my_machine.jpg){width="85%"}
+![](/assets/img/works-on-my-machine.jpg){width="85%"}
 </div>
 
 ## Someone Else's Computer
@@ -57,7 +57,7 @@ It's already well-known that different operating systems can have different soft
 However, it is also important to consider that different versions of the same operating system can have different software requirements. For example, some software might only be compatible with Windows 10 and not Windows 11.
 
 ::: center
-![](/assets/img/mac_linux_windows.jpg)
+![](/assets/img/mac-linux-windows.jpg)
 :::
 
 ## Programming languages
@@ -69,7 +69,7 @@ Less obvious, however, and more common as a pain-point, are the differences in v
 Fortunately, most modern programming languages are cross-compatible across recent, major operating systems without issue.
 
 ::: center
-![](/assets/img/r_python_julia.jpg)
+![](/assets/img/r-python-julia.jpg)
 :::
 
 ## Packages/Libraries (Add-Ons)
@@ -81,7 +81,7 @@ Keeping track of which packages are used and the specific versions of those pack
 In the context of the R programming language, most packages are likewise compatible across operating systems.
 
 ::: center
-![](/assets/img/r_packages.png)
+![](/assets/img/r-packages.png)
 :::
 ::::::
 
