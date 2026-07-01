@@ -15,12 +15,10 @@ However, this is not strictly necessary. You can also follow along by creating a
 The exercises for initiating and snapshotting a project can be found in the `init-snapshot-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) repo.
 
 ```{r, results='asis', echo=FALSE}
-
 # To make changes to the instructions, go to the init-snapshot-exercises-instructions.md file in the intro-to-renv-exercises repository!
 library(httr)
-url="https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/init-snapshot-exercises/README.md"
-response=GET(url)
+url <- "https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/init-snapshot-exercises/README.md"
+response <- GET(url)
 cat(content(response))
-
 ```
 

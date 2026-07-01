@@ -12,11 +12,9 @@ If you're not familiar with using git and GitHub, you can skip the forking and c
 The exercises for initiating and snapshotting a project can be found in the `restore-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) repo.
 
 ```{r, results='asis', echo=FALSE}
-
 # To make changes to the instructions, go to the init-snapshot-exercises-instructions.md file in the intro-to-renv-exercises repository!
 library(httr)
-url="https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/restore-exercises/README.md"
-response=GET(url)
+url <- "https://raw.githubusercontent.com/lmu-osc/introduction-to-renv-exercises/main/restore-exercises/README.md"
+response <- GET(url)
 cat(content(response))
-
 ```

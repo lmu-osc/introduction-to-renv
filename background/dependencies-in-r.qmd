@@ -43,15 +43,13 @@ The package is still in relatively early stages of development so it may not be 
 ## {renv}
 
 ```{r, echo=FALSE}
-
 cran_avail_pkgs <- available.packages(
-    contriburl = contrib.url("https://cran.r-project.org/")
-  ) 
+  contriburl = contrib.url("https://cran.r-project.org/")
+)
 
 cran_package_count <- cran_avail_pkgs %>%
   as_tibble() %>%
   nrow()
-
 ```
 
 ```{r, echo=FALSE}
@@ -59,7 +57,6 @@ renv_cran_version <- cran_avail_pkgs %>%
   as_tibble() %>%
   filter(Package == "renv") %>%
   pull(Version)
-
 ```
 
 [{renv}](https://rstudio.github.io/renv/) is another one of Posit's inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.
