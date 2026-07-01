@@ -3,7 +3,7 @@ title: "Understanding {renv}"
 ---
 
 ::: {.center .img-border}
-![Typical project workflow with {renv}](assets/img/renv_cycle.png)
+![Typical project workflow with {renv}](/assets/img/renv_cycle.png)
 :::
 
 <br>
@@ -22,7 +22,7 @@ As you might have noted from the videos in the previous sections, initiating a p
 Adding renv to a project also updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. **This is only relevant if you're building an R package.**
 :::
 
-[^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the [Caching](caching.qmd) chapter.
+[^1]: Strictly speaking, the directory `renv/library` contains [symlinks or symbolic links](https://www.google.com/search?q=symlink) to packages in the renv library, which is a cache of the packages used in the project. This "cached" library is a shared library, meaning that if you have multiple projects using the same version of the package, the package is only stored once on your computer. This is a huge space saver, especially if you have many projects using the same package. More on this in the [Caching](/extra-content/caching.qmd) chapter.
 
 You should rarely, if ever, need to interact directly with any of the files or folders created by {renv}. The lockfile is the most important file, as it records the packages used in the project and their versions, and should be maintained with calls to functions from the {renv} package such as `snapshot()`.
 
