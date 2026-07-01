@@ -1,0 +1,9 @@
+---
+title: "{renv}"
+---
+
+This section covers the core functionality of the {renv} package: how to set it up, use it day-to-day, and collaborate with others using the lockfile.
+
+- **[Quick Start](renv-getting-started.qmd)** — Initiate {renv} in a new or existing project, take your first snapshot, and understand the basic workflow.
+- **[Understanding {renv}](starting-details.qmd)** — A deeper look at how {renv} manages project libraries, resolves dependencies, and integrates with your R sessions.
+- **[Restoring Projects](restoring-a-project.qmd)** — How to recreate an R environment from a `renv.lock` file, enabling others to run your code with the exact same package versions.

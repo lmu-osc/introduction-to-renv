@@ -1,0 +1,11 @@
+---
+title: "Exercises"
+---
+
+Put what you've learned into practice with hands-on walkthroughs. Each exercise provides step-by-step instructions and highlights common pitfalls.
+
+- **[Init and Snapshot](example-init-snapshot.qmd)** — Initialize {renv} in a project and take a snapshot of its dependencies.
+- **[Restore](example-restore.qmd)** — Recreate a project environment from an existing lockfile.
+- **[Explicitly Record](example-explicit-record.qmd)** — Manually record packages in the lockfile using `dependencies()` and `record()`.
+
+These exercises use the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) companion repository. Forking and cloning it is recommended but not required.
