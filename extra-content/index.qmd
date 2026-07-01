@@ -1,0 +1,9 @@
+---
+title: "Optional Content"
+---
+
+This section dives deeper into {renv} internals and advanced workflows. It's intended for users with more sophisticated use cases or troubleshooting needs.
+
+- **[Caching](caching.qmd)** — How {renv} caches packages to save disk space and speed up installations, and where those caches live on your system.
+- **[`embed()` and `use()`](embed-and-use.qmd)** — Two lesser-known functions for embedding dependency information directly in scripts and temporarily using packages without installing them.
+- **[Advanced Topics](advanced-topics.qmd)** — Customizing {renv} settings, handling system dependencies, and other advanced configuration options.

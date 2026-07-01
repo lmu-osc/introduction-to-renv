@@ -1,6 +1,5 @@
 ---
 title: "Technical Definitions"
-bibliography: references.bib
 ---
 
 ```{r, echo=FALSE, message=FALSE}
@@ -87,7 +86,7 @@ cran_package_count <- cran_avail_pkgs %>%
 ```
 
 ::: center-larger
-![Popular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor](assets/img/cran_and_bioconductor.png)
+![Popular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor](/assets/img/cran-and-bioconductor.png)
 :::
 
 A repository is a collection of packages that are available for download from a specific location. The most common and general-purpose repository for R packages is the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), which hosted `r cran_package_count` freely available packages at the last time this page was generated on `r format(Sys.Date(), "%B %d %Y")`. Another popular repository, [Bioconductor](https://www.bioconductor.org/), also hosts several thousand packages, but these packages are focused on bioinformatics, genomics, and computational biology. 

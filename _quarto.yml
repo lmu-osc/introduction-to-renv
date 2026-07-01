@@ -1,11 +1,10 @@
 project:
   type: website
-  
 
 website:
   title: "Introduction to {renv}"
-  page-footer: 
-    center: "Copyright, 2024 Open Science Center at LMU Munich"
+  page-footer:
+    center: © 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.
     border: false
   search:
     location: sidebar
@@ -13,13 +12,12 @@ website:
   repo-actions: [edit, issue]
   back-to-top-navigation: true
   page-navigation: true
-  favicon: assets/LMU-OSC_favicon.jpg
+  favicon: /assets/lmu-osc-favicon.jpg
   margin-header: |
-    ![](/assets/LMU-OSC_logo.jpg){width="175"}
-  
-  
+    ![](//assets/lmu-osc-logo.svg){width="175"}
+
   navbar:
-    right: 
+    right:
       - about.qmd
     left:
       - href: index.qmd
@@ -28,13 +26,12 @@ website:
       - icon: github
         menu:
           - text: Source Code
-            url:  https://github.com/lmu-osc/introduction-to-renv
+            url: https://github.com/lmu-osc/introduction-to-renv
           - text: Report a Bug
-            url:  https://github.com/lmu-osc/introduction-to-renv/issues
+            url: https://github.com/lmu-osc/introduction-to-renv/issues
       - icon: house-heart
-        url: https://www.osc.uni-muenchen.de/index.html
-   
-        
+        url: https://www.osc.lmu.de/
+
   sidebar:
     style: "docked"
     # background: "#cfc7c6"
@@ -42,54 +39,64 @@ website:
       - text: "Overview"
         href: index.qmd
       - section: "Background"
+        href: background/index.qmd
         contents:
-          - href: computational-reproducibility.qmd
+          - href: background/computational-reproducibility.qmd
             text: "1. Reproducibility"
-          - href: intro-dependencies.qmd
+          - href: background/intro-dependencies.qmd
             text: "2. Software Dependencies"
-          - href: technical-definitions.qmd
+          - href: background/technical-definitions.qmd
             text: "3. Technical Definitions"
-          - href: dependencies-in-r.qmd
+          - href: background/dependencies-in-r.qmd
             text: "4. R Package Managers"
       - section: "{renv}"
+        href: about-renv/index.qmd
         contents:
-          - href: renv-getting-started.qmd
+          - href: about-renv/renv-getting-started.qmd
             text: "1. Quick Start"
-          - href: starting-details.qmd
+          - href: about-renv/starting-details.qmd
             text: "2. Understanding {renv}"
-          - href: restoring-a-project.qmd
+          - href: about-renv/restoring-a-project.qmd
             text: "3. Restoring Projects"
       - section: "Exercises"
+        href: exercises/index.qmd
         contents:
-          - href: example-init-snapshot.qmd
+          - href: exercises/example-init-snapshot.qmd
             text: "Init and Snapshot"
-          - href: example-restore.qmd
+          - href: exercises/example-restore.qmd
             text: "Restore"
-          - href: example-explicit-record.qmd
+          - href: exercises/example-explicit-record.qmd
             text: "Explicitly Record"
       - section: "Optional Content"
-        contents: 
-          - href: caching.qmd
+        href: extra-content/index.qmd
+        contents:
+          - href: extra-content/caching.qmd
             text: "Caching"
-          - href: embed-and-use.qmd
+          - href: extra-content/embed-and-use.qmd
             text: "`embed()` and `use()`"
-          - href: advanced-topics.qmd
-
+          - href: extra-content/advanced-topics.qmd
 
 format:
   html:
-    theme: 
+    theme:
       - cosmo
-      - custom.scss
-    css: styles.css
+      - lmu-osc-custom.scss
+    css:
+      - /assets/bootstrap-grid.min.css
+      - https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css
+      - footer/footer-style.css
     toc: true
     fontsize: 13pt
     code-overflow: wrap
+    code-link: true
     grid:
       sidebar-width: 300px
     include-in-header:
       - file: matomo-analytics.html
+    include-after-body:
+      - file: footer/footer.html
 
+bibliography: references.bib
 
 editor: source
 csl: chicago-fullnote-bibliography.csl

@@ -1,0 +1,12 @@
+---
+title: "Background"
+---
+
+This section provides the conceptual groundwork for understanding why dependency management matters for reproducibility, and how R's package ecosystem works.
+
+- **[Reproducibility](computational-reproducibility.qmd)** — What we mean by reproducibility, why code reproducibility matters, and the "works on my machine" problem.
+- **[Software Dependencies](intro-dependencies.qmd)** — An introduction to software dependencies and how they complicate the goal of reproducible research.
+- **[Technical Definitions](technical-definitions.qmd)** — Clarifying terminology: packages, libraries, and repositories in the R ecosystem.
+- **[R Package Managers](dependencies-in-r.qmd)** — How R packages are distributed through CRAN, Bioconductor, GitHub, and other sources.
+
+If you're already comfortable with these concepts, feel free to jump straight to the [{renv} section](../about-renv/index.qmd).

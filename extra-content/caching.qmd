@@ -1,6 +1,5 @@
 ---
 title: "Caching"
-bibliography: references.bib
 ---
 
 This page will discuss the concept of caching and how it is used in {renv}.
