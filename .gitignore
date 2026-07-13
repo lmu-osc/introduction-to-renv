@@ -62,4 +62,5 @@ _site/
 
 **/*.quarto_ipynb
 
+# ignore posi assistant settings
 .posit/assistant

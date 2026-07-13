@@ -14,3 +14,8 @@
   outline: 2px solid #FFD700;
   outline-offset: 2px;
 }
+
+/* no external window thing for the icons */
+.osc-footer-socials a::after {
+  display: none !important;
+}

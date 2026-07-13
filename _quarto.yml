@@ -1,20 +1,18 @@
+# Begin Project
 project:
-  type: website
+  type: tutorial-template
+  # FYI: the tutorial-template project type is defined in the lmu-osc/tutorial-template extension
+# End Project
 
+# Begin Website
+repo-url: https://github.com/lmu-osc/introduction-to-renv
 website:
   title: "Introduction to {renv}"
   page-footer:
-    center: © 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.
     border: false
-  search:
-    location: sidebar
+    center: © 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.
   repo-url: https://github.com/lmu-osc/introduction-to-renv
   repo-actions: [edit, issue]
-  back-to-top-navigation: true
-  page-navigation: true
-  favicon: /assets/lmu-osc-favicon.jpg
-  margin-header: |
-    ![](//assets/lmu-osc-logo.svg){width="175"}
 
   navbar:
     right:
@@ -34,7 +32,6 @@ website:
 
   sidebar:
     style: "docked"
-    # background: "#cfc7c6"
     contents:
       - text: "Overview"
         href: index.qmd
@@ -73,30 +70,28 @@ website:
           - href: extra-content/caching.qmd
             text: "Caching"
           - href: extra-content/embed-and-use.qmd
-            text: "`embed()` and `use()`"
+            text: "embed() and use()"
           - href: extra-content/advanced-topics.qmd
+# End Website
 
+# Begin Includes
+include-in-header:
+  - file: matomo-analytics.html
+include-after-body:
+  - file: footer/footer.html
+# End Includes
+
+# Begin Format
+# use only if needed. the default format for `tutorial-template` projects is tutorial-template-html+tutorial
+# we recommend just extending the definition below if you need to make format changes
 format:
-  html:
-    theme:
-      - cosmo
-      - lmu-osc-custom.scss
+  tutorial-template-html+tutorial:
     css:
-      - /assets/bootstrap-grid.min.css
-      - https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css
       - footer/footer-style.css
-    toc: true
-    fontsize: 13pt
-    code-overflow: wrap
-    code-link: true
-    grid:
-      sidebar-width: 300px
-    include-in-header:
-      - file: matomo-analytics.html
-    include-after-body:
-      - file: footer/footer.html
+# End Format
+
+# Begin Editor
+editor: source
+# End Editor
 
 bibliography: references.bib
-
-editor: source
-csl: chicago-fullnote-bibliography.csl

@@ -4,7 +4,7 @@
 _site/**
 .quarto/**
 .github/**
-assets/bootstrap-grid.min.css
+_extensions/
 
 # Common documentation files to ignore
 LICENSE-CODE.md
@@ -12,6 +12,11 @@ LICENSE.md
 LICENSE
 README.md
 README
+README-template.md
+license.md
+license-code.md
+readme.md
 CITATION.cff
+CITATION-template.cff
 _quarto.yml
 404.qmd
