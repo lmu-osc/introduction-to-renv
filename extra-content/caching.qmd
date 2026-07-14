@@ -14,17 +14,17 @@ This page will discuss the concept of caching and how it is used in {renv}.
 
 <!--     -   "symlinks" to the shared library in `renv/library` -->
 
-# What is Caching?
+## What is Caching?
 
 In the context of software development, caching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program. When a program needs to access a package, it first checks the cache to see if the package is already stored there. If the package is found in the cache, the program can retrieve it quickly without having to download it again. This can significantly reduce the time it takes to run a program, especially if the package is large or if the program is run frequently.
 
-# Caching in {renv}
+## Caching in {renv}
 
 In the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages.
 
 A cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the [Restoring Projects](restoring_a_project.html) section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.
 
-## Cache Locations
+### Cache Locations
 
 Although you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.
 
@@ -55,7 +55,7 @@ renv::paths$cache()
 #> [1] "/Users/<USER>/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20"
 ```
 
-### Packages in the Cache
+#### Packages in the Cache
 
 Each of the caches will contain the packages that you downloaded for use in your projects as you were using that version of R. So for example, if you downloaded version 1.0.9 of {dplyr} while using R 4.3, you would find the package in the `R-4.3` folder of the cache. If you then started a project using R 4.4 and downloaded version 1.1.2 of {dplyr}, you would find that version in the `R-4.4` folder of the cache. Moreover, if another project using R 4.4 also needed version 1.1.4 of {dplyr}, it would be found in the `R-4.4` folder of the cache.
 
@@ -79,19 +79,19 @@ list.files("~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4/aarch64-apple
 
 In this case, I have versions 3.4.3, 3.4.4, 3.5.0, and 3.5.1 of {ggplot2} in the cache for R 4.3, but only versions 3.5.0 and 3.5.1 in the cache for R 4.4 which is an expected outcome. I used several older version of {ggplot2} with an older version of R and then upgraded to a newer version of R and only used the newer versions of {ggplot2}!
 
-## Project Library
+### Project Library
 
 The discussion of caching so far has covered just the shared libraries that {renv} uses to store packages. But how does {renv} use these caches, how does this relate back to your project libraries, and what is the role of the `renv/library` folder in your projects?
 
 Each {renv} project has its own library, located in the `renv/library` folder of the project. When you install a package in a project with {renv}, however, the package is not *technically* installed in the `renv/library` library. In fact, none of the packages used in your project are *actually* stored in this folder. Instead, the contents of these folders are "symlinks" to the packages in the shared library.
 
-### Symlinks
+#### Symlinks
 
 A symlink or "symbolic link" is a file that points to another file or directory. It is a reference to the original file or directory, and it can be used to access the original file or directory from a different location. Symlinks are important because they allow you to create shortcuts to files or directories, which can be useful for organizing files, accessing files from different locations, or creating symbolic links to files or directories that are located on different drives or partitions.
 
 In the context of {renv}, the apparent packages in the `renv/library` folder of your project are actually symlinks that point to the packages in the cache!
 
-# Summary and Key Points
+## Summary and Key Points
 
 This chapter contained quite a bit of technical detail and may have been a bit overwhelming. Here are the key points to remember:
 

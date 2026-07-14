@@ -2,14 +2,14 @@
 title: "Software Dependencies"
 ---
 
-# Dependencies Overview
+## Dependencies Overview
 
 The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using  *depends* on to function. If the dependencies are not installed, dependent software will either be missing features, not work as expected, or possibly not work at all.
 
 We make an arbitrary distinction between "system dependencies" and "package dependencies" for the purposes of this tutorial, but there is principally no difference between the two.The distinction is made to clarify that system dependencies are not R packages, but rather are other software programs that are necessary for the project to run. Package dependencies are R packages that are necessary for the project to run.
 
 
-## Package Dependencies
+### Package Dependencies
 
 Package dependencies are R packages that are necessary for the project to run. For example, if you are using the `dplyr` package in your project, you will need to have the `dplyr` package installed on your system. However, `dplyr` itself depends on other R packages such as `tibble`, `rlang`, and `vctrs`. And `tibble`, `rlang`, and `vctrs` have their dependencies too.
 
@@ -30,29 +30,29 @@ If you're ever curious about the dependencies of a package, they should all be d
 -   `pak::pkg_deps_tree()` for a visual representation of the direct dependencies **and** the recursive dependencies. An example of this will be shown in the [Starting Details](/about-renv/starting-details.qmd) chapter.
 :::
 
-## System Dependencies
+### System Dependencies
 
 Systems dependencies are not R packages, but rather are other software programs that are necessary for the project to run. For example, if you are using R to run a Python script, you will need to have Python installed on your system. Or if you are using R to run a C++ script, you will need to have a C++ compiler installed on your system. These system dependencies can be more difficult to manage than package dependencies, as they are not always explicitly declared in the project files.
 
 
-# Intro to Management Practices
+## Intro to Management Practices
 
 Given the potential complexity of software dependencies, it is important to manage these dependencies in a way that is both efficient and reproducible. This is especially important when sharing code with others or when working on a project over a long period of time so that you can easily recreate the environment in which the code was originally run.
 
 You might already have a system in place for managing your dependencies, such as writing a document outlining installation procedures or you maintain a list of project packages, you might already use an automated package manager, or you might not have a system at all. Regardless of what you currently use, the manual and automated approaches are discussed below, and we clarify why you should use an automated approach for managing dependencies going forward.
 
-## Manual management
+### Manual management
 
 As noted, the dependencies for your project can be managed manually with e.g. a written list of the softwares and versions used. The main pros to this approach is that little technical knowledge is needed to create a simple Word or text file with this information, and such information can likewise be shared easily. However, the cons are that this approach is inexact, error-prone, still requires another user to manually download each package by hand, and the recursive dependencies are unlikely to be logged. This approach is not recommended for any serious project, especially if you are working with others or if you are working on a project over a long period of time.
 
-## Automated Management
+### Automated Management
 
 Automated management of dependencies is the recommended approach for managing dependencies. This approach involves using a package manager to automatically install the necessary software dependencies for a project. The main pros to this approach are that it is more accurate, less error-prone, and can be easily shared with others. The cons are that it requires some technical knowledge to set up and can be more difficult to troubleshoot if something goes wrong.
 
 There are many package managers available for different programming languages, and the choice of package manager can depend on the programming language you are using, the complexity of your project, and your personal preferences. Some common package managers for R and Python are listed below:
 
 ::: panel-tabset
-## R
+### R
 
 The major current and historical options for managing R dependencies are:
 
@@ -60,7 +60,7 @@ The major current and historical options for managing R dependencies are:
 2.  **{groundhog}** is a package that is similar to {renv}, and developed by independent, open-source contributors
 3.  **{packrat}** is a deprecated package that is no longer recommended for new projects
 
-## Python
+### Python
 
 If you're coming from a background in Python, you might be familiar with the following analogous approaches:
 

@@ -5,7 +5,7 @@ engine: knitr
 
 This page provides the basic steps to starting a project with the {renv} package, and how to update the `renv.lock` file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the [Starting Details](starting_details.html) page.
 
-# Initiating {renv}
+## Initiating {renv}
 
 When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.
 
@@ -21,7 +21,7 @@ For most purposes, one will only need to have a passing understanding of the `re
 **The `renv` folder comes with a .gitignore file. This file should be respected if you are using git with your project--do not override or force track items in the `renv` folder.** A more detailed explanation is available in the Advanced Topics section, but TL;DR: the project library should always be rebuilt from the `renv.lock` file.
 :::
 
-## With a New RStudio Project
+### With a New RStudio Project
 
 When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to "Use renv with your project."
 
@@ -37,7 +37,7 @@ When initiating a new project from within RStudio such as a typical .Rproj, a Qu
 {{< video /assets/img/renv-init-new-project.mp4 >}}
 :::
 
-## From an Existing Project or Folder
+### From an Existing Project or Folder
 
 In essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.
 
@@ -52,7 +52,7 @@ init()
 {{< video /assets/img/renv-init-existing-project.mp4 >}}
 :::
 
-# Check Status of Project
+## Check Status of Project
 
 After initiating {renv} in your project, you should see a message indicating that your project is in a "consistent state." In short, this means that {renv} has detected the following:
 
@@ -80,7 +80,7 @@ The project is out of sync with the lockfile.
     - {package_name}
 ```
 
-# Updating `renv.lock`
+## Updating `renv.lock`
 
 As you write additional `.R`, `.Rmd`, and/or `.qmd` files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the `renv.lock` file. This can be done by "snapshotting" the project which will initiate a search for calls to `library()`, `require()` and namespaced calls to functions e.g. `package::function()`.
 

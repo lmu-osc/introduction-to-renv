@@ -5,9 +5,9 @@ fig-cap-location: bottom
 
 In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.
 
-# What is Reproducibility?
+## What is Reproducibility?
 
-## A Brief Definition
+### A Brief Definition
 
 > I propose to consider the question "What is reproducibility?" As reproducibility is such a central concept in science, one would think that it would be clearly defined. However, this is not the case. Reproducibility is an elusive concept. It has no single commonly agreed upon definition. Rather, it has many different, and each of these captures central, but different properties of it...
 >
@@ -23,15 +23,15 @@ One might assume that academic publications provide all of the information requi
 
 To address the shortcomings of written descriptions, **researchers must also strive to publish their code, data, and ideally both code and data together such that the *complete* documentation of the project is available to others.** This tutorial specifically covers how to document the R version and R packages used in a project to ensure that the code can be run on other machines.
 
-## Reproducible Code
+### Reproducible Code
 
 Why should we concern ourselves with making reproducible *code* specifically? From a scientific perspective, reproducible code is essential in allowing other researchers to verify findings, to build upon existing work, and to ensure that the scientific process is transparent and trustworthy. From a practical perspective, reproducible code can save time and effort in the long run by making it easier to revisit and understand one's own work, to make debugging and troubleshooting easier, and to collaborate with others.
 
 In the context of this tutorial, we will focus on the practical aspects of making code reproducible. This mainly means taking steps to ensure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is **portable** and **future-proof** by ensuring the software originally used in creating our code is the same software used by others. Let's look at this in more detail.
 
-# The \~Machines\~
+## The \~Machines\~
 
-## Your Computer
+### Your Computer
 
 Getting code to work on your own machine is, in principle, not too difficult. You can install the necessary software specific to your hardware and software, set up your environment, and run your code! Simple, right? (Writing code that actually works is another story, of course 😉.)
 
@@ -41,16 +41,16 @@ However, this is only half the battle. When you run your code on your machine, y
 ![](/assets/img/works-on-my-machine.jpg){width="85%"}
 </div>
 
-## Someone Else's Computer
+### Someone Else's Computer
 
 When you share your code with others, you are effectively asking them to run *your* code on *their* machine, and it is unlikely that their computer is set up exactly like yours given how many degrees of freedom there are in operating systems, programming languages, software, and the different versions of these. A non-exhaustive list of examples where there might be software discrepancies are detailed below.
 
-### Major Machine & Software Differences
+#### Major Machine & Software Differences
 
 <br>
 
 :::::: panel-tabset
-## Operating systems
+### Operating systems
 
 It's already well-known that different operating systems can have different software requirements. For example, some software might only be available on Windows, while others might only be available on MacOS or Linux.
 
@@ -60,7 +60,7 @@ However, it is also important to consider that different versions of the same op
 ![](/assets/img/mac-linux-windows.jpg)
 :::
 
-## Programming languages
+### Programming languages
 
 Another obvious difference is the programming language used in a project. For example, a project written in R will not run (correctly) in a Python, MATLAB, or Julia environment.
 
@@ -72,7 +72,7 @@ Fortunately, most modern programming languages are cross-compatible across recen
 ![](/assets/img/r-python-julia.jpg)
 :::
 
-## Packages/Libraries (Add-Ons)
+### Packages/Libraries (Add-Ons)
 
 The most likely pain point for reproducibility is the software add-ons, or packages/libraries, that are used in a project. For example, in R, there are over 20,000 packages available on CRAN, and in Python, there are over 200,000 packages available on PyPI.
 
@@ -93,10 +93,10 @@ Some real-world examples:
 -   **Programming languages**: R switched its default random number generating process at version 3.6.0 [@brodeur2024], and R versions from 4.4.0 give different (albeit more consistent) values for the `density()` function [@schlicht2022]
 -   **Packages/libraries**: JASP changed the default Bayesian ANOVA [@vandenbergh2023]
 
-## All of the Machines
+### All of the Machines
 
 ::: callout-important
-## Expect No One to Already Have the Required Software
+### Expect No One to Already Have the Required Software
 
 1.  Don't expect others to have the software you rely on.
 2.  Even if others have the software, don't expect them to have the **same version**.

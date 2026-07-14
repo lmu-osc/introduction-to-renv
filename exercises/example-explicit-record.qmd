@@ -6,7 +6,7 @@ As with the previous exercise, it is **recommended** that you fork the repositor
 
 If you're not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.
 
-# Adding Packages to the`renv.lock` File
+## Adding Packages to the`renv.lock` File
 
 
 The exercises for initiating and snapshotting a project can be found in the `explicit-record-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises/tree/main) repo.

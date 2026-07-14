@@ -10,7 +10,7 @@ The following examples will guide you through the process of initializing a proj
 
 However, this is not strictly necessary. You can also follow along by creating a new project on your local machine and initializing {renv} in that project. If you choose to do this, you can skip the forking and cloning steps and instead download a zip file of the repository.
 
-# Getting Started
+## Getting Started
 
 The exercises for initiating and snapshotting a project can be found in the `init-snapshot-exercises` folder of the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) repo.
 
