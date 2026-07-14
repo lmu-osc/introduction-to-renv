@@ -559,10 +559,10 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
 <p>The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the <code>renv.lock</code> file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.</p>
 <p>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</p>
-<section id="when-to-restore" class="level1">
-<h1>When to <code>restore()</code></h1>
-<section id="from-a-github-repo" class="level2">
-<h2 class="anchored" data-anchor-id="from-a-github-repo">From a GitHub Repo</h2>
+<section id="when-to-restore" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-restore">When to <code>restore()</code></h2>
+<section id="from-a-github-repo" class="level3">
+<h3 class="anchored" data-anchor-id="from-a-github-repo">From a GitHub Repo</h3>
 <p>Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo <em>should</em> always have all of the required files for restoring a project including the <code>renv.lock</code> file, the <code>renv</code> folder, the <code>*.Rproj</code> file, and the R scripts. Note that repos generally do not (and should not) contain the <code>renv/library</code> folder–this is intended behavior. The <code>renv/library</code> contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Moreover, the <code>renv/library</code> folder can be quite large and is not necessary for restoring a project.</p>
 <p>The steps for restoring a project from a GitHub repository are as follows:</p>
 <ul>
@@ -572,8 +572,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </ul>
 <p>There should not be anything else to do! The <code>renv.lock</code> file will be used to install the correct versions of the packages you need for the project.</p>
 </section>
-<section id="from-a-lockfile" class="level2">
-<h2 class="anchored" data-anchor-id="from-a-lockfile">From a lockfile</h2>
+<section id="from-a-lockfile" class="level3">
+<h3 class="anchored" data-anchor-id="from-a-lockfile">From a lockfile</h3>
 <p>You may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the <code>renv.lock</code> file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:</p>
 <ul>
 <li>Obtain the <code>renv.lock</code> file from your collaborators.</li>
@@ -588,8 +588,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <li><strong>Option 2: Run <code>renv::init()</code>. Choose the option to “Restore the project from the lockfile.” This will do everything that <code>renv::restore()</code> does <em>and</em> install the packages at the same time.</strong></li>
 </ul>
 </section>
-<section id="after-upgrading-r" class="level2">
-<h2 class="anchored" data-anchor-id="after-upgrading-r">After Upgrading R</h2>
+<section id="after-upgrading-r" class="level3">
+<h3 class="anchored" data-anchor-id="after-upgrading-r">After Upgrading R</h3>
 <p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <a href="caching.html">caching chapter</a>, but a summarized version is also provided here.</p>
 <!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. -->
 <p>To first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.</p>
@@ -598,8 +598,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <p>The second option is to switch between R versions using a tool like <a href="https://rud.is/rswitch/">rswitch</a> or <a href="https://github.com/r-lib/rig">rig</a>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.</p>
 </section>
 </section>
-<section id="when-to-upgrade-and-update" class="level1">
-<h1>When to <code>upgrade()</code> and <code>update()</code></h1>
+<section id="when-to-upgrade-and-update" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-upgrade-and-update">When to <code>upgrade()</code> and <code>update()</code></h2>
 <p>If you are working on a project and you want to update the packages in your project, you can run <code>renv::update()</code>. This will update the packages in your project to the latest versions that are compatible with the versions of the packages in your <code>renv.lock</code> file. If you want to update a specific package, you can run <code>renv::update("package_name")</code>.</p>
 <p>If you want to update the <code>renv</code> package itself, you can run <code>renv::upgrade()</code>. This will update the <code>renv</code> package to the latest version available on CRAN.</p>
 
@@ -1106,9 +1106,9 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># When to `restore()`</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## When to `restore()`</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## From a GitHub Repo</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">### From a GitHub Repo</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo *should* always have all of the required files for restoring a project including the `renv.lock` file, the `renv` folder, the `*.Rproj<span class="in">` file, and the R scripts. Note that repos generally do not (and should not) contain the `</span>renv/library<span class="in">` folder--this is intended behavior. The `</span>renv/library<span class="in">` contains "symlinks" to the actual package files on your machine, and these symlinks are not portable across machines[^1]. Moreover, the `</span>renv/library` folder can be quite large and is not necessary for restoring a project.</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
@@ -1122,7 +1122,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>There should not be anything else to do! The <span class="in">`renv.lock`</span> file will be used to install the correct versions of the packages you need for the project.</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## From a lockfile</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### From a lockfile</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>You may encounter situations where it's not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project's depedencies using just the <span class="in">`renv.lock`</span> file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:</span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -1139,7 +1139,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Option 1: Run <span class="in">`renv::restore()`</span>. If prompted, choose the option "Activate the project and use the project library." This will create all other necessary files and directories for a {renv} project.</span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Option 2: Run `renv::init()`. Choose the option to "Restore the project from the lockfile." This will do everything that `renv::restore()` does *and* install the packages at the same time.**</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## After Upgrading R</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### After Upgrading R</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <span class="co">[</span><span class="ot">caching chapter</span><span class="co">](caching.html)</span>, but a summarized version is also provided here.</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
@@ -1153,7 +1153,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>The second option is to switch between R versions using a tool like <span class="co">[</span><span class="ot">rswitch</span><span class="co">](https://rud.is/rswitch/)</span> or <span class="co">[</span><span class="ot">rig</span><span class="co">](https://github.com/r-lib/rig)</span>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it's not possible to update the version of R being used.</span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu"># When to `upgrade()` and `update()`</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## When to `upgrade()` and `update()`</span></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>If you are working on a project and you want to update the packages in your project, you can run <span class="in">`renv::update()`</span>. This will update the packages in your project to the latest versions that are compatible with the versions of the packages in your <span class="in">`renv.lock`</span> file. If you want to update a specific package, you can run <span class="in">`renv::update("package_name")`</span>.</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>

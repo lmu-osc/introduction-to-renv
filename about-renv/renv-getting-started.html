@@ -560,8 +560,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
 
 <p>This page provides the basic steps to starting a project with the {renv} package, and how to update the <code>renv.lock</code> file as you add new packages to your project. This page will be followed by a more detailed explanation of the package’s functionality in the <a href="starting_details.html">Starting Details</a> page.</p>
-<section id="initiating-renv" class="level1">
-<h1>Initiating {renv}</h1>
+<section id="initiating-renv" class="level2">
+<h2 class="anchored" data-anchor-id="initiating-renv">Initiating {renv}</h2>
 <p>When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.</p>
 <p>Either approach should yield the following results in the directory you’re working within:</p>
 <ul>
@@ -583,8 +583,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <p><strong>The <code>renv</code> folder comes with a .gitignore file. This file should be respected if you are using git with your project–do not override or force track items in the <code>renv</code> folder.</strong> A more detailed explanation is available in the Advanced Topics section, but TL;DR: the project library should always be rebuilt from the <code>renv.lock</code> file.</p>
 </div>
 </div>
-<section id="with-a-new-rstudio-project" class="level2">
-<h2 class="anchored" data-anchor-id="with-a-new-rstudio-project">With a New RStudio Project</h2>
+<section id="with-a-new-rstudio-project" class="level3">
+<h3 class="anchored" data-anchor-id="with-a-new-rstudio-project">With a New RStudio Project</h3>
 <p>When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to “Use renv with your project.”</p>
 <ol type="1">
 <li><code>File</code></li>
@@ -597,8 +597,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="../assets/img/renv-init-new-project.mp4"></video></div>
 </div>
 </section>
-<section id="from-an-existing-project-or-folder" class="level2">
-<h2 class="anchored" data-anchor-id="from-an-existing-project-or-folder">From an Existing Project or Folder</h2>
+<section id="from-an-existing-project-or-folder" class="level3">
+<h3 class="anchored" data-anchor-id="from-an-existing-project-or-folder">From an Existing Project or Folder</h3>
 <p>In essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -609,8 +609,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </div>
 </section>
 </section>
-<section id="check-status-of-project" class="level1">
-<h1>Check Status of Project</h1>
+<section id="check-status-of-project" class="level2">
+<h2 class="anchored" data-anchor-id="check-status-of-project">Check Status of Project</h2>
 <p>After initiating {renv} in your project, you should see a message indicating that your project is in a “consistent state.” In short, this means that {renv} has detected the following:</p>
 <ul>
 <li>That all packages detected in the project are listed in the <code>renv.lock</code> file</li>
@@ -626,8 +626,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Packages that are not <span class="cf">in</span> the lockfile<span class="sc">:</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> {package_name}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="updating-renv.lock" class="level1">
-<h1>Updating <code>renv.lock</code></h1>
+<section id="updating-renv.lock" class="level2">
+<h2 class="anchored" data-anchor-id="updating-renv.lock">Updating <code>renv.lock</code></h2>
 <p>As you write additional <code>.R</code>, <code>.Rmd</code>, and/or <code>.qmd</code> files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the <code>renv.lock</code> file. This can be done by “snapshotting” the project which will initiate a search for calls to <code>library()</code>, <code>require()</code> and namespaced calls to functions e.g.&nbsp;<code>package::function()</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">snapshot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Running the <code>snapshot()</code> function will capture new packages used in your project, <em>and</em> it will update the package versions in the <code>renv.lock</code> file if you have installed new versions to the project you are working in.</p>
@@ -1132,7 +1132,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>This page provides the basic steps to starting a project with the {renv} package, and how to update the <span class="in">`renv.lock`</span> file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the <span class="co">[</span><span class="ot">Starting Details</span><span class="co">](starting_details.html)</span> page.</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Initiating {renv}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Initiating {renv}</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>When using or adding {renv} to one of your projects, you will likely enter from one of two approaches: either from a new project with RStudio, or by adding {renv} to an already existing (or non-RStudio) project.</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -1148,7 +1148,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>**The `renv` folder comes with a .gitignore file. This file should be respected if you are using git with your project--do not override or force track items in the `renv` folder.** A more detailed explanation is available in the Advanced Topics section, but TL;DR: the project library should always be rebuilt from the <span class="in">`renv.lock`</span> file.</span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## With a New RStudio Project</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### With a New RStudio Project</span></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>When initiating a new project from within RStudio such as a typical .Rproj, a Quarto website, a new R package or similar, you can follow the approximate directions below to check the box that you would like to "Use renv with your project."</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
@@ -1164,7 +1164,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>{{&lt; video /assets/img/renv-init-new-project.mp4 &gt;}}</span>
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## From an Existing Project or Folder</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### From an Existing Project or Folder</span></span>
 <span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>In essentially all other scenarios, one can initiate {renv} for a project by navigating to your project/folder and running the two commands below.</span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
@@ -1179,7 +1179,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>{{&lt; video /assets/img/renv-init-existing-project.mp4 &gt;}}</span>
 <span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu"># Check Status of Project</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check Status of Project</span></span>
 <span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>After initiating {renv} in your project, you should see a message indicating that your project is in a "consistent state." In short, this means that {renv} has detected the following:</span>
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
@@ -1207,7 +1207,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> {package_name}</span>
 <span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="fu"># Updating `renv.lock`</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Updating `renv.lock`</span></span>
 <span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>As you write additional <span class="in">`.R`</span>, <span class="in">`.Rmd`</span>, and/or <span class="in">`.qmd`</span> files for your project, you will presumably employ more and more functions from foreign packages, and these new packages should be captured in the <span class="in">`renv.lock`</span> file. This can be done by "snapshotting" the project which will initiate a search for calls to <span class="in">`library()`</span>, <span class="in">`require()`</span> and namespaced calls to functions e.g. <span class="in">`package::function()`</span>.</span>
 <span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
