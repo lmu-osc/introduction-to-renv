@@ -9,6 +9,7 @@ description: An introduction to the {renv} package for managing R package depend
 #| echo: false
 #| warning: false
 library(downlit)
+library(xml2)
 ```
 
 

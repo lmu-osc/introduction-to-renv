@@ -98,11 +98,6 @@ jobs:
           if (length(missing) > 0) install.packages(missing)
         shell: Rscript {0}
 
-      - name: Load downlit package
-        run: |
-          library(downlit)
-        shell: Rscript {0}
-
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
