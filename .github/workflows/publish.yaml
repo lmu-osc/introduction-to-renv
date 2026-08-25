@@ -93,9 +93,14 @@ jobs:
             dir.create(lib, recursive = TRUE, showWarnings = FALSE)
             .libPaths(c(lib, .libPaths()))
           }
-          pkgs <- c("knitr", "rmarkdown")
+          pkgs <- c("knitr", "rmarkdown", "downlit")
           missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
           if (length(missing) > 0) install.packages(missing)
+        shell: Rscript {0}
+
+      - name: Load downlit package
+        run: |
+          library(downlit)
         shell: Rscript {0}
 
       - name: Render and Publish
