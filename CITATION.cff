@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you refer to this tutorial, please cite it as below."
+authors:
+  - family-names: Callahan
+    given-names: Pat
+    affiliation: "LMU Open Science Center"
+    orcid: "https://orcid.org/0000-0003-1769-7580"
+  - family-names: Pargent
+    given-names: Florian
+    affiliation: "LMU Open Science Center"
+    orcid: "https://orcid.org/0000-0002-2388-553X"
+  - family-names: Kohrt
+    given-names: Florian
+    affiliation: "LMU Open Science Center"
+    orcid: "https://orcid.org/0000-0003-0374-5625"
+title: "Introduction to {renv}"
+version: v0.2.0
+date-released: 2026-07-02
+doi: 10.5281/zenodo.14230879
+url: "https://lmu-osc.github.io/introduction-to-renv/"

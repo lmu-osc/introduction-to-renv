@@ -593,7 +593,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </section>
 <section id="after-upgrading-r" class="level3">
 <h3 class="anchored" data-anchor-id="after-upgrading-r">After Upgrading R</h3>
-<p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <a href="caching.html">caching chapter</a>, but a summarized version is also provided here.</p>
+<p>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <a href="../extra-content/caching.html">caching chapter</a>, but a summarized version is also provided here.</p>
 <!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. -->
 <p>To first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.</p>
 <p>If you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:</p>
@@ -615,7 +615,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>See the <a href="caching.html">Caching chapter</a> for more information on the <code>renv/library</code> folder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>See the <a href="../extra-content/caching.html">Caching chapter</a> for more information on the <code>renv/library</code> folder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1115,7 +1115,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo *should* always have all of the required files for restoring a project including the `renv.lock` file, the `renv` folder, the `*.Rproj<span class="in">` file, and the R scripts. Note that repos generally do not (and should not) contain the `</span>renv/library<span class="in">` folder--this is intended behavior. The `</span>renv/library<span class="in">` contains "symlinks" to the actual package files on your machine, and these symlinks are not portable across machines[^1]. Moreover, the `</span>renv/library` folder can be quite large and is not necessary for restoring a project.</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See the <span class="co">[</span><span class="ot">Caching chapter</span><span class="co">](caching.html)</span> for more information on the <span class="in">`renv/library`</span> folder.</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See the <span class="co">[</span><span class="ot">Caching chapter</span><span class="co">](../extra-content/caching.qmd)</span> for more information on the <span class="in">`renv/library`</span> folder.</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>The steps for restoring a project from a GitHub repository are as follows:</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
@@ -1144,7 +1144,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### After Upgrading R</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <span class="co">[</span><span class="ot">caching chapter</span><span class="co">](caching.html)</span>, but a summarized version is also provided here.</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the <span class="co">[</span><span class="ot">caching chapter</span><span class="co">](../extra-content/caching.qmd)</span>, but a summarized version is also provided here.</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. --&gt;</span></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>

@@ -65,7 +65,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -532,6 +551,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   <li><a href="#contributors" id="toc-contributors" class="nav-link active" data-scroll-target="#contributors">Contributors</a></li>
   <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#tutorial-template-quarto-extension" id="toc-tutorial-template-quarto-extension" class="nav-link" data-scroll-target="#tutorial-template-quarto-extension">Tutorial Template Quarto Extension</a></li>
+  <li><a href="#how-to-cite" id="toc-how-to-cite" class="nav-link" data-scroll-target="#how-to-cite">How to Cite</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/about.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -599,12 +620,25 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </section>
 <section id="licenses" class="level2">
 <h2 class="anchored" data-anchor-id="licenses">Licenses</h2>
-<p>The overall project is licensed under the <strong><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></strong> license found at <a href="./LICENSE.html">LICENSE</a>; all code snippets are additionally licensed under the <strong><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a></strong> license found at <a href="./LICENSE-CODE.html">LICENSE-CODE</a>.</p>
+<p>The overall project is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"><strong>CC BY-SA 4.0</strong></a> license found at <a href="./LICENSE.html">LICENSE</a>; all code without any narrative text is also (at your option) available under the <a href="https://creativecommons.org/publicdomain/zero/1.0/"><strong>CC0 1.0 Universal</strong></a> license found at <a href="./LICENSE-CODE.html">LICENSE-CODE</a>.</p>
 <p>Why two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and configuration files. This is a common practice for websites that include code snippets and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.</p>
 </section>
 <section id="notes" class="level2">
 <h2 class="anchored" data-anchor-id="notes">Notes</h2>
 <p>This tutorial was primarily written in 2024 using {renv} version 1.0.11. Major changes to the {renv} package are unlikely to occur in the near future, but it is always a good idea to check the <a href="https://rstudio.github.io/renv/">package’s website</a> for the most up-to-date information, and to confirm that our tutorial is not out-of-date.</p>
+</section>
+<section id="tutorial-template-quarto-extension" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial-template-quarto-extension">Tutorial Template Quarto Extension</h2>
+<p>This tutorial was written using the <a href="https://github.com/lmu-osc/tutorial-template"><code>lmu-osc/tutorial-template</code></a> Quarto extension <span class="citation" data-cites="callahan2026">(<a href="#ref-callahan2026" role="doc-biblioref">Callahan 2026</a>)</span>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-callahan2026" class="csl-entry" role="listitem">
+Callahan, Patrick. 2026. <em>LMU Open Science Center Tutorial Template: A Quarto Extension</em>. <a href="https://doi.org/10.5281/zenodo.21263721">https://doi.org/10.5281/zenodo.21263721</a>.
+</div>
+</div>
+</section>
+<section id="how-to-cite" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-cite">How to Cite</h2>
+<p><strong>To cite this tutorial, please refer to the project’s <a href="CITATION.cff">CITATION.cff</a> file or use the BibTeX citation provided in the appendix below.</strong></p>
 
 
 <!-- -->
@@ -614,6 +648,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{callahan2024,
   author = {Callahan, Pat and Pargent, Florian and Kohrt, Florian},
   title = {Introduction to \{Renv\}},
+  version = {0.2.0},
   date = {2024-11-27},
   url = {https://lmu-osc.github.io/introduction-to-renv},
   doi = {10.5281/zenodo.14230879},
@@ -621,8 +656,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-callahan2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 Callahan, Pat, Florian Pargent, and Florian Kohrt. 2024.
-<span>“Introduction to {Renv}.”</span> LMU Open Science Center, November
-27. <a href="https://doi.org/10.5281/zenodo.14230879">https://doi.org/10.5281/zenodo.14230879</a>.
+<span>“Introduction to {Renv}.”</span> Version 0.2.0. LMU Open Science
+Center, November 27. <a href="https://doi.org/10.5281/zenodo.14230879">https://doi.org/10.5281/zenodo.14230879</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1104,34 +1139,56 @@ Callahan, Pat, Florian Pargent, and Florian Kohrt. 2024.
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  container-title: "LMU Open Science Center"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  url: https://lmu-osc.github.io/introduction-to-renv</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  doi: "10.5281/zenodo.14230879"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Pat Callahan</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: "LMU Open Science Center"</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0003-1769-7580</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Florian Pargent</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: "LMU Open Science Center"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0002-2388-553X</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Florian Kohrt</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: "LMU Open Science Center"</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0003-0374-5625</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># google-scholar: true</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contributors</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>This site was authored by Pat Callahan with contributions and feedback from Florian Pargent and Florian Kohrt.</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>The overall project is licensed under the **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)** license found at [LICENSE](LICENSE.md); all code snippets are additionally licensed under the **[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)** license found at <span class="co">[</span><span class="ot">LICENSE-CODE</span><span class="co">](LICENSE-CODE.md)</span>.</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Why two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and configuration files. This is a common practice for websites that include code snippets and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>This tutorial was primarily written in 2024 using {renv} version 1.0.11. Major changes to the {renv} package are unlikely to occur in the near future, but it is always a good idea to check the <span class="co">[</span><span class="ot">package's website</span><span class="co">](https://rstudio.github.io/renv/)</span> for the most up-to-date information, and to confirm that our tutorial is not out-of-date. </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  version: 0.2.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Pat Callahan</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - id: osc</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">        name: LMU Open Science Center</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">        ror: https://ror.org/05591te55</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">        isni: 000000041936973X</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0003-1769-7580</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Florian Pargent</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">      - id: osc</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">        name: LMU Open Science Center</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        ror: https://ror.org/05591te55</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        isni: 000000041936973X</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0002-2388-553X</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Florian Kohrt</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation:</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">      - id: osc</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">        name: LMU Open Science Center</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">        ror: https://ror.org/05591te55</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">        isni: 000000041936973X</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0003-0374-5625</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># google-scholar: true</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contributors</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>This site was authored by Pat Callahan with contributions and feedback from Florian Pargent and Florian Kohrt.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>The overall project is available under the <span class="co">[</span><span class="ot">**CC BY-SA 4.0**</span><span class="co">](https://creativecommons.org/licenses/by-sa/4.0/)</span> license found at <span class="co">[</span><span class="ot">LICENSE</span><span class="co">](LICENSE.md)</span>; all code without any narrative text is also (at your option) available under the <span class="co">[</span><span class="ot">**CC0 1.0 Universal**</span><span class="co">](https://creativecommons.org/publicdomain/zero/1.0/)</span> license found at <span class="co">[</span><span class="ot">LICENSE-CODE</span><span class="co">](LICENSE-CODE.md)</span>.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>Why two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and configuration files. This is a common practice for websites that include code snippets and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>This tutorial was primarily written in 2024 using {renv} version 1.0.11. Major changes to the {renv} package are unlikely to occur in the near future, but it is always a good idea to check the <span class="co">[</span><span class="ot">package's website</span><span class="co">](https://rstudio.github.io/renv/)</span> for the most up-to-date information, and to confirm that our tutorial is not out-of-date.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tutorial Template Quarto Extension</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>This tutorial was written using the <span class="co">[</span><span class="ot">`lmu-osc/tutorial-template`</span><span class="co">](https://github.com/lmu-osc/tutorial-template)</span> Quarto extension <span class="co">[</span><span class="ot">@callahan2026</span><span class="co">]</span>.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Cite</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>**To cite this tutorial, please refer to the project's [CITATION.cff](CITATION.cff) file or use the BibTeX citation provided in the appendix below.**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
