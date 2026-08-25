@@ -3,7 +3,7 @@ title: "{renv}: Easy Start"
 engine: knitr
 ---
 
-This page provides the basic steps to starting a project with the {renv} package, and how to update the `renv.lock` file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the [Starting Details](starting_details.html) page.
+This page provides the basic steps to starting a project with the {renv} package, and how to update the `renv.lock` file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the [Starting Details](starting-details.qmd) page.
 
 ## Initiating {renv}
 
@@ -94,4 +94,4 @@ Running the `snapshot()` function will capture new packages used in your project
 {{< video /assets/img/renv-status-snapshot.mp4 >}}
 :::
 
-This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be "restoring" libraries for either your own projects or for projects shared by others using `renv::restore()`. This is discussed next in [Restoring A Project](restoring_a_project.html), but **we strongly recommend reading the details of [Understanding {renv}](starting_details.html) first.**
+This is essentially 80% of the work you will ever need to put into creating a project that also uses {renv}. The other major component of using this package will be "restoring" libraries for either your own projects or for projects shared by others using `renv::restore()`. This is discussed next in [Restoring A Project](restoring-a-project.qmd), but **we strongly recommend reading the details of [Understanding {renv}](starting-details.qmd) first.**

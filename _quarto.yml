@@ -12,7 +12,6 @@ website:
     border: false
     center: © 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.
   repo-url: https://github.com/lmu-osc/introduction-to-renv
-  repo-actions: [edit, issue]
 
   navbar:
     right:

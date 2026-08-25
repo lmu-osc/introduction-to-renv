@@ -22,7 +22,7 @@ In the context of software development, caching is used to store data that is fr
 
 In the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the `renv.lock` if you don't already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages.
 
-A cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the [Restoring Projects](restoring_a_project.html) section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.
+A cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the [Restoring Projects](../about-renv/restoring-a-project.qmd) section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.
 
 ### Cache Locations
 

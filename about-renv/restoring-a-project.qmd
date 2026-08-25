@@ -12,7 +12,7 @@ We will cover restoring a project from a GitHub repository, restoring a project 
 
 Restoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo *should* always have all of the required files for restoring a project including the `renv.lock` file, the `renv` folder, the `*.Rproj` file, and the R scripts. Note that repos generally do not (and should not) contain the `renv/library` folder--this is intended behavior. The `renv/library` contains "symlinks" to the actual package files on your machine, and these symlinks are not portable across machines[^1]. Moreover, the `renv/library` folder can be quite large and is not necessary for restoring a project.
 
-[^1]: See the [Caching chapter](caching.html) for more information on the `renv/library` folder.
+[^1]: See the [Caching chapter](../extra-content/caching.qmd) for more information on the `renv/library` folder.
 
 The steps for restoring a project from a GitHub repository are as follows:
 
@@ -41,7 +41,7 @@ renv::status()
 
 ### After Upgrading R
 
-Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the [caching chapter](caching.html), but a summarized version is also provided here.
+Something that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the [caching chapter](../extra-content/caching.qmd), but a summarized version is also provided here.
 
 <!-- When you upgrade R, the cache for the previous version of R is no longer valid. This is because the cache contains compiled binaries of packages that are specific to the version of R you are using. When you upgrade R, the compiled binaries are no longer valid and need to be recompiled. This is why you need to restore the project after upgrading R. -->
 
