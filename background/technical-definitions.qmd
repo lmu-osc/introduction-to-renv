@@ -36,8 +36,7 @@ installed.packages(priority = c("base", "recommended")) %>%
   as_tibble() %>%
   select(Package, Version, Priority, Depends, Imports) %>%
   DT::datatable(
-    options = list(paging = TRUE, scrollY = "300px", pageLength = 11),
-    style = "bootstrap5"
+    options = list(paging = TRUE, scrollY = "300px", pageLength = 11)
   )
 ```
 
