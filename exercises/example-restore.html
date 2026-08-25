@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Using restore() – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
@@ -63,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -87,8 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-eb085aa7c0f1d8411752f2c1fdfaa824.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -113,10 +108,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-<!-- Matomo -->
-<script>
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!-- Matomo --><script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -131,14 +124,9 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 }
-</script>
-<!-- End Matomo Code -->
-
-
-<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+</script><!-- End Matomo Code --><link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
 <link rel="stylesheet" href="../footer/footer-style.css">
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -304,14 +292,10 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
-    </a>
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Introduction to {renv}</span>
     </a>
@@ -321,23 +305,23 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/introduction-to-renv">
             Source Code
             </a>
@@ -348,7 +332,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -358,9 +342,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -371,17 +353,11 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -390,7 +366,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -404,8 +380,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../background/computational-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Reproducibility</span></a>
@@ -430,7 +406,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../about-renv/index.html" class="sidebar-item-text sidebar-link">
@@ -439,8 +415,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about-renv/renv-getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Quick Start</span></a>
@@ -459,7 +435,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
@@ -468,8 +444,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../exercises/example-init-snapshot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Init and Snapshot</span></a>
@@ -488,7 +464,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../extra-content/index.html" class="sidebar-item-text sidebar-link">
@@ -497,8 +473,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extra-content/caching.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Caching</span></a>
@@ -517,29 +493,22 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-   
-  <ul>
-  <li><a href="#restore-a-renv-project" id="toc-restore-a-renv-project" class="nav-link active" data-scroll-target="#restore-a-renv-project">Restore a {renv} Project</a></li>
+        <nav id="TOC" role="doc-toc" class="toc-active"><ul>
+<li><a href="#restore-a-renv-project" id="toc-restore-a-renv-project" class="nav-link active" data-scroll-target="#restore-a-renv-project">Restore a {renv} Project</a></li>
   <li><a href="#exercise-notes" id="toc-exercise-notes" class="nav-link" data-scroll-target="#exercise-notes">Exercise Notes</a></li>
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/exercises/example-restore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/exercises/example-restore.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/exercises/example-restore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/exercises/example-restore.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../exercises/example-restore.html">Restore</a></li></ol></nav>
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Using <code>restore()</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Exercises</a></li><li class="breadcrumb-item"><a href="../exercises/example-restore.html">Restore</a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Using <code>restore()</code>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -553,73 +522,77 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   
 
 
-</header>
-
-
-<p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
+</header><p>As with the previous exercise, it is <strong>recommended</strong> that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.</p>
 <p>If you’re not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.</p>
-<section id="restore-a-renv-project" class="level2">
-<h2 class="anchored" data-anchor-id="restore-a-renv-project">Restore a {renv} Project</h2>
+<section id="restore-a-renv-project" class="level2"><h2 class="anchored" data-anchor-id="restore-a-renv-project">Restore a {renv} Project</h2>
 <p>The exercises for initiating and snapshotting a project can be found in the <code>restore-exercises</code> folder of the <a href="https://github.com/lmu-osc/introduction-to-renv-exercises">intro-to-renv-exercises</a> repo.</p>
-</section>
-<section id="exercise-notes" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-notes">Exercise Notes</h2>
+</section><section id="exercise-notes" class="level2"><h2 class="anchored" data-anchor-id="exercise-notes">Exercise Notes</h2>
 <p>Restoring a project library from a <code>renv.lock</code> file can generally be accomplished in just two steps:</p>
 <ol type="1">
 <li>Open the RStudio <code>.RProj</code> file.</li>
-<li>Run <code>renv::restore()</code>.</li>
+<li>Run <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code>.</li>
 </ol>
 <p>You could technically complete just these two steps for this exercise, and you would essentially be finished. However, the exercise is designed to help you understand the process of restoring a project library, and to help you see what happens when your project library does not match the required packages laid out in <code>renv.lock</code> file.</p>
-</section>
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+</section><section id="instructions" class="level2"><h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <p><strong>IMPORTANT</strong>: This exercise expects you have version 4.5.X of R installed. If you have a different version, please install the correct version before starting the exercise. <strong>Step 5 will most likely fail if you have an older version of R installed. You can still read along, and then watch the solution video.</strong></p>
 <ol type="1">
 <li>Open the <code>restore-exercises.Rproj</code> file.
 <ul>
-<li><p>Upon opening, you should be greeted with a message similar to this:</p>
+<li>
+<p>Upon opening, you should be greeted with a message similar to this:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrapping renv 1.0.7 ---------------------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Downloading renv ... OK</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Installing renv  ... OK</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Project <span class="st">'~/Desktop/introduction-to-renv-exercises/restore-exercises'</span> loaded. [renv <span class="dv">1</span>.<span class="fl">2.2</span>]</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> One or more packages recorded <span class="cf">in</span> the lockfile are not installed.</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Use <span class="st">`</span><span class="at">renv::status()</span><span class="st">`</span> <span class="cf">for</span> more details.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul></li>
-<li>At the console, run the command <code>renv::status()</code>.
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Use <span class="st">`</span><span class="at">renv::status()</span><span class="st">`</span> <span class="cf">for</span> more details.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+</ul>
+</li>
+<li>At the console, run the command <code><a href="https://rstudio.github.io/renv/reference/status.html">renv::status()</a></code>.
 <ul>
 <li>What is out of sync and why?</li>
-</ul></li>
-<li>At the console, run the command <code>renv::dependencies()</code>. For better formatting, you can run <code>View(renv::dependencies())</code>.
+</ul>
+</li>
+<li>At the console, run the command <code><a href="https://rstudio.github.io/renv/reference/dependencies.html">renv::dependencies()</a></code>. For better formatting, you can run <code>View(renv::dependencies())</code>.
 <ul>
 <li><p>What packages do you see listed as direct dependencies?</p></li>
 <li><p>The <code>Source</code> column indicates which files use these packages. Knowing this, can you list the package dependencies by file?</p></li>
-<li><p><em>Note: some versions of Quarto/RStudio may present you with the warning message below.</em> If this occurs, then install the package, and run <code>renv::dependencies()</code> again.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The <span class="st">'yaml'</span> package is required to parse dependencies within R Markdown files. Consider installing it with <span class="fu">install.packages</span>(<span class="st">"yaml"</span>).<span class="st">" </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul></li>
+<li>
+<p><em>Note: some versions of Quarto/RStudio may present you with the warning message below.</em> If this occurs, then install the package, and run <code><a href="https://rstudio.github.io/renv/reference/dependencies.html">renv::dependencies()</a></code> again.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The <span class="st">'yaml'</span> package is required to parse dependencies within R Markdown files. Consider installing it with <span class="fu">install.packages</span>(<span class="st">"yaml"</span>).<span class="st">" </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+</ul>
+</li>
 <li>Open the <code>presentation.rmd</code> file.
 <ul>
 <li><em>Note: RStudio may prompt you to install several packages in a yellow highlighted bar. You can ignore this request. A later step will address this.</em></li>
 <li>{rmarkdown} was listed as a dependency from this file, but there is not actually a call to the package in the file. Why do you think this is?</li>
-</ul></li>
+</ul>
+</li>
 <li>We want to simulate running someone else’s analysis <em>without</em> first installing the same packages as them: try to Render<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> the <code>presentation.rmd</code> file.
 <ul>
 <li><strong>You will be prompted to install some packages in a pop-up window. This is to install the {rmarkdown} package and its dependencies. Accept the prompt.</strong></li>
 <li>The {rmarkdown} package and its dependencies should install, but the rendering still fails. Why do you think this is? Take a careful look at the error message, and align it with the content of the <code>presentation.rmd</code> file.</li>
-</ul></li>
-<li>We will now need to install all R packages required for this exercise. Run the command <code>renv::restore()</code>.
+</ul>
+</li>
+<li>We will now need to install all R packages required for this exercise. Run the command <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code>.
 <ul>
 <li>What happens?</li>
 <li>If prompted with the question “Do you want to proceed? [Y/n]:”, type <code>Y</code> and press <code>Enter</code>.”</li>
-</ul></li>
+</ul>
+</li>
 <li>Open the <code>billboard_100.R</code> file, and run the code by pressing the <code>Source</code> button near the top right hand corner of the script.
 <ul>
 <li>This should create the <code>top_billboard_rankings.rds</code> file, needed in the next step.</li>
-</ul></li>
+</ul>
+</li>
 <li>Try to render the <code>presentation.rmd</code> file.
 <ul>
 <li>What happens?</li>
-</ul></li>
+</ul>
+</li>
 <li>Close the project <code>restore-exercises.Rproj</code>.</li>
 </ol>
 <p>Congrats! You have restored someone else’s project and successfully rendered their analysis.</p>
@@ -627,16 +600,10 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
 <!-- -->
 
-</section>
-
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
 <li id="fn1"><p>“Rendering” an RMarkdown <code>.rmd</code>, Quarto <code>.qmd</code>, or similar file simply means you are generating the output file (e.g., <code>.html</code>, <code>.pdf</code>, etc.) from the source file. In RStudio, you can do this by clicking the “Knit” or “Render” button depending on your file type and version of RStudio.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1106,9 +1073,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../exercises/example-init-snapshot.html" class="pagination-link" aria-label="Init and Snapshot">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Init and Snapshot</span>
       </a>          
@@ -1141,8 +1106,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -1153,9 +1117,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       &nbsp;
     </div>
   </div>
-</footer>
-<footer class="osc-footer-card text-white py-5">
-  <div class="container">
+</footer><footer class="osc-footer-card text-white py-5"><div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-6 col-lg-3 ">
         <h4 class="fw-bold fs-5 fs-lg-4 text-white">
@@ -1171,7 +1133,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Contact</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
               <i class="bi bi-envelope me-1"></i>
               Prof. Dr. Felix Schönbrodt (Managing Director)
@@ -1190,12 +1152,12 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
               Subscribe to our announcement list
             </a>
@@ -1211,7 +1173,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
         <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
@@ -1231,8 +1193,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     </div>
 
     <hr class="my-4 border-light">
-
-    <div class="d-flex flex-wrap gap-3 small">
+<div class="d-flex flex-wrap gap-3 small">
       <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
       <span aria-hidden="true">|</span>
       <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
@@ -1242,8 +1203,6 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>

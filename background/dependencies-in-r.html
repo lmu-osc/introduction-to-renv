@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Dependency Management in R – Introduction to {renv}</title>
 <style>
 /* Default styles provided by pandoc.
@@ -63,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -87,8 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-eb085aa7c0f1d8411752f2c1fdfaa824.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-188b87d2eecf63d90488fc07321c5074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -113,10 +108,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-<!-- Matomo -->
-<script>
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!-- Matomo --><script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -131,14 +124,9 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 }
-</script>
-<!-- End Matomo Code -->
-
-
-<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+</script><!-- End Matomo Code --><link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
 <link rel="stylesheet" href="../footer/footer-style.css">
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -304,14 +292,10 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
-    </a>
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Introduction to {renv}</span>
     </a>
@@ -321,23 +305,23 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/introduction-to-renv">
             Source Code
             </a>
@@ -348,7 +332,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -358,9 +342,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -371,17 +353,11 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -390,7 +366,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -404,8 +380,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../background/computational-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Reproducibility</span></a>
@@ -430,7 +406,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../about-renv/index.html" class="sidebar-item-text sidebar-link">
@@ -439,8 +415,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about-renv/renv-getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Quick Start</span></a>
@@ -459,7 +435,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
@@ -468,8 +444,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../exercises/example-init-snapshot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Init and Snapshot</span></a>
@@ -488,7 +464,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../extra-content/index.html" class="sidebar-item-text sidebar-link">
@@ -497,8 +473,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extra-content/caching.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Caching</span></a>
@@ -517,32 +493,26 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-   
-  <ul>
-  <li><a href="#common-managers" id="toc-common-managers" class="nav-link active" data-scroll-target="#common-managers">Common Managers</a>
+        <nav id="TOC" role="doc-toc" class="toc-active"><ul>
+<li>
+<a href="#common-managers" id="toc-common-managers" class="nav-link active" data-scroll-target="#common-managers">Common Managers</a>
   <ul class="collapse">
-  <li><a href="#packrat" id="toc-packrat" class="nav-link" data-scroll-target="#packrat">{packrat}</a></li>
+<li><a href="#packrat" id="toc-packrat" class="nav-link" data-scroll-target="#packrat">{packrat}</a></li>
   <li><a href="#groundhog" id="toc-groundhog" class="nav-link" data-scroll-target="#groundhog">{groundhog}</a></li>
   <li><a href="#renv" id="toc-renv" class="nav-link" data-scroll-target="#renv">{renv}</a></li>
-  </ul></li>
-  <li><a href="#limitations-of-package-managers" id="toc-limitations-of-package-managers" class="nav-link" data-scroll-target="#limitations-of-package-managers">Limitations of Package Managers</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/background/dependencies-in-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/background/dependencies-in-r.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</li>
+  <li><a href="#limitations-of-package-managers" id="toc-limitations-of-package-managers" class="nav-link" data-scroll-target="#limitations-of-package-managers">Limitations of Package Managers</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/background/dependencies-in-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/background/dependencies-in-r.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/index.html">Background</a></li><li class="breadcrumb-item"><a href="../background/dependencies-in-r.html">4. R Package Managers</a></li></ol></nav>
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/index.html">Background</a></li><li class="breadcrumb-item"><a href="../background/dependencies-in-r.html">4. R Package Managers</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Dependency Management in R</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -557,47 +527,33 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   
 
 
-</header>
-
-
-<p>This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.</p>
+</header><p>This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.</p>
 <p>The goal of package managers in R are to ensure that the <strong>packages</strong> you need are downloaded from a defined <strong>repository</strong> and installed in the <strong>libraries</strong> you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhog}, and {renv}.</p>
-<section id="common-managers" class="level2">
-<h2 class="anchored" data-anchor-id="common-managers">Common Managers</h2>
-<section id="packrat" class="level3">
-<h3 class="anchored" data-anchor-id="packrat">{packrat}</h3>
+<section id="common-managers" class="level2"><h2 class="anchored" data-anchor-id="common-managers">Common Managers</h2>
+<section id="packrat" class="level3"><h3 class="anchored" data-anchor-id="packrat">{packrat}</h3>
 <p>The {packrat} package was one of the first package managers developed for R, and it was designed to address some of the shortcomings of the base R package management system. {packrat} allows you to create a “snapshot” of your package dependencies, which can be shared with collaborators or used to recreate your working environment at a later date. This can be useful if you are working on a project with multiple collaborators or if you need to reproduce your analysis at a later date.</p>
 <p>It was, for many years, the most popular environment/dependency manager package for R, and was developed and maintained by RStudio/Posit. However, it has been soft-deprecated by Posit in favor of the {renv} package since at least <a href="https://github.com/rstudio/packrat/commit/90520e2247f65b2b9fb21bfa804444bd5ab2b78c">April 2020</a>. You should not start new projects with {packrat}, and, if possible, migrate existing projects using {packrat} over to {renv}. That said, it is worth knowing about the existence of this package because old tutorials, projects, and repos may still be using it.</p>
-</section>
-<section id="groundhog" class="level3">
-<h3 class="anchored" data-anchor-id="groundhog">{groundhog}</h3>
+</section><section id="groundhog" class="level3"><h3 class="anchored" data-anchor-id="groundhog">{groundhog}</h3>
 <p><a href="https://groundhogr.com/">{groundhog}</a> is a community-driven package manager for R that was developed as an alternative to {packrat} and {renv}. It is designed to be lightweight and easy to use, and it has already gained a following among R users who are looking for an alternative to {packrat}, notably within psychological research and related fields. The example from their website is included below:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"groundhog"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"groundhog"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rio"</span>,<span class="st">"metafor"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">groundhog.library</span>(pkgs, <span class="st">"2023-09-01"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This example demonstrates a scenario in which you would like to install the <code>rio</code> and <code>metafor</code> packages as they were on September 1st, 2023. The <code>groundhog.library()</code> function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the <code>library()</code> call for <code>groundhog.library()</code> is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"groundhog"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://groundhogr.com/">"groundhog"</a></span><span class="op">)</span></span>
+<span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rio"</span>,<span class="st">"metafor"</span><span class="op">)</span></span>
+<span><span class="fu">groundhog.library</span><span class="op">(</span><span class="va">pkgs</span>, <span class="st">"2023-09-01"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This example demonstrates a scenario in which you would like to install the <code>rio</code> and <code>metafor</code> packages as they were on September 1st, 2023. The <code>groundhog.library()</code> function is used to install these packages, and the date is specified as the second argument. One of the main benefits of this approach is that swapping the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> call for <code>groundhog.library()</code> is a simple change to make in your scripts, and it can be used to ensure that your collaborators are using the same package versions as you are.</p>
 <p>The other main benefit of using {groundhog} is that it is community-driven, meaning that it is developed and maintained by a group of R users who are interested in improving the package management experience in R outside of the Posit ecosystem. However, there are also some potential drawbacks to using {groundhog}.</p>
 <p>The package is still in relatively early stages of development so it may not be as stable or reliable as other package managers like {renv}. Likewise, the package does not have as many features as other package managers, so it will only be suitable for a smaller number of use cases. One of the largest benefits of learning {renv} instead of {groundhog} is a result of a networking effect; {renv} is a transferable skill between academia and industry, and it is likely to be more widely used than {groundhog} especially because of the professional support and software development the package receives from Posit.</p>
 <!-- -   [{groundhog}](https://groundhogr.com/): this is an open-source project to enable dependency management, and appears to have some popularity within psychological research and possibly other fields. It claims to address [some shortcomings](https://groundhogr.com/p3m/) of Posit Package Manager (discussed later), but my opinion is that the comparisons are misleading; {groundhog} must be compared against {renv} combined with PPM, not just against PPM. That said, if your collaborators are using {groundhog}, then I would recommend learning it to use it for those projects, but the benefits of {renv} make it the overwhelming favorable option. -->
-</section>
-<section id="renv" class="level3">
-<h3 class="anchored" data-anchor-id="renv">{renv}</h3>
+</section><section id="renv" class="level3"><h3 class="anchored" data-anchor-id="renv">{renv}</h3>
 <p><a href="https://rstudio.github.io/renv/">{renv}</a> is another one of Posit’s inventions, and is designed to be lightweight, easy to use, and to work well with other Posit packages and CI/CD development pipelines. A separate tutorial will discuss CI/CD pipelines in detail, but, in short, using {renv} with your R projects allows you to easily automate advanced tasks like publishing Shiny apps, deploying website updates through GitHub Pages, checking the development status of R packages you create, and more. These benefits may seem a bit less tangible if you are new to R, but they are very important both for professional software development and for tasks that can make your work significantly easier in the long run.</p>
 <p>More to the focus of this tutorial, however, {renv} greatly assists in making your project reproducible by creating a “snapshot” of your package dependencies in as few as two commands:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named <code>renv::restore()</code> function.</p>
-<section id="pros-and-cons" class="level4">
-<h4 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/init.html">init</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/snapshot.html">snapshot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code> function.</p>
+<section id="pros-and-cons" class="level4"><h4 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h4>
 <p>As mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.</p>
 <p>Moreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.2.4). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.</p>
-<p>In comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (<code>.RProj</code> file) to use {renv} whereas {groundhog} allows you to simply embed the function <code>groundhog.library(pkg, date)</code> into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the <em>default workflow</em> for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the <code>embed()</code> and <code>use()</code> functions, discussed in the supplementary material of this tutorial.</p>
-</section>
-</section>
-</section>
-<section id="limitations-of-package-managers" class="level2">
-<h2 class="anchored" data-anchor-id="limitations-of-package-managers">Limitations of Package Managers</h2>
+<p>In comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (<code>.RProj</code> file) to use {renv} whereas {groundhog} allows you to simply embed the function <code>groundhog.library(pkg, date)</code> into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the <em>default workflow</em> for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the <code><a href="https://rdrr.io/r/stats/embed.html">embed()</a></code> and <code><a href="https://rdrr.io/r/base/use.html">use()</a></code> functions, discussed in the supplementary material of this tutorial.</p>
+</section></section></section><section id="limitations-of-package-managers" class="level2"><h2 class="anchored" data-anchor-id="limitations-of-package-managers">Limitations of Package Managers</h2>
 <p>The main limitation of package managers is that they only manage the <strong>packages</strong> you use in your project. They do not manage the <strong>software</strong> you use to run your project, such as R itself, or the <strong>operating system</strong> you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.</p>
 <p>Matching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like <a href="https://github.com/r-lib/rig">rig</a> for R projects on your computer, or to use a containerization solution like <a href="https://mybinder.org/">Binder</a> for creating <a href="https://www.docker.com/">Docker</a> files or managed environments in <a href="https://rstudio.cloud/">RStudio Cloud</a>. These solutions allow you to create a “container” with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -636,16 +592,10 @@ Important
 
 <!-- -->
 
-</section>
-
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
 <li id="fn1"><p>Niche: {renv} also has integrations allowing it to be used with Python which can be useful in instances where you have a multilanguage project. This would likely only be encountered in complex, multiteam analysis projects or possibly in industry settings.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1115,9 +1065,7 @@ Important
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../background/technical-definitions.html" class="pagination-link" aria-label="3. Technical Definitions">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Technical Definitions</span>
       </a>          
@@ -1234,8 +1182,7 @@ Important
 <span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>For example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://packagemanager.rstudio.com/client/#/repos/1/packages/curl/7.77.0)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -1246,9 +1193,7 @@ Important
       &nbsp;
     </div>
   </div>
-</footer>
-<footer class="osc-footer-card text-white py-5">
-  <div class="container">
+</footer><footer class="osc-footer-card text-white py-5"><div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-6 col-lg-3 ">
         <h4 class="fw-bold fs-5 fs-lg-4 text-white">
@@ -1264,7 +1209,7 @@ Important
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Contact</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
               <i class="bi bi-envelope me-1"></i>
               Prof. Dr. Felix Schönbrodt (Managing Director)
@@ -1283,12 +1228,12 @@ Important
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
               Subscribe to our announcement list
             </a>
@@ -1304,7 +1249,7 @@ Important
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
         <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
@@ -1324,8 +1269,7 @@ Important
     </div>
 
     <hr class="my-4 border-light">
-
-    <div class="d-flex flex-wrap gap-3 small">
+<div class="d-flex flex-wrap gap-3 small">
       <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
       <span aria-hidden="true">|</span>
       <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
@@ -1335,8 +1279,6 @@ Important
 
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>
