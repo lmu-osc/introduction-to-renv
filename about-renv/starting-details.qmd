@@ -90,7 +90,7 @@ You will likely never need to use `renv::dependencies()` directly, but being awa
 
 ### Dependency Trees
 
-As mentioned in the [Dependencies Overview](../background/intro-dependencies.qmd#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example displaying the recursive dependency tree for the {dplyr} package.
+As mentioned in the [Dependencies Overview](/background/intro-dependencies.qmd#dependencies-overview), project dependencies can have their own dependencies. For example, you might have noticed that when installing 1 new package, R asks you if you want to install additional packages. These additional packages are dependencies of the package you are installing, and cumulatively they create a "dependency tree." To get a visual representation of this, consider the following example displaying the recursive dependency tree for the {dplyr} package.
 
 ::: output-overflow
 ``` r
