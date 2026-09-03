@@ -1,0 +1,242 @@
+---
+title: "Troubleshooting and Resetting {renv}"
+---
+
+By this point in the tutorial, you have hopefully come to appreciate just how much work {renv} does behind the scenes. That said, even the best tools occasionally misbehave. Maybe you have a project that suddenly refuses to open in RStudio, a `renv::restore()` that keeps failing, or you inherited a repository from a collaborator and simply cannot get it to run. This page is a practical guide to troubleshooting {renv} projects, with remedies ordered from the *least* to the *most* drastic.
+
+The good news is that **almost all {renv} problems share a single underlying cause**. If you understand that cause, most of what follows will feel like common sense.
+
+## The Root Cause: A Version Mismatch {#version-mismatch}
+
+Recall from [Understanding {renv}](/about-renv/starting-details.qmd) that the `renv.lock` file is a record of the environment your project is *supposed* to use. Among other things, it records:
+
+-   The version of **R** used to create the lockfile
+-   The **packages** your project uses
+-   The **exact version** of each package
+
+When you open a {renv} project or run `renv::restore()`, {renv} compares this recorded environment with what is actually installed on your computer. When the two do not line up, you get the error messages, warnings, and "out of sync" notices that make {renv} feel broken. **In practice, essentially all {renv} problems come down to a mismatch between what is recorded in `renv.lock` and the version of R (or the R packages) actually being used on your system.**
+
+Why is this so common? A few reasons:
+
+-   **R packages are built for specific versions of R.** Many packages are only compatible with certain versions of R, and packages released today often require a fairly recent version of R. If your lockfile was created with an older version of R, the versions of the packages recorded in it may simply not be installable (or loadable) on a newer version of R, and vice versa.
+-   **{renv} records the version of R, but it does not manage it.** As emphasized in the [R Package Managers](/background/dependencies-in-r.qmd) chapter, package managers manage *packages*, not R itself. {renv} can tell you which version of R a project expects, but it cannot install or switch R versions for you. That part is up to you.
+-   **R versions and packages drift over time.** If you upgrade R (or a collaborator does), the cached packages from your old R version are no longer valid. See the [Caching](/extra-content/caching.qmd) chapter for why {renv} keeps a separate cache for each minor version of R.
+
+Two scenarios that almost always boil down to a version mismatch:
+
+-   You open an older project whose `renv.lock` records an older version of R than the one you are now running. {renv} cannot use the old packages, and `renv::restore()` either fails or cannot find versions of the packages that are compatible with your current R.
+-   You clone a collaborator's repository. The `renv.lock` records versions of R and packages that are not installed on your machine, so the project will not run until you reproduce that environment.
+
+### Common Symptoms
+
+The table below lists the symptoms users most often describe as "{renv} is broken," along with what they usually mean. The remedies for each are covered in the rest of this page.
+
+| Symptom | Most likely explanation |
+|:---|:---|
+| The project loads slowly, errors, or won't open properly in RStudio | The {renv} autoloader (the `source("renv/activate.R")` line in `.Rprofile`) can't activate a project library that matches the recorded environment. |
+| `renv::restore()` fails, or can't find a compatible version of a package | The lockfile records an R or package version that is incompatible with the version of R you are currently running. |
+| `renv::status()` reports that the project is "out of sync" with the lockfile | The installed packages, used packages, and recorded packages don't match. |
+| Installing a package fails with "package ... is not available for R version ..." | The requested package version needs a different version of R. |
+| Everything worked yesterday and now it doesn't | Something changed on your system: an R upgrade, a package upgrade, or a changed `renv.lock` (e.g. after a `git pull`). |
+
+::: {.callout-note title="It is rarely actually 'broken'"}
+Before you do anything drastic, remember that {renv} is mature and widely used software. The overwhelming majority of "broken" {renv} projects are simply expecting an environment that is not currently present on your machine. The fixes below are about restoring that environment -- or deliberately moving the project to a new one -- not about repairing corrupted files.
+:::
+
+## Diagnose First {#diagnose}
+
+Before choosing a remedy, take two minutes to confirm what is actually going on.
+
+**1. Check the status of the project.** Inside the project, run:
+
+``` r
+renv::status()
+```
+
+This will tell you whether the project is in a consistent state or whether packages are missing, unused, or out of sync with the lockfile.
+
+**2. Compare the version of R recorded in the lockfile with the version you are running.** Open the `renv.lock` file in a text editor (it is a JSON file). Near the top you should see something like:
+
+``` r
+# The beginning of a renv.lock file
+{
+  "R": {
+    "Version": "4.6.1",
+    ...
+```
+
+Now check the version of R you are actually using, either in the RStudio console on startup or with:
+
+``` r
+R.version.string
+```
+
+If these two versions differ, you have found the root cause of most {renv} problems.
+
+**3. Run `renv::diagnostics()`.** This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. The output is extremely useful when asking someone else for help (e.g. in a GitHub issue), and it will often point you toward the source of the problem.
+
+**4. Ask what changed.** If the project worked before, the fastest path to a fix is usually figuring out what changed since it last worked: Did you upgrade R? Did a collaborator update `renv.lock`? Did you move the project to a new computer? The answer will usually tell you which of the remedies below is appropriate.
+
+## Remedies from Least to Most Drastic {#remedies}
+
+The right remedy depends on how you want to treat the project. Borrowing a framing from the [official {renv} FAQ](https://rstudio.github.io/renv/articles/faq.html), you are choosing between two philosophies:
+
+::: {.callout-tip title="Two Ways to Think About a Project"}
+-   **A "time capsule":** you want the project to keep using the exact environment recorded in `renv.lock`, frozen in time. If this is your goal, you should [match the R version the project expects](#match-r-version), not change the project.
+-   **A moving target:** you are happy for the project's packages (and R version) to move forward over time, and you mainly use {renv} to keep the environment *self-contained*. If this is your goal, you should [move the project forward](#move-project-forward).
+:::
+
+The remedies below are ordered roughly from least to most drastic:
+
+1.  **[Match the R version the project expects](#match-r-version)** -- reproduce the environment recorded in the lockfile. Keeps everything frozen; nothing is deleted.
+2.  **[Move the project forward](#move-project-forward)** -- update R and the project's packages to current versions, then snapshot. Nothing is deleted, but the lockfile changes.
+3.  **[Deactivate {renv}](#deactivate)** -- stop using {renv} in the project (reversibly) so you can open it with your normal package library.
+4.  **[Fully reset {renv}](#full-reset)** -- remove {renv} from the project entirely and start over. **Last resort only.**
+
+## Fix 1: Match the R Version the Project Expects {#match-r-version}
+
+If you want the project to keep using the environment recorded in `renv.lock` -- for example, because you need the exact results it produced -- the solution is to run the project with the version of R it expects. Since {renv} does not manage R versions, you need a tool that does.
+
+### Installing and Switching R Versions with `rig`
+
+[`rig`](https://github.com/r-lib/rig) (the "R Installation Manager") is a tool developed by Posit for installing, removing, and switching between multiple versions of R on macOS, Windows, and Linux. It is the tool we recommended in the [R Package Managers](/background/dependencies-in-r.qmd) chapter, and it is [recommended by the official {renv} documentation](https://rstudio.github.io/renv/articles/renv.html) as a way to make working with multiple R versions easier.
+
+Install it following the instructions on [the `rig` repository](https://github.com/r-lib/rig) (macOS users can also install it via the Homebrew cask). Once installed, a typical workflow looks like this:
+
+``` r
+# In the terminal (not in R!):
+rig list                # see which R versions are currently installed
+rig add 4.3.3           # install a specific R version, e.g. R 4.3.3
+rig default 4.3.3       # make it the R version used by default (terminal and RStudio)
+```
+
+-   On **macOS**, `rig` also installs a small menu bar app ("Rig") that lets you view and change the default R version with a couple of clicks -- handy if you switch between projects that need different R versions. Another macOS-only option is [`rswitch`](https://rud.is/rswitch/), mentioned in the [Restoring Projects](/about-renv/restoring-a-project.qmd) chapter.
+-   On **Linux** and **Windows**, switching is done from the command line with the same `rig` commands above.
+-   `rig` can install multiple versions of R side by side and lets you start a specific one (e.g. `R-4.3`) directly. See the [`rig` documentation](https://github.com/r-lib/rig) for details.
+
+### The Workflow
+
+Once you have the R version your project expects installed and set as the default:
+
+1.  Find the R version recorded in `renv.lock` (as described in [Diagnose First](#diagnose)).
+2.  Install that R version with `rig` (if you don't already have it).
+3.  Make it the default version of R (so both your terminal and RStudio use it), then **restart RStudio** so it picks up the new default.
+4.  Open the project. {renv} should now find compatible packages.
+5.  If packages still need to be installed, run:
+
+``` r
+renv::restore()
+```
+
+Because {renv} caches packages for each minor version of R, installing a version of R you have used before will often let {renv} restore the project very quickly from the cache rather than re-downloading everything. See the [Caching](/extra-content/caching.qmd) chapter for details.
+
+If you work on several projects that require different R versions, switching the default R version before opening each project becomes routine. This is the scenario `rig` and `rswitch` are designed for.
+
+## Fix 2: Move the Project Forward {#move-project-forward}
+
+If you don't need the project to stay frozen at its old versions -- for example, because none of your outputs will change, or because you want to benefit from bug fixes in newer packages -- you can instead bring the project up to date with the version of R you currently use. The official {renv} documentation itself [recommends updating packages regularly](https://rstudio.github.io/renv/articles/renv.html).
+
+::: {.callout-warning title="Before you update, back up the lockfile"}
+`renv::snapshot()` overwrites `renv.lock`. If you want the option of returning to the current state later, **first** make a backup copy of `renv.lock` (or commit it to git). You will rarely regret having a backup, and you will never regret being able to `renv::restore()` your way back to a known-good state.
+:::
+
+The procedure for moving a project forward is:
+
+``` r
+renv::upgrade()   # 1. Update {renv} itself to the latest version
+renv::update()    # 2. Update the project's packages to current versions
+renv::snapshot()  # 3. Record the new state in renv.lock
+```
+
+What each step does:
+
+-   `renv::upgrade()` updates the **{renv} package itself**. This is worth doing on its own whenever you hit strange behavior: like any software, {renv} occasionally ships with bugs that are fixed in later releases, and `renv::upgrade()` (or installing the development version from GitHub) is the simplest way to make sure you have those fixes.
+-   `renv::update()` updates the **packages** in your project library to the latest versions compatible with your current R -- including the base packages that come with a newer version of R.
+-   `renv::snapshot()` records the new package versions in `renv.lock`, so the lockfile reflects the environment you are now using.
+
+After updating, **run your project's code and verify that everything still works** (and produces the same results, if that matters to you). If a package update breaks something and you backed up the lockfile first, you can roll back with `renv::restore()` after replacing the new lockfile with your backup (or checking out the old lockfile from git).
+
+## Fix 3: Deactivate {renv} (Without Deleting Anything) {#deactivate}
+
+Sometimes you don't need to fix the project environment at all -- you just need to get back into the project. If {renv}'s startup behavior is getting in the way, you can temporarily stop {renv} from activating when the project opens:
+
+``` r
+renv::deactivate()
+```
+
+This removes the {renv} auto-loader (the `source("renv/activate.R")` line) from the project's `.Rprofile`, so the next time you open the project, R will use your normal (user/system) package library instead of a project library.
+
+Importantly, `renv::deactivate()` does **not** delete any of your {renv} files -- `renv.lock`, the `renv` folder, and everything else stay exactly where they are. That means it is fully reversible: when you're ready to use {renv} again, simply run:
+
+``` r
+renv::activate()
+```
+
+Think of `renv::deactivate()` as "pause {renv} for this project," not "uninstall {renv}."
+
+## The Last Resort: Fully Reset {renv} {#full-reset}
+
+If none of the above works -- for example, the {renv} scaffolding itself has become corrupted and {renv} can't even load to run `renv::activate()` -- you may want to fully reset {renv} and start over. **Treat this as a genuine last resort.** A full reset throws away the recorded environment, and if you don't have a backup of `renv.lock`, you may not be able to recreate the exact package versions the project used.
+
+### What "renv" Consists Of in a Project
+
+Before resetting, it helps to know exactly what a full reset removes. As discussed in [Understanding {renv}](/about-renv/starting-details.qmd), a {renv} project contains the following pieces:
+
+``` r
+your-project/
+├── .Rprofile          # contains the line: source("renv/activate.R")
+├── renv.lock          # records the R version, repositories, and packages
+└── renv/
+    ├── activate.R     # bootstraps {renv} when the project opens
+    ├── settings.json  # project-specific {renv} settings
+    ├── library/       # symlinks to the shared package cache
+    └── staging/       # temporary area used during package installs
+```
+
+A full reset removes (or effectively disables) all of these. Your **code and data are untouched**, and -- because the `renv/library` folder only contains symlinks into the shared cache -- your **cached packages are not deleted either**. You are only removing the project's connection to {renv}.
+
+### Option A: Reset from Within R
+
+If {renv} still runs, the cleanest reset is a single function. From [the {renv} documentation](https://rstudio.github.io/renv/articles/renv.html), `renv::deactivate(clean = TRUE)` removes the auto-loader from `.Rprofile` **and** deletes all of the {renv} files and directories in the project, "leaving the project the way it was found":
+
+``` r
+renv::deactivate(clean = TRUE)
+```
+
+If you later want to use {renv} again in the project, you start over from scratch:
+
+``` r
+renv::init()
+```
+
+### Option B: Manual Reset (When {renv} Won't Even Run)
+
+If {renv} is so broken that it cannot load (for example, it errors out during R startup before you can run any functions), you can reset it manually by editing the files yourself:
+
+1.  **Close the project** and quit R/RStudio.
+2.  **Back up the lockfile.** Copy `renv.lock` somewhere safe (e.g. to a file named `renv.lock.bak` outside the project, or commit it to git). If you ever want to recover the old environment, this file is your only record of it.
+3.  **Delete the `renv.lock` file.**
+4.  **Delete the `renv` folder** (the whole folder, not just its contents).
+5.  **Edit `.Rprofile`** so that the line `source("renv/activate.R")` is removed. In most {renv} projects, `.Rprofile` contains only that one line, in which case you can delete the file entirely. Note that `.Rprofile` is a *hidden* file (it begins with a dot), so you may need to enable "show hidden files" in your file browser.
+6.  **Reopen the project.** {renv} will no longer activate, and R will use the packages in your normal (user/system) library.
+
+::: {.callout-note title="If RStudio won't even open the project"}
+If RStudio errors out before you can get into the project to fix these files, you can open the project folder as a plain folder instead of via the `.Rproj` file (or start R from a terminal in that directory). Then edit or remove `.Rprofile` as described above and try opening the project again.
+:::
+
+After a manual reset, you have two reasonable paths forward:
+
+-   **Continue without {renv}.** Your project opens normally, and you install packages as you always have. You have simply abandoned the locked environment.
+-   **Re-initialize {renv}.** If you want a fresh start with {renv} (and you kept a backup of the old lockfile), place the backup back as `renv.lock` and run `renv::init()`, choosing to restore the project from the lockfile -- but note that this only makes sense if you are also [running a compatible version of R](#match-r-version). Otherwise, run `renv::init()` with no lockfile to build a new lockfile from your current packages.
+
+In short: **if you want the same environment back, prefer [Fix 1](#match-r-version). A full reset is for when you want a fresh start.**
+
+## Good Habits That Prevent Future Headaches {#good-habits}
+
+A few simple habits make almost every problem on this page easier to solve -- and most of them prevent the problems from happening in the first place:
+
+-   **Commit the {renv} files to git.** As noted in [Understanding {renv}](/about-renv/starting-details.qmd), commit `renv.lock`, `.Rprofile`, `renv/settings.json`, and `renv/activate.R` to version control. If anything goes wrong, git history is your safety net, and you can always `git checkout` an older lockfile.
+-   **Run `renv::snapshot()` after installing or removing packages**, and before making major changes to the project, so the lockfile stays an accurate record of a working state.
+-   **Restart your R session** when {renv} (or RStudio) prompts you to, especially after installing, updating, or restoring packages.
+-   **Keep {renv} itself up to date** with `renv::upgrade()`. Bug fixes (including fixes for startup problems) ship regularly, and updating {renv} is often the simplest fix for strange behavior.
+-   **When asking for help, share the output of `renv::diagnostics()`** along with your `renv.lock` and the exact error message. If you are working through this tutorial, the [repository's issue tracker](https://github.com/lmu-osc/introduction-to-renv/issues) is also a good place to ask questions or report problems with the tutorial itself.

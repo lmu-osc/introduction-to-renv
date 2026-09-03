@@ -71,6 +71,8 @@ website:
           - href: extra-content/embed-and-use.qmd
             text: "embed() and use()"
           - href: extra-content/advanced-topics.qmd
+          - href: extra-content/troubleshooting.qmd
+            text: "Troubleshooting {renv}"
 # End Website
 
 # Begin Includes
