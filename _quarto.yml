@@ -70,6 +70,10 @@ website:
             text: "Caching"
           - href: extra-content/embed-and-use.qmd
             text: "embed() and use()"
+          - href: extra-content/rig.qmd
+            text: "Managing R Versions with `rig`"
+          - href: extra-content/troubleshooting.qmd
+            text: "Troubleshooting {renv}"
           - href: extra-content/advanced-topics.qmd
 # End Website
 

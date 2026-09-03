@@ -1,0 +1,115 @@
+---
+title: "Managing R Versions with `rig`"
+---
+
+Most of this tutorial assumes that you are working with a single, reasonably up-to-date version of R. In practice, however, you will often need different versions of R for different projects: an older {renv} project might expect R 4.3, while your newest work runs on R 4.6. This page introduces [`rig`](https://github.com/r-lib/rig) (the "R Installation Manager"), the tool we recommend for installing and switching between R versions, and shows how to use it together with {renv} projects.
+
+## Why Manage R Versions?
+
+As emphasized in the [R Package Managers](/background/dependencies-in-r.qmd) chapter, R package managers like {renv} manage the *packages* in your project, but they do not manage R itself. {renv} records the version of R in the `renv.lock` file, and it builds a separate [package cache](/extra-content/caching.qmd) for each minor version of R you use, but it cannot install or switch R versions for you.
+
+That leaves the version of R as something you are responsible for, and it is a frequent source of reproducibility headaches:
+
+-   A project's `renv.lock` records the version of R it was created with. If you open the project with a different version of R, packages may fail to install or load.
+-   R packages are often only compatible with certain versions of R. Newer packages generally require newer versions of R, while a lockfile created on an older R may reference package versions that are no longer installable on a newer R.
+-   If you upgrade (or downgrade) R, you will need to [restore your projects](/about-renv/restoring-a-project.qmd) so their libraries are rebuilt for the new R version.
+
+If this sounds like the problem you are having, see [Troubleshooting {renv}](/extra-content/troubleshooting.qmd), where matching the R version a project expects is the first and least drastic remedy.
+
+## What is `rig`?
+
+[`rig`](https://github.com/r-lib/rig) is a command-line tool developed by Posit Software for installing, listing, removing, and switching between multiple versions of R. It works on **macOS**, **Windows**, and **Linux**, and it is the tool we recommended in the [R Package Managers](/background/dependencies-in-r.qmd) chapter and the one [recommended by the official {renv} documentation](https://rstudio.github.io/renv/articles/renv.html) for working with multiple R versions.
+
+Things you will likely use it for:
+
+-   Installing multiple versions of R side by side (including both Intel and Apple Silicon builds on Macs).
+-   Choosing the "default" version of R used by your terminal and by RStudio.
+-   Starting a specific version of R directly when you need it for a particular project.
+-   On macOS, switching the default R version from a small menu-bar app.
+
+If you only work on macOS and prefer a GUI, an older but popular alternative is [`rswitch`](https://rud.is/rswitch/), a menu-bar app that does the same "pick the default R" job. `rig` also ships its own menu-bar app on macOS, so many users will not need anything else.
+
+## Installing `rig`
+
+Installation differs by operating system, so check [the `rig` repository](https://github.com/r-lib/rig) for the most up-to-date instructions. The common options are:
+
+-   **macOS (Homebrew)** -- the simplest option:
+
+    ``` bash
+    brew tap r-lib/rig
+    brew trust r-lib/rig
+    brew install --cask rig
+    ```
+
+    You can also download the installer from [the `rig` releases page](https://github.com/r-lib/rig/releases).
+
+-   **Windows** -- `winget install posit.rig`, or install via [Chocolatey](https://chocolatey.org/), Scoop, or the official installer.
+
+-   **Linux** -- `rig` is available from package repositories for the major distributions, or as a tarball. See [the `rig` repository](https://github.com/r-lib/rig) for details.
+
+## Basic `rig` Commands
+
+Once installed, `rig` is used from the terminal (not from within R):
+
+``` bash
+rig list           # list the R versions installed on your machine
+rig add 4.6.1      # install a specific version of R
+rig add release    # install the latest stable release of R
+rig default 4.6.1  # set the default R version (alias: rig switch)
+rig rm 4.3.3       # uninstall a version of R you no longer need
+```
+
+A few useful details:
+
+-   `rig` understands symbolic version names like `release`, `oldrel`, `devel`, and `next`. For example, `rig add oldrel` installs the previous minor release of R, which can be handy when a project needs an older R.
+-   `rig list` marks the current default version, and `rig available` lists the versions you can install.
+-   After installing a version, `rig` creates "quick links" such as `R-4.6` or `R-4.6.1`. Typing `R-4.6` in the terminal starts exactly that version of R without changing your default -- useful for checking a project against a specific R on the command line.
+
+## Switching the Default R Version
+
+The "default" R version is the one started when you type `R` in a terminal and, importantly for this tutorial, **the version RStudio uses**. Switching R versions is therefore a short procedure:
+
+1.  Set the new default from the terminal:
+
+    ``` bash
+    rig default 4.3.3
+    ```
+
+2.  Quit and restart RStudio. RStudio picks up the default R version when it launches, so a fresh start is required for the change to take effect.
+3.  Verify the version from within R:
+
+    ``` r
+    R.version.string
+    ```
+
+**On macOS**, `rig` also installs a small menu-bar app ("Rig") that lets you view and change the default R version with a couple of clicks -- handy if you regularly switch between projects that need different R versions. You can start it like any app (e.g. with `open -a Rig`) and select the default version from its menu. The [`rswitch`](https://rud.is/rswitch/) app offers a similar menu-bar experience on macOS.
+
+## Running a {renv} Project with a Specific R Version
+
+Consider the scenario that motivates this page: you open an older {renv} project, but `renv::restore()` fails or the project's packages won't load because the `renv.lock` was created with a different version of R than the one you are now running. (The [Troubleshooting {renv}](/extra-content/troubleshooting.qmd) page describes this in detail as "Fix 1: Match the R Version the Project Expects.")
+
+To run the project with the R version it expects:
+
+1.  Find the R version recorded in the project's `renv.lock` file. Open `renv.lock` in a text editor; near the top you should see an entry like `"Version": "4.3.3"` under the `"R"` heading.
+2.  Install that version of R if you don't already have it:
+
+    ``` bash
+    rig add 4.3.3
+    ```
+
+3.  Make it the default R version (so RStudio uses it):
+
+    ``` bash
+    rig default 4.3.3
+    ```
+
+4.  Restart RStudio and open the project.
+5.  If {renv} reports that packages still need to be installed, run:
+
+    ``` r
+    renv::restore()
+    ```
+
+Because {renv} keeps a separate cache for each minor version of R, restoring the project will often be quick if you have used that version of R with {renv} before: the packages can be linked from the cache rather than re-downloaded and recompiled. See the [Caching](/extra-content/caching.qmd) chapter for details.
+
+If you switch between several projects that require different R versions, making the default R version match the project *before* you open it becomes a routine habit -- exactly the workflow `rig` (and, on macOS, `rswitch`) are designed to support.

@@ -6,4 +6,6 @@ This section dives deeper into {renv} internals and advanced workflows. It's int
 
 - **[Caching](caching.qmd)** — How {renv} caches packages to save disk space and speed up installations, and where those caches live on your system.
 - **[`embed()` and `use()`](embed-and-use.qmd)** — Two lesser-known functions for embedding dependency information directly in scripts and temporarily using packages without installing them.
+- **[Troubleshooting {renv}](troubleshooting.qmd)** — What to do when a project won't open or restore: diagnosing version mismatches, switching R versions, and fully resetting a broken {renv} project as a last resort.
+- **[Managing R Versions with `rig`](rig.qmd)** — Install and switch between multiple versions of R with `rig`, and run {renv} projects with the R version they expect.
 - **[Advanced Topics](advanced-topics.qmd)** — Customizing {renv} settings, handling system dependencies, and other advanced configuration options.
