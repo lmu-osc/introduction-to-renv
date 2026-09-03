@@ -512,6 +512,18 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../extra-content/rig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing R Versions with <code>rig</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting {renv}</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../extra-content/advanced-topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Topics</span></a>
   </div>
@@ -598,7 +610,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <p>To first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: <code>major.minor.patch</code>. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.</p>
 <p>If you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:</p>
 <p>The first option is to update your <em>project</em> to use the new version of R. This can be done by running <code>renv::update()</code> to update the packages in your project (particularly the base R packages that came with the new version of R), and then running <code>renv::snapshot()</code> to update the <code>renv.lock</code> file.</p>
-<p>The second option is to switch between R versions using a tool like <a href="https://rud.is/rswitch/">rswitch</a> or <a href="https://github.com/r-lib/rig">rig</a>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.</p>
+<p>The second option is to switch between R versions using a tool like <a href="../extra-content/rig.html">rig</a> or <a href="https://rud.is/rswitch/">rswitch</a>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used. See the <a href="../extra-content/rig.html">Managing R Versions with <code>rig</code></a> chapter for installation and switching instructions.</p>
 </section>
 </section>
 <section id="when-to-upgrade-and-update" class="level2">
@@ -1154,7 +1166,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>The first option is to update your *project* to use the new version of R. This can be done by running <span class="in">`renv::update()`</span> to update the packages in your project (particularly the base R packages that came with the new version of R), and then running <span class="in">`renv::snapshot()`</span> to update the <span class="in">`renv.lock`</span> file.</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>The second option is to switch between R versions using a tool like <span class="co">[</span><span class="ot">rswitch</span><span class="co">](https://rud.is/rswitch/)</span> or <span class="co">[</span><span class="ot">rig</span><span class="co">](https://github.com/r-lib/rig)</span>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it's not possible to update the version of R being used.</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>The second option is to switch between R versions using a tool like <span class="co">[</span><span class="ot">rig</span><span class="co">](/extra-content/rig.qmd)</span> or <span class="co">[</span><span class="ot">rswitch</span><span class="co">](https://rud.is/rswitch/)</span>. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it's not possible to update the version of R being used. See the <span class="co">[</span><span class="ot">Managing R Versions with `rig`</span><span class="co">](/extra-content/rig.qmd)</span> chapter for installation and switching instructions.</span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## When to `upgrade()` and `update()`</span></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>

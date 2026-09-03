@@ -108,51 +108,171 @@
     ]
   },
   {
-    "objectID": "extra-content/caching.html",
-    "href": "extra-content/caching.html",
-    "title": "Caching",
+    "objectID": "extra-content/troubleshooting.html",
+    "href": "extra-content/troubleshooting.html",
+    "title": "Troubleshooting and Resetting {renv}",
     "section": "",
-    "text": "This page will discuss the concept of caching and how it is used in {renv}.",
+    "text": "By this point in the tutorial, you have hopefully come to appreciate just how much work {renv} does behind the scenes. That said, even the best tools occasionally misbehave. Maybe you have a project that suddenly refuses to open in RStudio, a renv::restore() that keeps failing, or you inherited a repository from a collaborator and simply cannot get it to run. This page is a practical guide to troubleshooting {renv} projects, with remedies ordered from the least to the most drastic.\nThe good news is that almost all {renv} problems share a single underlying cause. If you understand that cause, most of what follows will feel like common sense.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Caching"
+      "Troubleshooting {renv}"
     ]
   },
   {
-    "objectID": "extra-content/caching.html#what-is-caching",
-    "href": "extra-content/caching.html#what-is-caching",
-    "title": "Caching",
-    "section": "What is Caching?",
-    "text": "What is Caching?\nIn the context of software development, caching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program. When a program needs to access a package, it first checks the cache to see if the package is already stored there. If the package is found in the cache, the program can retrieve it quickly without having to download it again. This can significantly reduce the time it takes to run a program, especially if the package is large or if the program is run frequently.",
+    "objectID": "extra-content/troubleshooting.html#version-mismatch",
+    "href": "extra-content/troubleshooting.html#version-mismatch",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "The Root Cause: A Version Mismatch",
+    "text": "The Root Cause: A Version Mismatch\nRecall from Understanding {renv} that the renv.lock file is a record of the environment your project is supposed to use. Among other things, it records:\n\nThe version of R used to create the lockfile\nThe packages your project uses\nThe exact version of each package\n\nWhen you open a {renv} project or run renv::restore(), {renv} compares this recorded environment with what is actually installed on your computer. When the two do not line up, you get the error messages, warnings, and “out of sync” notices that make {renv} feel broken. In practice, essentially all {renv} problems come down to a mismatch between what is recorded in renv.lock and the version of R (or the R packages) actually being used on your system.\nWhy is this so common? A few reasons:\n\nR packages are built for specific versions of R. Many packages are only compatible with certain versions of R, and packages released today often require a fairly recent version of R. If your lockfile was created with an older version of R, the versions of the packages recorded in it may simply not be installable (or loadable) on a newer version of R, and vice versa.\n{renv} records the version of R, but it does not manage it. As emphasized in the R Package Managers chapter, package managers manage packages, not R itself. {renv} can tell you which version of R a project expects, but it cannot install or switch R versions for you. That part is up to you.\nR versions and packages drift over time. If you upgrade R (or a collaborator does), the cached packages from your old R version are no longer valid. See the Caching chapter for why {renv} keeps a separate cache for each minor version of R.\n\nTwo scenarios that almost always boil down to a version mismatch:\n\nYou open an older project whose renv.lock records an older version of R than the one you are now running. {renv} cannot use the old packages, and renv::restore() either fails or cannot find versions of the packages that are compatible with your current R.\nYou clone a collaborator’s repository. The renv.lock records versions of R and packages that are not installed on your machine, so the project will not run until you reproduce that environment.\n\n\nCommon Symptoms\nThe table below lists the symptoms users most often describe as “{renv} is broken,” along with what they usually mean. The remedies for each are covered in the rest of this page.\n\n\n\n\n\n\n\nSymptom\nMost likely explanation\n\n\n\n\nThe project loads slowly, errors, or won’t open properly in RStudio\nThe {renv} autoloader (the source(\"renv/activate.R\") line in .Rprofile) can’t activate a project library that matches the recorded environment.\n\n\nrenv::restore() fails, or can’t find a compatible version of a package\nThe lockfile records an R or package version that is incompatible with the version of R you are currently running.\n\n\nrenv::status() reports that the project is “out of sync” with the lockfile\nThe installed packages, used packages, and recorded packages don’t match.\n\n\nInstalling a package fails with “package … is not available for R version …”\nThe requested package version needs a different version of R.\n\n\nEverything worked yesterday and now it doesn’t\nSomething changed on your system: an R upgrade, a package upgrade, or a changed renv.lock (e.g. after a git pull).\n\n\n\n\n\n\n\n\n\nNoteIt is rarely actually ‘broken’\n\n\n\nBefore you do anything drastic, remember that {renv} is mature and widely used software. The overwhelming majority of “broken” {renv} projects are simply expecting an environment that is not currently present on your machine. The fixes below are about restoring that environment – or deliberately moving the project to a new one – not about repairing corrupted files.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Caching"
+      "Troubleshooting {renv}"
     ]
   },
   {
-    "objectID": "extra-content/caching.html#caching-in-renv",
-    "href": "extra-content/caching.html#caching-in-renv",
-    "title": "Caching",
-    "section": "Caching in {renv}",
-    "text": "Caching in {renv}\nIn the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the renv.lock if you don’t already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages.\nA cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the Restoring Projects section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.\n\nCache Locations\nAlthough you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.\nThe {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system (Posit 2024):\n\n\nLinux: ~/.cache/R/renv/cache\nmacOS: ~/Library/Caches/org.R-project.R/R/renv/cache\nWindows: %LOCALAPPDATA%/renv/cache\n\n\nWithin each of these cache folders, you should see sub-folders for each version of R that you have used with {renv}. For example, on a macOS system, you might see the following folders:\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5\", full.names = T)\n\n#&gt; [1] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/macos\"\n#&gt; [2] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.2\"\n#&gt; [3] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3\"\n#&gt; [4] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4\"\nThe {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to the one cache specific to the version of R used in your project. You can access the path to the cache with the following code:\n# Run on a MacOS, and &lt;USER&gt; removed. \nrenv::paths$cache()\n#&gt; [1] \"/Users/&lt;USER&gt;/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20\"\n\nPackages in the Cache\nEach of the caches will contain the packages that you downloaded for use in your projects as you were using that version of R. So for example, if you downloaded version 1.0.9 of {dplyr} while using R 4.3, you would find the package in the R-4.3 folder of the cache. If you then started a project using R 4.4 and downloaded version 1.1.2 of {dplyr}, you would find that version in the R-4.4 folder of the cache. Moreover, if another project using R 4.4 also needed version 1.1.4 of {dplyr}, it would be found in the R-4.4 folder of the cache.\nThis text might be an over-explanation of the concept so I’ll demonstrate it with a code chunk below that lists out the versions of {dplyr} in the cache.\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/dplyr\")\n#&gt; [1] \"1.1.2\" \"1.1.4\"\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4/aarch64-apple-darwin20/dplyr\")\n#&gt; [1] \"1.1.2\" \"1.1.4\"\nSo it seems that I have versions 1.1.2 and 1.1.4 of {dplyr} in the caches for both R 4.3 and R 4.4. However, this is merely a coincidence; it won’t always be the case that the caches have the exact same versions of packages. Let’s look at an example where the versions differ.\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/ggplot2\")\n#&gt; [1] \"3.4.3\" \"3.4.4\" \"3.5.0\" \"3.5.1\"\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4/aarch64-apple-darwin20/ggplot2\")\n#&gt; [1] \"3.5.0\" \"3.5.1\"\nIn this case, I have versions 3.4.3, 3.4.4, 3.5.0, and 3.5.1 of {ggplot2} in the cache for R 4.3, but only versions 3.5.0 and 3.5.1 in the cache for R 4.4 which is an expected outcome. I used several older version of {ggplot2} with an older version of R and then upgraded to a newer version of R and only used the newer versions of {ggplot2}!\n\n\n\nProject Library\nThe discussion of caching so far has covered just the shared libraries that {renv} uses to store packages. But how does {renv} use these caches, how does this relate back to your project libraries, and what is the role of the renv/library folder in your projects?\nEach {renv} project has its own library, located in the renv/library folder of the project. When you install a package in a project with {renv}, however, the package is not technically installed in the renv/library library. In fact, none of the packages used in your project are actually stored in this folder. Instead, the contents of these folders are “symlinks” to the packages in the shared library.\n\nSymlinks\nA symlink or “symbolic link” is a file that points to another file or directory. It is a reference to the original file or directory, and it can be used to access the original file or directory from a different location. Symlinks are important because they allow you to create shortcuts to files or directories, which can be useful for organizing files, accessing files from different locations, or creating symbolic links to files or directories that are located on different drives or partitions.\nIn the context of {renv}, the apparent packages in the renv/library folder of your project are actually symlinks that point to the packages in the cache!",
+    "objectID": "extra-content/troubleshooting.html#diagnose",
+    "href": "extra-content/troubleshooting.html#diagnose",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Diagnose First",
+    "text": "Diagnose First\nBefore choosing a remedy, take two minutes to confirm what is actually going on.\n1. Check the status of the project. Inside the project, run:\nrenv::status()\nThis will tell you whether the project is in a consistent state or whether packages are missing, unused, or out of sync with the lockfile.\n2. Compare the version of R recorded in the lockfile with the version you are running. Open the renv.lock file in a text editor (it is a JSON file). Near the top you should see something like:\n# The beginning of a renv.lock file\n{\n  \"R\": {\n    \"Version\": \"4.6.1\",\n    ...\nNow check the version of R you are actually using, either in the RStudio console on startup or with:\nR.version.string\nIf these two versions differ, you have found the root cause of most {renv} problems.\n3. Run renv::diagnostics(). This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. The output is extremely useful when asking someone else for help (e.g. in a GitHub issue), and it will often point you toward the source of the problem.\n4. Ask what changed. If the project worked before, the fastest path to a fix is usually figuring out what changed since it last worked: Did you upgrade R? Did a collaborator update renv.lock? Did you move the project to a new computer? The answer will usually tell you which of the remedies below is appropriate.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Caching"
+      "Troubleshooting {renv}"
     ]
   },
   {
-    "objectID": "extra-content/caching.html#summary-and-key-points",
-    "href": "extra-content/caching.html#summary-and-key-points",
-    "title": "Caching",
-    "section": "Summary and Key Points",
-    "text": "Summary and Key Points\nThis chapter contained quite a bit of technical detail and may have been a bit overwhelming. Here are the key points to remember:\n\nCaching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program.\nIn the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects.\nThe cache is built per each minor version of R you use, and the cache locations are specific to your operating system. You will almost never need to directly access these cache locations.\nEach project has its own library, located in the renv/library folder of the project, but the packages in this folder are actually symlinks to the packages in the cache.",
+    "objectID": "extra-content/troubleshooting.html#remedies",
+    "href": "extra-content/troubleshooting.html#remedies",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Remedies from Least to Most Drastic",
+    "text": "Remedies from Least to Most Drastic\nThe right remedy depends on how you want to treat the project. Borrowing a framing from the official {renv} FAQ, you are choosing between two philosophies:\n\n\n\n\n\n\nTipTwo Ways to Think About a Project\n\n\n\n\nA “time capsule”: you want the project to keep using the exact environment recorded in renv.lock, frozen in time. If this is your goal, you should match the R version the project expects, not change the project.\nA moving target: you are happy for the project’s packages (and R version) to move forward over time, and you mainly use {renv} to keep the environment self-contained. If this is your goal, you should move the project forward.\n\n\n\nThe remedies below are ordered roughly from least to most drastic:\n\nMatch the R version the project expects – reproduce the environment recorded in the lockfile. Keeps everything frozen; nothing is deleted.\nMove the project forward – update R and the project’s packages to current versions, then snapshot. Nothing is deleted, but the lockfile changes.\nDeactivate {renv} – stop using {renv} in the project (reversibly) so you can open it with your normal package library.\nFully reset {renv} – remove {renv} from the project entirely and start over. Last resort only.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Caching"
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/troubleshooting.html#match-r-version",
+    "href": "extra-content/troubleshooting.html#match-r-version",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Fix 1: Match the R Version the Project Expects",
+    "text": "Fix 1: Match the R Version the Project Expects\nIf you want the project to keep using the environment recorded in renv.lock – for example, because you need the exact results it produced – the solution is to run the project with the version of R it expects. Since {renv} does not manage R versions, you need a tool that does. We recommend rig (the “R Installation Manager”), a cross-platform tool from Posit for installing and switching between R versions (macOS users can also use the rswitch GUI). Installation and full usage details are covered on the dedicated Managing R Versions with rig page; the workflow below assumes you already have the right version installed and set as the default.\n\nThe Workflow\nOnce you have the R version your project expects installed and set as the default:\n\nFind the R version recorded in renv.lock (as described in Diagnose First).\nInstall and switch to that R version with rig (if you don’t already have it) – see Managing R Versions with rig.\nRestart RStudio so it picks up the new default version of R.\nOpen the project. {renv} should now find compatible packages.\nIf packages still need to be installed, run:\n\nrenv::restore()\nBecause {renv} caches packages for each minor version of R, installing a version of R you have used before will often let {renv} restore the project very quickly from the cache rather than re-downloading everything. See the Caching chapter for details.\nIf you work on several projects that require different R versions, switching the default R version before opening each project becomes routine. See Managing R Versions with rig for the full workflow.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/troubleshooting.html#move-project-forward",
+    "href": "extra-content/troubleshooting.html#move-project-forward",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Fix 2: Move the Project Forward",
+    "text": "Fix 2: Move the Project Forward\nIf you don’t need the project to stay frozen at its old versions – for example, because none of your outputs will change, or because you want to benefit from bug fixes in newer packages – you can instead bring the project up to date with the version of R you currently use. The official {renv} documentation itself recommends updating packages regularly.\n\n\n\n\n\n\nWarningBefore you update, back up the lockfile\n\n\n\nrenv::snapshot() overwrites renv.lock. If you want the option of returning to the current state later, first make a backup copy of renv.lock (or commit it to git). You will rarely regret having a backup, and you will never regret being able to renv::restore() your way back to a known-good state.\n\n\nThe procedure for moving a project forward is:\nrenv::upgrade()   # 1. Update {renv} itself to the latest version\nrenv::update()    # 2. Update the project's packages to current versions\nrenv::snapshot()  # 3. Record the new state in renv.lock\nWhat each step does:\n\nrenv::upgrade() updates the {renv} package itself. This is worth doing on its own whenever you hit strange behavior: like any software, {renv} occasionally ships with bugs that are fixed in later releases, and renv::upgrade() (or installing the development version from GitHub) is the simplest way to make sure you have those fixes.\nrenv::update() updates the packages in your project library to the latest versions compatible with your current R – including the base packages that come with a newer version of R.\nrenv::snapshot() records the new package versions in renv.lock, so the lockfile reflects the environment you are now using.\n\nAfter updating, run your project’s code and verify that everything still works (and produces the same results, if that matters to you). If a package update breaks something and you backed up the lockfile first, you can roll back with renv::restore() after replacing the new lockfile with your backup (or checking out the old lockfile from git).",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/troubleshooting.html#deactivate",
+    "href": "extra-content/troubleshooting.html#deactivate",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Fix 3: Deactivate {renv} (Without Deleting Anything)",
+    "text": "Fix 3: Deactivate {renv} (Without Deleting Anything)\nSometimes you don’t need to fix the project environment at all – you just need to get back into the project. If {renv}’s startup behavior is getting in the way, you can temporarily stop {renv} from activating when the project opens:\nrenv::deactivate()\nThis removes the {renv} auto-loader (the source(\"renv/activate.R\") line) from the project’s .Rprofile, so the next time you open the project, R will use your normal (user/system) package library instead of a project library.\nImportantly, renv::deactivate() does not delete any of your {renv} files – renv.lock, the renv folder, and everything else stay exactly where they are. That means it is fully reversible: when you’re ready to use {renv} again, simply run:\nrenv::activate()\nThink of renv::deactivate() as “pause {renv} for this project,” not “uninstall {renv}.”",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/troubleshooting.html#full-reset",
+    "href": "extra-content/troubleshooting.html#full-reset",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "The Last Resort: Fully Reset {renv}",
+    "text": "The Last Resort: Fully Reset {renv}\nIf none of the above works – for example, the {renv} scaffolding itself has become corrupted and {renv} can’t even load to run renv::activate() – you may want to fully reset {renv} and start over. Treat this as a genuine last resort. A full reset throws away the recorded environment, and if you don’t have a backup of renv.lock, you may not be able to recreate the exact package versions the project used.\n\nWhat “renv” Consists Of in a Project\nBefore resetting, it helps to know exactly what a full reset removes. As discussed in Understanding {renv}, a {renv} project contains the following pieces:\nyour-project/\n├── .Rprofile          # contains the line: source(\"renv/activate.R\")\n├── renv.lock          # records the R version, repositories, and packages\n└── renv/\n    ├── activate.R     # bootstraps {renv} when the project opens\n    ├── settings.json  # project-specific {renv} settings\n    ├── library/       # symlinks to the shared package cache\n    └── staging/       # temporary area used during package installs\nA full reset removes (or effectively disables) all of these. Your code and data are untouched, and – because the renv/library folder only contains symlinks into the shared cache – your cached packages are not deleted either. You are only removing the project’s connection to {renv}.\n\n\nOption A: Reset from Within R\nIf {renv} still runs, the cleanest reset is a single function. From the {renv} documentation, renv::deactivate(clean = TRUE) removes the auto-loader from .Rprofile and deletes all of the {renv} files and directories in the project, “leaving the project the way it was found”:\nrenv::deactivate(clean = TRUE)\nIf you later want to use {renv} again in the project, you start over from scratch:\nrenv::init()\n\n\nOption B: Manual Reset (When {renv} Won’t Even Run)\nIf {renv} is so broken that it cannot load (for example, it errors out during R startup before you can run any functions), you can reset it manually by editing the files yourself:\n\nClose the project and quit R/RStudio.\nBack up the lockfile. Copy renv.lock somewhere safe (e.g. to a file named renv.lock.bak outside the project, or commit it to git). If you ever want to recover the old environment, this file is your only record of it.\nDelete the renv.lock file.\nDelete the renv folder (the whole folder, not just its contents).\nEdit .Rprofile so that the line source(\"renv/activate.R\") is removed. In most {renv} projects, .Rprofile contains only that one line, in which case you can delete the file entirely. Note that .Rprofile is a hidden file (it begins with a dot), so you may need to enable “show hidden files” in your file browser.\nReopen the project. {renv} will no longer activate, and R will use the packages in your normal (user/system) library.\n\n\n\n\n\n\n\nNoteIf RStudio won’t even open the project\n\n\n\nIf RStudio errors out before you can get into the project to fix these files, you can open the project folder as a plain folder instead of via the .Rproj file (or start R from a terminal in that directory). Then edit or remove .Rprofile as described above and try opening the project again.\n\n\nAfter a manual reset, you have two reasonable paths forward:\n\nContinue without {renv}. Your project opens normally, and you install packages as you always have. You have simply abandoned the locked environment.\nRe-initialize {renv}. If you want a fresh start with {renv} (and you kept a backup of the old lockfile), place the backup back as renv.lock and run renv::init(), choosing to restore the project from the lockfile – but note that this only makes sense if you are also running a compatible version of R. Otherwise, run renv::init() with no lockfile to build a new lockfile from your current packages.\n\nIn short: if you want the same environment back, prefer Fix 1. A full reset is for when you want a fresh start.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/troubleshooting.html#good-habits",
+    "href": "extra-content/troubleshooting.html#good-habits",
+    "title": "Troubleshooting and Resetting {renv}",
+    "section": "Good Habits That Prevent Future Headaches",
+    "text": "Good Habits That Prevent Future Headaches\nA few simple habits make almost every problem on this page easier to solve – and most of them prevent the problems from happening in the first place:\n\nCommit the {renv} files to git. As noted in Understanding {renv}, commit renv.lock, .Rprofile, renv/settings.json, and renv/activate.R to version control. If anything goes wrong, git history is your safety net, and you can always git checkout an older lockfile.\nRun renv::snapshot() after installing or removing packages, and before making major changes to the project, so the lockfile stays an accurate record of a working state.\nRestart your R session when {renv} (or RStudio) prompts you to, especially after installing, updating, or restoring packages.\nKeep {renv} itself up to date with renv::upgrade(). Bug fixes (including fixes for startup problems) ship regularly, and updating {renv} is often the simplest fix for strange behavior.\nWhen asking for help, share the output of renv::diagnostics() along with your renv.lock and the exact error message. If you are working through this tutorial, the repository’s issue tracker is also a good place to ask questions or report problems with the tutorial itself.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Troubleshooting {renv}"
+    ]
+  },
+  {
+    "objectID": "extra-content/advanced-topics.html",
+    "href": "extra-content/advanced-topics.html",
+    "title": "Advanced Topics",
+    "section": "",
+    "text": "This page is currently a stub for potential future content. We may expand this page to include more advanced topics in the future, but for now, we will link out to the official {renv} documentation for these topics.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Advanced Topics"
+    ]
+  },
+  {
+    "objectID": "extra-content/advanced-topics.html#settings-and-config",
+    "href": "extra-content/advanced-topics.html#settings-and-config",
+    "title": "Advanced Topics",
+    "section": "“Settings” and “Config”",
+    "text": "“Settings” and “Config”\nhttps://rstudio.github.io/renv/reference/settings.html\nhttps://rstudio.github.io/renv/reference/config.html",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Advanced Topics"
+    ]
+  },
+  {
+    "objectID": "extra-content/advanced-topics.html#library-management",
+    "href": "extra-content/advanced-topics.html#library-management",
+    "title": "Advanced Topics",
+    "section": "Library Management",
+    "text": "Library Management\nhttps://rstudio.github.io/renv/reference/index.html#library-management\nEmphasis on record(), and history()/revert(). Also talk about the lockfile_*() functions as useful documentation for understanding the contents of the lockfile and what everything means.\nPossible discuss checkout()?",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Advanced Topics"
+    ]
+  },
+  {
+    "objectID": "extra-content/advanced-topics.html#docker-and-renv",
+    "href": "extra-content/advanced-topics.html#docker-and-renv",
+    "title": "Advanced Topics",
+    "section": "Docker and {renv}",
+    "text": "Docker and {renv}\n(mention existence, and link out to Binder which can create [most of] the Docker file from a renv lockfile)\nhttps://rstudio.github.io/renv/articles/docker.html\n\nBinder\n(link to the tutorial if we create one. otherwise, just link to Binder page on renv)",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Advanced Topics"
+    ]
+  },
+  {
+    "objectID": "extra-content/advanced-topics.html#python-integration",
+    "href": "extra-content/advanced-topics.html#python-integration",
+    "title": "Advanced Topics",
+    "section": "Python Integration",
+    "text": "Python Integration\n(only mention existence, and link to)\nhttps://rstudio.github.io/renv/articles/python.html",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Advanced Topics"
     ]
   },
   {
@@ -243,7 +363,7 @@
     "href": "background/dependencies-in-r.html#limitations-of-package-managers",
     "title": "Dependency Management in R",
     "section": "Limitations of Package Managers",
-    "text": "Limitations of Package Managers\nThe main limitation of package managers is that they only manage the packages you use in your project. They do not manage the software you use to run your project, such as R itself, or the operating system you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.\nMatching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like rig for R projects on your computer, or to use a containerization solution like Binder for creating Docker files or managed environments in RStudio Cloud. These solutions allow you to create a “container” with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.\n\n\n\n\n\n\nImportant\n\n\n\nR package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.\nIf you need to change R versions for your projects, we recommend downloading rig.\n\n\nA less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s DESCRIPTION file or by checking out the Posit Package Manager page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.\n\n\n\n\n\n\nNoteAdvanced Reading: System Dependencies in R Packages\n\n\n\n\n\nFor a more advanced understanding of system dependencies in R packages, see this R-hub blogpost on the topic. Subsequently, you can explore the rstudio/r-system-requirements repo to see how RStudio manages system dependencies for their own packages (and you can too if you need to use e.g. a Docker container for your project).\n\n\n\nFor example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found here.",
+    "text": "Limitations of Package Managers\nThe main limitation of package managers is that they only manage the packages you use in your project. They do not manage the software you use to run your project, such as R itself, or the operating system you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.\nMatching the installed version of R to the required version, however, will tend to be the main problem in most cases. The potential solutions are too expansive to cover in this tutorial, but the most common solution is to use a software that allows you to change R versions like rig for R projects on your computer, or to use a containerization solution like Binder for creating Docker files or managed environments in RStudio Cloud. These solutions allow you to create a “container” with instructions to download all the software you need to run your project, and can be shared with collaborators or used to recreate your working environment at a later date.\n\n\n\n\n\n\nImportant\n\n\n\nR package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.\nIf you need to change R versions for your projects, we recommend downloading rig. See the Managing R Versions with rig chapter for installation and usage instructions.\n\n\nA less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s DESCRIPTION file or by checking out the Posit Package Manager page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.\n\n\n\n\n\n\nNoteAdvanced Reading: System Dependencies in R Packages\n\n\n\n\n\nFor a more advanced understanding of system dependencies in R packages, see this R-hub blogpost on the topic. Subsequently, you can explore the rstudio/r-system-requirements repo to see how RStudio manages system dependencies for their own packages (and you can too if you need to use e.g. a Docker container for your project).\n\n\n\nFor example, the {curl} R package requires the curl system software which comes bundled with Windows and macOS, but needs to be installed explicitly by the user on Linux systems. The PPM page for {curl} lists the commands needed to install the curl software on a variety of Linux distributions, and can be found here.",
     "crumbs": [
       "Home",
       "Background",
@@ -598,7 +718,7 @@
     "href": "about-renv/restoring-a-project.html#when-to-restore",
     "title": "Restoring Another Project",
     "section": "When to restore()",
-    "text": "When to restore()\n\nFrom a GitHub Repo\nRestoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo should always have all of the required files for restoring a project including the renv.lock file, the renv folder, the *.Rproj file, and the R scripts. Note that repos generally do not (and should not) contain the renv/library folder–this is intended behavior. The renv/library contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines1. Moreover, the renv/library folder can be quite large and is not necessary for restoring a project.\nThe steps for restoring a project from a GitHub repository are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.\n\n\nFrom a lockfile\nYou may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the renv.lock file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:\n\nObtain the renv.lock file from your collaborators.\nPlace the renv.lock in the same directory as your project’s *.Rproj file.\nRun renv::status(). The results will look similar to this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nOption 1: Run renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\nOption 2: Run renv::init(). Choose the option to “Restore the project from the lockfile.” This will do everything that renv::restore() does and install the packages at the same time.\n\n\n\nAfter Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the caching chapter, but a summarized version is also provided here.\n\nTo first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: major.minor.patch. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.\nIf you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:\nThe first option is to update your project to use the new version of R. This can be done by running renv::update() to update the packages in your project (particularly the base R packages that came with the new version of R), and then running renv::snapshot() to update the renv.lock file.\nThe second option is to switch between R versions using a tool like rswitch or rig. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used.",
+    "text": "When to restore()\n\nFrom a GitHub Repo\nRestoring a project library from a GitHub repository is the most straightforward method to restore a project. A repo should always have all of the required files for restoring a project including the renv.lock file, the renv folder, the *.Rproj file, and the R scripts. Note that repos generally do not (and should not) contain the renv/library folder–this is intended behavior. The renv/library contains “symlinks” to the actual package files on your machine, and these symlinks are not portable across machines1. Moreover, the renv/library folder can be quite large and is not necessary for restoring a project.\nThe steps for restoring a project from a GitHub repository are as follows:\n\nClone the repository to your local machine with git clone\nOpen the *.Rproj file\nRun renv::restore()\n\nThere should not be anything else to do! The renv.lock file will be used to install the correct versions of the packages you need for the project.\n\n\nFrom a lockfile\nYou may encounter situations where it’s not practical or possible to use a GitHub repository for your project, namely if your collaborators are not familiar with using GitHub. In these cases, you can both restore and share a project’s depedencies using just the renv.lock file. This procedure for restoring contains just a few extra steps compared to the previous method, but should still look familiar:\n\nObtain the renv.lock file from your collaborators.\nPlace the renv.lock in the same directory as your project’s *.Rproj file.\nRun renv::status(). The results will look similar to this:\n\nrenv::status()\n#&gt; This project does not appear to be using renv.\n#&gt; Use `renv::restore()` to install the packages defined in lockfile.\n\nOption 1: Run renv::restore(). If prompted, choose the option “Activate the project and use the project library.” This will create all other necessary files and directories for a {renv} project.\nOption 2: Run renv::init(). Choose the option to “Restore the project from the lockfile.” This will do everything that renv::restore() does and install the packages at the same time.\n\n\n\nAfter Upgrading R\nSomething that may come as a surprise is the need to restore a project after upgrading R. This occurs because the {renv} package creates a separate cache for each major and minor version of R that you use. A more detailed explanation of this can be found in the caching chapter, but a summarized version is also provided here.\n\nTo first clarify “major” and “minor” upgrades: they refer to semantic versioning of software which is a way of providing version numbers to software using three numbers separated by periods: major.minor.patch. For example, an upgrade from R4.3.2 to 4.3.3. is a “patch” while an upgrade from R4.3 to R4.4 is a “minor” release. Minor releases occur approximately once per year, and, after installing a new minor release, you will need to restore your project.\nIf you install a new major or minor version of R, you will need to ensure that the version of R you are using is compatible with your project(s). There are two ways to achieve this:\nThe first option is to update your project to use the new version of R. This can be done by running renv::update() to update the packages in your project (particularly the base R packages that came with the new version of R), and then running renv::snapshot() to update the renv.lock file.\nThe second option is to switch between R versions using a tool like rig or rswitch. These tools are useful if you are working on multiple projects that require different versions of R, or if you have projects where it’s not possible to update the version of R being used. See the Managing R Versions with rig chapter for installation and switching instructions.",
     "crumbs": [
       "Home",
       "{renv}",
@@ -681,7 +801,7 @@
     "href": "background/technical-definitions.html#repositories",
     "title": "Technical Definitions",
     "section": "Repositories",
-    "text": "Repositories\n\n\n\nPopular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor\n\n\nA repository is a collection of packages that are available for download from a specific location. The most common and general-purpose repository for R packages is the Comprehensive R Archive Network (CRAN), which hosted 24835 freely available packages at the last time this page was generated on September 03 2026. Another popular repository, Bioconductor, also hosts several thousand packages, but these packages are focused on bioinformatics, genomics, and computational biology.\nAlthough not strictly “repositories,” GitHub and GitLab to a lesser extent are popular locations for hosting R packages, and many developers use these services to develop their packages and distribute them to the public. Another repository option of note is R-universe, which is a growing repository for R packages that is designed to make it easier for R users to share and discover packages. The benefit (but also downside of R-Universe) is that it is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN.\nCommonly Used Repositories\nCRAN and Bioconductor\nAs mentioned, CRAN is the most popular repository for R packages, and it is the default repository that R will use when you use the install.packages() function. CRAN has a strict set of guidelines for package submission, and packages are reviewed by a team of volunteers before they are accepted into the repository. This ensures that packages on CRAN are of high quality and are well-documented, which is why CRAN is often considered the gold standard for R package repositories.\nBioconductor, on the other hand, is a repository specifically for packages related to bioinformatics, genomics, and computational biology. Bioconductor has its own set of guidelines for package submission, and packages are reviewed by a team of experts in the field before they are accepted into the repository. This ensures that packages on Bioconductor are also of high quality and are well-suited for use in bioinformatics and genomics research.\nGitHub and GitLab\nGitHub and GitLab are popular version control platforms that are used by many R package developers to host their packages. These platforms are not strictly “repositories” in the same sense as CRAN and Bioconductor which are purpose-dedicated to hosting R packages, but they are often used as repositories for R packages. GitHub, in particular, is a popular platform for hosting R packages, and many R packages are available on GitHub for download and installation using the devtools::install_github() function.\nR-universe\nR-universe is a newer repository for R packages that is designed to make it easier for R users to share and discover packages. R-universe is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN. However, R-universe can be a great place to find packages that are not available on CRAN or Bioconductor, and it is a good place to discover new and interesting packages that are being developed by the R community.\nIt is, however, worth noting that almost any package available on R-Universe will also be available on CRAN, Bioconductor, or GitHub/GitLab so it is not necessary to use R-Universe to find packages that are not available on CRAN or Bioconductor.\nRepositories and Package Managers\nRepositories are an essential part of the R package ecosystem, as they are the locations from which R packages are downloaded and installed. Package managers like {renv}, {packrat}, and {checkpoint} use repositories to manage package versions and dependencies, and they can help you ensure that your projects are reproducible and that the correct versions of packages are used.\nWhen you install a package using a package manager, the package manager will download the package from a repository and store it in a library on your computer. The package manager will also keep track of the version of the package that was installed and any dependencies that the package has. This makes it easy to reproduce your projects and ensure that the correct versions of packages are used.\nIn the next section, we will discuss the various package managers that are available in R and how they can help you manage your packages and dependencies.\nSee also the Posit article on packages, libraries, and repositories.",
+    "text": "Repositories\n\n\n\nPopular R repositories: Comprehensive R Archive Network (CRAN) and Bioconductor\n\n\nA repository is a collection of packages that are available for download from a specific location. The most common and general-purpose repository for R packages is the Comprehensive R Archive Network (CRAN), which hosted 24840 freely available packages at the last time this page was generated on September 03 2026. Another popular repository, Bioconductor, also hosts several thousand packages, but these packages are focused on bioinformatics, genomics, and computational biology.\nAlthough not strictly “repositories,” GitHub and GitLab to a lesser extent are popular locations for hosting R packages, and many developers use these services to develop their packages and distribute them to the public. Another repository option of note is R-universe, which is a growing repository for R packages that is designed to make it easier for R users to share and discover packages. The benefit (but also downside of R-Universe) is that it is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN.\nCommonly Used Repositories\nCRAN and Bioconductor\nAs mentioned, CRAN is the most popular repository for R packages, and it is the default repository that R will use when you use the install.packages() function. CRAN has a strict set of guidelines for package submission, and packages are reviewed by a team of volunteers before they are accepted into the repository. This ensures that packages on CRAN are of high quality and are well-documented, which is why CRAN is often considered the gold standard for R package repositories.\nBioconductor, on the other hand, is a repository specifically for packages related to bioinformatics, genomics, and computational biology. Bioconductor has its own set of guidelines for package submission, and packages are reviewed by a team of experts in the field before they are accepted into the repository. This ensures that packages on Bioconductor are also of high quality and are well-suited for use in bioinformatics and genomics research.\nGitHub and GitLab\nGitHub and GitLab are popular version control platforms that are used by many R package developers to host their packages. These platforms are not strictly “repositories” in the same sense as CRAN and Bioconductor which are purpose-dedicated to hosting R packages, but they are often used as repositories for R packages. GitHub, in particular, is a popular platform for hosting R packages, and many R packages are available on GitHub for download and installation using the devtools::install_github() function.\nR-universe\nR-universe is a newer repository for R packages that is designed to make it easier for R users to share and discover packages. R-universe is not as curated as CRAN, so you may find packages that are not as well-tested or maintained as those on CRAN. However, R-universe can be a great place to find packages that are not available on CRAN or Bioconductor, and it is a good place to discover new and interesting packages that are being developed by the R community.\nIt is, however, worth noting that almost any package available on R-Universe will also be available on CRAN, Bioconductor, or GitHub/GitLab so it is not necessary to use R-Universe to find packages that are not available on CRAN or Bioconductor.\nRepositories and Package Managers\nRepositories are an essential part of the R package ecosystem, as they are the locations from which R packages are downloaded and installed. Package managers like {renv}, {packrat}, and {checkpoint} use repositories to manage package versions and dependencies, and they can help you ensure that your projects are reproducible and that the correct versions of packages are used.\nWhen you install a package using a package manager, the package manager will download the package from a repository and store it in a library on your computer. The package manager will also keep track of the version of the package that was installed and any dependencies that the package has. This makes it easy to reproduce your projects and ensure that the correct versions of packages are used.\nIn the next section, we will discuss the various package managers that are available in R and how they can help you manage your packages and dependencies.\nSee also the Posit article on packages, libraries, and repositories.",
     "crumbs": [
       "Home",
       "Background",
@@ -749,63 +869,135 @@
     ]
   },
   {
-    "objectID": "extra-content/advanced-topics.html",
-    "href": "extra-content/advanced-topics.html",
-    "title": "Advanced Topics",
+    "objectID": "extra-content/rig.html",
+    "href": "extra-content/rig.html",
+    "title": "Managing R Versions with rig",
     "section": "",
-    "text": "(Section under development)",
+    "text": "Most of this tutorial assumes that you are working with a single, reasonably up-to-date version of R. In practice, however, you will often need different versions of R for different projects: an older {renv} project might expect R 4.3, while your newest work runs on R 4.6. This page introduces rig (the “R Installation Manager”), the tool we recommend for installing and switching between R versions, and shows how to use it together with {renv} projects.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Advanced Topics"
+      "Managing R Versions with `rig`"
     ]
   },
   {
-    "objectID": "extra-content/advanced-topics.html#settings-and-config",
-    "href": "extra-content/advanced-topics.html#settings-and-config",
-    "title": "Advanced Topics",
-    "section": "“Settings” and “Config”",
-    "text": "“Settings” and “Config”\nhttps://rstudio.github.io/renv/reference/settings.html\nhttps://rstudio.github.io/renv/reference/config.html",
+    "objectID": "extra-content/rig.html#why-manage-r-versions",
+    "href": "extra-content/rig.html#why-manage-r-versions",
+    "title": "Managing R Versions with rig",
+    "section": "Why Manage R Versions?",
+    "text": "Why Manage R Versions?\nAs emphasized in the R Package Managers chapter, R package managers like {renv} manage the packages in your project, but they do not manage R itself. {renv} records the version of R in the renv.lock file, and it builds a separate package cache for each minor version of R you use, but it cannot install or switch R versions for you.\nThat leaves the version of R as something you are responsible for, and it is a frequent source of reproducibility headaches:\n\nA project’s renv.lock records the version of R it was created with. If you open the project with a different version of R, packages may fail to install or load.\nR packages are often only compatible with certain versions of R. Newer packages generally require newer versions of R, while a lockfile created on an older R may reference package versions that are no longer installable on a newer R.\nIf you upgrade (or downgrade) R, you will need to restore your projects so their libraries are rebuilt for the new R version.\n\nIf this sounds like the problem you are having, see Troubleshooting {renv}, where matching the R version a project expects is the first and least drastic remedy.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Advanced Topics"
+      "Managing R Versions with `rig`"
     ]
   },
   {
-    "objectID": "extra-content/advanced-topics.html#library-management",
-    "href": "extra-content/advanced-topics.html#library-management",
-    "title": "Advanced Topics",
-    "section": "Library Management",
-    "text": "Library Management\nhttps://rstudio.github.io/renv/reference/index.html#library-management\nEmphasis on record(), and history()/revert(). Also talk about the lockfile_*() functions as useful documentation for understanding the contents of the lockfile and what everything means.\nPossible discuss checkout()?",
+    "objectID": "extra-content/rig.html#what-is-rig",
+    "href": "extra-content/rig.html#what-is-rig",
+    "title": "Managing R Versions with rig",
+    "section": "What is rig?",
+    "text": "What is rig?\nrig is a command-line tool developed by Posit Software for installing, listing, removing, and switching between multiple versions of R. It works on macOS, Windows, and Linux, and it is the tool we recommended in the R Package Managers chapter and the one recommended by the official {renv} documentation for working with multiple R versions.\nThings you will likely use it for:\n\nInstalling multiple versions of R side by side (including both Intel and Apple Silicon builds on Macs).\nChoosing the “default” version of R used by your terminal and by RStudio.\nStarting a specific version of R directly when you need it for a particular project.\nOn macOS, switching the default R version from a small menu-bar app.\n\nIf you only work on macOS and prefer a GUI, an older but popular alternative is rswitch, a menu-bar app that does the same “pick the default R” job. rig also ships its own menu-bar app on macOS, so many users will not need anything else.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Advanced Topics"
+      "Managing R Versions with `rig`"
     ]
   },
   {
-    "objectID": "extra-content/advanced-topics.html#docker-and-renv",
-    "href": "extra-content/advanced-topics.html#docker-and-renv",
-    "title": "Advanced Topics",
-    "section": "Docker and {renv}",
-    "text": "Docker and {renv}\n(mention existence, and link out to Binder which can create [most of] the Docker file from a renv lockfile)\nhttps://rstudio.github.io/renv/articles/docker.html\n\nBinder\n(link to the tutorial if we create one. otherwise, just link to Binder page on renv)",
+    "objectID": "extra-content/rig.html#installing-rig",
+    "href": "extra-content/rig.html#installing-rig",
+    "title": "Managing R Versions with rig",
+    "section": "Installing rig",
+    "text": "Installing rig\nInstallation differs by operating system, so check the rig repository for the most up-to-date instructions. The common options are:\n\nmacOS (Homebrew) – the simplest option:\nbrew tap r-lib/rig\nbrew trust r-lib/rig\nbrew install --cask rig\nYou can also download the installer from the rig releases page.\nWindows – winget install posit.rig, or install via Chocolatey, Scoop, or the official installer.\nLinux – rig is available from package repositories for the major distributions, or as a tarball. See the rig repository for details.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Advanced Topics"
+      "Managing R Versions with `rig`"
     ]
   },
   {
-    "objectID": "extra-content/advanced-topics.html#python-integration",
-    "href": "extra-content/advanced-topics.html#python-integration",
-    "title": "Advanced Topics",
-    "section": "Python Integration",
-    "text": "Python Integration\n(only mention existence, and link to)\nhttps://rstudio.github.io/renv/articles/python.html",
+    "objectID": "extra-content/rig.html#basic-rig-commands",
+    "href": "extra-content/rig.html#basic-rig-commands",
+    "title": "Managing R Versions with rig",
+    "section": "Basic rig Commands",
+    "text": "Basic rig Commands\nOnce installed, rig is used from the terminal (not from within R):\nrig list           # list the R versions installed on your machine\nrig add 4.6.1      # install a specific version of R\nrig add release    # install the latest stable release of R\nrig default 4.6.1  # set the default R version (alias: rig switch)\nrig rm 4.3.3       # uninstall a version of R you no longer need\nA few useful details:\n\nrig understands symbolic version names like release, oldrel, devel, and next. For example, rig add oldrel installs the previous minor release of R, which can be handy when a project needs an older R.\nrig list marks the current default version, and rig available lists the versions you can install.\nAfter installing a version, rig creates “quick links” such as R-4.6 or R-4.6.1. Typing R-4.6 in the terminal starts exactly that version of R without changing your default – useful for checking a project against a specific R on the command line.",
     "crumbs": [
       "Home",
       "Optional Content",
-      "Advanced Topics"
+      "Managing R Versions with `rig`"
+    ]
+  },
+  {
+    "objectID": "extra-content/rig.html#switching-the-default-r-version",
+    "href": "extra-content/rig.html#switching-the-default-r-version",
+    "title": "Managing R Versions with rig",
+    "section": "Switching the Default R Version",
+    "text": "Switching the Default R Version\nThe “default” R version is the one started when you type R in a terminal and, importantly for this tutorial, the version RStudio uses. Switching R versions is therefore a short procedure:\n\nSet the new default from the terminal:\nrig default 4.3.3\nQuit and restart RStudio. RStudio picks up the default R version when it launches, so a fresh start is required for the change to take effect.\nVerify the version from within R:\nR.version.string\n\nOn macOS, rig also installs a small menu-bar app (“Rig”) that lets you view and change the default R version with a couple of clicks – handy if you regularly switch between projects that need different R versions. You can start it like any app (e.g. with open -a Rig) and select the default version from its menu. The rswitch app offers a similar menu-bar experience on macOS.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Managing R Versions with `rig`"
+    ]
+  },
+  {
+    "objectID": "extra-content/rig.html#running-a-renv-project-with-a-specific-r-version",
+    "href": "extra-content/rig.html#running-a-renv-project-with-a-specific-r-version",
+    "title": "Managing R Versions with rig",
+    "section": "Running a {renv} Project with a Specific R Version",
+    "text": "Running a {renv} Project with a Specific R Version\nConsider the scenario that motivates this page: you open an older {renv} project, but renv::restore() fails or the project’s packages won’t load because the renv.lock was created with a different version of R than the one you are now running. (The Troubleshooting {renv} page describes this in detail as “Fix 1: Match the R Version the Project Expects.”)\nTo run the project with the R version it expects:\n\nFind the R version recorded in the project’s renv.lock file. Open renv.lock in a text editor; near the top you should see an entry like \"Version\": \"4.3.3\" under the \"R\" heading.\nInstall that version of R if you don’t already have it:\nrig add 4.3.3\nMake it the default R version (so RStudio uses it):\nrig default 4.3.3\nRestart RStudio and open the project.\nIf {renv} reports that packages still need to be installed, run:\nrenv::restore()\n\nBecause {renv} keeps a separate cache for each minor version of R, restoring the project will often be quick if you have used that version of R with {renv} before: the packages can be linked from the cache rather than re-downloaded and recompiled. See the Caching chapter for details.\nIf you switch between several projects that require different R versions, making the default R version match the project before you open it becomes a routine habit – exactly the workflow rig (and, on macOS, rswitch) are designed to support.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Managing R Versions with `rig`"
+    ]
+  },
+  {
+    "objectID": "extra-content/caching.html",
+    "href": "extra-content/caching.html",
+    "title": "Caching",
+    "section": "",
+    "text": "This page will discuss the concept of caching and how it is used in {renv}.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Caching"
+    ]
+  },
+  {
+    "objectID": "extra-content/caching.html#what-is-caching",
+    "href": "extra-content/caching.html#what-is-caching",
+    "title": "Caching",
+    "section": "What is Caching?",
+    "text": "What is Caching?\nIn the context of software development, caching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program. When a program needs to access a package, it first checks the cache to see if the package is already stored there. If the package is found in the cache, the program can retrieve it quickly without having to download it again. This can significantly reduce the time it takes to run a program, especially if the package is large or if the program is run frequently.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Caching"
+    ]
+  },
+  {
+    "objectID": "extra-content/caching.html#caching-in-renv",
+    "href": "extra-content/caching.html#caching-in-renv",
+    "title": "Caching",
+    "section": "Caching in {renv}",
+    "text": "Caching in {renv}\nIn the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects. The cache will, when needed, contain multiple different versions of the same package and your project will link to the correct version, only downloading the version specified in the renv.lock if you don’t already have it somewhere in the renv cache. This shared library is a huge space saver, especially if you have many projects using the same packages.\nA cache is built per each minor version of R you use. For example, if you have used {renv} with R versions 4.3 and 4.4 on your computer, then you will end up with a cache matching each of these R versions. This is an important detail to note for the Restoring Projects section of this tutorial, as you may need to rebuild the cache if you upgrade your R version.\n\nCache Locations\nAlthough you will likely never need to interact with the cache directly, it can be useful to know where it is located on your system in case you need to troubleshoot any issues with {renv}. Moreover, seeing the actual cache locations can help make the concept of caching more tangible.\nThe {renv} caches for R packages will be nested in folders below one of the following locations, based on your operating system (Posit 2024):\n\n\nLinux: ~/.cache/R/renv/cache\nmacOS: ~/Library/Caches/org.R-project.R/R/renv/cache\nWindows: %LOCALAPPDATA%/renv/cache\n\n\nWithin each of these cache folders, you should see sub-folders for each version of R that you have used with {renv}. For example, on a macOS system, you might see the following folders:\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5\", full.names = T)\n\n#&gt; [1] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/macos\"\n#&gt; [2] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.2\"\n#&gt; [3] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3\"\n#&gt; [4] \"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4\"\nThe {renv} package also provides a function to access the exact path to the cache used in your current project. This cache location will be slightly more specific than the paths listed above because it is a reference to the one cache specific to the version of R used in your project. You can access the path to the cache with the following code:\n# Run on a MacOS, and &lt;USER&gt; removed. \nrenv::paths$cache()\n#&gt; [1] \"/Users/&lt;USER&gt;/Library/Caches/org.R-project.R/R/renv/cache/v5/macos/R-4.4/aarch64-apple-darwin20\"\n\nPackages in the Cache\nEach of the caches will contain the packages that you downloaded for use in your projects as you were using that version of R. So for example, if you downloaded version 1.0.9 of {dplyr} while using R 4.3, you would find the package in the R-4.3 folder of the cache. If you then started a project using R 4.4 and downloaded version 1.1.2 of {dplyr}, you would find that version in the R-4.4 folder of the cache. Moreover, if another project using R 4.4 also needed version 1.1.4 of {dplyr}, it would be found in the R-4.4 folder of the cache.\nThis text might be an over-explanation of the concept so I’ll demonstrate it with a code chunk below that lists out the versions of {dplyr} in the cache.\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/dplyr\")\n#&gt; [1] \"1.1.2\" \"1.1.4\"\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4/aarch64-apple-darwin20/dplyr\")\n#&gt; [1] \"1.1.2\" \"1.1.4\"\nSo it seems that I have versions 1.1.2 and 1.1.4 of {dplyr} in the caches for both R 4.3 and R 4.4. However, this is merely a coincidence; it won’t always be the case that the caches have the exact same versions of packages. Let’s look at an example where the versions differ.\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.3/aarch64-apple-darwin20/ggplot2\")\n#&gt; [1] \"3.4.3\" \"3.4.4\" \"3.5.0\" \"3.5.1\"\nlist.files(\"~/Library/Caches/org.R-project.R/R/renv/cache/v5/R-4.4/aarch64-apple-darwin20/ggplot2\")\n#&gt; [1] \"3.5.0\" \"3.5.1\"\nIn this case, I have versions 3.4.3, 3.4.4, 3.5.0, and 3.5.1 of {ggplot2} in the cache for R 4.3, but only versions 3.5.0 and 3.5.1 in the cache for R 4.4 which is an expected outcome. I used several older version of {ggplot2} with an older version of R and then upgraded to a newer version of R and only used the newer versions of {ggplot2}!\n\n\n\nProject Library\nThe discussion of caching so far has covered just the shared libraries that {renv} uses to store packages. But how does {renv} use these caches, how does this relate back to your project libraries, and what is the role of the renv/library folder in your projects?\nEach {renv} project has its own library, located in the renv/library folder of the project. When you install a package in a project with {renv}, however, the package is not technically installed in the renv/library library. In fact, none of the packages used in your project are actually stored in this folder. Instead, the contents of these folders are “symlinks” to the packages in the shared library.\n\nSymlinks\nA symlink or “symbolic link” is a file that points to another file or directory. It is a reference to the original file or directory, and it can be used to access the original file or directory from a different location. Symlinks are important because they allow you to create shortcuts to files or directories, which can be useful for organizing files, accessing files from different locations, or creating symbolic links to files or directories that are located on different drives or partitions.\nIn the context of {renv}, the apparent packages in the renv/library folder of your project are actually symlinks that point to the packages in the cache!",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Caching"
+    ]
+  },
+  {
+    "objectID": "extra-content/caching.html#summary-and-key-points",
+    "href": "extra-content/caching.html#summary-and-key-points",
+    "title": "Caching",
+    "section": "Summary and Key Points",
+    "text": "Summary and Key Points\nThis chapter contained quite a bit of technical detail and may have been a bit overwhelming. Here are the key points to remember:\n\nCaching is used to store data that is frequently accessed, such as packages, to speed up the execution of a program.\nIn the context of {renv}, the package cache is a shared library that contains the packages downloaded for and then used in your projects.\nThe cache is built per each minor version of R you use, and the cache locations are specific to your operating system. You will almost never need to directly access these cache locations.\nEach project has its own library, located in the renv/library folder of the project, but the packages in this folder are actually symlinks to the packages in the cache.",
+    "crumbs": [
+      "Home",
+      "Optional Content",
+      "Caching"
     ]
   },
   {
@@ -813,7 +1005,7 @@
     "href": "extra-content/index.html",
     "title": "Optional Content",
     "section": "",
-    "text": "This section dives deeper into {renv} internals and advanced workflows. It’s intended for users with more sophisticated use cases or troubleshooting needs.\n\nCaching — How {renv} caches packages to save disk space and speed up installations, and where those caches live on your system.\nembed() and use() — Two lesser-known functions for embedding dependency information directly in scripts and temporarily using packages without installing them.\nAdvanced Topics — Customizing {renv} settings, handling system dependencies, and other advanced configuration options.\n\n\n\n\n\n\n Back to top",
+    "text": "This section dives deeper into {renv} internals and advanced workflows. It’s intended for users with more sophisticated use cases or troubleshooting needs.\n\nCaching — How {renv} caches packages to save disk space and speed up installations, and where those caches live on your system.\nembed() and use() — Two lesser-known functions for embedding dependency information directly in scripts and temporarily using packages without installing them.\nTroubleshooting {renv} — What to do when a project won’t open or restore: diagnosing version mismatches, switching R versions, and fully resetting a broken {renv} project as a last resort.\nManaging R Versions with rig — Install and switch between multiple versions of R with rig, and run {renv} projects with the R version they expect.\nAdvanced Topics — Customizing {renv} settings, handling system dependencies, and other advanced configuration options.\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Home",
       "Optional Content"

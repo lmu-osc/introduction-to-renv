@@ -488,6 +488,18 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../extra-content/rig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing R Versions with <code>rig</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting {renv}</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../extra-content/advanced-topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advanced Topics</span></a>
   </div>
@@ -567,7 +579,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.</strong></p>
-<p><strong>If you need to change R versions for your projects, we recommend downloading <a href="https://github.com/r-lib/rig">rig</a>.</strong></p>
+<p><strong>If you need to change R versions for your projects, we recommend downloading <a href="https://github.com/r-lib/rig">rig</a>. See the <a href="../extra-content/rig.html">Managing R Versions with <code>rig</code></a> chapter for installation and usage instructions.</strong></p>
 </div>
 </div>
 <p>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package’s <code>DESCRIPTION</code> file or by checking out the <a href="https://packagemanager.posit.co/client/#/">Posit Package Manager</a> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</p>
@@ -1167,7 +1179,7 @@ Important
 <span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>**R package managers only manage the packages you use in your project. The package managers might record the version of R you are using, but they will not directly manage or change your R versions.**</span>
 <span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>**If you need to change R versions for your projects, we recommend downloading [rig](https://github.com/r-lib/rig).**</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>**If you need to change R versions for your projects, we recommend downloading [rig](https://github.com/r-lib/rig). See the [Managing R Versions with `rig`](/extra-content/rig.qmd) chapter for installation and usage instructions.**</span>
 <span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>A less common issue, particularly if you are using Windows or macOS, occurs when R packages have a system dependency that is neither R itself nor other R packages. These are also not managed by package managers, but can easily identified either by checking a package's <span class="in">`DESCRIPTION`</span> file or by checking out the <span class="co">[</span><span class="ot">Posit Package Manager</span><span class="co">](https://packagemanager.posit.co/client/#/)</span> page for the package. This site is particularly convenient as it lists all the system dependencies for a package, and the commands needed to install them on a variety of operating systems.</span>

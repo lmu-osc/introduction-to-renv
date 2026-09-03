@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Troubleshooting and Resetting {renv} – Introduction to {renv}</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../extra-content/advanced-topics.html" rel="next">
+<link href="../extra-content/rig.html" rel="prev">
+<link href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-97e28f47ad423cfcb72627c3f906fd98.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1b5eaea64cccf5f2bea7f479051f272c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0263eb0704e1a60d2ddd91fea2fa9eac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1b5eaea64cccf5f2bea7f479051f272c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- Matomo -->
+<script>
+if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://www.analytics.osc.lmu.de/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+}
+</script>
+<!-- End Matomo Code -->
+
+
+<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+<link rel="stylesheet" href="../footer/footer-style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to {renv}</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/introduction-to-renv">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/introduction-to-renv/issues">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
+    <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra-content/index.html">Optional Content</a></li><li class="breadcrumb-item"><a href="../extra-content/troubleshooting.html">Troubleshooting {renv}</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../background/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Background</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../background/computational-reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../background/intro-dependencies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Software Dependencies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../background/technical-definitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Technical Definitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../background/dependencies-in-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. R Package Managers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../about-renv/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">{renv}</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about-renv/renv-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Quick Start</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about-renv/starting-details.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Understanding {renv}</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about-renv/restoring-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Restoring Projects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/example-init-snapshot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Init and Snapshot</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/example-restore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Restore</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/example-explicit-record.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explicitly Record</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../extra-content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optional Content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/caching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Caching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/embed-and-use.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">embed() and use()</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/rig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing R Versions with <code>rig</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/troubleshooting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Troubleshooting {renv}</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra-content/advanced-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced Topics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+   
+  <ul>
+  <li><a href="#version-mismatch" id="toc-version-mismatch" class="nav-link active" data-scroll-target="#version-mismatch">The Root Cause: A Version Mismatch</a>
+  <ul class="collapse">
+  <li><a href="#common-symptoms" id="toc-common-symptoms" class="nav-link" data-scroll-target="#common-symptoms">Common Symptoms</a></li>
+  </ul></li>
+  <li><a href="#diagnose" id="toc-diagnose" class="nav-link" data-scroll-target="#diagnose">Diagnose First</a></li>
+  <li><a href="#remedies" id="toc-remedies" class="nav-link" data-scroll-target="#remedies">Remedies from Least to Most Drastic</a></li>
+  <li><a href="#match-r-version" id="toc-match-r-version" class="nav-link" data-scroll-target="#match-r-version">Fix 1: Match the R Version the Project Expects</a>
+  <ul class="collapse">
+  <li><a href="#the-workflow" id="toc-the-workflow" class="nav-link" data-scroll-target="#the-workflow">The Workflow</a></li>
+  </ul></li>
+  <li><a href="#move-project-forward" id="toc-move-project-forward" class="nav-link" data-scroll-target="#move-project-forward">Fix 2: Move the Project Forward</a></li>
+  <li><a href="#deactivate" id="toc-deactivate" class="nav-link" data-scroll-target="#deactivate">Fix 3: Deactivate {renv} (Without Deleting Anything)</a></li>
+  <li><a href="#full-reset" id="toc-full-reset" class="nav-link" data-scroll-target="#full-reset">The Last Resort: Fully Reset {renv}</a>
+  <ul class="collapse">
+  <li><a href="#what-renv-consists-of-in-a-project" id="toc-what-renv-consists-of-in-a-project" class="nav-link" data-scroll-target="#what-renv-consists-of-in-a-project">What “renv” Consists Of in a Project</a></li>
+  <li><a href="#option-a-reset-from-within-r" id="toc-option-a-reset-from-within-r" class="nav-link" data-scroll-target="#option-a-reset-from-within-r">Option A: Reset from Within R</a></li>
+  <li><a href="#option-b-manual-reset-when-renv-wont-even-run" id="toc-option-b-manual-reset-when-renv-wont-even-run" class="nav-link" data-scroll-target="#option-b-manual-reset-when-renv-wont-even-run">Option B: Manual Reset (When {renv} Won’t Even Run)</a></li>
+  </ul></li>
+  <li><a href="#good-habits" id="toc-good-habits" class="nav-link" data-scroll-target="#good-habits">Good Habits That Prevent Future Headaches</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/extra-content/troubleshooting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/extra-content/troubleshooting.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../extra-content/index.html">Optional Content</a></li><li class="breadcrumb-item"><a href="../extra-content/troubleshooting.html">Troubleshooting {renv}</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Troubleshooting and Resetting {renv}</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>By this point in the tutorial, you have hopefully come to appreciate just how much work {renv} does behind the scenes. That said, even the best tools occasionally misbehave. Maybe you have a project that suddenly refuses to open in RStudio, a <code>renv::restore()</code> that keeps failing, or you inherited a repository from a collaborator and simply cannot get it to run. This page is a practical guide to troubleshooting {renv} projects, with remedies ordered from the <em>least</em> to the <em>most</em> drastic.</p>
+<p>The good news is that <strong>almost all {renv} problems share a single underlying cause</strong>. If you understand that cause, most of what follows will feel like common sense.</p>
+<section id="version-mismatch" class="level2">
+<h2 class="anchored" data-anchor-id="version-mismatch">The Root Cause: A Version Mismatch</h2>
+<p>Recall from <a href="../about-renv/starting-details.html">Understanding {renv}</a> that the <code>renv.lock</code> file is a record of the environment your project is <em>supposed</em> to use. Among other things, it records:</p>
+<ul>
+<li>The version of <strong>R</strong> used to create the lockfile</li>
+<li>The <strong>packages</strong> your project uses</li>
+<li>The <strong>exact version</strong> of each package</li>
+</ul>
+<p>When you open a {renv} project or run <code>renv::restore()</code>, {renv} compares this recorded environment with what is actually installed on your computer. When the two do not line up, you get the error messages, warnings, and “out of sync” notices that make {renv} feel broken. <strong>In practice, essentially all {renv} problems come down to a mismatch between what is recorded in <code>renv.lock</code> and the version of R (or the R packages) actually being used on your system.</strong></p>
+<p>Why is this so common? A few reasons:</p>
+<ul>
+<li><strong>R packages are built for specific versions of R.</strong> Many packages are only compatible with certain versions of R, and packages released today often require a fairly recent version of R. If your lockfile was created with an older version of R, the versions of the packages recorded in it may simply not be installable (or loadable) on a newer version of R, and vice versa.</li>
+<li><strong>{renv} records the version of R, but it does not manage it.</strong> As emphasized in the <a href="../background/dependencies-in-r.html">R Package Managers</a> chapter, package managers manage <em>packages</em>, not R itself. {renv} can tell you which version of R a project expects, but it cannot install or switch R versions for you. That part is up to you.</li>
+<li><strong>R versions and packages drift over time.</strong> If you upgrade R (or a collaborator does), the cached packages from your old R version are no longer valid. See the <a href="../extra-content/caching.html">Caching</a> chapter for why {renv} keeps a separate cache for each minor version of R.</li>
+</ul>
+<p>Two scenarios that almost always boil down to a version mismatch:</p>
+<ul>
+<li>You open an older project whose <code>renv.lock</code> records an older version of R than the one you are now running. {renv} cannot use the old packages, and <code>renv::restore()</code> either fails or cannot find versions of the packages that are compatible with your current R.</li>
+<li>You clone a collaborator’s repository. The <code>renv.lock</code> records versions of R and packages that are not installed on your machine, so the project will not run until you reproduce that environment.</li>
+</ul>
+<section id="common-symptoms" class="level3">
+<h3 class="anchored" data-anchor-id="common-symptoms">Common Symptoms</h3>
+<p>The table below lists the symptoms users most often describe as “{renv} is broken,” along with what they usually mean. The remedies for each are covered in the rest of this page.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Symptom</th>
+<th style="text-align: left;">Most likely explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">The project loads slowly, errors, or won’t open properly in RStudio</td>
+<td style="text-align: left;">The {renv} autoloader (the <code>source("renv/activate.R")</code> line in <code>.Rprofile</code>) can’t activate a project library that matches the recorded environment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>renv::restore()</code> fails, or can’t find a compatible version of a package</td>
+<td style="text-align: left;">The lockfile records an R or package version that is incompatible with the version of R you are currently running.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>renv::status()</code> reports that the project is “out of sync” with the lockfile</td>
+<td style="text-align: left;">The installed packages, used packages, and recorded packages don’t match.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Installing a package fails with “package … is not available for R version …”</td>
+<td style="text-align: left;">The requested package version needs a different version of R.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Everything worked yesterday and now it doesn’t</td>
+<td style="text-align: left;">Something changed on your system: an R upgrade, a package upgrade, or a changed <code>renv.lock</code> (e.g.&nbsp;after a <code>git pull</code>).</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled" title="It is rarely actually 'broken'">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>It is rarely actually ‘broken’
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you do anything drastic, remember that {renv} is mature and widely used software. The overwhelming majority of “broken” {renv} projects are simply expecting an environment that is not currently present on your machine. The fixes below are about restoring that environment – or deliberately moving the project to a new one – not about repairing corrupted files.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="diagnose" class="level2">
+<h2 class="anchored" data-anchor-id="diagnose">Diagnose First</h2>
+<p>Before choosing a remedy, take two minutes to confirm what is actually going on.</p>
+<p><strong>1. Check the status of the project.</strong> Inside the project, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will tell you whether the project is in a consistent state or whether packages are missing, unused, or out of sync with the lockfile.</p>
+<p><strong>2. Compare the version of R recorded in the lockfile with the version you are running.</strong> Open the <code>renv.lock</code> file in a text editor (it is a JSON file). Near the top you should see something like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The beginning of a renv.lock file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"R"</span><span class="sc">:</span> {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Version"</span><span class="sc">:</span> <span class="st">"4.6.1"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now check the version of R you are actually using, either in the RStudio console on startup or with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If these two versions differ, you have found the root cause of most {renv} problems.</p>
+<p><strong>3. Run <code>renv::diagnostics()</code>.</strong> This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. The output is extremely useful when asking someone else for help (e.g.&nbsp;in a GitHub issue), and it will often point you toward the source of the problem.</p>
+<p><strong>4. Ask what changed.</strong> If the project worked before, the fastest path to a fix is usually figuring out what changed since it last worked: Did you upgrade R? Did a collaborator update <code>renv.lock</code>? Did you move the project to a new computer? The answer will usually tell you which of the remedies below is appropriate.</p>
+</section>
+<section id="remedies" class="level2">
+<h2 class="anchored" data-anchor-id="remedies">Remedies from Least to Most Drastic</h2>
+<p>The right remedy depends on how you want to treat the project. Borrowing a framing from the <a href="https://rstudio.github.io/renv/articles/faq.html">official {renv} FAQ</a>, you are choosing between two philosophies:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Two Ways to Think About a Project">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Two Ways to Think About a Project
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>A “time capsule”:</strong> you want the project to keep using the exact environment recorded in <code>renv.lock</code>, frozen in time. If this is your goal, you should <a href="#match-r-version">match the R version the project expects</a>, not change the project.</li>
+<li><strong>A moving target:</strong> you are happy for the project’s packages (and R version) to move forward over time, and you mainly use {renv} to keep the environment <em>self-contained</em>. If this is your goal, you should <a href="#move-project-forward">move the project forward</a>.</li>
+</ul>
+</div>
+</div>
+<p>The remedies below are ordered roughly from least to most drastic:</p>
+<ol type="1">
+<li><strong><a href="#match-r-version">Match the R version the project expects</a></strong> – reproduce the environment recorded in the lockfile. Keeps everything frozen; nothing is deleted.</li>
+<li><strong><a href="#move-project-forward">Move the project forward</a></strong> – update R and the project’s packages to current versions, then snapshot. Nothing is deleted, but the lockfile changes.</li>
+<li><strong><a href="#deactivate">Deactivate {renv}</a></strong> – stop using {renv} in the project (reversibly) so you can open it with your normal package library.</li>
+<li><strong><a href="#full-reset">Fully reset {renv}</a></strong> – remove {renv} from the project entirely and start over. <strong>Last resort only.</strong></li>
+</ol>
+</section>
+<section id="match-r-version" class="level2">
+<h2 class="anchored" data-anchor-id="match-r-version">Fix 1: Match the R Version the Project Expects</h2>
+<p>If you want the project to keep using the environment recorded in <code>renv.lock</code> – for example, because you need the exact results it produced – the solution is to run the project with the version of R it expects. Since {renv} does not manage R versions, you need a tool that does. We recommend <a href="../extra-content/rig.html"><code>rig</code></a> (the “R Installation Manager”), a cross-platform tool from Posit for installing and switching between R versions (macOS users can also use the <a href="https://rud.is/rswitch/"><code>rswitch</code></a> GUI). Installation and full usage details are covered on the dedicated <a href="../extra-content/rig.html">Managing R Versions with <code>rig</code></a> page; the workflow below assumes you already have the right version installed and set as the default.</p>
+<section id="the-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="the-workflow">The Workflow</h3>
+<p>Once you have the R version your project expects installed and set as the default:</p>
+<ol type="1">
+<li>Find the R version recorded in <code>renv.lock</code> (as described in <a href="#diagnose">Diagnose First</a>).</li>
+<li>Install and switch to that R version with <code>rig</code> (if you don’t already have it) – see <a href="../extra-content/rig.html">Managing R Versions with <code>rig</code></a>.</li>
+<li><strong>Restart RStudio</strong> so it picks up the new default version of R.</li>
+<li>Open the project. {renv} should now find compatible packages.</li>
+<li>If packages still need to be installed, run:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Because {renv} caches packages for each minor version of R, installing a version of R you have used before will often let {renv} restore the project very quickly from the cache rather than re-downloading everything. See the <a href="../extra-content/caching.html">Caching</a> chapter for details.</p>
+<p>If you work on several projects that require different R versions, switching the default R version before opening each project becomes routine. See <a href="../extra-content/rig.html">Managing R Versions with <code>rig</code></a> for the full workflow.</p>
+</section>
+</section>
+<section id="move-project-forward" class="level2">
+<h2 class="anchored" data-anchor-id="move-project-forward">Fix 2: Move the Project Forward</h2>
+<p>If you don’t need the project to stay frozen at its old versions – for example, because none of your outputs will change, or because you want to benefit from bug fixes in newer packages – you can instead bring the project up to date with the version of R you currently use. The official {renv} documentation itself <a href="https://rstudio.github.io/renv/articles/renv.html">recommends updating packages regularly</a>.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Before you update, back up the lockfile">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Before you update, back up the lockfile
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>renv::snapshot()</code> overwrites <code>renv.lock</code>. If you want the option of returning to the current state later, <strong>first</strong> make a backup copy of <code>renv.lock</code> (or commit it to git). You will rarely regret having a backup, and you will never regret being able to <code>renv::restore()</code> your way back to a known-good state.</p>
+</div>
+</div>
+<p>The procedure for moving a project forward is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">upgrade</span>()   <span class="co"># 1. Update {renv} itself to the latest version</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">update</span>()    <span class="co"># 2. Update the project's packages to current versions</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()  <span class="co"># 3. Record the new state in renv.lock</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>What each step does:</p>
+<ul>
+<li><code>renv::upgrade()</code> updates the <strong>{renv} package itself</strong>. This is worth doing on its own whenever you hit strange behavior: like any software, {renv} occasionally ships with bugs that are fixed in later releases, and <code>renv::upgrade()</code> (or installing the development version from GitHub) is the simplest way to make sure you have those fixes.</li>
+<li><code>renv::update()</code> updates the <strong>packages</strong> in your project library to the latest versions compatible with your current R – including the base packages that come with a newer version of R.</li>
+<li><code>renv::snapshot()</code> records the new package versions in <code>renv.lock</code>, so the lockfile reflects the environment you are now using.</li>
+</ul>
+<p>After updating, <strong>run your project’s code and verify that everything still works</strong> (and produces the same results, if that matters to you). If a package update breaks something and you backed up the lockfile first, you can roll back with <code>renv::restore()</code> after replacing the new lockfile with your backup (or checking out the old lockfile from git).</p>
+</section>
+<section id="deactivate" class="level2">
+<h2 class="anchored" data-anchor-id="deactivate">Fix 3: Deactivate {renv} (Without Deleting Anything)</h2>
+<p>Sometimes you don’t need to fix the project environment at all – you just need to get back into the project. If {renv}’s startup behavior is getting in the way, you can temporarily stop {renv} from activating when the project opens:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">deactivate</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This removes the {renv} auto-loader (the <code>source("renv/activate.R")</code> line) from the project’s <code>.Rprofile</code>, so the next time you open the project, R will use your normal (user/system) package library instead of a project library.</p>
+<p>Importantly, <code>renv::deactivate()</code> does <strong>not</strong> delete any of your {renv} files – <code>renv.lock</code>, the <code>renv</code> folder, and everything else stay exactly where they are. That means it is fully reversible: when you’re ready to use {renv} again, simply run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">activate</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Think of <code>renv::deactivate()</code> as “pause {renv} for this project,” not “uninstall {renv}.”</p>
+</section>
+<section id="full-reset" class="level2">
+<h2 class="anchored" data-anchor-id="full-reset">The Last Resort: Fully Reset {renv}</h2>
+<p>If none of the above works – for example, the {renv} scaffolding itself has become corrupted and {renv} can’t even load to run <code>renv::activate()</code> – you may want to fully reset {renv} and start over. <strong>Treat this as a genuine last resort.</strong> A full reset throws away the recorded environment, and if you don’t have a backup of <code>renv.lock</code>, you may not be able to recreate the exact package versions the project used.</p>
+<section id="what-renv-consists-of-in-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="what-renv-consists-of-in-a-project">What “renv” Consists Of in a Project</h3>
+<p>Before resetting, it helps to know exactly what a full reset removes. As discussed in <a href="../about-renv/starting-details.html">Understanding {renv}</a>, a {renv} project contains the following pieces:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>your<span class="sc">-</span>project<span class="sc">/</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>├── .Rprofile          <span class="co"># contains the line: source("renv/activate.R")</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>├── renv.lock          <span class="co"># records the R version, repositories, and packages</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>└── renv<span class="sc">/</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    ├── activate.R     <span class="co"># bootstraps {renv} when the project opens</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    ├── settings.json  <span class="co"># project-specific {renv} settings</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ├── library<span class="sc">/</span>       <span class="co"># symlinks to the shared package cache</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    └── staging<span class="sc">/</span>       <span class="co"># temporary area used during package installs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A full reset removes (or effectively disables) all of these. Your <strong>code and data are untouched</strong>, and – because the <code>renv/library</code> folder only contains symlinks into the shared cache – your <strong>cached packages are not deleted either</strong>. You are only removing the project’s connection to {renv}.</p>
+</section>
+<section id="option-a-reset-from-within-r" class="level3">
+<h3 class="anchored" data-anchor-id="option-a-reset-from-within-r">Option A: Reset from Within R</h3>
+<p>If {renv} still runs, the cleanest reset is a single function. From <a href="https://rstudio.github.io/renv/articles/renv.html">the {renv} documentation</a>, <code>renv::deactivate(clean = TRUE)</code> removes the auto-loader from <code>.Rprofile</code> <strong>and</strong> deletes all of the {renv} files and directories in the project, “leaving the project the way it was found”:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">deactivate</span>(<span class="at">clean =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you later want to use {renv} again in the project, you start over from scratch:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="option-b-manual-reset-when-renv-wont-even-run" class="level3">
+<h3 class="anchored" data-anchor-id="option-b-manual-reset-when-renv-wont-even-run">Option B: Manual Reset (When {renv} Won’t Even Run)</h3>
+<p>If {renv} is so broken that it cannot load (for example, it errors out during R startup before you can run any functions), you can reset it manually by editing the files yourself:</p>
+<ol type="1">
+<li><strong>Close the project</strong> and quit R/RStudio.</li>
+<li><strong>Back up the lockfile.</strong> Copy <code>renv.lock</code> somewhere safe (e.g.&nbsp;to a file named <code>renv.lock.bak</code> outside the project, or commit it to git). If you ever want to recover the old environment, this file is your only record of it.</li>
+<li><strong>Delete the <code>renv.lock</code> file.</strong></li>
+<li><strong>Delete the <code>renv</code> folder</strong> (the whole folder, not just its contents).</li>
+<li><strong>Edit <code>.Rprofile</code></strong> so that the line <code>source("renv/activate.R")</code> is removed. In most {renv} projects, <code>.Rprofile</code> contains only that one line, in which case you can delete the file entirely. Note that <code>.Rprofile</code> is a <em>hidden</em> file (it begins with a dot), so you may need to enable “show hidden files” in your file browser.</li>
+<li><strong>Reopen the project.</strong> {renv} will no longer activate, and R will use the packages in your normal (user/system) library.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="If RStudio won't even open the project">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>If RStudio won’t even open the project
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If RStudio errors out before you can get into the project to fix these files, you can open the project folder as a plain folder instead of via the <code>.Rproj</code> file (or start R from a terminal in that directory). Then edit or remove <code>.Rprofile</code> as described above and try opening the project again.</p>
+</div>
+</div>
+<p>After a manual reset, you have two reasonable paths forward:</p>
+<ul>
+<li><strong>Continue without {renv}.</strong> Your project opens normally, and you install packages as you always have. You have simply abandoned the locked environment.</li>
+<li><strong>Re-initialize {renv}.</strong> If you want a fresh start with {renv} (and you kept a backup of the old lockfile), place the backup back as <code>renv.lock</code> and run <code>renv::init()</code>, choosing to restore the project from the lockfile – but note that this only makes sense if you are also <a href="#match-r-version">running a compatible version of R</a>. Otherwise, run <code>renv::init()</code> with no lockfile to build a new lockfile from your current packages.</li>
+</ul>
+<p>In short: <strong>if you want the same environment back, prefer <a href="#match-r-version">Fix 1</a>. A full reset is for when you want a fresh start.</strong></p>
+</section>
+</section>
+<section id="good-habits" class="level2">
+<h2 class="anchored" data-anchor-id="good-habits">Good Habits That Prevent Future Headaches</h2>
+<p>A few simple habits make almost every problem on this page easier to solve – and most of them prevent the problems from happening in the first place:</p>
+<ul>
+<li><strong>Commit the {renv} files to git.</strong> As noted in <a href="../about-renv/starting-details.html">Understanding {renv}</a>, commit <code>renv.lock</code>, <code>.Rprofile</code>, <code>renv/settings.json</code>, and <code>renv/activate.R</code> to version control. If anything goes wrong, git history is your safety net, and you can always <code>git checkout</code> an older lockfile.</li>
+<li><strong>Run <code>renv::snapshot()</code> after installing or removing packages</strong>, and before making major changes to the project, so the lockfile stays an accurate record of a working state.</li>
+<li><strong>Restart your R session</strong> when {renv} (or RStudio) prompts you to, especially after installing, updating, or restoring packages.</li>
+<li><strong>Keep {renv} itself up to date</strong> with <code>renv::upgrade()</code>. Bug fixes (including fixes for startup problems) ship regularly, and updating {renv} is often the simplest fix for strange behavior.</li>
+<li><strong>When asking for help, share the output of <code>renv::diagnostics()</code></strong> along with your <code>renv.lock</code> and the exact error message. If you are working through this tutorial, the <a href="https://github.com/lmu-osc/introduction-to-renv/issues">repository’s issue tracker</a> is also a good place to ask questions or report problems with the tutorial itself.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/introduction-to-renv\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../extra-content/rig.html" class="pagination-link" aria-label="Managing R Versions with `rig`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Managing R Versions with <code>rig</code></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../extra-content/advanced-topics.html" class="pagination-link" aria-label="Advanced Topics">
+        <span class="nav-page-text">Advanced Topics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Troubleshooting and Resetting {renv}"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>By this point in the tutorial, you have hopefully come to appreciate just how much work {renv} does behind the scenes. That said, even the best tools occasionally misbehave. Maybe you have a project that suddenly refuses to open in RStudio, a <span class="in">`renv::restore()`</span> that keeps failing, or you inherited a repository from a collaborator and simply cannot get it to run. This page is a practical guide to troubleshooting {renv} projects, with remedies ordered from the *least* to the *most* drastic.</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>The good news is that **almost all {renv} problems share a single underlying cause**. If you understand that cause, most of what follows will feel like common sense.</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Root Cause: A Version Mismatch {#version-mismatch}</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>Recall from <span class="co">[</span><span class="ot">Understanding {renv}</span><span class="co">](/about-renv/starting-details.qmd)</span> that the <span class="in">`renv.lock`</span> file is a record of the environment your project is *supposed* to use. Among other things, it records:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The version of **R** used to create the lockfile</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The **packages** your project uses</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The **exact version** of each package</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>When you open a {renv} project or run <span class="in">`renv::restore()`</span>, {renv} compares this recorded environment with what is actually installed on your computer. When the two do not line up, you get the error messages, warnings, and "out of sync" notices that make {renv} feel broken. **In practice, essentially all {renv} problems come down to a mismatch between what is recorded in `renv.lock` and the version of R (or the R packages) actually being used on your system.**</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>Why is this so common? A few reasons:</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**R packages are built for specific versions of R.** Many packages are only compatible with certain versions of R, and packages released today often require a fairly recent version of R. If your lockfile was created with an older version of R, the versions of the packages recorded in it may simply not be installable (or loadable) on a newer version of R, and vice versa.</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**{renv} records the version of R, but it does not manage it.** As emphasized in the <span class="co">[</span><span class="ot">R Package Managers</span><span class="co">](/background/dependencies-in-r.qmd)</span> chapter, package managers manage *packages*, not R itself. {renv} can tell you which version of R a project expects, but it cannot install or switch R versions for you. That part is up to you.</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**R versions and packages drift over time.** If you upgrade R (or a collaborator does), the cached packages from your old R version are no longer valid. See the <span class="co">[</span><span class="ot">Caching</span><span class="co">](/extra-content/caching.qmd)</span> chapter for why {renv} keeps a separate cache for each minor version of R.</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>Two scenarios that almost always boil down to a version mismatch:</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>You open an older project whose <span class="in">`renv.lock`</span> records an older version of R than the one you are now running. {renv} cannot use the old packages, and <span class="in">`renv::restore()`</span> either fails or cannot find versions of the packages that are compatible with your current R.</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>You clone a collaborator's repository. The <span class="in">`renv.lock`</span> records versions of R and packages that are not installed on your machine, so the project will not run until you reproduce that environment.</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="fu">### Common Symptoms</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>The table below lists the symptoms users most often describe as "{renv} is broken," along with what they usually mean. The remedies for each are covered in the rest of this page.</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Symptom <span class="pp">|</span> Most likely explanation <span class="pp">|</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|:---|</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> The project loads slowly, errors, or won't open properly in RStudio <span class="pp">|</span> The {renv} autoloader (the <span class="in">`source("renv/activate.R")`</span> line in <span class="in">`.Rprofile`</span>) can't activate a project library that matches the recorded environment. <span class="pp">|</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`renv::restore()`</span> fails, or can't find a compatible version of a package <span class="pp">|</span> The lockfile records an R or package version that is incompatible with the version of R you are currently running. <span class="pp">|</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`renv::status()`</span> reports that the project is "out of sync" with the lockfile <span class="pp">|</span> The installed packages, used packages, and recorded packages don't match. <span class="pp">|</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Installing a package fails with "package ... is not available for R version ..." <span class="pp">|</span> The requested package version needs a different version of R. <span class="pp">|</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Everything worked yesterday and now it doesn't <span class="pp">|</span> Something changed on your system: an R upgrade, a package upgrade, or a changed <span class="in">`renv.lock`</span> (e.g. after a <span class="in">`git pull`</span>). <span class="pp">|</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="It is rarely actually 'broken'"}</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>Before you do anything drastic, remember that {renv} is mature and widely used software. The overwhelming majority of "broken" {renv} projects are simply expecting an environment that is not currently present on your machine. The fixes below are about restoring that environment -- or deliberately moving the project to a new one -- not about repairing corrupted files.</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diagnose First {#diagnose}</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>Before choosing a remedy, take two minutes to confirm what is actually going on.</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>**1. Check the status of the project.** Inside the project, run:</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="in">``` r</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>This will tell you whether the project is in a consistent state or whether packages are missing, unused, or out of sync with the lockfile.</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>**2. Compare the version of R recorded in the lockfile with the version you are running.** Open the <span class="in">`renv.lock`</span> file in a text editor (it is a JSON file). Near the top you should see something like:</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="in">``` r</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="co"># The beginning of a renv.lock file</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"R"</span><span class="sc">:</span> {</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Version"</span><span class="sc">:</span> <span class="st">"4.6.1"</span>,</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="at">Now check the version of R you are actually using, either in the RStudio console on startup or with:</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="at">If these two versions differ, you have found the root cause of most {renv} problems.</span></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="at">**3. Run </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">diagnostics</span>()<span class="st">`</span><span class="at">.** This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. The output is extremely useful when asking someone else for help (e.g. in a GitHub issue), and it will often point you toward the source of the problem.</span></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="at">**4. Ask what changed.** If the project worked before, the fastest path to a fix is usually figuring out what changed since it last worked: Did you upgrade R? Did a collaborator update </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">? Did you move the project to a new computer? The answer will usually tell you which of the remedies below is appropriate.</span></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="at">## Remedies from Least to Most Drastic {#remedies}</span></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="at">The right remedy depends on how you want to treat the project. Borrowing a framing from the [official {renv} FAQ](https://rstudio.github.io/renv/articles/faq.html), you are choosing between two philosophies:</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="at">::: {.callout-tip title="Two Ways to Think About a Project"}</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a><span class="at">-   **A "time capsule":** you want the project to keep using the exact environment recorded in </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">, frozen in time. If this is your goal, you should [match the R version the project expects](#match-r-version), not change the project.</span></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="at">-   **A moving target:** you are happy for the project's packages (and R version) to move forward over time, and you mainly use {renv} to keep the environment *self-contained*. If this is your goal, you should [move the project forward](#move-project-forward).</span></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="at">:::</span></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="at">The remedies below are ordered roughly from least to most drastic:</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="at">1.  **[Match the R version the project expects](#match-r-version)** -- reproduce the environment recorded in the lockfile. Keeps everything frozen; nothing is deleted.</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="at">2.  **[Move the project forward](#move-project-forward)** -- update R and the project's packages to current versions, then snapshot. Nothing is deleted, but the lockfile changes.</span></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="at">3.  **[Deactivate {renv}](#deactivate)** -- stop using {renv} in the project (reversibly) so you can open it with your normal package library.</span></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="at">4.  **[Fully reset {renv}](#full-reset)** -- remove {renv} from the project entirely and start over. **Last resort only.**</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="at">## Fix 1: Match the R Version the Project Expects {#match-r-version}</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="at">If you want the project to keep using the environment recorded in </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> -- for example, because you need the exact results it produced -- the solution is to run the project with the version of R it expects. Since {renv} does not manage R versions, you need a tool that does. We recommend [</span><span class="st">`</span>rig<span class="st">`</span><span class="at">](/extra-content/rig.qmd) (the "R Installation Manager"), a cross-platform tool from Posit for installing and switching between R versions (macOS users can also use the [</span><span class="st">`</span>rswitch<span class="st">`</span><span class="at">](https://rud.is/rswitch/) GUI). Installation and full usage details are covered on the dedicated [Managing R Versions with </span><span class="st">`</span>rig<span class="st">`</span><span class="at">](/extra-content/rig.qmd) page; the workflow below assumes you already have the right version installed and set as the default.</span></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="at">### The Workflow</span></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a><span class="at">Once you have the R version your project expects installed and set as the default:</span></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="at">1.  Find the R version recorded in </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> (as described in [Diagnose First](#diagnose)).</span></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a><span class="at">2.  Install and switch to that R version with </span><span class="st">`</span>rig<span class="st">`</span><span class="at"> (if you don't already have it) -- see [Managing R Versions with </span><span class="st">`</span>rig<span class="st">`</span><span class="at">](/extra-content/rig.qmd).</span></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="at">3.  **Restart RStudio** so it picks up the new default version of R.</span></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="at">4.  Open the project. {renv} should now find compatible packages.</span></span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="at">5.  If packages still need to be installed, run:</span></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="at">Because {renv} caches packages for each minor version of R, installing a version of R you have used before will often let {renv} restore the project very quickly from the cache rather than re-downloading everything. See the [Caching](/extra-content/caching.qmd) chapter for details.</span></span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="at">If you work on several projects that require different R versions, switching the default R version before opening each project becomes routine. See [Managing R Versions with </span><span class="st">`</span>rig<span class="st">`</span><span class="at">](/extra-content/rig.qmd) for the full workflow.</span></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="at">## Fix 2: Move the Project Forward {#move-project-forward}</span></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="at">If you don't need the project to stay frozen at its old versions -- for example, because none of your outputs will change, or because you want to benefit from bug fixes in newer packages -- you can instead bring the project up to date with the version of R you currently use. The official {renv} documentation itself [recommends updating packages regularly](https://rstudio.github.io/renv/articles/renv.html).</span></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="at">::: {.callout-warning title="Before you update, back up the lockfile"}</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="st">`</span>renv<span class="sc">::</span><span class="fu">snapshot</span>()<span class="st">`</span><span class="at"> overwrites </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">. If you want the option of returning to the current state later, **first** make a backup copy of </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> (or commit it to git). You will rarely regret having a backup, and you will never regret being able to </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">restore</span>()<span class="st">`</span><span class="at"> your way back to a known-good state.</span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="at">:::</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="at">The procedure for moving a project forward is:</span></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">upgrade</span>()   <span class="co"># 1. Update {renv} itself to the latest version</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">update</span>()    <span class="co"># 2. Update the project's packages to current versions</span></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()  <span class="co"># 3. Record the new state in renv.lock</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="at">What each step does:</span></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="at">-   </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">upgrade</span>()<span class="st">`</span><span class="at"> updates the **{renv} package itself**. This is worth doing on its own whenever you hit strange behavior: like any software, {renv} occasionally ships with bugs that are fixed in later releases, and </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">upgrade</span>()<span class="st">`</span><span class="at"> (or installing the development version from GitHub) is the simplest way to make sure you have those fixes.</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="at">-   </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">update</span>()<span class="st">`</span><span class="at"> updates the **packages** in your project library to the latest versions compatible with your current R -- including the base packages that come with a newer version of R.</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="at">-   </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">snapshot</span>()<span class="st">`</span><span class="at"> records the new package versions in </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">, so the lockfile reflects the environment you are now using.</span></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="at">After updating, **run your project's code and verify that everything still works** (and produces the same results, if that matters to you). If a package update breaks something and you backed up the lockfile first, you can roll back with </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">restore</span>()<span class="st">`</span><span class="at"> after replacing the new lockfile with your backup (or checking out the old lockfile from git).</span></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="at">## Fix 3: Deactivate {renv} (Without Deleting Anything) {#deactivate}</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="at">Sometimes you don't need to fix the project environment at all -- you just need to get back into the project. If {renv}'s startup behavior is getting in the way, you can temporarily stop {renv} from activating when the project opens:</span></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">deactivate</span>()</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="at">This removes the {renv} auto-loader (the </span><span class="st">`</span><span class="fu">source</span>(<span class="st">"renv/activate.R"</span>)<span class="st">`</span><span class="at"> line) from the project's </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at">, so the next time you open the project, R will use your normal (user/system) package library instead of a project library.</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="at">Importantly, </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">deactivate</span>()<span class="st">`</span><span class="at"> does **not** delete any of your {renv} files -- </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">, the </span><span class="st">`</span>renv<span class="st">`</span><span class="at"> folder, and everything else stay exactly where they are. That means it is fully reversible: when you're ready to use {renv} again, simply run:</span></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">activate</span>()</span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="at">Think of </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">deactivate</span>()<span class="st">`</span><span class="at"> as "pause {renv} for this project," not "uninstall {renv}."</span></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="at">## The Last Resort: Fully Reset {renv} {#full-reset}</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a><span class="at">If none of the above works -- for example, the {renv} scaffolding itself has become corrupted and {renv} can't even load to run </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">activate</span>()<span class="st">`</span><span class="at"> -- you may want to fully reset {renv} and start over. **Treat this as a genuine last resort.** A full reset throws away the recorded environment, and if you don't have a backup of </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">, you may not be able to recreate the exact package versions the project used.</span></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a><span class="at">### What "renv" Consists Of in a Project</span></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="at">Before resetting, it helps to know exactly what a full reset removes. As discussed in [Understanding {renv}](/about-renv/starting-details.qmd), a {renv} project contains the following pieces:</span></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a>your<span class="sc">-</span>project<span class="sc">/</span></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a>├── .Rprofile          <span class="co"># contains the line: source("renv/activate.R")</span></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a>├── renv.lock          <span class="co"># records the R version, repositories, and packages</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a>└── renv<span class="sc">/</span></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a>    ├── activate.R     <span class="co"># bootstraps {renv} when the project opens</span></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a>    ├── settings.json  <span class="co"># project-specific {renv} settings</span></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a>    ├── library<span class="sc">/</span>       <span class="co"># symlinks to the shared package cache</span></span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a>    └── staging<span class="sc">/</span>       <span class="co"># temporary area used during package installs</span></span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="at">A full reset removes (or effectively disables) all of these. Your **code and data are untouched**, and -- because the </span><span class="st">`</span>renv<span class="sc">/</span>library<span class="st">`</span><span class="at"> folder only contains symlinks into the shared cache -- your **cached packages are not deleted either**. You are only removing the project's connection to {renv}.</span></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a><span class="at">### Option A: Reset from Within R</span></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a><span class="at">If {renv} still runs, the cleanest reset is a single function. From [the {renv} documentation](https://rstudio.github.io/renv/articles/renv.html), </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">deactivate</span>(<span class="at">clean =</span> <span class="cn">TRUE</span>)<span class="st">`</span><span class="at"> removes the auto-loader from </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at"> **and** deletes all of the {renv} files and directories in the project, "leaving the project the way it was found":</span></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">deactivate</span>(<span class="at">clean =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="at">If you later want to use {renv} again in the project, you start over from scratch:</span></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> r</span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="at">### Option B: Manual Reset (When {renv} Won't Even Run)</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="at">If {renv} is so broken that it cannot load (for example, it errors out during R startup before you can run any functions), you can reset it manually by editing the files yourself:</span></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="at">1.  **Close the project** and quit R/RStudio.</span></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="at">2.  **Back up the lockfile.** Copy </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> somewhere safe (e.g. to a file named </span><span class="st">`</span>renv.lock.bak<span class="st">`</span><span class="at"> outside the project, or commit it to git). If you ever want to recover the old environment, this file is your only record of it.</span></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="at">3.  **Delete the </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> file.**</span></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a><span class="at">4.  **Delete the </span><span class="st">`</span>renv<span class="st">`</span><span class="at"> folder** (the whole folder, not just its contents).</span></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a><span class="at">5.  **Edit </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at">** so that the line </span><span class="st">`</span><span class="fu">source</span>(<span class="st">"renv/activate.R"</span>)<span class="st">`</span><span class="at"> is removed. In most {renv} projects, </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at"> contains only that one line, in which case you can delete the file entirely. Note that </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at"> is a *hidden* file (it begins with a dot), so you may need to enable "show hidden files" in your file browser.</span></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="at">6.  **Reopen the project.** {renv} will no longer activate, and R will use the packages in your normal (user/system) library.</span></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="at">::: {.callout-note title="If RStudio won't even open the project"}</span></span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="at">If RStudio errors out before you can get into the project to fix these files, you can open the project folder as a plain folder instead of via the </span><span class="st">`</span>.Rproj<span class="st">`</span><span class="at"> file (or start R from a terminal in that directory). Then edit or remove </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at"> as described above and try opening the project again.</span></span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="at">:::</span></span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="at">After a manual reset, you have two reasonable paths forward:</span></span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Continue without {renv}.** Your project opens normally, and you install packages as you always have. You have simply abandoned the locked environment.</span></span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Re-initialize {renv}.** If you want a fresh start with {renv} (and you kept a backup of the old lockfile), place the backup back as </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> and run </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">init</span>()<span class="st">`</span><span class="at">, choosing to restore the project from the lockfile -- but note that this only makes sense if you are also [running a compatible version of R](#match-r-version). Otherwise, run </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">init</span>()<span class="st">`</span><span class="at"> with no lockfile to build a new lockfile from your current packages.</span></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a><span class="at">In short: **if you want the same environment back, prefer [Fix 1](#match-r-version). A full reset is for when you want a fresh start.**</span></span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a><span class="at">## Good Habits That Prevent Future Headaches {#good-habits}</span></span>
+<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="at">A few simple habits make almost every problem on this page easier to solve -- and most of them prevent the problems from happening in the first place:</span></span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Commit the {renv} files to git.** As noted in [Understanding {renv}](/about-renv/starting-details.qmd), commit </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at">, </span><span class="st">`</span>.Rprofile<span class="st">`</span><span class="at">, </span><span class="st">`</span>renv<span class="sc">/</span>settings.json<span class="st">`</span><span class="at">, and </span><span class="st">`</span>renv<span class="sc">/</span>activate.R<span class="st">`</span><span class="at"> to version control. If anything goes wrong, git history is your safety net, and you can always </span><span class="st">`</span>git checkout<span class="st">`</span><span class="at"> an older lockfile.</span></span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Run </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">snapshot</span>()<span class="st">`</span><span class="at"> after installing or removing packages**, and before making major changes to the project, so the lockfile stays an accurate record of a working state.</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Restart your R session** when {renv} (or RStudio) prompts you to, especially after installing, updating, or restoring packages.</span></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a><span class="at">-   **Keep {renv} itself up to date** with </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">upgrade</span>()<span class="st">`</span><span class="at">. Bug fixes (including fixes for startup problems) ship regularly, and updating {renv} is often the simplest fix for strange behavior.</span></span>
+<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a><span class="at">-   **When asking for help, share the output of </span><span class="st">`</span>renv<span class="sc">::</span><span class="fu">diagnostics</span>()<span class="st">`</span><span class="at">** along with your </span><span class="st">`</span>renv.lock<span class="st">`</span><span class="at"> and the exact error message. If you are working through this tutorial, the [repository's issue tracker](https://github.com/lmu-osc/introduction-to-renv/issues) is also a good place to ask questions or report problems with the tutorial itself.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/extra-content/troubleshooting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/extra-content/troubleshooting.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<footer class="osc-footer-card text-white py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3 ">
+        <h4 class="fw-bold fs-5 fs-lg-4 text-white">
+          Ludwig-Maximilians-Universität<br>
+          LMU Open Science Center
+        </h4>
+        <p class="mb-0 mt-1 fw-normal fs-5">
+          Leopoldstr. 13<br>
+          80802 München
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Contact</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Prof. Dr. Felix Schönbrodt (Managing Director)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:malika.ihle@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Dr. Malika Ihle (Coordinator) 
+            </a>
+          </li>
+          <li>
+            <a href="mailto:osc@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              OSC team
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
+              Subscribe to our announcement list
+            </a>
+          </li>
+          <li>
+            <a href="https://www.osc.lmu.de/about/join-us.html" target="_blank" class="text-white text-decoration-underline" aria-label="Become a member (opens in new window)">
+              Become a member
+            </a>
+          </li>
+          <li>
+            <a href="https://matrix.to/#/#lmu-open-science-center:matrix.lmu.de" target="_blank" class="text-white text-decoration-underline" aria-label="Chat with us on Matrix (opens in new window)">
+              Chat with us on Matrix
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
+        <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/lmu-open-science-center/" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on LinkedIn (opens in new window)">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://bsky.app/profile/lmu-osc.bsky.social" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Bluesky (opens in new window)">
+          <i class="bi bi-bluesky"></i>
+        </a>
+        <a href="https://scicomm.xyz/@lmu_osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Mastodon (opens in new window)">
+          <i class="bi bi-mastodon"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-light">
+
+    <div class="d-flex flex-wrap gap-3 small">
+      <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/accessibilty.html" class="text-white text-decoration-underline">Accessibility</a>
+    </div>
+
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
