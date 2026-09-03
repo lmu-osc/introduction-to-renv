@@ -2,7 +2,8 @@
 title: "Advanced Topics"
 ---
 
-(Section under development)
+
+This page is currently a stub for potential future content. We may expand this page to include more advanced topics in the future, but for now, we will link out to the official {renv} documentation for these topics.
 
 ## "Settings" and "Config"
 
