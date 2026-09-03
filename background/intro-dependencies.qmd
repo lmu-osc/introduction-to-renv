@@ -65,6 +65,8 @@ The major current and historical options for managing R dependencies are:
 If you're coming from a background in Python, you might be familiar with the following analogous approaches:
 
 The pip, pipenv, and poetry packages can, generally speaking, be used for package management and for declaring necessary Python versions in the respective `requirements.txt`, `Pipfile`, and `pyproject.toml` files. However, one would usually use this in conjunction with software like Anaconda or Miniconda to manage Python versions and environments.
+
+More recently, the `uv` package and project manager from [Astral](https://docs.astral.sh/uv/) has gained massive momentum due to its overall convenience, and may become the de facto Python management tool in the near future. (For reference, this note was added in September of 2026.)
 :::
 
 The next chapter delves into some necessary [Technical Definitions](technical-definitions.qmd) in the R ecosystem, the following chapter will really dive in to the details of [R Package Managers](dependencies-in-r.qmd).
