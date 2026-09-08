@@ -4,6 +4,14 @@ title: "Background"
 
 This section provides the conceptual groundwork for understanding why dependency management matters for reproducibility, and how R's package ecosystem works.
 
+## Background at a Glance
+
+The deck below summarizes the main ideas covered in this section. Use the arrow keys or the on-screen controls to navigate, and the fullscreen button to enlarge it.
+
+<iframe src="overview-slides.html" title="Background section overview slides" width="100%" height="560" style="border: 1px solid var(--bs-secondary-border-subtle, #e6e6e7); border-radius: 8px;" loading="lazy" allowfullscreen></iframe>
+
+The chapters themselves are listed below:
+
 - **[Reproducibility](computational-reproducibility.qmd)** — What we mean by reproducibility, why code reproducibility matters, and the "works on my machine" problem.
 - **[Software Dependencies](intro-dependencies.qmd)** — An introduction to software dependencies and how they complicate the goal of reproducible research.
 - **[Technical Definitions](technical-definitions.qmd)** — Clarifying terminology: packages, libraries, and repositories in the R ecosystem.

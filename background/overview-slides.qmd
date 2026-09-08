@@ -1,0 +1,180 @@
+---
+title: "Background at a Glance"
+subtitle: "An overview of the ideas behind reproducible R environments, before we meet {renv}"
+format:
+  revealjs:
+    theme: white
+    slide-number: true
+    css: overview-slides.css
+---
+
+## One Big Question
+
+How can we make sure that **our R code runs on other machines, by other people, and in the future?**
+
+The four chapters in this section build up to that question:
+
+1.  **Reproducibility** — why code should be portable and future-proof
+2.  **Software Dependencies** — how software builds on software
+3.  **Technical Definitions** — packages, libraries, and repositories
+4.  **R Package Managers** — from {packrat} to {renv}
+
+# 1 · Reproducibility
+
+## What Does "Reproducibility" Mean?
+
+> Reproducibility is the ability of independent investigators to draw the same conclusions from an experiment by following the documentation shared by the original investigators.
+> --Gunderson
+
+- A written paper rarely captures every data cleaning, exploration, and analysis choice
+- Sharing **code and data** for *complete* documentation
+- Our focus: code that others can run on their machines, now and later
+
+## Why Bother with Reproducible Code?
+
+- For science: lets others **verify findings**, build on existing work, and keeps the process transparent and trustworthy
+- For yourself: makes it easier to **revisit your own work**, debug, and collaborate
+- In practice: 
+    - reproducibility saves time in the long run
+    - **Journals and funding agencies increasingly require it** 😟
+
+## The "Works on My Machine" Problem
+
+Your machine works because you configured it. Someone else's machine probably differs:
+
+- **Operating systems** — and versions of the same OS
+- **Language versions** — R's random number generation changed at 3.6.0; `density()` changed again at 4.4.0
+- **Package versions** — the most likely pain point, with over 20,000 packages on CRAN alone
+
+::: {.notes}
+
+* Expect no one to already have the software you rely on. And don't expect the same versions, either.
+* The solution is managing our **software dependencies** — the next chapter.
+
+
+:::
+
+
+# 2 · Software Dependencies
+
+## What Is a Dependency?
+
+Software depends on other software to run:
+
+- **Package dependencies** are R packages a project needs — and they have dependencies of their own
+    - e.g. {dplyr} relies on {tibble}, {rlang}, and {vctrs}, which rely on others...
+- **System dependencies** are other programs, e.g. Python or a C++ compiler
+
+This cascading problem is known as "dependency hell" — and it is not unique to R.
+
+## How Should We Manage Dependencies?
+
+- **Manually**: write down the software and versions you used
+- **Automatically**: use a package manager
+    - Accurate, shareable, and the recommended approach
+
+Common R package managers you will meet: **{renv}** (our recommendation), **{groundhog}**, and the deprecated **{packrat}**.
+
+::: {.notes}
+
+* Manual is ***an*** option, but not a good one as it's easy to miss dependencies and versions. Automatic is the way to go.
+* For that, we would use a package manager. The most common ones are {renv}, {groundhog}, and the deprecated {packrat}.
+* I mention packrat only because it was the first package manager for R, but it is no longer maintained. {renv} is the recommended one now.
+
+:::
+
+# 3 · Technical Definitions
+
+## Packages, Libraries, Repositories
+
+Three terms come up constantly in R dependency management:
+
+- **Package**: a bundle of functions, data, and documentation that extends base R
+- **Library**: a folder on your computer where installed packages are stored
+- **Repository**: an online collection from which packages can be downloaded and installed
+
+::: {.notes}
+
+* Before jumping ino the how of package managers in R and renv, there is some vocabulary to cover. The three terms that come up constantly in R dependency management are packages, libraries, and repositories.
+* I don't expect you to memorize these definitions right at the beginning, but you should be able to recognize them and reference these definitions later as needed
+
+:::
+
+## Packages & Libraries
+
+- **Packages** come pre-installed (the base and recommended packages, like {stats}) or are user-installed from a repository
+- **Libraries** hold packages; `.libPaths()` shows which ones your R session uses
+
+::: {.notes}
+
+* Packages can come pre-installed or you can add your own like dplyr, ggplot, and so on. You likely do this frequently with the install.packages function or similar
+* Libraries--your packages have to be stored somewhere on your computer, and that is exactly what a library is. In all likelihood, you will never need to create, alter, or delete a library on your own. Just know that libraries exist and that they are where your packages are stored. You can see which libraries your R session is using with the .libPaths function.
+
+:::
+
+## Repositories
+
+Where to get packages from:
+
+- **CRAN** — the default and most popular; curated and reviewed, often the "gold standard"
+- **Bioconductor** — thousands of packages for bioinformatics and genomics
+- **GitHub / GitLab** — where developers host and distribute packages
+
+::: {.notes}
+
+* In order to download and install packages, you need to be able to get them from somewher first. These places are called repositories.
+* CRAN, or the central R archive network, is the default and most popular repository. It is curated and reviewed, and often considered the gold standard.
+* Bioconductor is a repository for bioinformatics and genomics packages. It's highly relevant if you work in those domains, but otherwise you may not encounter it.
+* GitHub and GitLab are where developers host and distribute packages. You can install packages directly, but they are not curated or reviewed like CRAN.
+
+:::
+
+# 4 · R Package Managers
+
+## What Do R Package Managers Do?
+
+Package managers ensure the **packages** your project needs are:
+
+- downloaded from a defined **repository**
+- installed into the **libraries** you want to use
+- recorded with their versions, so the environment can be recreated
+
+## Three Managers Worth Knowing
+
+| Manager | Status | Idea |
+|---------|--------|------|
+| {packrat} | Deprecated | The original; deprecated |
+| {groundhog} | Alternative | Date-based: still developing? |
+| {renv} | **Recommended** | Posit; project-based and widely used |
+
+::: {.notes}
+
+* packrat for historical context
+* groundhog as a purely open source alternative, but not widely used and development might have stagnated
+* renv is the most mature, widely used, and actively maintained package manager for R. It is the one we will focus on in this course.
+
+:::
+
+## Meet {renv}
+
+``` r
+renv::init()      # set up a project library and lockfile
+renv::snapshot()  # record the package versions in renv.lock
+renv::restore()   # reinstall those versions later, or on a collaborator's machine
+```
+
+- Stable (v1+), maintained by Posit, and a transferable skill between academia and industry
+- Project-based workflow: pairs naturally with R Projects and CI/CD pipelines
+
+## What Package Managers Cannot Do
+
+- They manage **packages only** — not R itself, other software, or the operating system
+- Matching R versions is usually the main hurdle: tools like **rig** or container solutions (Docker, Binder) fill that gap
+- System dependencies are not managed either, but are documented in a package's `DESCRIPTION` file and on Posit Package Manager
+
+## Wrapping Up
+
+- **Reproducibility** means others can rerun your code and draw the same conclusions
+- **Dependencies** grow recursively, so manage them automatically
+- Remember the vocabulary: **packages** live in **libraries**, and are installed from **repositories**
+- For R, the recommended package manager is **{renv}** — read through the content, and try the exercises!
