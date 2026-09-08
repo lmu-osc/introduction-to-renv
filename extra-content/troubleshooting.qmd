@@ -68,12 +68,13 @@ This will tell you whether the project is in a consistent state or whether packa
 Now check the version of R you are actually using, either in the RStudio console on startup or with:
 
 ``` r
+# works in both
 R.version.string
 ```
 
 If these two versions differ, you have found the root cause of most {renv} problems.
 
-**3. Run `renv::diagnostics()`.** This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. The output is extremely useful when asking someone else for help (e.g. in a GitHub issue), and it will often point you toward the source of the problem.
+**3. Run `renv::diagnostics()`.** This function prints a summary of your {renv} configuration, your library paths, and any problems {renv} can detect. This is a more advanced troubleshooting method, advisable only if A) you feel comfortable sorting through the output or B) if someone else asked for the output (i.e. in a GitHub issue).
 
 **4. Ask what changed.** If the project worked before, the fastest path to a fix is usually figuring out what changed since it last worked: Did you upgrade R? Did a collaborator update `renv.lock`? Did you move the project to a new computer? The answer will usually tell you which of the remedies below is appropriate.
 
