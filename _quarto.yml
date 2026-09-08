@@ -82,6 +82,11 @@ website:
 # which is why they live under `format` below rather than at the top level.
 # End Includes
 
+# Begin Includes
+include-in-header:
+  - file: matomo-analytics.html
+# End Includes
+
 # Begin Format
 # use only if needed. the default format for `tutorial-template` projects is tutorial-template-html+tutorial
 # we recommend just extending the definition below if you need to make format changes
@@ -89,8 +94,6 @@ format:
   tutorial-template-html+tutorial:
     css:
       - footer/footer-style.css
-    include-in-header:
-      - file: matomo-analytics.html
     include-after-body:
       - file: footer/footer.html
 # End Format
