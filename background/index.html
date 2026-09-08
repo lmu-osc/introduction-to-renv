@@ -535,8 +535,13 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+   
+  <ul>
+  <li><a href="#background-at-a-glance" id="toc-background-at-a-glance" class="nav-link active" data-scroll-target="#background-at-a-glance">Background at a Glance</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/background/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/background/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -562,6 +567,12 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
 
 <p>This section provides the conceptual groundwork for understanding why dependency management matters for reproducibility, and how R’s package ecosystem works.</p>
+<section id="background-at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="background-at-a-glance">Background at a Glance</h2>
+<p>The deck below summarizes the main ideas covered in this section. Use the arrow keys or the on-screen controls to navigate, and the fullscreen button to enlarge it.</p>
+<iframe src="overview-slides.html" title="Background section overview slides" width="100%" height="560" style="border: 1px solid var(--bs-secondary-border-subtle, #e6e6e7); border-radius: 8px;" loading="lazy" allowfullscreen="">
+</iframe>
+<p>The chapters themselves are listed below:</p>
 <ul>
 <li><strong><a href="../background/computational-reproducibility.html">Reproducibility</a></strong> — What we mean by reproducibility, why code reproducibility matters, and the “works on my machine” problem.</li>
 <li><strong><a href="../background/intro-dependencies.html">Software Dependencies</a></strong> — An introduction to software dependencies and how they complicate the goal of reproducible research.</li>
@@ -573,6 +584,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 
 <!-- -->
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1064,12 +1076,20 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>This section provides the conceptual groundwork for understanding why dependency management matters for reproducibility, and how R's package ecosystem works.</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Reproducibility](computational-reproducibility.qmd)** — What we mean by reproducibility, why code reproducibility matters, and the "works on my machine" problem.</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Software Dependencies](intro-dependencies.qmd)** — An introduction to software dependencies and how they complicate the goal of reproducible research.</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Technical Definitions](technical-definitions.qmd)** — Clarifying terminology: packages, libraries, and repositories in the R ecosystem.</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[R Package Managers](dependencies-in-r.qmd)** — How R packages are distributed through CRAN, Bioconductor, GitHub, and other sources.</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>If you're already comfortable with these concepts, feel free to jump straight to the <span class="co">[</span><span class="ot">{renv} section</span><span class="co">](/about-renv/index.qmd)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Background at a Glance</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>The deck below summarizes the main ideas covered in this section. Use the arrow keys or the on-screen controls to navigate, and the fullscreen button to enlarge it.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"overview-slides.html"</span><span class="ot"> title</span><span class="op">=</span><span class="st">"Background section overview slides"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100%"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"560"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"border: 1px solid var(--bs-secondary-border-subtle, #e6e6e7); border-radius: 8px;"</span><span class="ot"> loading</span><span class="op">=</span><span class="st">"lazy"</span><span class="ot"> allowfullscreen</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>The chapters themselves are listed below:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Reproducibility](computational-reproducibility.qmd)** — What we mean by reproducibility, why code reproducibility matters, and the "works on my machine" problem.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Software Dependencies](intro-dependencies.qmd)** — An introduction to software dependencies and how they complicate the goal of reproducible research.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[Technical Definitions](technical-definitions.qmd)** — Clarifying terminology: packages, libraries, and repositories in the R ecosystem.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[R Package Managers](dependencies-in-r.qmd)** — How R packages are distributed through CRAN, Bioconductor, GitHub, and other sources.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>If you're already comfortable with these concepts, feel free to jump straight to the <span class="co">[</span><span class="ot">{renv} section</span><span class="co">](/about-renv/index.qmd)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1079,7 +1099,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Pat Callahan. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/background/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/background/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/introduction-to-renv/edit/main/background/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/blob/main/background/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/introduction-to-renv/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
