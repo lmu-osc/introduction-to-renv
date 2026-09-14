@@ -3,6 +3,12 @@ title: "Reproducibility"
 fig-cap-location: bottom
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 In this tutorial, we focus on the practical aspects of making sure that the code we write can be run on other machines, by other people, and in the future. In other words, we want to make sure that our code is portable and future-proof by ensuring the software originally used in creating our code is the same software used by others. Let’s look at this in more detail.
 
 ## What is Reproducibility?

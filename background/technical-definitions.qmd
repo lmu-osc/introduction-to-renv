@@ -2,6 +2,12 @@
 title: "Technical Definitions"
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 ```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set()
 library(dplyr)

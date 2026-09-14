@@ -8,6 +8,12 @@ library(dplyr)
 library(magrittr)
 ```
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 This page covers more specific information regarding dependency management in R including legacy projects like {packrat}, alternative community-driven projects like {groundhog}, and introduces the {renv} package.
 
 The goal of package managers in R are to ensure that the **packages** you need are downloaded from a defined **repository** and installed in the **libraries** you want to use. There are several package managers available for R, each with its own strengths and weaknesses. The three most known package managers are {packrat}, {groundhog}, and {renv}.

@@ -2,6 +2,12 @@
 title: "Software Dependencies"
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 ## Dependencies Overview
 
 The general concept of software dependencies is relatively straightforward: "dependencies" are other softwares/programs that the software you're using  *depends* on to function. If the dependencies are not installed, dependent software will either be missing features, not work as expected, or possibly not work at all.

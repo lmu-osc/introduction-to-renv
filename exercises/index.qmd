@@ -9,3 +9,17 @@ Put what you've learned into practice with hands-on walkthroughs. Each exercise 
 - **[Explicitly Record](example-explicit-record.qmd)** — Manually record packages in the lockfile using `dependencies()` and `record()`.
 
 These exercises use the [intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises) companion repository. Forking and cloning it is recommended but not required.
+
+
+::: {.callout-note}
+
+Make sure to download the `introduction-to-renv-exercises` repository first! To do that, you can follow the previously-learned directions for creating a new RStudio project, and use this link `https://github.com/lmu-osc/introduction-to-renv-exercises`.
+
+Alternatively, at the command line:
+
+```bash
+# change to the directory where you want the repo first! use the "cd PATH" command to do this
+git clone git@github.com:lmu-osc/introduction-to-renv-exercises.git
+```
+
+:::
