@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Dependency Management in R – Introduction to {renv}</title>
 <style>
@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-97e28f47ad423cfcb72627c3f906fd98.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b3b05533756b65102542bf1d1302b2e4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f050b060498074d55717287ea207baa6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b3b05533756b65102542bf1d1302b2e4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-086ab9d7f12d77a34f94d2bc5610e28c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -576,7 +576,7 @@ Note
 <p>The results of this code will be discussed in the next chapter, but, in short, the “snapshot” it creates can be shared with collaborators or used to recreate your working environment at a later date. This is referred to as restoring a project, and can be done with the aptly-named <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code> function.</p>
 <section id="pros-and-cons" class="level4"><h4 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h4>
 <p>As mentioned, {renv} is likely the most popular option for package management in R, and is a highly transferable skill between both academia and industry settings<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Thus, it is the one that I recommend using for new projects, and will be the focus of the rest of this tutorial on dependency management in R.</p>
-<p>Moreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.3.0). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.</p>
+<p>Moreover, this package can be considered a relatively stable package as it has moved beyond it’s initial development stages into a version 1 release (currently at version 1.3.1). It is maintained by professional software engineers at Posit, and also receives open-source contributions and bug reports via the public GitHub repository.</p>
 <p>In comparison to {groundhog}, one of the supposed main drawbacks of {renv} is that it is project-based, meaning that you need to create an R Project (<code>.RProj</code> file) to use {renv} whereas {groundhog} allows you to simply embed the function <code>groundhog.library(pkg, date)</code> into any R file. This is not a drawback in my opinion, as using an R Project structure helps manage your working environment, but it is worth noting that the <em>default workflow</em> for {renv} is not as flexible as {groundhog} in this regard. However, {renv} also offers a similar workflow to {groundhog} via the <code><a href="https://rdrr.io/r/stats/embed.html">embed()</a></code> and <code><a href="https://rdrr.io/r/base/use.html">use()</a></code> functions, discussed in the supplementary material of this tutorial.</p>
 </section></section></section><section id="limitations-of-package-managers" class="level2"><h2 class="anchored" data-anchor-id="limitations-of-package-managers">Limitations of Package Managers</h2>
 <p>The main limitation of package managers is that they only manage the <strong>packages</strong> you use in your project. They do not manage the <strong>software</strong> you use to run your project, such as R itself, or the <strong>operating system</strong> you use to run the software. This means that if you need to reproduce your analysis at a later date, you will also need to ensure that you have the correct version of R and any other software you need to run your project.</p>
