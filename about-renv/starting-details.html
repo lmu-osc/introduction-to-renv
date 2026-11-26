@@ -86,9 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-47407c29e8f0cbb45854e90f85b31c93.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4e5e55a1aa43624eb2da5f750c063e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d9eab4046e637db54cb20c9b9c8f2d13.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-4e5e55a1aa43624eb2da5f750c063e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8b0772496cc5a470112d23a4b5564dce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6b2cf02d2d7624c463f57e645c974cb9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8b0772496cc5a470112d23a4b5564dce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -605,7 +605,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <ol type="1">
 <li>Creation of a lockfile, <code>renv.lock</code>, which records the version of R in use, the default download repository, and the packages used in the project.</li>
 <li>Creation of a <code>renv</code> folder which contains the project <code>library</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a settings file, a <code>.gitignore</code> file and a staging area for package installation</li>
-<li>Addition of the line <code>source("renv/activate.R")</code> to your <code>.Rprofile</code>. This file is automatically run anytime a project session is started by e.g.&nbsp;opening the <code>*.Rproj</code> file. This line ensures that the project library is used in the session, not the global library.</li>
+<li>Addition of the line <code>source("renv/activate.R")</code> to your <code>.Rprofile</code> file in your project. (This file is created if it does not already exist. Also, you might not see this file in your standard file explorer because it is a so-called dotfile, which is hidden by default on most operating systems. You can still see it in RStudio’s file explorer.)</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -1492,7 +1492,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Creation of a lockfile, <span class="in">`renv.lock`</span>, which records the version of R in use, the default download repository, and the packages used in the project.</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Creation of a <span class="in">`renv`</span> folder which contains the project <span class="in">`library`</span><span class="ot">[^1]</span>, a settings file, a <span class="in">`.gitignore`</span> file and a staging area for package installation</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Addition of the line <span class="in">`source("renv/activate.R")`</span> to your <span class="in">`.Rprofile`</span>. This file is automatically run anytime a project session is started by e.g. opening the <span class="in">`*.Rproj`</span> file. This line ensures that the project library is used in the session, not the global library.</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Addition of the line <span class="in">`source("renv/activate.R")`</span> to your <span class="in">`.Rprofile`</span> file in your project. (This file is created if it does not already exist. Also, you might not see this file in your standard file explorer because it is a so-called dotfile, which is hidden by default on most operating systems. You can still see it in RStudio's file explorer.)</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true" title="Other Created Files"}</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>Adding renv to a project also updates the <span class="in">`.Rbuildignore`</span> to include the <span class="in">`renv`</span> folder and the <span class="in">`renv.lock`</span> file. **This is only relevant if you're building an R package.**</span>
