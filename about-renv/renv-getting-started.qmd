@@ -3,6 +3,12 @@ title: "{renv}: Easy Start"
 engine: knitr
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 This page provides the basic steps to starting a project with the {renv} package, and how to update the `renv.lock` file as you add new packages to your project. This page will be followed by a more detailed explanation of the package's functionality in the [Starting Details](starting-details.qmd) page.
 
 ## Initiating {renv}

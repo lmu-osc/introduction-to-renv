@@ -2,6 +2,12 @@
 title: "Understanding {renv}"
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 ::: {.center .img-border}
 ![Typical project workflow with {renv}](/assets/img/renv-cycle.png)
 :::

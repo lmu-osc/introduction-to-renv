@@ -2,6 +2,12 @@
 title: "Restoring Another Project"
 ---
 
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
 The discussion so far on using {renv} has been about initiating a project with {renv} and then updating the `renv.lock` file as you work on the project. This is generally the more complicated portion of the work you will ever need to do with {renv}. The other side of using {renv} is restoring a project that someone else has shared with you or restoring a project that you have shared with others. This is the topic of this page.
 
 We will cover restoring a project from a GitHub repository, restoring a project from a lockfile, and restoring a project after upgrading R.
