@@ -2,9 +2,14 @@
 title: "Explicitly Recording Packages"
 ---
 
-As with the previous exercise, it is **recommended** that you fork the repository to your GitHub account and clone it to your local machine to follow along with the examples. This will allow the course facilitators to see your work, provide feedback, and troubleshoot with you as needed.
+::: {.callout-important title="Clone the exercises repository"}
+These exercises use the companion repository **[intro-to-renv-exercises](https://github.com/lmu-osc/introduction-to-renv-exercises){target="_blank"}**. Clone it before you start, either in RStudio with *File > New Project > Version Control > Git* or at the command line:
 
-If you're not familiar with using git and GitHub, you can skip the forking and cloning steps and instead download a zip file of the repository.
+```bash
+# change to the directory where you want the repo first, e.g. `cd ~/Documents`
+git clone https://github.com/lmu-osc/introduction-to-renv-exercises.git
+```
+:::
 
 ## Adding Packages to the`renv.lock` File
 
