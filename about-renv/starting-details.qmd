@@ -16,7 +16,7 @@ As you might have noted from the videos in the previous sections, initiating a p
 
 1.  Creation of a lockfile, `renv.lock`, which records the version of R in use, the default download repository, and the packages used in the project.
 2.  Creation of a `renv` folder which contains the project `library`[^1], a settings file, a `.gitignore` file and a staging area for package installation
-3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile`. This file is automatically run anytime a project session is started by e.g. opening the `*.Rproj` file. This line ensures that the project library is used in the session, not the global library.
+3.  Addition of the line `source("renv/activate.R")` to your `.Rprofile` file in your project. (This file is created if it does not already exist. Also, you might not see this file in your standard file explorer because it is a so-called dotfile, which is hidden by default on most operating systems. You can still see it in RStudio's file explorer.)
 
 :::{.callout-note collapse="true" title="Other Created Files"}
 Adding renv to a project also updates the `.Rbuildignore` to include the `renv` folder and the `renv.lock` file. **This is only relevant if you're building an R package.**
