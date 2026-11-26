@@ -54,6 +54,8 @@ website:
             text: "2. Understanding {renv}"
           - href: about-renv/restoring-a-project.qmd
             text: "3. Restoring Projects"
+          - href: about-renv/recap.qmd
+            text: "Recap"
       - section: "Exercises"
         href: exercises/index.qmd
         contents:

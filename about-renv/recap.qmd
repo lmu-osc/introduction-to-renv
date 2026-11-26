@@ -1,0 +1,62 @@
+---
+title: "Recap"
+---
+
+::: {.callout-note}
+
+Please *only* read this section! These are not follow-along examples--the practice material is presented in the [Exercises chapter](/exercises/index.qmd).
+
+:::
+
+## Core {renv} functions
+
+The basic workflow is to initialize a project, check its status, and keep the lockfile up to date. The `installed` column refers to packages in the project library, `recorded` to packages listed in `renv.lock`, and `used` to packages detected in the project files.
+
+| Function | What it does |
+|---|---|
+| `renv::init()` | Sets up {renv} in a project. It can also restore packages from an existing lockfile. |
+| `renv::status()` | Checks whether installed, recorded, and used packages are consistent. It does not change them. |
+| `renv::snapshot()` | Updates `renv.lock` to record the packages detected in the project. |
+| `renv::restore()` | Installs the packages and versions listed in `renv.lock` into the project library. |
+| `renv::update()` | Updates packages in the project library. Run `renv::snapshot()` afterward to record the updated versions. |
+| `renv::upgrade()` | Updates {renv} itself. |
+
+In terms of the `status()` columns, installing a package changes `installed`; 
+
+* `snapshot()` and `record()` change `recorded`
+* and `restore()` makes `installed` match the packages and versions in `renv.lock`
+* `used` reflects what {renv} detects in the project files.
+
+For example, `status()` can show packages that are installed and used but not yet recorded in the lockfile:
+
+::: output-overflow
+``` r
+renv::status()
+#> The following package(s) are in an inconsistent state:
+#> 
+#>  package           installed recorded used
+#>  fontBitstreamVera y         n        y   
+#>  fontLiberation    y         n        y   
+#>  fontquiver        y         n        y   
+#>  gdtools           y         n        y   
+#>  ggfun             y         n        y   
+#>  ggimage           y         n        y   
+#>  ggiraph           y         n        y   
+#>  ggplotify         y         n        y   
+#>  gridGraphics      y         n        y   
+#>  hexbin            y         n        y   
+#>  hexSticker        y         n        y   
+#>  lattice           y         n        y   
+#>  magick            y         n        y   
+#>  MASS              y         n        y   
+#>  showtext          y         n        y   
+#>  showtextdb        y         n        y   
+#>  sysfonts          y         n        y   
+#>  systemfonts       y         n        y   
+#>  yulab.utils       y         n        y   
+#> 
+#> See `?renv::status` for advice on resolving these issues.
+```
+:::
+
+Here, the packages are installed (`y`) and detected as used (`y`), but are not recorded in `renv.lock` (`n`). Run `renv::snapshot()` to record the detected dependencies, then check again with `renv::status()`.
